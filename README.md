@@ -10,7 +10,7 @@ Interaktive Lernplattform für Navigationstheorie nach dem Lehrplan der RYA (Day
 ```bash
 npm install
 npm run dev        # Entwicklungsserver → http://localhost:5173
-npm test           # Vitest: Navigationsmathematik, Fragenkatalog, Statistik
+npm test           # Vitest: Navigationsmathematik, Fragenkatalog, Spaced Repetition, Statistik
 npm run build      # Typecheck + Produktionsbuild nach dist/
 npm run preview    # Produktionsbuild lokal ansehen
 ```
@@ -28,20 +28,22 @@ src/
 │   ├── angles.ts        Normierung 0–360°, Winkeldifferenz, Formatierung (021,8°)
 │   ├── vectors.ts       x = v·sin θ (Ost), y = v·cos θ (Nord), Richtung = atan2(x, y)
 │   ├── triangle.ts      Geschwindigkeitsdreieck, Simulation, Course to Steer
-│   ├── dst.ts           Distance–Speed–Time, Einheiten
+│   ├── dst.ts           Distance–Speed–Time, ETA, Einheiten
+│   ├── tides.ts         Interpolation der Stromrate (Spring/Nipp)
 │   └── position.ts      Positionsversatz (Mittelbreite), Lat/Lon-Formatierung
 ├── types/             Gemeinsame TypeScript-Typen (Navigation, Lerninhalte)
 ├── data/glossary.ts   Die neun Begriffe mit allen Lerninhalten
+├── data/flashcards.ts 21 Lernkarten
 ├── questions/         Fragenkatalog (erweiterbar je Ausbildungsstufe)
 ├── stores/            Zustand-Stores (Fortschritt, Einstellungen, Simulator) – persistiert
 ├── hooks/             Hash-Router, Lernzeit-Timer, Theme
-├── lib/               Quiz-Auswertung, Statistik/Streak, Hilfsfunktionen
+├── lib/               Quiz-Auswertung, Statistik/Streak, Spaced Repetition (spacedRepetition.ts)
 ├── navigation/        Menüstruktur der App
 ├── components/
 │   ├── ui/            shadcn/ui-Komponenten (Button, Card, Slider, Tabs, …)
 │   ├── layout/        AppShell, Sidebar, ThemeToggle
 │   └── nautical/      SVG-Bausteine: Vektorpfeile (RYA-Pfeilkonvention), Boot, Nordpfeil, Winkelbogen
-├── modules/           Fachmodule: dashboard, glossary, simulator, quiz
+├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators
 ├── pages/             Roadmap, Über & Hinweise
 └── tests/             Vitest-Tests
 ```
@@ -78,10 +80,17 @@ Getestete Fälle: Referenzbeispiel (021,8° / 5,39 kn), keine Strömung, Strom v
 Querströmung, starke Gegenströmung, Windabdrift, Kurswechsel über 000°, Stillstand über Grund,
 nicht erreichbarer Course to Steer – sowie automatische Prüfung aller numerischen Musterlösungen gegen die Rechenfunktionen.
 
-### Phase 2 – geplant
-50 Fragen + weitere Fragetypen (Zuordnung, Vektordiagramm, Fehlererkennung), Lernkarten mit Spaced Repetition,
-erweiterte Statistiken, Navigationsrechner (DST, ETA, COG, SOG, Tidal Stream, Course to Steer, EP –
-die Rechenfunktionen für CTS und EP existieren bereits).
+### Phase 2 – fertig ✅
+- **Prüfungstrainer:** 50 Aufgaben (Begriffsverständnis, Zahlenberechnung, Kursberechnung, Vektordiagramm,
+  Fehlererkennung, Begriff-Zuordnung), Filter nach Thema, Aufgabentyp und Schwierigkeit. Alle 32 Rechenaufgaben
+  werden in den Tests gegen die Rechenfunktionen nachgerechnet.
+- **Lernkarten:** 21 Karten (9 Grundbegriffe + 12 erweiterte Begriffe wie DR, Set, Drift, CTS, Variation, Deviation),
+  Spaced Repetition (vereinfachtes SM-2) mit den Bewertungen Nicht gewusst / Schwer / Gut / Sehr leicht,
+  Intervall-Vorschau, Tastatursteuerung (Leertaste, 1–4).
+- **Lernstatistiken:** Lernaktivität der letzten 14 Tage, Kartenstand, Fehlerquote nach Thema oder Aufgabentyp.
+- **Navigationsrechner:** Distance–Speed–Time, ETA (auch über Mitternacht), COG, SOG (Stromdreieck oder zwei Fixes),
+  Tidal Stream (Interpolation Spring/Nipp), Course to Steer (mit ausdrücklicher Meldung „Kurs nicht haltbar“),
+  Estimated Position (Lat/Lon, Mittelbreitenverfahren). Jeweils mit Eingabeprüfung und Rechenweg.
 
 ### Phase 3 – geplant
 Interaktive Seekarte (Gitter, Breiten/Längen, Maßstab, Messwerkzeuge, Zoom/Pan), Course-to-Steer- und

@@ -56,3 +56,27 @@ describe('Maßstab (niceStep)', () => {
     expect(niceStep(30, 6)).toBe(5)
   })
 })
+
+import { errorRateBy, lastDays } from '@/lib/stats'
+describe('Erweiterte Statistik', () => {
+  it('Zeitreihe der letzten Tage inkl. Lücken', () => {
+    const s = lastDays({ '2026-10-15': 120, '2026-10-13': 60 }, 3, '2026-10-15')
+    expect(s).toEqual([
+      { day: '2026-10-13', value: 60 },
+      { day: '2026-10-14', value: 0 },
+      { day: '2026-10-15', value: 120 },
+    ])
+  })
+  it('Fehlerquote nach Kategorie', () => {
+    const r = errorRateBy(
+      [{ id: 'x', date: '', mode: 'exam', durationSec: 1, answers: [
+        { questionId: 'a', topic: 'sog', correct: false, given: 1 },
+        { questionId: 'b', topic: 'sog', correct: true, given: 1 },
+      ] }],
+      ['calc', 'mc'],
+      (id) => (id === 'a' ? 'calc' : 'mc'),
+    )
+    expect(r[0].errorRate).toBe(1)
+    expect(r[1].errorRate).toBe(0)
+  })
+})

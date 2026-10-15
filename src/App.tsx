@@ -2,6 +2,8 @@ import { AppShell } from '@/components/layout/AppShell'
 import { useHashRoute } from '@/hooks/useHashRoute'
 import { useStudyTimer } from '@/hooks/useStudyTimer'
 import { useApplyTheme } from '@/hooks/useTheme'
+import { CalculatorsPage } from '@/modules/calculators/CalculatorsPage'
+import { FlashcardsPage } from '@/modules/flashcards/FlashcardsPage'
 import { DashboardPage } from '@/modules/dashboard/DashboardPage'
 import { GlossaryPage } from '@/modules/glossary/GlossaryPage'
 import { QuizPage } from '@/modules/quiz/QuizPage'
@@ -24,6 +26,12 @@ export default function App() {
       break
     case 'quiz':
       page = <QuizPage key={route.preset ?? 'default'} preset={route.preset} />
+      break
+    case 'flashcards':
+      page = <FlashcardsPage />
+      break
+    case 'calculators':
+      page = <CalculatorsPage />
       break
     case 'roadmap':
       page = <RoadmapPage />

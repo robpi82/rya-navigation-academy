@@ -12,7 +12,9 @@ import {
 } from 'lucide-react'
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { GLOSSARY, TERM_BY_ID } from '@/data/glossary'
-import type { Question, QuizAnswerRecord, QuizMode, TermId } from '@/types/learning'
+import { CATEGORY_LABEL, type Question, type QuestionCategory, type QuizAnswerRecord, type QuizMode, type TermId } from '@/types/learning'
+import { MatchInput } from './MatchInput'
+import { QuestionDiagram } from './QuestionDiagram'
 import { formatClock, isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
 import { questionsNeedingReview } from '@/lib/stats'
 import { formatBearing, formatNumber } from '@/calculations'
@@ -80,14 +82,20 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
   const reviewIds = useMemo(() => questionsNeedingReview(questionStats), [questionStats])
   const [mode, setMode] = useState<QuizMode>('learn')
   const [topics, setTopics] = useState<TermId[]>([])
+  const [categories, setCategories] = useState<QuestionCategory[]>([])
+  const [difficulty, setDifficulty] = useState<0 | 1 | 2 | 3>(0)
   const [count, setCount] = useState<number>(10)
   const [onlyReview, setOnlyReview] = useState(initialReview && reviewIds.length > 0)
 
   const pool = useMemo(() => {
     let qs = onlyReview ? reviewIds.map((id) => QUESTION_BY_ID[id]).filter(Boolean) : QUESTION_BANK
     if (topics.length) qs = qs.filter((q) => topics.includes(q.topic))
+    if (categories.length) qs = qs.filter((q) => categories.includes(q.category))
+    if (difficulty) qs = qs.filter((q) => q.difficulty === difficulty)
     return qs
-  }, [onlyReview, reviewIds, topics])
+  }, [onlyReview, reviewIds, topics, categories, difficulty])
+  const toggleCategory = (c: QuestionCategory) =>
+    setCategories((cs) => (cs.includes(c) ? cs.filter((x) => x !== c) : [...cs, c]))
 
   const toggleTopic = (t: TermId) => setTopics((ts) => (ts.includes(t) ? ts.filter((x) => x !== t) : [...ts, t]))
   const n = Math.min(count, pool.length)
@@ -151,9 +159,33 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
             </fieldset>
 
             <fieldset>
+              <legend className="mb-2 text-sm font-medium">
+                Aufgabentyp <span className="font-normal text-muted-foreground">(keine Auswahl = alle)</span>
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {(Object.keys(CATEGORY_LABEL) as QuestionCategory[]).map((c) => (
+                  <Button key={c} size="sm" variant={categories.includes(c) ? 'default' : 'outline'} onClick={() => toggleCategory(c)} aria-pressed={categories.includes(c)}>
+                    {CATEGORY_LABEL[c]}
+                  </Button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend className="mb-2 text-sm font-medium">Schwierigkeit</legend>
+              <div className="flex flex-wrap gap-2">
+                {([0, 1, 2, 3] as const).map((d) => (
+                  <Button key={d} size="sm" variant={difficulty === d ? 'default' : 'outline'} onClick={() => setDifficulty(d)} aria-pressed={difficulty === d}>
+                    {d === 0 ? 'Alle' : DIFFICULTY_LABEL[d]}
+                  </Button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
               <legend className="mb-2 text-sm font-medium">Anzahl Fragen</legend>
               <div className="flex flex-wrap gap-2">
-                {[5, 10, 15, 999].map((c) => (
+                {[5, 10, 20, 30, 999].map((c) => (
                   <Button key={c} size="sm" variant={count === c ? 'default' : 'outline'} onClick={() => setCount(c)} aria-pressed={count === c}>
                     {c === 999 ? 'Alle' : c}
                   </Button>
@@ -250,6 +282,7 @@ function QuizRunner({
   const [answers, setAnswers] = useState<QuizAnswerRecord[]>([])
   const [selected, setSelected] = useState<number | null>(null)
   const [text, setText] = useState('')
+  const [matches, setMatches] = useState<(number | null)[]>(() => emptyMatches(questions[0]))
   const [inputError, setInputError] = useState<string | null>(null)
   const [revealed, setRevealed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -262,10 +295,13 @@ function QuizRunner({
   }, [q])
 
   const submit = () => {
-    let given: number | null
+    let given: number | number[] | null
     if (q.type === 'mc') {
       if (selected === null) return
       given = selected
+    } else if (q.type === 'match') {
+      if (matches.some((m) => m === null)) return
+      given = matches as number[]
     } else {
       given = parseNumberInput(text)
       if (given === null) {
@@ -287,6 +323,7 @@ function QuizRunner({
       return
     }
     setIndex((i) => i + 1)
+    setMatches(emptyMatches(questions[index + 1]))
     setSelected(null)
     setText('')
     setRevealed(false)
@@ -319,9 +356,14 @@ function QuizRunner({
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline">{TERM_BY_ID[q.topic].abbr} · {TERM_BY_ID[q.topic].english}</Badge>
             <Badge variant="secondary">{DIFFICULTY_LABEL[q.difficulty]}</Badge>
-            <Badge variant="secondary">{q.type === 'mc' ? 'Multiple Choice' : 'Berechnung'}</Badge>
+            <Badge variant="secondary">{CATEGORY_LABEL[q.category]}</Badge>
           </div>
           <CardTitle className="pt-2 text-lg leading-snug">{q.prompt}</CardTitle>
+          {q.type === 'mc' && q.diagram && (
+            <div className="pt-2">
+              <QuestionDiagram diagram={q.diagram} />
+            </div>
+          )}
         </CardHeader>
         <CardContent className="space-y-4">
           <form
@@ -366,6 +408,8 @@ function QuizRunner({
                   )
                 })}
               </div>
+            ) : q.type === 'match' ? (
+              <MatchInput question={q} value={matches} onChange={setMatches} revealed={revealed} />
             ) : (
               <div className="space-y-1">
                 <label htmlFor="numeric-answer" className="text-sm font-medium">
@@ -400,7 +444,7 @@ function QuizRunner({
                   {isLast ? 'Auswertung' : 'Nächste Frage'} <ArrowRight />
                 </Button>
               ) : (
-                <Button type="submit" disabled={q.type === 'mc' ? selected === null : text.trim() === ''}>
+                <Button type="submit" disabled={q.type === 'mc' ? selected === null : q.type === 'match' ? matches.some((m) => m === null) : text.trim() === ''}>
                   {mode === 'exam' ? (isLast ? 'Abgeben' : 'Antwort speichern') : 'Prüfen'}
                 </Button>
               )}
@@ -412,25 +456,31 @@ function QuizRunner({
   )
 }
 
+const emptyMatches = (q: Question | undefined): (number | null)[] => (q?.type === 'match' ? q.pairs.map(() => null) : [])
+
 function correctAnswerText(q: Question): string {
   if (q.type === 'mc') return q.options[q.correctIndex]
+  if (q.type === 'match') return q.pairs.map((p) => `${p.left} → ${p.right}`).join('; ')
   return q.isBearing ? formatBearing(q.answer) : `${formatNumber(q.answer, 2)} ${q.unit}`
 }
 
-function givenText(q: Question, given: number | null): string {
+function givenText(q: Question, given: number | number[] | null): string {
   if (given === null) return '–'
+  if (q.type === 'match')
+    return Array.isArray(given) ? q.pairs.map((p, i) => `${p.left} → ${q.pairs[given[i]]?.right ?? '–'}`).join('; ') : '–'
+  if (Array.isArray(given)) return '–'
   if (q.type === 'mc') return q.options[given] ?? '–'
   return `${formatNumber(given, 2)} ${q.unit}`
 }
 
-function Solution({ q, correct, given }: { q: Question; correct: boolean; given: number | null }) {
+function Solution({ q, correct, given }: { q: Question; correct: boolean; given: number | number[] | null }) {
   return (
     <div className={cn('space-y-2 rounded-lg border p-4', correct ? 'border-success/40 bg-success/5' : 'border-destructive/40 bg-destructive/5')}>
       <p className={cn('flex items-center gap-2 font-semibold', correct ? 'text-success' : 'text-destructive')}>
         {correct ? <CheckCircle2 className="size-5" /> : <XCircle className="size-5" />}
         {correct ? 'Richtig!' : 'Nicht richtig.'}
       </p>
-      {!correct && (
+      {!correct && q.type !== 'match' && (
         <p className="text-sm">
           Deine Antwort: <span className="font-medium">{givenText(q, given)}</span> · Richtig:{' '}
           <span className="font-medium">{correctAnswerText(q)}</span>

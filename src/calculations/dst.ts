@@ -25,3 +25,31 @@ export function formatDuration(hours: number | null): string {
 export const METERS_PER_NM = 1852
 export const nmToKm = (nm: number): number => (nm * METERS_PER_NM) / 1000
 export const knotsToMetersPerSecond = (kn: number): number => (kn * METERS_PER_NM) / 3600
+
+/** "HH:MM" → Minuten seit Mitternacht, oder null bei ungültiger Eingabe */
+export function parseClock(text: string): number | null {
+  const m = /^\s*(\d{1,2})[:.](\d{2})\s*$/.exec(text)
+  if (!m) return null
+  const h = Number(m[1])
+  const min = Number(m[2])
+  if (h > 23 || min > 59) return null
+  return h * 60 + min
+}
+
+/** Minuten seit Mitternacht (beliebig groß) → Uhrzeit "HH:MM" und Anzahl Folgetage */
+export function formatClockTime(totalMinutes: number): { time: string; dayOffset: number } {
+  const rounded = Math.round(totalMinutes)
+  const dayOffset = Math.floor(rounded / 1440)
+  const m = ((rounded % 1440) + 1440) % 1440
+  return {
+    time: `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`,
+    dayOffset,
+  }
+}
+
+/** ETA = Abfahrt + Distanz / SOG */
+export function computeEta(departureMinutes: number, distanceNm: number, sogKn: number) {
+  const hours = timeFrom(distanceNm, sogKn)
+  if (hours === null) return null
+  return { hours, ...formatClockTime(departureMinutes + hours * 60) }
+}

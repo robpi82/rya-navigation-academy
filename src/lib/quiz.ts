@@ -10,8 +10,13 @@ export function parseNumberInput(raw: string): number | null {
 }
 
 /** Prüft eine Antwort. Bei Richtungsangaben wird die Toleranz über 000° hinweg berücksichtigt. */
-export function isAnswerCorrect(q: Question, given: number | null): boolean {
+export function isAnswerCorrect(q: Question, given: number | number[] | null): boolean {
   if (given === null) return false
+  if (q.type === 'match') {
+    // given[i] = Index des rechten Elements, das dem linken Element i zugeordnet wurde
+    return Array.isArray(given) && given.length === q.pairs.length && given.every((r, i) => r === i)
+  }
+  if (Array.isArray(given)) return false
   if (q.type === 'mc') return given === q.correctIndex
   const diff = q.isBearing ? Math.abs(angleDifference(q.answer, given)) : Math.abs(q.answer - given)
   return diff <= q.tolerance + 1e-9

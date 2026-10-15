@@ -49,15 +49,67 @@ interface QuestionBase {
   solution: string
   /** Nachvollziehbarer Rechen-/Denkweg */
   steps: string[]
+  category: QuestionCategory
+}
+
+/** Thematische Aufgabenart (für Filter und Statistik) */
+export type QuestionCategory = 'concept' | 'calculation' | 'course' | 'diagram' | 'error' | 'matching'
+
+export const CATEGORY_LABEL: Record<QuestionCategory, string> = {
+  concept: 'Begriffsverständnis',
+  calculation: 'Zahlenberechnung',
+  course: 'Kursberechnung',
+  diagram: 'Vektordiagramm',
+  error: 'Fehlererkennung',
+  matching: 'Begriff-Zuordnung',
+}
+
+/** Vektordiagramm zu einer Aufgabe: Vektoren werden neutral mit Buchstaben beschriftet. */
+export interface QuestionDiagram {
+  heading: number
+  stw: number
+  tideDirection: number
+  tideRate: number
+  leeway: number
+  /** Buchstaben-Beschriftung je Vektor; nicht genannte Vektoren werden nicht gezeichnet */
+  labels: Partial<Record<'heading' | 'water' | 'tide' | 'ground', string>>
 }
 
 export interface MultipleChoiceQuestion extends QuestionBase {
   type: 'mc'
   options: string[]
   correctIndex: number
+  diagram?: QuestionDiagram
 }
 
-export type NumericQuantity = 'cog' | 'sog' | 'waterTrack' | 'distanceOverGround' | 'timeMinutes' | 'distance'
+export type QuestionVerify =
+  | {
+      kind: 'sim'
+      heading: number
+      stw: number
+      tideDirection: number
+      tideRate: number
+      leeway: number
+      durationMin: number
+      quantity: 'cog' | 'sog' | 'waterTrack' | 'distanceOverGround' | 'tideDrift' | 'distanceThroughWater'
+    }
+  | {
+      kind: 'cts'
+      desiredTrack: number
+      stw: number
+      tideDirection: number
+      tideRate: number
+      leeway: number
+      distance?: number
+      quantity: 'cts' | 'sog' | 'timeMinutes'
+    }
+  | {
+      kind: 'dst'
+      distance?: number
+      speed?: number
+      minutes?: number
+      quantity: 'distance' | 'speed' | 'timeMinutes'
+    }
 
 export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
@@ -70,18 +122,16 @@ export interface NumericQuestion extends QuestionBase {
    * Optionales Szenario, mit dem die Musterlösung in den automatisierten Tests
    * gegen die Berechnungsfunktionen geprüft wird.
    */
-  verify?: {
-    heading: number
-    stw: number
-    tideDirection: number
-    tideRate: number
-    leeway: number
-    durationMin: number
-    quantity: Exclude<NumericQuantity, 'timeMinutes' | 'distance'>
-  }
+  verify?: QuestionVerify
 }
 
-export type Question = MultipleChoiceQuestion | NumericQuestion
+export interface MatchQuestion extends QuestionBase {
+  type: 'match'
+  /** Paare in korrekter Zuordnung; die rechte Seite wird in der UI gemischt */
+  pairs: { left: string; right: string }[]
+}
+
+export type Question = MultipleChoiceQuestion | NumericQuestion | MatchQuestion
 
 export type QuizMode = 'learn' | 'exam'
 
@@ -89,8 +139,8 @@ export interface QuizAnswerRecord {
   questionId: string
   topic: TermId
   correct: boolean
-  /** gegebene Antwort (Index oder Zahl) */
-  given: number | null
+  /** gegebene Antwort: Index (MC), Zahl (Berechnung) oder Zuordnung je linkem Element (Index der rechten Seite) */
+  given: number | number[] | null
 }
 
 export interface QuizAttempt {

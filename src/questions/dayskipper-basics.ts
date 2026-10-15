@@ -12,6 +12,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'hdg',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Du steuerst 180° nach Kompass. Ein kräftiger Strom setzt nach Osten. Welche Aussage stimmt?',
     options: [
       'Heading und COG sind beide 180°',
@@ -33,6 +34,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'stw',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Welches Instrument misst die Speed Through the Water (STW)?',
     options: ['GPS', 'Log', 'Echolot', 'Handpeilkompass'],
     correctIndex: 1,
@@ -48,12 +50,13 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'sog',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'calculation',
     prompt:
       'Heading 045°, STW 6 kn, kein Leeway. Der Strom setzt 225° mit 1,5 kn (genau von vorn). Wie groß ist die SOG?',
     answer: 4.5,
     tolerance: 0.05,
     unit: 'kn',
-    verify: { heading: 45, stw: 6, tideDirection: 225, tideRate: 1.5, leeway: 0, durationMin: 60, quantity: 'sog' },
+    verify: { kind: 'sim', heading: 45, stw: 6, tideDirection: 225, tideRate: 1.5, leeway: 0, durationMin: 60, quantity: 'sog' },
     solution: 'SOG = 4,5 kn',
     steps: [
       'Strom setzt 225° – das ist genau entgegengesetzt zum Heading 045° (045° + 180°).',
@@ -67,13 +70,14 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'cog',
     difficulty: 2,
     level: 'day-skipper',
+    category: 'calculation',
     prompt:
       'Heading 000°, STW 5 kn, kein Leeway. Der Strom setzt 090° mit 2 kn. Berechne den COG (auf 1° genau).',
     answer: 21.8,
     tolerance: 1,
     unit: '°',
     isBearing: true,
-    verify: { heading: 0, stw: 5, tideDirection: 90, tideRate: 2, leeway: 0, durationMin: 60, quantity: 'cog' },
+    verify: { kind: 'sim', heading: 0, stw: 5, tideDirection: 90, tideRate: 2, leeway: 0, durationMin: 60, quantity: 'cog' },
     solution: 'COG ≈ 022° (021,8°)',
     steps: [
       'Fahrt durchs Wasser: x = 5 · sin 0° = 0, y = 5 · cos 0° = 5.',
@@ -88,11 +92,12 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'sog',
     difficulty: 2,
     level: 'day-skipper',
+    category: 'calculation',
     prompt: 'Gleiche Situation: Heading 000°, STW 5 kn, Strom 090° 2 kn. Wie groß ist die SOG (auf 0,1 kn)?',
     answer: 5.39,
     tolerance: 0.06,
     unit: 'kn',
-    verify: { heading: 0, stw: 5, tideDirection: 90, tideRate: 2, leeway: 0, durationMin: 60, quantity: 'sog' },
+    verify: { kind: 'sim', heading: 0, stw: 5, tideDirection: 90, tideRate: 2, leeway: 0, durationMin: 60, quantity: 'sog' },
     solution: 'SOG ≈ 5,4 kn',
     steps: ['Vektor über Grund: x = 2, y = 5.', 'SOG = √(2² + 5²) = √29 ≈ 5,39 kn.'],
   },
@@ -102,13 +107,14 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'water-track',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'calculation',
     prompt:
       'Heading 355°. Der Wind versetzt das Boot um 8° nach Steuerbord (Leeway +8°). Wie lautet der Water Track?',
     answer: 3,
     tolerance: 0.5,
     unit: '°',
     isBearing: true,
-    verify: { heading: 355, stw: 5, tideDirection: 0, tideRate: 0, leeway: 8, durationMin: 60, quantity: 'waterTrack' },
+    verify: { kind: 'sim', heading: 355, stw: 5, tideDirection: 0, tideRate: 0, leeway: 8, durationMin: 60, quantity: 'waterTrack' },
     solution: 'Water Track = 003°',
     steps: [
       'Water Track = Heading + Leeway = 355° + 8° = 363°.',
@@ -121,6 +127,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'leeway',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Bei welchem Kurs zum Wind ist die Leeway eines Segelboots typischerweise am größten?',
     options: ['Vor dem Wind', 'Raumschots', 'Am Wind bei kräftigem Wind', 'Unter Motor bei Flaute'],
     correctIndex: 2,
@@ -137,6 +144,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'leeway',
     difficulty: 2,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Worin unterscheiden sich Leeway und Tidal Set?',
     options: [
       'Beide beschreiben dasselbe: die Abdrift durch Strom',
@@ -157,6 +165,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'ground-track',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Welche Vektoren ergeben im Stromdreieck zusammen den Ground Track?',
     options: [
       'Heading + Leeway',
@@ -178,12 +187,13 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'ground-track',
     difficulty: 2,
     level: 'day-skipper',
+    category: 'calculation',
     prompt:
       'Heading 090°, STW 4 kn, kein Leeway, Strom 000° mit 3 kn. Welche Distanz über Grund legt das Boot in 30 Minuten zurück?',
     answer: 2.5,
     tolerance: 0.05,
     unit: 'NM',
-    verify: { heading: 90, stw: 4, tideDirection: 0, tideRate: 3, leeway: 0, durationMin: 30, quantity: 'distanceOverGround' },
+    verify: { kind: 'sim', heading: 90, stw: 4, tideDirection: 0, tideRate: 3, leeway: 0, durationMin: 30, quantity: 'distanceOverGround' },
     solution: '2,5 NM',
     steps: [
       'Vektor über Grund: x = 4 (Ost), y = 3 (Nord).',
@@ -197,6 +207,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'fix',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Was ist ein Position Fix?',
     options: [
       'Eine aus Kurs, Fahrt und Strom berechnete Position',
@@ -217,6 +228,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'fix',
     difficulty: 2,
     level: 'day-skipper',
+    category: 'concept',
     prompt:
       'Deine Drei-Linien-Kreuzpeilung ergibt ein großes Fehlerdreieck (cocked hat). Was ist die sinnvollste Reaktion?',
     options: [
@@ -239,6 +251,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'ep',
     difficulty: 1,
     level: 'day-skipper',
+    category: 'concept',
     prompt: 'Welche Reihenfolge ist für die Konstruktion einer EP korrekt?',
     options: [
       'Letzter Fix → Stromvektor → Ground Track',
@@ -260,6 +273,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'cog',
     difficulty: 2,
     level: 'day-skipper',
+    category: 'concept',
     prompt:
       'Dein Boot fährt mit 3 kn durchs Wasser genau gegen einen 3-kn-Strom. Was zeigt das GPS als COG an?',
     options: [
@@ -281,12 +295,13 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     topic: 'sog',
     difficulty: 3,
     level: 'day-skipper',
+    category: 'calculation',
     prompt:
       'Heading 000°, STW 2 kn, kein Leeway. Gegenstrom setzt 180° mit 3 kn. Wie groß ist die SOG und in welche Richtung bewegt sich das Boot über Grund? Gib die SOG an.',
     answer: 1,
     tolerance: 0.05,
     unit: 'kn',
-    verify: { heading: 0, stw: 2, tideDirection: 180, tideRate: 3, leeway: 0, durationMin: 60, quantity: 'sog' },
+    verify: { kind: 'sim', heading: 0, stw: 2, tideDirection: 180, tideRate: 3, leeway: 0, durationMin: 60, quantity: 'sog' },
     solution: 'SOG = 1 kn, COG = 180° – das Boot treibt rückwärts.',
     steps: [
       'Fahrt durchs Wasser: y = +2 (Nord).',

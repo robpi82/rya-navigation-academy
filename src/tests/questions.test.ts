@@ -1,13 +1,42 @@
 import { describe, expect, it } from 'vitest'
 import { QUESTION_BANK } from '@/questions'
 import { GLOSSARY, TERM_IDS } from '@/data/glossary'
-import { simulate } from '@/calculations'
+import { courseToSteer, distanceFrom, simulate, speedFrom, timeFrom } from '@/calculations'
 import { isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
+import type { QuestionVerify } from '@/types/learning'
+
+function compute(v: QuestionVerify): number | null {
+  switch (v.kind) {
+    case 'sim': {
+      const r = simulate(v)
+      return r[v.quantity]
+    }
+    case 'cts': {
+      const r = courseToSteer(v)
+      if (!r.feasible) return null
+      if (v.quantity === 'cts') return r.courseToSteer
+      if (v.quantity === 'sog') return r.sog
+      return r.timeHours === null ? null : r.timeHours * 60
+    }
+    case 'dst': {
+      if (v.quantity === 'distance') return distanceFrom(v.speed!, v.minutes! / 60)
+      if (v.quantity === 'speed') return speedFrom(v.distance!, v.minutes! / 60)
+      const h = timeFrom(v.distance!, v.speed!)
+      return h === null ? null : h * 60
+    }
+  }
+}
 
 describe('Fragenkatalog', () => {
-  it('enthält mindestens 15 Fragen mit eindeutigen IDs', () => {
-    expect(QUESTION_BANK.length).toBeGreaterThanOrEqual(15)
+  it('enthält mindestens 50 Fragen mit eindeutigen IDs', () => {
+    expect(QUESTION_BANK.length).toBeGreaterThanOrEqual(50)
     expect(new Set(QUESTION_BANK.map((q) => q.id)).size).toBe(QUESTION_BANK.length)
+  })
+
+  it('deckt alle neun Begriffe und alle Fragetypen ab', () => {
+    for (const t of TERM_IDS) expect(QUESTION_BANK.some((q) => q.topic === t), t).toBe(true)
+    for (const c of ['concept', 'calculation', 'course', 'diagram', 'error', 'matching'])
+      expect(QUESTION_BANK.some((q) => q.category === c), c).toBe(true)
   })
 
   it('jede Frage hat Musterlösung, Erklärung, gültiges Thema und Schwierigkeitsgrad', () => {
@@ -22,22 +51,28 @@ describe('Fragenkatalog', () => {
         expect(q.correctIndex, q.id).toBeLessThan(q.options.length)
         expect(new Set(q.options).size, q.id).toBe(q.options.length)
       }
+      if (q.type === 'match') {
+        expect(q.pairs.length, q.id).toBeGreaterThanOrEqual(3)
+        expect(new Set(q.pairs.map((p) => p.right)).size, q.id).toBe(q.pairs.length)
+        expect(new Set(q.pairs.map((p) => p.left)).size, q.id).toBe(q.pairs.length)
+      }
     }
   })
 
   it('numerische Musterlösungen stimmen mit den Berechnungsfunktionen überein', () => {
+    let checked = 0
     for (const q of QUESTION_BANK) {
       if (q.type !== 'numeric' || !q.verify) continue
-      const r = simulate(q.verify)
-      const computed = {
-        cog: r.cog,
-        sog: r.sog,
-        waterTrack: r.waterTrack,
-        distanceOverGround: r.distanceOverGround,
-      }[q.verify.quantity]
+      const computed = compute(q.verify)
       expect(computed, q.id).not.toBeNull()
-      expect(isAnswerCorrect(q, computed!), `${q.id}: berechnet ${computed}`).toBe(true)
+      expect(isAnswerCorrect(q, computed!), `${q.id}: berechnet ${computed}, Musterlösung ${q.answer}`).toBe(true)
+      checked++
     }
+    expect(checked).toBeGreaterThanOrEqual(20)
+  })
+
+  it('alle Berechnungsaufgaben sind maschinell überprüft', () => {
+    for (const q of QUESTION_BANK) if (q.type === 'numeric') expect(q.verify, q.id).toBeDefined()
   })
 
   it('Glossar-Verständnisfragen sind gültig', () => {
@@ -63,6 +98,16 @@ describe('Antwortprüfung', () => {
     expect(isAnswerCorrect(q, 3)).toBe(true)
     expect(isAnswerCorrect(q, 363)).toBe(true)
     expect(isAnswerCorrect(q, 355)).toBe(false)
+  })
+
+  it('Zuordnung ist nur bei vollständig richtiger Zuordnung korrekt', () => {
+    const q = QUESTION_BANK.find((x) => x.type === 'match')!
+    const n = q.type === 'match' ? q.pairs.length : 0
+    const right = Array.from({ length: n }, (_, i) => i)
+    expect(isAnswerCorrect(q, right)).toBe(true)
+    expect(isAnswerCorrect(q, [...right].reverse())).toBe(false)
+    expect(isAnswerCorrect(q, right.slice(1))).toBe(false)
+    expect(isAnswerCorrect(q, 0)).toBe(false)
   })
 
   it('shuffle behält alle Elemente', () => {

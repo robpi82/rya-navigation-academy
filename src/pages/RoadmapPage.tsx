@@ -21,11 +21,12 @@ const PHASES = [
   {
     phase: 2,
     title: 'Erweiterung',
-    done: false,
+    done: true,
     items: [
-      '50 Quizfragen, weitere Fragetypen (Zuordnung, Fehlererkennung, Vektordiagramme)',
-      'Lernkarten mit Spaced Repetition (Nicht gewusst / Schwer / Gut / Sehr leicht)',
-      'Erweiterte Lernstatistiken',
+      '50 Quizfragen mit Fragetypen Zuordnung, Fehlererkennung, Vektordiagramm und Kursberechnung',
+      'Filter nach Thema, Aufgabentyp und Schwierigkeit',
+      '21 Lernkarten mit Spaced Repetition (Nicht gewusst / Schwer / Gut / Sehr leicht)',
+      'Erweiterte Lernstatistiken (Lernaktivität, Kartenstand, Fehlerquote nach Aufgabentyp)',
       'Navigationsrechner: DST, ETA, COG, SOG, Tidal Stream, Course to Steer, EP',
     ],
   },
@@ -35,7 +36,8 @@ const PHASES = [
     done: false,
     items: [
       'Interaktive Seekarte mit Gitter, Maßstab, Mess- und Winkelwerkzeug, Zoom',
-      'Course-to-Steer- und Estimated-Position-Aufgaben',
+      'Course-to-Steer- und Estimated-Position-Aufgaben in der Karte',
+      'Interaktive Kartenaufgaben im Prüfungstrainer',
       'Tidal-Stream-Übungen',
       'Coastal-Skipper-Lerninhalte',
     ],

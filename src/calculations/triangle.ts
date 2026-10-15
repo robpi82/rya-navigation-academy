@@ -8,6 +8,8 @@ import type {
 import { degToRad, normalizeAngle, radToDeg } from './angles'
 import { addVectors, direction, dot, fromPolar, magnitude, scaleVector, ZERO_THRESHOLD } from './vectors'
 
+const de = (n: number) => n.toFixed(2).replace('.', ',')
+
 /** Water Track = Heading + Leeway (Leeway positiv = Abdrift nach Steuerbord). */
 export const waterTrackFromHeading = (heading: number, leeway: number): number =>
   normalizeAngle(heading + leeway)
@@ -90,7 +92,7 @@ export function courseToSteer(params: {
     return {
       feasible: false,
       reason: 'cross-tide-too-strong',
-      message: `Die Querkomponente des Stroms (${Math.abs(tc).toFixed(2)} kn) ist größer als die Fahrt durchs Wasser (${stw.toFixed(2)} kn). Der gewünschte Kurs kann nicht gehalten werden.`,
+      message: `Die Querkomponente des Stroms (${de(Math.abs(tc))} kn) ist größer als die Fahrt durchs Wasser (${de(stw)} kn). Der gewünschte Kurs kann nicht gehalten werden.`,
     }
   }
   const alpha = radToDeg(Math.asin(Math.max(-1, Math.min(1, ratio))))
@@ -99,7 +101,7 @@ export function courseToSteer(params: {
     return {
       feasible: false,
       reason: 'no-progress',
-      message: `Der Gegenstrom ist zu stark: Entlang des gewünschten Kurses ergibt sich keine Fahrt über Grund (${sog.toFixed(2)} kn). Das Ziel ist so nicht erreichbar.`,
+      message: `Der Gegenstrom ist zu stark: Entlang des gewünschten Kurses ergibt sich keine Fahrt über Grund (${de(sog)} kn). Das Ziel ist so nicht erreichbar.`,
     }
   }
   const waterTrack = normalizeAngle(desiredTrack + alpha)

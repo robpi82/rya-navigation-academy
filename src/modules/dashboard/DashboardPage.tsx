@@ -1,9 +1,13 @@
-import { useMemo } from 'react'
-import { ArrowRight, BookOpen, Clock, Compass, Flame, GraduationCap, RotateCcw, Target } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { ArrowRight, BookOpen, Clock, Compass, Flame, GraduationCap, Layers, RotateCcw, Target } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { GLOSSARY, TERM_BY_ID, TERM_IDS } from '@/data/glossary'
-import { QUESTION_BANK } from '@/questions'
-import { attemptScore, computeStreak, questionsNeedingReview, topicStats } from '@/lib/stats'
+import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
+import { FLASHCARDS } from '@/data/flashcards'
+import { isDue, isMastered } from '@/lib/spacedRepetition'
+import { reviewsPerDay, useFlashcardStore } from '@/stores/flashcardStore'
+import { CATEGORY_LABEL, type QuestionCategory } from '@/types/learning'
+import { attemptScore, computeStreak, dayKey, errorRateBy, lastDays, questionsNeedingReview, topicStats } from '@/lib/stats'
 import { useProgressStore } from '@/stores/progressStore'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Badge } from '@/components/ui/badge'
@@ -55,15 +59,47 @@ export function DashboardPage() {
   const answeredDistinct = Object.keys(questionStats).length
   const masteredQuestions = Object.values(questionStats).filter((s) => s.lastCorrect).length
 
+  const [errorView, setErrorView] = useState<'topic' | 'category'>('topic')
   const topicData = useMemo(
     () =>
-      topicStats(attempts, TERM_IDS).map((t) => ({
-        name: TERM_BY_ID[t.topic].abbr,
-        Fehlerquote: Math.round(t.errorRate * 100),
-        answered: t.answered,
-      })),
-    [attempts],
+      errorView === 'topic'
+        ? topicStats(attempts, TERM_IDS).map((t) => ({
+            name: TERM_BY_ID[t.topic].abbr,
+            full: TERM_BY_ID[t.topic].english,
+            Fehlerquote: Math.round(t.errorRate * 100),
+            answered: t.answered,
+          }))
+        : errorRateBy(attempts, Object.keys(CATEGORY_LABEL) as QuestionCategory[], (id) => QUESTION_BY_ID[id]?.category).map((c) => ({
+            name: CATEGORY_LABEL[c.key].split(/[- ]/)[0],
+            full: CATEGORY_LABEL[c.key],
+            Fehlerquote: Math.round(c.errorRate * 100),
+            answered: c.answered,
+          })),
+    [attempts, errorView],
   )
+  const flashcards = useFlashcardStore((s) => s.cards)
+  const flashLog = useFlashcardStore((s) => s.log)
+  const resetFlashcards = useFlashcardStore((s) => s.reset)
+  const now = new Date()
+  const cardsDue = FLASHCARDS.filter((c) => flashcards[c.id] && isDue(flashcards[c.id], now)).length
+  const cardsNew = FLASHCARDS.filter((c) => !flashcards[c.id]).length
+  const cardsMastered = FLASHCARDS.filter((c) => isMastered(flashcards[c.id])).length
+  const activity = useMemo(() => {
+    const reviews = reviewsPerDay(flashLog)
+    const answersPerDay: Record<string, number> = {}
+    for (const a of attempts) {
+      const k = dayKey(new Date(a.date))
+      answersPerDay[k] = (answersPerDay[k] ?? 0) + a.answers.length
+    }
+    return lastDays(studySeconds, 14).map((d) => ({
+      name: d.day.slice(8, 10) + '.' + d.day.slice(5, 7) + '.',
+      minutes: Math.round(d.value / 60),
+      reviews: reviews[d.day] ?? 0,
+      answers: answersPerDay[d.day] ?? 0,
+      Lernaktionen: (reviews[d.day] ?? 0) + (answersPerDay[d.day] ?? 0),
+    }))
+  }, [studySeconds, flashLog, attempts])
+  const hasActivity = activity.some((d) => d.Lernaktionen > 0)
   const examData = useMemo(
     () =>
       attempts
@@ -77,10 +113,13 @@ export function DashboardPage() {
     [attempts],
   )
 
-  // Fortschritt Day Skipper (Phase-1-Inhalte): 40 % Begriffe, 20 % Verständnisfragen, 40 % beherrschte Quizfragen
+  // Fortschritt Day Skipper: 30 % Begriffe, 10 % Verständnisfragen, 40 % beherrschte Aufgaben, 20 % gefestigte Lernkarten
   const checksCorrect = Object.values(termChecks).filter(Boolean).length
   const dayskipperProgress = Math.round(
-    (learnedTerms.length / GLOSSARY.length) * 40 + (checksCorrect / GLOSSARY.length) * 20 + (masteredQuestions / QUESTION_BANK.length) * 40,
+    (learnedTerms.length / GLOSSARY.length) * 30 +
+      (checksCorrect / GLOSSARY.length) * 10 +
+      (masteredQuestions / QUESTION_BANK.length) * 40 +
+      (cardsMastered / FLASHCARDS.length) * 20,
   )
 
   const nextTerm = GLOSSARY.find((t) => !learnedTerms.includes(t.id))
@@ -94,7 +133,7 @@ export function DashboardPage() {
       />
 
       {/* Schnellstart */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <a href={nextTerm ? `#/glossar/${nextTerm.id}` : '#/glossar'} className="group rounded-xl bg-gradient-to-br from-[oklch(0.3_0.08_255)] to-[oklch(0.42_0.09_215)] p-5 text-white shadow-md transition-transform hover:-translate-y-0.5">
           <BookOpen className="size-6 text-teal-300" />
           <div className="mt-3 text-lg font-semibold">{nextTerm ? `Weiter mit ${nextTerm.abbr}` : 'Glossar wiederholen'}</div>
@@ -115,6 +154,12 @@ export function DashboardPage() {
           </p>
           <ArrowRight className="mt-3 size-5 transition-transform group-hover:translate-x-1" />
         </a>
+        <a href="#/lernkarten" className="group rounded-xl border bg-card p-5 shadow-sm transition-transform hover:-translate-y-0.5">
+          <Layers className="size-6 text-vec-water" />
+          <div className="mt-3 text-lg font-semibold">{cardsDue ? `${cardsDue} Karten fällig` : 'Lernkarten'}</div>
+          <p className="text-sm text-muted-foreground">{cardsDue ? 'Spaced Repetition' : `${cardsNew} neue von ${FLASHCARDS.length}`}</p>
+          <ArrowRight className="mt-3 size-5 transition-transform group-hover:translate-x-1" />
+        </a>
       </div>
 
       {/* Kennzahlen */}
@@ -125,11 +170,90 @@ export function DashboardPage() {
         <StatTile icon={Clock} label="Lernzeit" value={formatStudyTime(totalStudy)} sub="aktive Zeit in der App" />
       </div>
 
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <Card>
+          <CardHeader>
+            <CardTitle>Lernaktivität</CardTitle>
+            <CardDescription>Beantwortete Fragen und bewertete Lernkarten der letzten 14 Tage</CardDescription>
+          </CardHeader>
+          <CardContent className="h-56">
+            {hasActivity ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={activity} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
+                  <CartesianGrid vertical={false} stroke="var(--chart-grid)" />
+                  <XAxis dataKey="name" tick={{ fill: 'var(--muted-foreground)', fontSize: 10 }} axisLine={false} tickLine={false} interval={1} />
+                  <YAxis allowDecimals={false} tick={{ fill: 'var(--muted-foreground)', fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <Tooltip
+                    cursor={{ fill: 'var(--muted)', opacity: 0.5 }}
+                    contentStyle={tooltipStyle}
+                    formatter={(v, _n, item) => [`${v} (${item.payload.answers} Antworten, ${item.payload.reviews} Karten, ${item.payload.minutes} min)`, 'Lernaktionen']}
+                  />
+                  <Bar dataKey="Lernaktionen" fill="var(--vec-water)" radius={[4, 4, 0, 0]} maxBarSize={22} />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <EmptyChart text="Noch keine Lernaktivität aufgezeichnet." />
+            )}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Lernkarten</CardTitle>
+            <CardDescription>Stand der Spaced Repetition</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <div className="mb-1 flex justify-between text-sm">
+                <span>Gefestigt (≥ 7 Tage)</span>
+                <span className="font-mono">
+                  {cardsMastered} / {FLASHCARDS.length}
+                </span>
+              </div>
+              <Progress value={(cardsMastered / FLASHCARDS.length) * 100} indicatorClassName="bg-success" />
+            </div>
+            <dl className="grid grid-cols-3 gap-2 text-center">
+              <div className="rounded-lg bg-muted/60 p-2">
+                <dt className="text-xs text-muted-foreground">Fällig</dt>
+                <dd className="text-xl font-bold">{cardsDue}</dd>
+              </div>
+              <div className="rounded-lg bg-muted/60 p-2">
+                <dt className="text-xs text-muted-foreground">Neu</dt>
+                <dd className="text-xl font-bold">{cardsNew}</dd>
+              </div>
+              <div className="rounded-lg bg-muted/60 p-2">
+                <dt className="text-xs text-muted-foreground">Bewertungen</dt>
+                <dd className="text-xl font-bold">{flashLog.length}</dd>
+              </div>
+            </dl>
+            <Button asChild variant="outline" className="w-full">
+              <a href="#/lernkarten">{cardsDue ? 'Fällige Karten lernen' : 'Zu den Lernkarten'}</a>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Fehlerquote nach Thema</CardTitle>
-            <CardDescription>Anteil falscher Antworten in allen Durchgängen (%)</CardDescription>
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <CardTitle>Fehlerquote</CardTitle>
+                <CardDescription>Anteil falscher Antworten in allen Durchgängen (%)</CardDescription>
+              </div>
+              <div className="inline-flex rounded-lg bg-muted p-1 text-xs" role="group" aria-label="Gruppierung">
+                {(['topic', 'category'] as const).map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => setErrorView(v)}
+                    aria-pressed={errorView === v}
+                    className={errorView === v ? 'rounded-md bg-card px-2.5 py-1 font-medium shadow-sm' : 'rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground'}
+                  >
+                    {v === 'topic' ? 'nach Thema' : 'nach Aufgabentyp'}
+                  </button>
+                ))}
+              </div>
+            </div>
           </CardHeader>
           <CardContent className="h-64">
             {hasTopicData ? (
@@ -141,7 +265,8 @@ export function DashboardPage() {
                   <Tooltip
                     cursor={{ fill: 'var(--muted)', opacity: 0.5 }}
                     contentStyle={tooltipStyle}
-                    formatter={(v: number, _n, item) => [`${v} % (${item.payload.answered} Antworten)`, 'Fehlerquote']}
+                    labelFormatter={(_l, p) => p?.[0]?.payload.full ?? ''}
+                    formatter={(v, _n, item) => [`${v} % (${item.payload.answered} Antworten)`, 'Fehlerquote']}
                   />
                   <Bar dataKey="Fehlerquote" fill="var(--vec-ground)" radius={[4, 4, 0, 0]} maxBarSize={28} />
                 </BarChart>
@@ -185,9 +310,9 @@ export function DashboardPage() {
             <CardTitle>Fortschritt nach Ausbildungsstufe</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <LevelRow label="Day Skipper Theory" value={dayskipperProgress} note="Begriffe, Verständnisfragen und beherrschte Aufgaben" />
+            <LevelRow label="Day Skipper Theory" value={dayskipperProgress} note="Begriffe, Verständnisfragen, beherrschte Aufgaben und gefestigte Lernkarten" />
             <LevelRow label="Coastal Skipper / Yachtmaster Offshore" value={0} note="Inhalte folgen in Phase 3" disabled />
-            <LevelRow label="Fortgeschrittene Navigationsübungen" value={0} note="Seekarte & Course to Steer folgen in Phase 3" disabled />
+            <LevelRow label="Fortgeschrittene Navigationsübungen" value={0} note="Interaktive Seekarte folgt in Phase 3" disabled />
           </CardContent>
         </Card>
 
@@ -225,7 +350,10 @@ export function DashboardPage() {
                 size="sm"
                 className="-ml-2 text-muted-foreground"
                 onClick={() => {
-                  if (window.confirm('Gesamten Lernfortschritt unwiderruflich löschen?')) reset()
+                  if (window.confirm('Gesamten Lernfortschritt inkl. Lernkarten unwiderruflich löschen?')) {
+                    reset()
+                    resetFlashcards()
+                  }
                 }}
               >
                 Lernfortschritt zurücksetzen

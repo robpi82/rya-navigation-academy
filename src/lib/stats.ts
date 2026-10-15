@@ -57,3 +57,32 @@ export const questionsNeedingReview = (stats: Record<string, QuestionStat>): str
 
 export const attemptScore = (a: QuizAttempt): number =>
   a.answers.length ? a.answers.filter((x) => x.correct).length / a.answers.length : 0
+
+/** Fehlerquote je Kategorie (z. B. Aufgabentyp); `categoryOf` ordnet eine Frage-ID ihrer Kategorie zu. */
+export function errorRateBy<K extends string>(
+  attempts: QuizAttempt[],
+  keys: K[],
+  categoryOf: (questionId: string) => K | undefined,
+): { key: K; answered: number; wrong: number; errorRate: number }[] {
+  return keys.map((key) => {
+    let answered = 0
+    let wrong = 0
+    for (const a of attempts)
+      for (const ans of a.answers)
+        if (categoryOf(ans.questionId) === key) {
+          answered++
+          if (!ans.correct) wrong++
+        }
+    return { key, answered, wrong, errorRate: answered ? wrong / answered : 0 }
+  })
+}
+
+/** Zeitreihe der letzten `days` Tage (ältester zuerst) mit Werten aus einer Tagestabelle. */
+export function lastDays(values: Record<string, number>, days: number, today: string = dayKey()): { day: string; value: number }[] {
+  const out: { day: string; value: number }[] = []
+  for (let i = days - 1; i >= 0; i--) {
+    const d = shiftDay(today, -i)
+    out.push({ day: d, value: values[d] ?? 0 })
+  }
+  return out
+}
