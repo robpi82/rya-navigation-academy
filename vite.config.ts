@@ -11,7 +11,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      output: { manualChunks: { recharts: ['recharts'], react: ['react', 'react-dom'] } },
+      output: { manualChunks: { recharts: ['recharts'] } },
     },
   },
   test: {

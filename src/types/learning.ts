@@ -9,6 +9,11 @@ export type TermId =
   | 'fix'
   | 'ep'
 
+/** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide'
+
+export type TopicId = TermId | CoastalTopicId
+
 export type CourseLevel = 'day-skipper' | 'coastal-skipper' | 'yachtmaster-offshore'
 
 export type IllustrationKind = TermId
@@ -41,7 +46,7 @@ export type Difficulty = 1 | 2 | 3
 
 interface QuestionBase {
   id: string
-  topic: TermId
+  topic: TopicId
   difficulty: Difficulty
   level: CourseLevel
   prompt: string
@@ -104,6 +109,23 @@ export type QuestionVerify =
       quantity: 'cts' | 'sog' | 'timeMinutes'
     }
   | {
+      kind: 'twelfths'
+      lw: number
+      hw: number
+      hoursAfterLw: number
+      /** Kartentiefe – falls gesetzt, wird die Wassertiefe (Kartentiefe + Höhe) geprüft */
+      chartedDepth?: number
+      quantity: 'height' | 'depth'
+    }
+  | {
+      kind: 'passage'
+      desiredTrack: number
+      distance: number
+      stw: number
+      tides: { set: number; rate: number }[]
+      quantity: 'cts' | 'timeMinutes'
+    }
+  | {
       kind: 'dst'
       distance?: number
       speed?: number
@@ -115,7 +137,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | 'kn' | 'NM' | 'min'
+  unit: '°' | 'kn' | 'NM' | 'min' | 'm'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**
@@ -137,7 +159,7 @@ export type QuizMode = 'learn' | 'exam'
 
 export interface QuizAnswerRecord {
   questionId: string
-  topic: TermId
+  topic: TopicId
   correct: boolean
   /** gegebene Antwort: Index (MC), Zahl (Berechnung) oder Zuordnung je linkem Element (Index der rechten Seite) */
   given: number | number[] | null

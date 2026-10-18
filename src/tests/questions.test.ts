@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { QUESTION_BANK } from '@/questions'
 import { GLOSSARY, TERM_IDS } from '@/data/glossary'
-import { courseToSteer, distanceFrom, simulate, speedFrom, timeFrom } from '@/calculations'
+import { COASTAL_TOPIC_IDS } from '@/data/topics'
+import { courseToSteer, distanceFrom, heightByTwelfths, planPassage, simulate, speedFrom, timeFrom } from '@/calculations'
 import { isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
 import type { QuestionVerify } from '@/types/learning'
 
@@ -18,6 +19,15 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'sog') return r.sog
       return r.timeHours === null ? null : r.timeHours * 60
     }
+    case 'twelfths': {
+      const h = heightByTwelfths(v.lw, v.hw, v.hoursAfterLw)
+      return v.quantity === 'height' ? h : h + (v.chartedDepth ?? 0)
+    }
+    case 'passage': {
+      const r = planPassage(v)
+      if (!r.feasible) return null
+      return v.quantity === 'cts' ? r.courseToSteer : r.hours * 60
+    }
     case 'dst': {
       if (v.quantity === 'distance') return distanceFrom(v.speed!, v.minutes! / 60)
       if (v.quantity === 'speed') return speedFrom(v.distance!, v.minutes! / 60)
@@ -28,8 +38,9 @@ function compute(v: QuestionVerify): number | null {
 }
 
 describe('Fragenkatalog', () => {
-  it('enthält mindestens 50 Fragen mit eindeutigen IDs', () => {
-    expect(QUESTION_BANK.length).toBeGreaterThanOrEqual(50)
+  it('enthält mindestens 50 Day-Skipper-Fragen und Coastal-Skipper-Fragen mit eindeutigen IDs', () => {
+    expect(QUESTION_BANK.filter((q) => q.level === 'day-skipper').length).toBeGreaterThanOrEqual(50)
+    expect(QUESTION_BANK.filter((q) => q.level === 'coastal-skipper').length).toBeGreaterThanOrEqual(10)
     expect(new Set(QUESTION_BANK.map((q) => q.id)).size).toBe(QUESTION_BANK.length)
   })
 
@@ -44,7 +55,7 @@ describe('Fragenkatalog', () => {
       expect(q.prompt.length, q.id).toBeGreaterThan(10)
       expect(q.solution.length, q.id).toBeGreaterThan(0)
       expect(q.steps.length, q.id).toBeGreaterThan(0)
-      expect(TERM_IDS, q.id).toContain(q.topic)
+      expect([...TERM_IDS, ...COASTAL_TOPIC_IDS], q.id).toContain(q.topic)
       expect([1, 2, 3], q.id).toContain(q.difficulty)
       if (q.type === 'mc') {
         expect(q.correctIndex, q.id).toBeGreaterThanOrEqual(0)

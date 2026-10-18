@@ -33,15 +33,22 @@ const PHASES = [
   {
     phase: 3,
     title: 'Fortgeschrittene Navigation',
-    done: false,
+    done: true,
     items: [
-      'Interaktive Seekarte mit Gitter, Maßstab, Mess- und Winkelwerkzeug, Zoom',
-      'Course-to-Steer- und Estimated-Position-Aufgaben in der Karte',
-      'Interaktive Kartenaufgaben im Prüfungstrainer',
-      'Tidal-Stream-Übungen',
-      'Coastal-Skipper-Lerninhalte',
+      'Interaktive Seekarte (fiktives Revier, Mercator): Gitter, Breiten-/Längengrade, Breitenmaßstab, Kompassrose',
+      'Werkzeuge: Start/Ziel, Kurslinie, Messen, Winkel, Positionen, Zoom und Verschieben (auch Touch)',
+      '11 Kartenaufgaben: Kurs/Distanz, Kreuzpeilung, EP plotten, Strom am Tidal Diamond, Course to Steer',
+      'Kursplanung mit Strom über mehrere Stunden (Tidal Diamonds A–C)',
+      'Coastal Skipper: 5 Lektionen mit interaktiven Übungen und 12 Prüfungsfragen',
     ],
   },
+]
+
+const IDEAS = [
+  'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
+  'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
+  'Benutzerkonten und Synchronisation über eine Datenbank',
+  'Offline-Betrieb über Service Worker (PWA)',
 ]
 
 export function RoadmapPage() {
@@ -70,6 +77,21 @@ export function RoadmapPage() {
           </Card>
         ))}
       </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Mögliche Erweiterungen</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2 text-sm">
+            {IDEAS.map((i) => (
+              <li key={i} className="flex gap-2">
+                <Circle className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                {i}
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
     </div>
   )
 }

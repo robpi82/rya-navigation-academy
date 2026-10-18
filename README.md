@@ -30,10 +30,14 @@ src/
 │   ├── triangle.ts      Geschwindigkeitsdreieck, Simulation, Course to Steer
 │   ├── dst.ts           Distance–Speed–Time, ETA, Einheiten
 │   ├── tides.ts         Interpolation der Stromrate (Spring/Nipp)
-│   └── position.ts      Positionsversatz (Mittelbreite), Lat/Lon-Formatierung
+│   ├── position.ts      Positionsversatz (Mittelbreite), Lat/Lon-Formatierung
+│   ├── chart.ts         Mercatorprojektion, Loxodrome (Kurs/Distanz/Zielpunkt), Punkt-in-Polygon
+│   ├── passage.ts       Course to Steer über mehrere Stromstunden
+│   └── coastal.ts       Zwölftelregel, Running Fix, Gefahrenpeilung
 ├── types/             Gemeinsame TypeScript-Typen (Navigation, Lerninhalte)
 ├── data/glossary.ts   Die neun Begriffe mit allen Lerninhalten
 ├── data/flashcards.ts 21 Lernkarten
+├── data/chartArea.ts  Fiktives Übungsrevier (Küsten, Seezeichen, Tidal Diamonds)
 ├── questions/         Fragenkatalog (erweiterbar je Ausbildungsstufe)
 ├── stores/            Zustand-Stores (Fortschritt, Einstellungen, Simulator) – persistiert
 ├── hooks/             Hash-Router, Lernzeit-Timer, Theme
@@ -42,8 +46,9 @@ src/
 ├── components/
 │   ├── ui/            shadcn/ui-Komponenten (Button, Card, Slider, Tabs, …)
 │   ├── layout/        AppShell, Sidebar, ThemeToggle
+│   ├── chart/         SeaChart: interaktive Seekarte (Zoom, Pan, Overlays)
 │   └── nautical/      SVG-Bausteine: Vektorpfeile (RYA-Pfeilkonvention), Boot, Nordpfeil, Winkelbogen
-├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators
+├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators, chart, coastal
 ├── pages/             Roadmap, Über & Hinweise
 └── tests/             Vitest-Tests
 ```
@@ -92,6 +97,25 @@ nicht erreichbarer Course to Steer – sowie automatische Prüfung aller numeris
   Tidal Stream (Interpolation Spring/Nipp), Course to Steer (mit ausdrücklicher Meldung „Kurs nicht haltbar“),
   Estimated Position (Lat/Lon, Mittelbreitenverfahren). Jeweils mit Eingabeprüfung und Rechenweg.
 
-### Phase 3 – geplant
-Interaktive Seekarte (Gitter, Breiten/Längen, Maßstab, Messwerkzeuge, Zoom/Pan), Course-to-Steer- und
-EP-Aufgaben, Tidal-Stream-Übungen, Coastal-Skipper-Inhalte, Service Worker für Offline-Betrieb.
+### Phase 3 – fertig ✅
+- **Interaktive Seekarte:** fiktives, geografisch konsistentes Übungsrevier „Nordbucht“ (Mercatorprojektion) mit Küsten,
+  Insel, Leuchtfeuern, Kardinaltonnen, Häfen, Gefahrenstelle und drei Tidal Diamonds. Breiten-/Längengitter mit
+  Beschriftung, Breitenmaßstab (1′ = 1 NM), Maßstabsleiste, Kompassrose, Zoom (Buttons, Mausrad, Pinch) und Verschieben.
+- **Werkzeuge:** Start/Ziel mit Kurslinie, Messen (Kurs + Distanz), Winkelmessung, Positionen markieren; Klicks rasten an
+  Seezeichen ein. Warnung, wenn die Kurslinie über Land führt.
+- **Kursplanung:** Course to Steer mit Strom aus den Tidal Diamonds über mehrere Stunden (Vektorsumme), Darstellung
+  des Stromdreiecks in der Karte, Stromtabelle mit interpolierter Rate.
+- **11 Kartenaufgaben:** Kurs/Distanz messen, Strom ablesen und interpolieren, Kreuzpeilung plotten, EP plotten
+  (auch mit Leeway), Course to Steer (auch mehrstündig mit kenterndem Strom). Plotaufgaben werden per Klick in die Karte
+  gelöst und mit Toleranzradius geprüft; Lösungen samt Hilfslinien einblendbar.
+- **Coastal Skipper:** 5 Lektionen (mehrstündiger CTS, Versegelungspeilung, Gefahrenpeilung, Zwölftelregel, Törnplanung)
+  mit interaktiven Übungen und 12 Prüfungsfragen; Ausbildungsstufen-Filter im Prüfungstrainer.
+- Code-Splitting der Seiten für schnelleren Start.
+
+Tests (93): u. a. Mercator/Loxodrome (Hin- und Rückrechnung), mehrstündiger CTS (Probe: Wasserweg + Ströme = Ziel),
+Zwölftelregel, Running Fix, NMT/NLT über 000°, Konsistenz des Reviers (Landmarken an Land, Tonnen im Wasser,
+Kurslinien der Aufgaben nicht über Land) und alle Kartenaufgaben-Lösungen.
+
+### Mögliche Erweiterungen
+Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
+Service Worker für Offline-Betrieb.

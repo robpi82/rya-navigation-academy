@@ -4,6 +4,9 @@ import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Too
 import { GLOSSARY, TERM_BY_ID, TERM_IDS } from '@/data/glossary'
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { FLASHCARDS } from '@/data/flashcards'
+import { CHART_EXERCISES } from '@/lib/chartExercises'
+import { LESSONS } from '@/modules/coastal/CoastalPage'
+import { topicInfo } from '@/data/topics'
 import { isDue, isMastered } from '@/lib/spacedRepetition'
 import { reviewsPerDay, useFlashcardStore } from '@/stores/flashcardStore'
 import { CATEGORY_LABEL, type QuestionCategory } from '@/types/learning'
@@ -118,9 +121,24 @@ export function DashboardPage() {
   const dayskipperProgress = Math.round(
     (learnedTerms.length / GLOSSARY.length) * 30 +
       (checksCorrect / GLOSSARY.length) * 10 +
-      (masteredQuestions / QUESTION_BANK.length) * 40 +
+      (QUESTION_BANK.filter((q) => q.level === 'day-skipper' && questionStats[q.id]?.lastCorrect).length / QUESTION_BANK.filter((q) => q.level === 'day-skipper').length) * 40 +
       (cardsMastered / FLASHCARDS.length) * 20,
   )
+
+  const completedLessons = useProgressStore((s) => s.completedLessons)
+  const chartResults = useProgressStore((s) => s.chartResults)
+  const lessonsDone = LESSONS.filter((l) => completedLessons.includes(l.id)).length
+  const coastalQuestions = QUESTION_BANK.filter((q) => q.level === 'coastal-skipper')
+  const coastalMastered = coastalQuestions.filter((q) => questionStats[q.id]?.lastCorrect).length
+  const chartSolved = CHART_EXERCISES.filter((e) => chartResults[e.id]?.solved).length
+  const coastalChart = CHART_EXERCISES.filter((e) => e.level === 'coastal-skipper')
+  // Coastal Skipper: 40 % Lektionen, 40 % beherrschte Coastal-Aufgaben, 20 % Coastal-Kartenaufgaben
+  const coastalProgress = Math.round(
+    (lessonsDone / LESSONS.length) * 40 +
+      (coastalMastered / Math.max(1, coastalQuestions.length)) * 40 +
+      (coastalChart.filter((e) => chartResults[e.id]?.solved).length / Math.max(1, coastalChart.length)) * 20,
+  )
+  const chartProgress = Math.round((chartSolved / CHART_EXERCISES.length) * 100)
 
   const nextTerm = GLOSSARY.find((t) => !learnedTerms.includes(t.id))
   const hasTopicData = topicData.some((t) => t.answered > 0)
@@ -311,8 +329,9 @@ export function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <LevelRow label="Day Skipper Theory" value={dayskipperProgress} note="Begriffe, Verständnisfragen, beherrschte Aufgaben und gefestigte Lernkarten" />
-            <LevelRow label="Coastal Skipper / Yachtmaster Offshore" value={0} note="Inhalte folgen in Phase 3" disabled />
-            <LevelRow label="Fortgeschrittene Navigationsübungen" value={0} note="Interaktive Seekarte folgt in Phase 3" disabled />
+            <LevelRow label="Coastal Skipper" value={coastalProgress} note={`${lessonsDone} / ${LESSONS.length} Lektionen, ${coastalMastered} / ${coastalQuestions.length} Aufgaben beherrscht`} />
+            <LevelRow label="Kartenaufgaben (Seekarte)" value={chartProgress} note={`${chartSolved} / ${CHART_EXERCISES.length} Aufgaben gelöst`} />
+            <LevelRow label="Yachtmaster Offshore" value={0} note="Noch keine Inhalte – mögliche Erweiterung" disabled />
           </CardContent>
         </Card>
 
@@ -339,7 +358,7 @@ export function DashboardPage() {
               <div className="flex flex-wrap gap-2">
                 {Array.from(new Set(reviewIds.map((id) => QUESTION_BANK.find((q) => q.id === id)?.topic).filter(Boolean))).map((t) => (
                   <Badge key={t} variant="destructive">
-                    {TERM_BY_ID[t!].abbr}: {reviewIds.filter((id) => QUESTION_BANK.find((q) => q.id === id)?.topic === t).length}
+                    {topicInfo(t!).abbr}: {reviewIds.filter((id) => QUESTION_BANK.find((q) => q.id === id)?.topic === t).length}
                   </Badge>
                 ))}
               </div>

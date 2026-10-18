@@ -35,7 +35,12 @@ export function AboutPage() {
             <li>Koordinaten: x nach Osten, y nach Norden; x = v·sin θ, y = v·cos θ; COG = atan2(x, y).</li>
             <li>Bei SOG = 0 ist der COG nicht definiert und wird nicht angezeigt.</li>
             <li>RYA-Pfeilkonvention: Water Track &gt;, Ground Track &gt;&gt;, Tidal Stream &gt;&gt;&gt;.</li>
-            <li>Kartensymbole: Fix ⊙ (Kreis mit Punkt), EP △ (Dreieck mit Punkt), DR / (Querstrich).</li>
+            <li>Kartensymbole: Fix ⊙ (Kreis mit Punkt), EP △ (Dreieck mit Punkt), DR / (Querstrich), Wegpunkt □.</li>
+            <li>
+              Seekarte: fiktives Übungsrevier „Nordbucht“ in Mercatorprojektion (Kugelmodell). Kurse entlang der Loxodrome, Distanzen am
+              Breitenmaßstab (1′ = 1 NM). Keine reale Seekarte – nicht zur Navigation.
+            </li>
+            <li>Gezeitenstrom: Rate zwischen Spring- und Nipptide linear über den Tidenhub interpoliert; mehrstündige Ströme werden vektoriell addiert.</li>
           </ul>
         </CardContent>
       </Card>

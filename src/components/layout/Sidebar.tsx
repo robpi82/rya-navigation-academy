@@ -1,6 +1,5 @@
-import { Clock } from 'lucide-react'
 import type { Route } from '@/hooks/useHashRoute'
-import { INFO_ITEM, MAIN_MENU, UPCOMING_MENU, type MenuItem } from '@/navigation/menu'
+import { COASTAL_MENU, INFO_ITEM, MAIN_MENU, ROADMAP_ITEM, type MenuItem } from '@/navigation/menu'
 import { cn } from '@/lib/utils'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
@@ -39,24 +38,11 @@ export function Sidebar({ route, onNavigate }: { route: Route; onNavigate?: () =
         {MAIN_MENU.map((item) => (
           <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
         ))}
-        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/50 uppercase">In Vorbereitung</p>
-        {UPCOMING_MENU.map((u) => (
-          <a
-            key={u.label}
-            href="#/roadmap"
-            onClick={onNavigate}
-            className={cn(
-              'flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground/55 hover:bg-white/6 hover:text-sidebar-foreground',
-              route.name === 'roadmap' && 'text-sidebar-foreground/80',
-            )}
-          >
-            <u.icon className="size-[18px] shrink-0" />
-            <span className="flex-1">{u.label}</span>
-            <span className="flex shrink-0 items-center gap-1 text-[11px] whitespace-nowrap">
-              <Clock className="size-3" /> Phase {u.phase}
-            </span>
-          </a>
+        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/50 uppercase">Coastal Skipper</p>
+        {COASTAL_MENU.map((item) => (
+          <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
         ))}
+        <NavLink item={ROADMAP_ITEM} active={route.name === 'roadmap'} onNavigate={onNavigate} />
         <div className="pt-4">
           <NavLink item={INFO_ITEM} active={route.name === 'about'} onNavigate={onNavigate} />
         </div>

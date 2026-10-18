@@ -11,8 +11,9 @@ import {
   XCircle,
 } from 'lucide-react'
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
-import { GLOSSARY, TERM_BY_ID } from '@/data/glossary'
-import { CATEGORY_LABEL, type Question, type QuestionCategory, type QuizAnswerRecord, type QuizMode, type TermId } from '@/types/learning'
+import { GLOSSARY } from '@/data/glossary'
+import { CATEGORY_LABEL, type Question, type QuestionCategory, type QuizAnswerRecord, type QuizMode, type TopicId, type CourseLevel } from '@/types/learning'
+import { COASTAL_TOPICS, COASTAL_TOPIC_IDS, topicInfo } from '@/data/topics'
 import { MatchInput } from './MatchInput'
 import { QuestionDiagram } from './QuestionDiagram'
 import { formatClock, isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
@@ -81,7 +82,8 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
   const attempts = useProgressStore((s) => s.attempts)
   const reviewIds = useMemo(() => questionsNeedingReview(questionStats), [questionStats])
   const [mode, setMode] = useState<QuizMode>('learn')
-  const [topics, setTopics] = useState<TermId[]>([])
+  const [level, setLevel] = useState<CourseLevel | 'all'>('day-skipper')
+  const [topics, setTopics] = useState<TopicId[]>([])
   const [categories, setCategories] = useState<QuestionCategory[]>([])
   const [difficulty, setDifficulty] = useState<0 | 1 | 2 | 3>(0)
   const [count, setCount] = useState<number>(10)
@@ -89,22 +91,23 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
 
   const pool = useMemo(() => {
     let qs = onlyReview ? reviewIds.map((id) => QUESTION_BY_ID[id]).filter(Boolean) : QUESTION_BANK
+    if (level !== 'all') qs = qs.filter((q) => q.level === level)
     if (topics.length) qs = qs.filter((q) => topics.includes(q.topic))
     if (categories.length) qs = qs.filter((q) => categories.includes(q.category))
     if (difficulty) qs = qs.filter((q) => q.difficulty === difficulty)
     return qs
-  }, [onlyReview, reviewIds, topics, categories, difficulty])
+  }, [onlyReview, reviewIds, level, topics, categories, difficulty])
   const toggleCategory = (c: QuestionCategory) =>
     setCategories((cs) => (cs.includes(c) ? cs.filter((x) => x !== c) : [...cs, c]))
 
-  const toggleTopic = (t: TermId) => setTopics((ts) => (ts.includes(t) ? ts.filter((x) => x !== t) : [...ts, t]))
+  const toggleTopic = (t: TopicId) => setTopics((ts) => (ts.includes(t) ? ts.filter((x) => x !== t) : [...ts, t]))
   const n = Math.min(count, pool.length)
 
   return (
     <div className="space-y-6">
       <PageHeader
         title="Prüfungstrainer"
-        subtitle={`${QUESTION_BANK.length} eigenständig erstellte Übungsaufgaben zu den neun Grundbegriffen – mit Musterlösung und Rechenweg.`}
+        subtitle={`${QUESTION_BANK.length} eigenständig erstellte Übungsaufgaben für Day Skipper und Coastal Skipper – mit Musterlösung und Rechenweg.`}
       />
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <Card>
@@ -141,13 +144,42 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
             </fieldset>
 
             <fieldset>
+              <legend className="mb-2 text-sm font-medium">Ausbildungsstufe</legend>
+              <div className="flex flex-wrap gap-2">
+                {(
+                  [
+                    { v: 'day-skipper', l: 'Day Skipper' },
+                    { v: 'coastal-skipper', l: 'Coastal Skipper' },
+                    { v: 'all', l: 'Alle Stufen' },
+                  ] as const
+                ).map(({ v, l }) => (
+                  <Button
+                    key={v}
+                    size="sm"
+                    variant={level === v ? 'default' : 'outline'}
+                    aria-pressed={level === v}
+                    onClick={() => {
+                      setLevel(v)
+                      setTopics([])
+                    }}
+                  >
+                    {l} ({v === 'all' ? QUESTION_BANK.length : QUESTION_BANK.filter((q) => q.level === v).length})
+                  </Button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
               <legend className="mb-2 text-sm font-medium">
                 Themen <span className="font-normal text-muted-foreground">(keine Auswahl = alle)</span>
               </legend>
               <div className="flex flex-wrap gap-2">
-                {GLOSSARY.map((t) => (
+                {[
+                  ...(level !== 'coastal-skipper' ? GLOSSARY.map((t) => ({ id: t.id as TopicId, label: t.abbr })) : []),
+                  ...(level !== 'day-skipper' ? COASTAL_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: COASTAL_TOPICS[id].german })) : []),
+                ].map((t) => (
                   <Button key={t.id} size="sm" variant={topics.includes(t.id) ? 'default' : 'outline'} onClick={() => toggleTopic(t.id)} aria-pressed={topics.includes(t.id)}>
-                    {t.abbr}
+                    {t.label}
                   </Button>
                 ))}
                 {topics.length > 0 && (
@@ -354,7 +386,7 @@ function QuizRunner({
       <Card>
         <CardHeader>
           <div className="flex flex-wrap gap-2">
-            <Badge variant="outline">{TERM_BY_ID[q.topic].abbr} · {TERM_BY_ID[q.topic].english}</Badge>
+            <Badge variant="outline">{topicInfo(q.topic).abbr} · {topicInfo(q.topic).english}</Badge>
             <Badge variant="secondary">{DIFFICULTY_LABEL[q.difficulty]}</Badge>
             <Badge variant="secondary">{CATEGORY_LABEL[q.category]}</Badge>
           </div>
