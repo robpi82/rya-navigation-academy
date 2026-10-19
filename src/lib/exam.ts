@@ -49,6 +49,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   'clearing-bearing': 'coastal',
   'passage-planning': 'coastal',
   'multi-hour-tide': 'coastal',
+  'secondary-ports': 'coastal',
 }
 
 /** Themengruppe einer Frage; alles andere sind die neun Grundbegriffe. */

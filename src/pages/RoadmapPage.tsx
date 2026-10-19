@@ -107,6 +107,16 @@ const PHASES = [
       'PNG-Icons (192, 512, maskable, Apple) für die Installation auf dem Startbildschirm',
     ],
   },
+  {
+    phase: 10,
+    title: 'Sekundärhäfen',
+    done: true,
+    items: [
+      'Neue Coastal-Lektion (sechste): Gezeiten eines Sekundärhafens aus Zeit- und Höhenunterschieden zum Standardhafen',
+      'Rechner mit Rechenweg: Interpolationsfaktor Springs/Nipp, Höhenunterschied, Datumswechsel (calculations/secondary.ts)',
+      '9 neue Coastal-Fragen (Rechenaufgaben nachgerechnet) und 3 Lernkarten',
+    ],
+  },
 ]
 
 const IDEAS = [

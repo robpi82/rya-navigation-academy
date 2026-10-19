@@ -23,6 +23,7 @@ import {
   passableWindow,
   planPassage,
   rhumbLine,
+  secondaryTide,
   reciprocal,
   cutAngle,
   compassErrorFromTransit,
@@ -36,6 +37,7 @@ import {
   variationForYear,
   waterDepth,
 } from '@/calculations'
+import { SECONDARY_PORTS, STANDARD_REFERENCES } from '@/data/secondaryPorts'
 import { isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
 import type { QuestionVerify } from '@/types/learning'
 
@@ -139,6 +141,11 @@ function compute(v: QuestionVerify): number | null {
     }
     case 'chart':
       return v.quantity === 'geoRange' ? geographicRange(v.lightHeight!, v.eyeHeight!) : rhumbLine(v.from!, v.to!).distance
+    case 'secondary': {
+      const port = SECONDARY_PORTS.find((p) => p.id === v.port)!
+      const r = secondaryTide({ hwTime: v.stdHwTime, hwHeight: v.stdHwHeight, lwTime: v.stdLwTime, lwHeight: v.stdLwHeight }, STANDARD_REFERENCES, port.differences)
+      return v.quantity === 'hwHeight' ? r.hwHeight : v.quantity === 'lwHeight' ? r.lwHeight : v.quantity === 'range' ? r.range : ((r.hwTime % 1440) + 1440) % 1440
+    }
     case 'dst': {
       if (v.quantity === 'distance') return distanceFrom(v.speed!, v.minutes! / 60)
       if (v.quantity === 'speed') return speedFrom(v.distance!, v.minutes! / 60)

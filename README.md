@@ -193,6 +193,12 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
   Gezeiten, Beaufort und VMG – alle werden in den Tests nachgerechnet. Jeder der neun Grundbegriffe hat mindestens fünf Fragen.
 - PNG-Icons für Manifest und iOS (`public/icon-*.png`, `apple-touch-icon.png`), damit die Installation überall ein Symbol zeigt.
 
+### Phase 10 – fertig ✅ (Sekundärhäfen)
+- Coastal-Lektion „Sekundärhäfen" (`#/coastal/secondary-ports`): Zeitunterschiede und nach Springs/Nipp interpolierte Höhenunterschiede
+  (`calculations/secondary.ts`, Übungsdaten in `data/secondaryPorts.ts`), Rechner mit angezeigtem Rechenweg.
+- 9 neue Coastal-Fragen (insgesamt 44; alle Rechenaufgaben nachgerechnet), 3 Lernkarten, Tests: 186.
+- Hinweis: Die Hafendaten sind fiktive Übungswerte; im Ernstfall gelten nur die Angaben des aktuellen Almanachs.
+
 ### Mögliche Erweiterungen
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation.
 

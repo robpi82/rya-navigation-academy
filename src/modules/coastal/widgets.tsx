@@ -3,15 +3,20 @@ import { CheckCircle2, ShieldAlert, ShieldCheck } from 'lucide-react'
 import {
   angleDifference,
   formatBearing,
+  formatClockTime,
   formatDuration,
   formatNumber,
   fromPolar,
   heightByTwelfths,
+  interpolatedDifference,
+  interpolationFactor,
   isClearOfDanger,
   planPassage,
   runningFix,
+  secondaryTide,
   timeForHeight,
 } from '@/calculations'
+import { SECONDARY_PORTS, STANDARD_REFERENCES } from '@/data/secondaryPorts'
 import { VectorArrow, VEC_COLORS } from '@/components/nautical/svg'
 import { Slider } from '@/components/ui/slider'
 import { cn } from '@/lib/utils'
@@ -349,6 +354,80 @@ export function PassagePlanningWidget() {
       <p className="text-sm text-muted-foreground">
         {done.length} von {CHECKLIST.length} Punkten geprüft{done.length === CHECKLIST.length ? ' – Plan vollständig. Gute Fahrt!' : '.'}
       </p>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ Sekundärhäfen */
+
+const clock = (min: number) => {
+  const c = formatClockTime(min)
+  return c.dayOffset === 0 ? c.time : `${c.time} (${c.dayOffset > 0 ? '+' : '−'}${Math.abs(c.dayOffset)} Tag)`
+}
+const diffStr = (n: number) => `${n >= 0 ? '+' : '−'}${Math.floor(Math.abs(n) / 60)}:${String(Math.abs(n) % 60).padStart(2, '0')}`
+const mDiff = (n: number) => `${n >= 0 ? '+' : '−'}${f2(Math.abs(n))} m`
+
+export function SecondaryPortWidget() {
+  const [portId, setPortId] = useState(SECONDARY_PORTS[0].id)
+  const hwTime = useNumberField('10.5', { min: 0, max: 24 })
+  const lwTime = useNumberField('16.75', { min: 0, max: 30 })
+  const [hwHeight, setHwHeight] = useState(4.5)
+  const [lwHeight, setLwHeight] = useState(1.5)
+  const port = SECONDARY_PORTS.find((p) => p.id === portId)!
+  const valid = fieldsValid(hwTime, lwTime)
+  const r = valid
+    ? secondaryTide({ hwTime: hwTime.value! * 60, hwHeight, lwTime: lwTime.value! * 60, lwHeight }, STANDARD_REFERENCES, port.differences)
+    : null
+  const fHw = interpolationFactor(hwHeight, STANDARD_REFERENCES.hw)
+  const fLw = interpolationFactor(lwHeight, STANDARD_REFERENCES.lw)
+  const dHw = interpolatedDifference(hwHeight, STANDARD_REFERENCES.hw, port.differences.hwHeight)
+  const dLw = interpolatedDifference(lwHeight, STANDARD_REFERENCES.lw, port.differences.lwHeight)
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-muted-foreground">
+        Standardhafen Ankerstedt (fiktiv): HW Springs 5,0 / Nipp 4,0 m, NW Springs 1,0 / Nipp 2,0 m. Gib die Vorhersage des Standardhafens ein; die App rechnet auf den Sekundärhafen um und zeigt den Rechenweg.
+      </p>
+      <Toggle value={portId} onChange={setPortId} label="Sekundärhafen" options={SECONDARY_PORTS.map((p) => ({ value: p.id, label: p.name }))} />
+      <div className="grid gap-3 sm:grid-cols-2">
+        <NumberField label="HW Standardhafen (Uhrzeit)" hint="Dezimalstunden, z. B. 10,5 = 10:30" unit="h" field={hwTime} />
+        <NumberField label="NW Standardhafen (Uhrzeit)" hint="z. B. 16,75 = 16:45" unit="h" field={lwTime} />
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="space-y-1">
+          <div className="flex justify-between text-sm">
+            <span className="font-medium">HW-Höhe Standardhafen</span>
+            <span className="font-mono">{f2(hwHeight)} m</span>
+          </div>
+          <Slider value={[hwHeight]} min={3.6} max={5.4} step={0.05} onValueChange={([v]) => setHwHeight(v)} aria-label="HW-Höhe im Standardhafen" />
+        </div>
+        <div className="space-y-1">
+          <div className="flex justify-between text-sm">
+            <span className="font-medium">NW-Höhe Standardhafen</span>
+            <span className="font-mono">{f2(lwHeight)} m</span>
+          </div>
+          <Slider value={[lwHeight]} min={0.6} max={2.4} step={0.05} onValueChange={([v]) => setLwHeight(v)} aria-label="NW-Höhe im Standardhafen" />
+        </div>
+      </div>
+      {r ? (
+        <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+            <Out label={`HW ${port.name}`} value={`${clock(r.hwTime)} · ${f2(r.hwHeight)} m`} highlight />
+            <Out label={`NW ${port.name}`} value={`${clock(r.lwTime)} · ${f2(r.lwHeight)} m`} highlight />
+            <Out label="Tidenhub" value={`${f2(r.range)} m`} />
+            <Out label="Faktor HW (0 = Nipp, 1 = Springs)" value={f2(fHw)} />
+            <Out label="Faktor NW" value={f2(fLw)} />
+          </div>
+          <ol className="list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
+            <li>Zeit: HW {clock(hwTime.value! * 60)} {diffStr(port.differences.hwTime)} = {clock(r.hwTime)}; NW {clock(lwTime.value! * 60)} {diffStr(port.differences.lwTime)} = {clock(r.lwTime)}.</li>
+            <li>Faktor HW = ({f2(hwHeight)} − 4,00) / (5,00 − 4,00) = {f2(fHw)}. Unterschied = {mDiff(port.differences.hwHeight.neaps)} + {f2(fHw)} × ({mDiff(port.differences.hwHeight.springs)} − ({mDiff(port.differences.hwHeight.neaps)})) = {mDiff(dHw)}.</li>
+            <li>Faktor NW = ({f2(lwHeight)} − 2,00) / (1,00 − 2,00) = {f2(fLw)}. Unterschied = {mDiff(dLw)}.</li>
+            <li>Höhen: HW {f2(hwHeight)} {mDiff(dHw)} = {f2(r.hwHeight)} m; NW {f2(lwHeight)} {mDiff(dLw)} = {f2(r.lwHeight)} m.</li>
+          </ol>
+        </div>
+      ) : (
+        <p className="rounded-lg border border-dashed p-3 text-sm text-muted-foreground">Bitte gültige Uhrzeiten eingeben.</p>
+      )}
     </div>
   )
 }

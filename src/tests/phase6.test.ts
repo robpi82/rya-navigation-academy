@@ -120,3 +120,37 @@ describe('Fragenpool Phase 9', () => {
       expect(QUESTION_BANK.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(5)
   })
 })
+
+import { interpolatedDifference, interpolationFactor, secondaryTide } from '@/calculations'
+import { SECONDARY_PORTS, STANDARD_REFERENCES } from '@/data/secondaryPorts'
+
+describe('Sekundärhäfen', () => {
+  const kranich = SECONDARY_PORTS.find((p) => p.id === 'kranich')!.differences
+  const std = { hwTime: 630, hwHeight: 4.5, lwTime: 1005, lwHeight: 1.5 }
+  it('Interpolationsfaktor liegt zwischen 0 (Nipp) und 1 (Springs) und wird begrenzt', () => {
+    expect(interpolationFactor(4.0, STANDARD_REFERENCES.hw)).toBe(0)
+    expect(interpolationFactor(5.0, STANDARD_REFERENCES.hw)).toBe(1)
+    expect(interpolationFactor(4.5, STANDARD_REFERENCES.hw)).toBeCloseTo(0.5)
+    expect(interpolationFactor(1.5, STANDARD_REFERENCES.lw)).toBeCloseTo(0.5)
+    expect(interpolationFactor(6, STANDARD_REFERENCES.hw)).toBe(1)
+    expect(interpolationFactor(3, STANDARD_REFERENCES.hw)).toBe(0)
+    expect(interpolationFactor(1, { neaps: 2, springs: 2 })).toBe(0)
+  })
+  it('Höhenunterschied wird linear zwischen den Spalten interpoliert', () => {
+    expect(interpolatedDifference(4.5, STANDARD_REFERENCES.hw, kranich.hwHeight)).toBeCloseTo(-0.5)
+    expect(interpolatedDifference(4.0, STANDARD_REFERENCES.hw, kranich.hwHeight)).toBeCloseTo(-0.4)
+    expect(interpolatedDifference(5.0, STANDARD_REFERENCES.hw, kranich.hwHeight)).toBeCloseTo(-0.6)
+  })
+  it('Sekundärhafen-Gezeit: Zeiten, Höhen und Tidenhub', () => {
+    const r = secondaryTide(std, STANDARD_REFERENCES, kranich)
+    expect(r.hwTime).toBe(605)
+    expect(r.lwTime).toBe(965)
+    expect(r.hwHeight).toBeCloseTo(4.0)
+    expect(r.lwHeight).toBeCloseTo(1.35)
+    expect(r.range).toBeCloseTo(2.65)
+  })
+  it('Unterschied null ergibt den Standardhafen', () => {
+    const zero = { hwTime: 0, lwTime: 0, hwHeight: { neaps: 0, springs: 0 }, lwHeight: { neaps: 0, springs: 0 } }
+    expect(secondaryTide(std, STANDARD_REFERENCES, zero)).toMatchObject({ hwTime: 630, hwHeight: 4.5, lwTime: 1005, lwHeight: 1.5 })
+  })
+})

@@ -10,7 +10,7 @@ export type TermId =
   | 'ep'
 
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
-export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide'
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
 export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
@@ -211,6 +211,15 @@ export type QuestionVerify =
       observed?: number
       /** Variation in ° (Ost positiv) */
       variation?: number
+    }
+  | {
+      kind: 'secondary'
+      quantity: 'hwHeight' | 'lwHeight' | 'hwTimeMin' | 'range'
+      stdHwTime: number
+      stdHwHeight: number
+      stdLwTime: number
+      stdLwHeight: number
+      port: 'kranich' | 'nordbucht' | 'moewe'
     }
   | {
       kind: 'dst'

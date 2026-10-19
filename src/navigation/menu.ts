@@ -14,7 +14,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import type { Route } from '@/hooks/useHashRoute'
-import { DAY_LESSON_IDS } from '@/data/lessonIds'
+import { COASTAL_LESSON_IDS, DAY_LESSON_IDS } from '@/data/lessonIds'
 import { QUESTION_BANK } from '@/questions'
 
 export interface MenuItem {
@@ -37,7 +37,7 @@ export const MAIN_MENU: MenuItem[] = [
   { label: 'Seekarte', href: '#/seekarte', icon: Map, route: 'chart', hint: 'Aufgaben' },
 ]
 
-export const COASTAL_MENU: MenuItem[] = [{ label: 'Coastal Skipper', href: '#/coastal', icon: Anchor, route: 'coastal', hint: '5 Lektionen' }]
+export const COASTAL_MENU: MenuItem[] = [{ label: 'Coastal Skipper', href: '#/coastal', icon: Anchor, route: 'coastal', hint: `${COASTAL_LESSON_IDS.length} Lektionen` }]
 
 export const ROADMAP_ITEM: MenuItem = { label: 'Roadmap', href: '#/roadmap', icon: Milestone, route: 'roadmap' }
 

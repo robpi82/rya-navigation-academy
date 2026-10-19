@@ -2,7 +2,7 @@ import { QUESTION_BANK } from '@/questions'
 import type { CoastalTopicId } from '@/types/learning'
 import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
-import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, TwelfthsWidget } from './widgets'
+import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
 
 export type CoastalLesson = Lesson & { id: CoastalTopicId }
 
@@ -72,6 +72,20 @@ export const LESSONS: CoastalLesson[] = [
     ],
     mnemonic: 'Plane den Törn – und fahre den Plan, solange er passt.',
     widgets: [{ title: 'Checkliste für die Planung', Comp: PassagePlanningWidget }],
+  },
+  {
+    id: 'secondary-ports',
+    title: 'Sekundärhäfen',
+    english: 'Secondary Ports',
+    summary: 'Gezeiten eines kleineren Hafens aus Zeit- und Höhenunterschieden zum Standardhafen ableiten.',
+    body: [
+      'Der Almanach enthält tägliche Vorhersagen nur für Standardhäfen. Für die meisten anderen Häfen (Sekundärhäfen) gibt er Unterschiede an: Zeitunterschiede für HW und NW sowie Höhenunterschiede für Springs und Nipp. Man nimmt HW bzw. NW des Standardhafens am selben Tag und wendet die Unterschiede an.',
+      'Die Höhenunterschiede hängen vom Tidenhub ab. Deshalb ermittelt man zuerst, wo die Standardhafen-Höhe zwischen dem Nipp- und dem Springwert liegt (Faktor 0 bis 1), und interpoliert damit den Höhenunterschied zwischen den Spalten für Nipp und Springs. Das Ergebnis addiert man zur Standardhafen-Höhe.',
+      'Achte auf das Datum: Überschreitet die Zeit 24:00 Uhr oder unterschreitet sie 00:00 Uhr, wechselt der Tag – und es kann sein, dass in einem Sekundärhafen an diesem Kalendertag eine Tide mehr oder weniger auftritt. Die Zahlen dieser App sind fiktive Übungsdaten; im Ernstfall gelten nur die Werte des aktuellen Almanachs.',
+    ],
+    mnemonic: 'Standardhafen ablesen – Zeit addieren – Faktor bilden – Höhenunterschied interpolieren – addieren.',
+    widgets: [{ title: 'Sekundärhafen berechnen', description: 'Rechenweg Schritt für Schritt.', Comp: SecondaryPortWidget }],
+    links: [{ label: 'Zwölftelregel (Coastal)', href: '#/coastal/tidal-height' }],
   },
 ]
 
