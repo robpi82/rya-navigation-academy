@@ -189,7 +189,7 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - Tests (181): Rundreise, Ablehnung ungültiger Dateien, Zusammenfassung.
 
 ### Phase 9 – fertig ✅ (Fragenpool, Icons)
-- 31 neue Day-Skipper-Fragen (insgesamt 247), darunter 20 Rechenaufgaben zu Water Track, SOG/COG, Distanzen, Kompassumrechnung,
+- 31 neue Day-Skipper-Fragen (insgesamt 256 im Katalog), darunter 20 Rechenaufgaben zu Water Track, SOG/COG, Distanzen, Kompassumrechnung,
   Gezeiten, Beaufort und VMG – alle werden in den Tests nachgerechnet. Jeder der neun Grundbegriffe hat mindestens fünf Fragen.
 - PNG-Icons für Manifest und iOS (`public/icon-*.png`, `apple-touch-icon.png`), damit die Installation überall ein Symbol zeigt.
 
@@ -200,7 +200,7 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - Hinweis: Die Hafendaten sind fiktive Übungswerte; im Ernstfall gelten nur die Angaben des aktuellen Almanachs.
 
 ### Phase 11 – fertig ✅ (Fragenpool, Layout-Korrektur)
-- 26 neue Day-Skipper-Fragen (insgesamt 273 im Katalog) zu Kompass, Gezeiten, Kartenkunde, Seezeichen und Wetter; 15 Rechenaufgaben
+- 26 neue Day-Skipper-Fragen (insgesamt 282 im Katalog, davon 238 Day Skipper) zu Kompass, Gezeiten, Kartenkunde, Seezeichen und Wetter; 15 Rechenaufgaben
   werden in den Tests nachgerechnet. Neuer Pool-Test (187 Tests) für die Themengruppen der Probeprüfung.
 - Der Link „Nächste Lektion" bricht jetzt um, statt am Rand abgeschnitten zu werden.
 
