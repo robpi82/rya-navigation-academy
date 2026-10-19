@@ -12,7 +12,24 @@ export type TermId =
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
 export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide'
 
-export type TopicId = TermId | CoastalTopicId
+/** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
+export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage'
+
+export type BuoyId =
+  | 'port'
+  | 'starboard'
+  | 'pref-stbd'
+  | 'pref-port'
+  | 'north'
+  | 'east'
+  | 'south'
+  | 'west'
+  | 'isolated'
+  | 'safe'
+  | 'special'
+  | 'new-danger'
+
+export type TopicId = TermId | CoastalTopicId | DayTopicId
 
 export type CourseLevel = 'day-skipper' | 'coastal-skipper' | 'yachtmaster-offshore'
 
@@ -57,6 +74,8 @@ interface QuestionBase {
   category: QuestionCategory
 }
 
+type LatLonLike = { lat: number; lon: number }
+
 /** Thematische Aufgabenart (für Filter und Statistik) */
 export type QuestionCategory = 'concept' | 'calculation' | 'course' | 'diagram' | 'error' | 'matching'
 
@@ -64,7 +83,7 @@ export const CATEGORY_LABEL: Record<QuestionCategory, string> = {
   concept: 'Begriffsverständnis',
   calculation: 'Zahlenberechnung',
   course: 'Kursberechnung',
-  diagram: 'Vektordiagramm',
+  diagram: 'Diagramm / Abbildung',
   error: 'Fehlererkennung',
   matching: 'Begriff-Zuordnung',
 }
@@ -85,6 +104,8 @@ export interface MultipleChoiceQuestion extends QuestionBase {
   options: string[]
   correctIndex: number
   diagram?: QuestionDiagram
+  /** Abbildung einer Tonne zur Aufgabe */
+  buoy?: BuoyId
 }
 
 export type QuestionVerify =
@@ -124,6 +145,41 @@ export type QuestionVerify =
       stw: number
       tides: { set: number; rate: number }[]
       quantity: 'cts' | 'timeMinutes'
+    }
+  | {
+      kind: 'compass'
+      quantity: 'true' | 'compass' | 'magnetic' | 'variationWest' | 'deviationEast'
+      compass?: number
+      trueCourse?: number
+      deviation?: number
+      variation?: number
+      chartVariation?: number
+      chartYear?: number
+      annualChange?: number
+      year?: number
+      table?: { heading: number; deviation: number }[]
+      compassHeading?: number
+    }
+  | {
+      kind: 'tide'
+      quantity: 'range' | 'depth' | 'height' | 'ukc' | 'windowMinutes' | 'chain'
+      hw?: number
+      lw?: number
+      hoursAfterHw?: number
+      chartedDepth?: number
+      heightOfTide?: number
+      draught?: number
+      margin?: number
+      bowHeight?: number
+      ratio?: number
+    }
+  | {
+      kind: 'chart'
+      quantity: 'distance' | 'geoRange'
+      from?: LatLonLike
+      to?: LatLonLike
+      lightHeight?: number
+      eyeHeight?: number
     }
   | {
       kind: 'dst'

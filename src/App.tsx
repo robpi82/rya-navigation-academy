@@ -12,6 +12,7 @@ const QuizPage = lazy(() => import('@/modules/quiz/QuizPage').then((m) => ({ def
 const FlashcardsPage = lazy(() => import('@/modules/flashcards/FlashcardsPage').then((m) => ({ default: m.FlashcardsPage })))
 const CalculatorsPage = lazy(() => import('@/modules/calculators/CalculatorsPage').then((m) => ({ default: m.CalculatorsPage })))
 const ChartPage = lazy(() => import('@/modules/chart/ChartPage').then((m) => ({ default: m.ChartPage })))
+const DayLessonsPage = lazy(() => import('@/modules/daylessons/DayLessonsPage').then((m) => ({ default: m.DayLessonsPage })))
 const CoastalPage = lazy(() => import('@/modules/coastal/CoastalPage').then((m) => ({ default: m.CoastalPage })))
 const RoadmapPage = lazy(() => import('@/pages/RoadmapPage').then((m) => ({ default: m.RoadmapPage })))
 const AboutPage = lazy(() => import('@/pages/AboutPage').then((m) => ({ default: m.AboutPage })))
@@ -40,6 +41,9 @@ export default function App() {
       break
     case 'chart':
       page = <ChartPage />
+      break
+    case 'themen':
+      page = <DayLessonsPage lessonId={route.lessonId} />
       break
     case 'coastal':
       page = <CoastalPage lessonId={route.lessonId} />

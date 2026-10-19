@@ -42,9 +42,22 @@ const PHASES = [
       'Coastal Skipper: 5 Lektionen mit interaktiven Übungen und 12 Prüfungsfragen',
     ],
   },
+  {
+    phase: 4,
+    title: 'Day-Skipper-Themen',
+    done: true,
+    items: [
+      'Kompass, Variation und Deviation: Umrechnungskette, Deviationstabelle, Variation im aktuellen Jahr',
+      'Gezeiten: Höhe der Gezeit, Wassertiefe, Zeitfenster, Spring-/Nipptide, Ankern bei Gezeiten',
+      'Kartenkunde: Symbolverzeichnis, Feuerkennungen entschlüsseln (animiert), Tiefen im Kartenausschnitt',
+      'Seezeichen (IALA A): zwölf Tonnenarten als Zeichnung mit blinkendem Licht, Erkennungs-Training',
+      '57 neue Prüfungsfragen und 24 neue Lernkarten zu diesen Themen',
+    ],
+  },
 ]
 
 const IDEAS = [
+  'Weitere Day-Skipper-Themen: Kollisionsverhütung (COLREGs), Wetter, Sicherheit und Seefunk, elektronische Navigation',
   'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
@@ -55,7 +68,7 @@ export function RoadmapPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Roadmap" subtitle="Welche Module bereits verfügbar sind und was als Nächstes folgt." />
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2">
         {PHASES.map((p) => (
           <Card key={p.phase} className={p.done ? 'border-success/50' : undefined}>
             <CardHeader className="flex-row items-center justify-between">

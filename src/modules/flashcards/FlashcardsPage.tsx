@@ -20,7 +20,13 @@ import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 
 type Deck = 'alle' | Flashcard['deck']
-const DECK_LABEL: Record<Deck, string> = { alle: 'Alle Karten', grundbegriffe: 'Grundbegriffe (9)', erweitert: 'Erweitert' }
+const DECK_LABEL: Record<Deck, string> = {
+  alle: 'Alle Karten',
+  grundbegriffe: 'Grundbegriffe (9)',
+  erweitert: 'Erweitert',
+  themen: 'Themen (Kompass, Gezeiten, Karte, Seezeichen)',
+}
+const DECK_BADGE: Record<Flashcard['deck'], string> = { grundbegriffe: 'Grundbegriff', erweitert: 'Erweitert', themen: 'Thema' }
 
 export function FlashcardsPage() {
   const [session, setSession] = useState<string[] | null>(null)
@@ -75,9 +81,9 @@ function Overview({ onStart }: { onStart: (ids: string[]) => void }) {
           </div>
           <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Neue Karten pro Sitzung">
             <span className="text-sm text-muted-foreground">Neue Karten pro Sitzung:</span>
-            {[0, 5, 10, 25].map((n) => (
+            {[0, 5, 10, 99].map((n) => (
               <Button key={n} size="sm" variant={newPerSession === n ? 'secondary' : 'ghost'} onClick={() => setNewPerSession(n)} aria-pressed={newPerSession === n}>
-                {n === 25 ? 'alle' : n}
+                {n === 99 ? 'alle' : n}
               </Button>
             ))}
           </div>
@@ -254,7 +260,7 @@ function StudySession({ initialQueue, onExit }: { initialQueue: string[]; onExit
         )}
       >
         <div className="flex items-center justify-between">
-          <Badge variant="outline">{card.deck === 'grundbegriffe' ? 'Grundbegriff' : 'Erweitert'}</Badge>
+          <Badge variant="outline">{DECK_BADGE[card.deck]}</Badge>
           {!cards[card.id] && <Badge variant="accent">neu</Badge>}
         </div>
         <div className="mt-6 text-center">

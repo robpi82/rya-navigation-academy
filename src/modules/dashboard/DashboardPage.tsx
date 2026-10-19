@@ -5,7 +5,7 @@ import { GLOSSARY, TERM_BY_ID, TERM_IDS } from '@/data/glossary'
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { FLASHCARDS } from '@/data/flashcards'
 import { CHART_EXERCISES } from '@/lib/chartExercises'
-import { LESSONS } from '@/modules/coastal/CoastalPage'
+import { COASTAL_LESSON_IDS, DAY_LESSON_IDS } from '@/data/lessonIds'
 import { topicInfo } from '@/data/topics'
 import { isDue, isMastered } from '@/lib/spacedRepetition'
 import { reviewsPerDay, useFlashcardStore } from '@/stores/flashcardStore'
@@ -116,25 +116,27 @@ export function DashboardPage() {
     [attempts],
   )
 
-  // Fortschritt Day Skipper: 30 % Begriffe, 10 % Verständnisfragen, 40 % beherrschte Aufgaben, 20 % gefestigte Lernkarten
-  const checksCorrect = Object.values(termChecks).filter(Boolean).length
-  const dayskipperProgress = Math.round(
-    (learnedTerms.length / GLOSSARY.length) * 30 +
-      (checksCorrect / GLOSSARY.length) * 10 +
-      (QUESTION_BANK.filter((q) => q.level === 'day-skipper' && questionStats[q.id]?.lastCorrect).length / QUESTION_BANK.filter((q) => q.level === 'day-skipper').length) * 40 +
-      (cardsMastered / FLASHCARDS.length) * 20,
-  )
-
   const completedLessons = useProgressStore((s) => s.completedLessons)
   const chartResults = useProgressStore((s) => s.chartResults)
-  const lessonsDone = LESSONS.filter((l) => completedLessons.includes(l.id)).length
+  const lessonsDone = COASTAL_LESSON_IDS.filter((id) => completedLessons.includes(id)).length
+  const dayLessonsDone = DAY_LESSON_IDS.filter((id) => completedLessons.includes(id)).length
+  // Fortschritt Day Skipper: 25 % Begriffe, 10 % Verständnisfragen, 35 % beherrschte Aufgaben, 15 % gefestigte Lernkarten, 15 % Themen-Lektionen
+  const checksCorrect = Object.values(termChecks).filter(Boolean).length
+  const dayQuestions = QUESTION_BANK.filter((q) => q.level === 'day-skipper')
+  const dayskipperProgress = Math.round(
+    (learnedTerms.length / GLOSSARY.length) * 25 +
+      (checksCorrect / GLOSSARY.length) * 10 +
+      (dayQuestions.filter((q) => questionStats[q.id]?.lastCorrect).length / dayQuestions.length) * 35 +
+      (cardsMastered / FLASHCARDS.length) * 15 +
+      (dayLessonsDone / DAY_LESSON_IDS.length) * 15,
+  )
   const coastalQuestions = QUESTION_BANK.filter((q) => q.level === 'coastal-skipper')
   const coastalMastered = coastalQuestions.filter((q) => questionStats[q.id]?.lastCorrect).length
   const chartSolved = CHART_EXERCISES.filter((e) => chartResults[e.id]?.solved).length
   const coastalChart = CHART_EXERCISES.filter((e) => e.level === 'coastal-skipper')
   // Coastal Skipper: 40 % Lektionen, 40 % beherrschte Coastal-Aufgaben, 20 % Coastal-Kartenaufgaben
   const coastalProgress = Math.round(
-    (lessonsDone / LESSONS.length) * 40 +
+    (lessonsDone / COASTAL_LESSON_IDS.length) * 40 +
       (coastalMastered / Math.max(1, coastalQuestions.length)) * 40 +
       (coastalChart.filter((e) => chartResults[e.id]?.solved).length / Math.max(1, coastalChart.length)) * 20,
   )
@@ -328,8 +330,8 @@ export function DashboardPage() {
             <CardTitle>Fortschritt nach Ausbildungsstufe</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <LevelRow label="Day Skipper Theory" value={dayskipperProgress} note="Begriffe, Verständnisfragen, beherrschte Aufgaben und gefestigte Lernkarten" />
-            <LevelRow label="Coastal Skipper" value={coastalProgress} note={`${lessonsDone} / ${LESSONS.length} Lektionen, ${coastalMastered} / ${coastalQuestions.length} Aufgaben beherrscht`} />
+            <LevelRow label="Day Skipper Theory" value={dayskipperProgress} note={`Begriffe, Themen-Lektionen (${dayLessonsDone}/${DAY_LESSON_IDS.length}), beherrschte Aufgaben, gefestigte Lernkarten`} />
+            <LevelRow label="Coastal Skipper" value={coastalProgress} note={`${lessonsDone} / ${COASTAL_LESSON_IDS.length} Lektionen, ${coastalMastered} / ${coastalQuestions.length} Aufgaben beherrscht`} />
             <LevelRow label="Kartenaufgaben (Seekarte)" value={chartProgress} note={`${chartSolved} / ${CHART_EXERCISES.length} Aufgaben gelöst`} />
             <LevelRow label="Yachtmaster Offshore" value={0} note="Noch keine Inhalte – mögliche Erweiterung" disabled />
           </CardContent>

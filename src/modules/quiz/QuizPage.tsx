@@ -13,7 +13,9 @@ import {
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { GLOSSARY } from '@/data/glossary'
 import { CATEGORY_LABEL, type Question, type QuestionCategory, type QuizAnswerRecord, type QuizMode, type TopicId, type CourseLevel } from '@/types/learning'
-import { COASTAL_TOPICS, COASTAL_TOPIC_IDS, topicInfo } from '@/data/topics'
+import { BuoyIcon } from '@/components/nautical/BuoyIcon'
+import { BUOY_BY_ID } from '@/data/buoyage'
+import { COASTAL_TOPICS, COASTAL_TOPIC_IDS, DAY_TOPICS, DAY_TOPIC_IDS, topicInfo } from '@/data/topics'
 import { MatchInput } from './MatchInput'
 import { QuestionDiagram } from './QuestionDiagram'
 import { formatClock, isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
@@ -176,6 +178,7 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
               <div className="flex flex-wrap gap-2">
                 {[
                   ...(level !== 'coastal-skipper' ? GLOSSARY.map((t) => ({ id: t.id as TopicId, label: t.abbr })) : []),
+                  ...(level !== 'coastal-skipper' ? DAY_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: DAY_TOPICS[id].german })) : []),
                   ...(level !== 'day-skipper' ? COASTAL_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: COASTAL_TOPICS[id].german })) : []),
                 ].map((t) => (
                   <Button key={t.id} size="sm" variant={topics.includes(t.id) ? 'default' : 'outline'} onClick={() => toggleTopic(t.id)} aria-pressed={topics.includes(t.id)}>
@@ -391,6 +394,13 @@ function QuizRunner({
             <Badge variant="secondary">{CATEGORY_LABEL[q.category]}</Badge>
           </div>
           <CardTitle className="pt-2 text-lg leading-snug">{q.prompt}</CardTitle>
+          {q.type === 'mc' && q.buoy && (
+            <div className="pt-2">
+              <div className="mx-auto w-36 rounded-lg bg-[var(--chart-water)] p-2">
+                <BuoyIcon id={q.buoy} className="h-auto w-full" title={`Tonne zur Aufgabe (${BUOY_BY_ID[q.buoy].english})`} />
+              </div>
+            </div>
+          )}
           {q.type === 'mc' && q.diagram && (
             <div className="pt-2">
               <QuestionDiagram diagram={q.diagram} />

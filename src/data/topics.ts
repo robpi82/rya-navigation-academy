@@ -1,4 +1,4 @@
-import type { CoastalTopicId, TopicId } from '@/types/learning'
+import type { CoastalTopicId, DayTopicId, TopicId } from '@/types/learning'
 import { TERM_BY_ID } from './glossary'
 
 export const COASTAL_TOPICS: Record<CoastalTopicId, { abbr: string; english: string; german: string }> = {
@@ -9,6 +9,15 @@ export const COASTAL_TOPICS: Record<CoastalTopicId, { abbr: string; english: str
   'passage-planning': { abbr: 'PP', english: 'Passage Planning', german: 'Törnplanung' },
 }
 
+export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; german: string }> = {
+  compass: { abbr: 'KOMP', english: 'Compass, Variation & Deviation', german: 'Kompass' },
+  tides: { abbr: 'TIDE', english: 'Tides & Heights of Tide', german: 'Gezeiten' },
+  'chart-reading': { abbr: 'KARTE', english: 'Chart Reading', german: 'Kartenkunde' },
+  buoyage: { abbr: 'TONNE', english: 'Buoyage (IALA A)', german: 'Seezeichen' },
+}
+
+export const DAY_TOPIC_IDS = Object.keys(DAY_TOPICS) as DayTopicId[]
+
 export const COASTAL_TOPIC_IDS = Object.keys(COASTAL_TOPICS) as CoastalTopicId[]
 
 /** Kürzel und englischer Name eines Themas (Grundbegriff oder Coastal-Thema) */
@@ -17,5 +26,6 @@ export function topicInfo(topic: TopicId): { abbr: string; english: string } {
     const t = TERM_BY_ID[topic as keyof typeof TERM_BY_ID]
     return { abbr: t.abbr, english: t.english }
   }
+  if (topic in DAY_TOPICS) return DAY_TOPICS[topic as DayTopicId]
   return COASTAL_TOPICS[topic as CoastalTopicId]
 }

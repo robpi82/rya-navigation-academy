@@ -33,7 +33,9 @@ src/
 │   ├── position.ts      Positionsversatz (Mittelbreite), Lat/Lon-Formatierung
 │   ├── chart.ts         Mercatorprojektion, Loxodrome (Kurs/Distanz/Zielpunkt), Punkt-in-Polygon
 │   ├── passage.ts       Course to Steer über mehrere Stromstunden
-│   └── coastal.ts       Zwölftelregel, Running Fix, Gefahrenpeilung
+│   ├── coastal.ts       Zwölftelregel, Running Fix, Gefahrenpeilung
+│   ├── compass.ts       Variation, Deviation, Deviationstabelle
+│   └── lights.ts        Feuerkennungen lesen und beschreiben
 ├── types/             Gemeinsame TypeScript-Typen (Navigation, Lerninhalte)
 ├── data/glossary.ts   Die neun Begriffe mit allen Lerninhalten
 ├── data/flashcards.ts 21 Lernkarten
@@ -48,7 +50,8 @@ src/
 │   ├── layout/        AppShell, Sidebar, ThemeToggle
 │   ├── chart/         SeaChart: interaktive Seekarte (Zoom, Pan, Overlays)
 │   └── nautical/      SVG-Bausteine: Vektorpfeile (RYA-Pfeilkonvention), Boot, Nordpfeil, Winkelbogen
-├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators, chart, coastal
+├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators, chart, coastal,
+│                      daylessons (Themen), lessons (gemeinsames Lektionsgerüst)
 ├── pages/             Roadmap, Über & Hinweise
 └── tests/             Vitest-Tests
 ```
@@ -116,6 +119,28 @@ Tests (93): u. a. Mercator/Loxodrome (Hin- und Rückrechnung), mehrstündiger CT
 Zwölftelregel, Running Fix, NMT/NLT über 000°, Konsistenz des Reviers (Landmarken an Land, Tonnen im Wasser,
 Kurslinien der Aufgaben nicht über Land) und alle Kartenaufgaben-Lösungen.
 
+### Phase 4 – fertig ✅ (Day-Skipper-Themen)
+- **Themen-Lektionen** (`#/themen`): Kompass/Variation/Deviation, Gezeiten, Kartenkunde, Seezeichen – jeweils mit Lehrtext,
+  Merksatz und interaktiven Übungen. Gemeinsames Lektionsgerüst (`modules/lessons`), das auch die Coastal-Lektionen nutzen.
+- **Kompass:** Umrechnungskette C → D → M → V → T in beiden Richtungen mit Ost/West, Deviationstabelle mit Interpolation,
+  Variation für das aktuelle Jahr.
+- **Gezeiten:** Höhe der Gezeit nach Kosinusmodell (Vergleich mit Zwölftelregel), Wassertiefe, Wasser unter dem Kiel,
+  Zeitfenster um HW, Mondphasen und Spring/Nipp, Ankerkette und Schwojkreis.
+- **Kartenkunde:** durchsuchbares Verzeichnis mit 37 Symbolen/Abkürzungen, Feuerkennungs-Parser mit Erklärung und
+  animiertem Licht (`calculations/lights.ts`), Lotungen und Trockenhöhen bei wählbarer Gezeit, Sichtweite von Feuern.
+- **Seezeichen (IALA A):** zwölf Tonnenarten als SVG-Zeichnung (`components/nautical/BuoyIcon.tsx`) mit blinkendem Licht,
+  Erkennungs-Training, Einlaufen/Auslaufen in System A und B.
+- **Inhalte:** 57 neue Prüfungsfragen (Kompass, Gezeiten, Kartenkunde, Seezeichen; insgesamt 119), 24 neue Lernkarten (Deck „Themen“,
+  insgesamt 45), Themen- und Stufenfilter im Prüfungstrainer.
+
+Tests (122): u. a. Kompasskorrektur in beiden Richtungen und über 000°, Deviationstabelle (zyklisch), Kosinus-Gezeitenmodell
+inkl. Zeitfenster-Probe, Feuerparser mit Zeitverläufen (Blitzzahl je Kardinaltonne), Konsistenz der Seezeichen-Daten und
+Nachrechnung aller 45+ Rechenaufgaben.
+
+Hinweis: Alle Inhalte sind eigenständig formuliert. Fachaussagen zu IALA-Betonnung und Kartensymbolen bitte vor ernsthafter
+Nutzung mit offiziellen Quellen abgleichen.
+
 ### Mögliche Erweiterungen
+Weitere Day-Skipper-Themen (Kollisionsverhütung, Wetter, Sicherheit/Seefunk, elektronische Navigation),
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
 Service Worker für Offline-Betrieb.

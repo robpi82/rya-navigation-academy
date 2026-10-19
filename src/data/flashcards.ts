@@ -13,7 +13,7 @@ export interface Flashcard {
   example: string
   /** Verknüpfung zum Glossar, falls vorhanden */
   termId?: TermId
-  deck: 'grundbegriffe' | 'erweitert'
+  deck: 'grundbegriffe' | 'erweitert' | 'themen'
 }
 
 /** Die neun Glossarbegriffe als Grunddeck */
@@ -145,5 +145,44 @@ const EXTENDED: Flashcard[] = [
   },
 ]
 
-export const FLASHCARDS: Flashcard[] = [...CORE, ...EXTENDED]
+/** Day-Skipper-Themen: Kompass, Gezeiten, Kartenkunde, Seezeichen */
+const c = (id: string, english: string, german: string, definition: string, mnemonic: string, example: string, abbr?: string): Flashcard => ({
+  id,
+  english,
+  abbr,
+  german,
+  definition,
+  mnemonic,
+  example,
+  deck: 'themen',
+})
+
+const TOPICS: Flashcard[] = [
+  c('tvmdc', 'Compass – Deviation – Magnetic – Variation – True', 'Kompasskorrektur (Kette)', 'Reihenfolge der Korrekturen zwischen Kompassanzeige (C) und rechtweisendem Kurs (T).', 'Cadbury\'s Dairy Milk Very Tasty. Von C nach T: Ost-Plus. Von T nach C: Ost-Minus.', 'C 075°, Dev 3°W, Var 4°W → M 072° → T 068°.', 'CDMVT'),
+  c('hand-bearing', 'Hand Bearing Compass', 'Handpeilkompass', 'Kompass zum Peilen von Objekten, möglichst fern von Eisen und Elektrik benutzt – daher in der Regel ohne Deviation.', 'Handpeilkompass: nur Variation anbringen.', 'Gepeilt 045°M, Variation 3°W → 042°T.'),
+  c('deviation-card', 'Deviation Card', 'Deviationstabelle', 'Tabelle der Deviation je Kompasskurs, beim Justieren des Bordkompasses erstellt.', 'Deviation hängt vom Kurs des Schiffes ab – jede Yacht hat ihre eigene Tabelle.', 'Bei 090°C zeigt die Tabelle 2°W.'),
+  c('variation-rose', 'Variation Rose', 'Kompassrose der Karte', 'Nennt Variation, Jahr und jährliche Änderung. Der Wert muss auf das aktuelle Jahr hochgerechnet werden.', 'Karte lesen: „4°30′W 2015 (6′E)" heißt: jedes Jahr 6′ weniger West.', '2025: 4°30′W − 10 × 6′ = 3°30′W.'),
+  c('range', 'Range of Tide', 'Tidenhub', 'Unterschied zwischen Hochwasser- und Niedrigwasserhöhe.', 'Hub = HW − NW.', 'HW 5,8 m, NW 0,9 m → 4,9 m.'),
+  c('springs', 'Spring Tides', 'Springtide', 'Größter Tidenhub bei Neu- und Vollmond; kräftigste Gezeitenströme.', 'Spring = „springt weit": viel Hub, viel Strom.', 'Spring-Hub im Beispielhafen 5,0 m.'),
+  c('neaps', 'Neap Tides', 'Nipptide', 'Kleinster Tidenhub bei Halbmond (Viertel); schwächste Ströme.', 'Neap = „knapp": wenig Hub, wenig Strom.', 'Nipp-Hub im Beispielhafen 2,0 m.'),
+  c('chart-datum', 'Chart Datum (LAT)', 'Kartennull', 'Bezugsfläche der Tiefen in der Karte, meist der niedrigste astronomische Gezeitenstand.', 'Tiefen: Kartennull. Höhen: MHWS.', 'Die Karte nennt 2,4 m – bei Hochwasser (+3,1 m) sind es 5,5 m.'),
+  c('height-of-tide', 'Height of Tide', 'Höhe der Gezeit', 'Wasserstand über dem Kartennull zu einer bestimmten Zeit.', 'Wassertiefe = Kartentiefe + Höhe der Gezeit.', 'Kartentiefe 1,5 m + Höhe 2,4 m = 3,9 m.'),
+  c('drying-height', 'Drying Height', 'Trockenhöhe (unterstrichene Zahl)', 'Höhe einer trockenfallenden Stelle über dem Kartennull.', 'Unterstrichen = trocken bei NW. Tiefe = Höhe der Gezeit − Trockenhöhe.', '1,2 unterstrichen, Höhe der Gezeit 3,5 m → 2,3 m Wasser.'),
+  c('ukc', 'Under Keel Clearance', 'Wasser unter dem Kiel', 'Wassertiefe minus Tiefgang – mit Sicherheitsreserve.', 'Immer mit Reserve planen (Seegang, Lotfehler, Tidenabweichung).', 'Tiefe 3,9 m, Tiefgang 1,8 m → 2,1 m unter dem Kiel.', 'UKC'),
+  c('nautical-scale', 'Latitude Scale', 'Breitenmaßstab', 'Seitlicher Maßstab der Seekarte: 1′ Breite = 1 NM. Distanzen werden hier abgegriffen.', 'Nie am Längenmaßstab messen!', 'Zwischen 50°39,5′ und 50°47,0′ N liegen 7,5 NM.'),
+  c('light-fl', 'Flashing / Occulting / Isophase', 'Blink-, unterbrochenes und Gleichtaktfeuer', 'Fl: kurzes Licht, lange Pause. Oc: langes Licht, kurze Pause. Iso: Licht und Dunkel gleich lang.', 'Fl = „Flash" kurz an. Oc = „Occult" kurz weg.', 'Iso 4s: 2 s an, 2 s aus.', 'Fl/Oc/Iso'),
+  c('light-q', 'Quick / Very Quick / Long Flash', 'Funkelfeuer, schnelles Funkelfeuer, Langblitz', 'Q: 50–79 Blitze/min. VQ: 80–159 Blitze/min. LFl: Blitz von mindestens 2 s.', 'Q und VQ kennzeichnen Kardinaltonnen; LFl macht die Südtonne eindeutig.', 'Q(6)+LFl 15s: 6 schnelle Blitze plus Langblitz.', 'Q/VQ/LFl'),
+  c('mhws', 'MHWS', 'Mittleres Springhochwasser', 'Bezug der Höhen von Landmarken, Brücken und Feuern in der Karte.', 'Höhen: MHWS. Tiefen: Kartennull.', 'Feuerhöhe 24 m über MHWS.', 'MHWS'),
+  c('lateral-a', 'Lateral Marks (System A)', 'Lateralzeichen', 'Rot = Backbord, grün = Steuerbord – beim Einlaufen in Richtung der Betonnung.', 'Einlaufen: rot links, grün rechts. Auslaufen: umgekehrt.', 'Rote Spiere an Backbord beim Einlaufen in den Hafen.'),
+  c('cardinal-n', 'North Cardinal', 'Nordtonne', 'Schwarz über Gelb, zwei Kegel nach oben, weiß Q/VQ dauernd. Sicher nördlich.', 'Schwarz zeigt zu den Kegelspitzen.', 'Nördlich der Tonne passieren.'),
+  c('cardinal-e', 'East Cardinal', 'Osttonne', 'Schwarz-Gelb-Schwarz, Kegel Basis an Basis, Q(3) 10s / VQ(3) 5s. Sicher östlich.', '3 Blitze = 3 Uhr = Ost.', 'Östlich der Tonne passieren.'),
+  c('cardinal-s', 'South Cardinal', 'Südtonne', 'Gelb über Schwarz, Kegel nach unten, Q(6)+LFl 15s. Sicher südlich.', '6 Blitze = 6 Uhr, Langblitz verhindert Verwechslung.', 'Südlich der Tonne passieren.'),
+  c('cardinal-w', 'West Cardinal', 'Westtonne', 'Gelb-Schwarz-Gelb, Kegel Spitze an Spitze, Q(9) 15s / VQ(9) 10s. Sicher westlich.', '9 Blitze = 9 Uhr = West; Sanduhr/Weinglas.', 'Westlich der Tonne passieren.'),
+  c('isolated-danger', 'Isolated Danger Mark', 'Einzelgefahrenzeichen', 'Schwarz mit rotem Band, zwei schwarze Kugeln, Fl(2) weiß. Steht auf einer Gefahr.', 'Zwei Kugeln, zwei Blitze: „einzelne Gefahr".', 'Mit Abstand rundum umfahren.'),
+  c('safe-water', 'Safe Water Mark', 'Mitte-Fahrwasser-/Ansteuerungstonne', 'Rot-weiß gestreift, Kugel oder rote Kugel als Toppzeichen, Iso/Oc/LFl 10s/Mo(A) weiß.', 'Rot-weiß: „hier ist es ringsum frei".', 'Markiert oft den Anfang einer betonnten Zufahrt.'),
+  c('special-mark', 'Special Mark', 'Spezialtonne', 'Gelb, ggf. gelbes X. Kennzeichnet besondere Bereiche oder Anlagen.', 'Gelbes X: besondere Zone – Karte lesen.', 'Z. B. Messstation, Kabelgebiet, Sperrgebiet.'),
+  c('pref-channel', 'Preferred Channel Mark', 'Gabelungstonne (bevorzugtes Fahrwasser)', 'Lateraltonne mit Band in der anderen Farbe und Kennung Fl(2+1). Zeigt das Hauptfahrwasser an einer Abzweigung.', '2+1 gibt es nur bei Gabelungstonnen.', 'Rot mit grünem Band: Hauptfahrwasser an Steuerbord.'),
+]
+
+export const FLASHCARDS: Flashcard[] = [...CORE, ...EXTENDED, ...TOPICS]
 export const FLASHCARD_BY_ID: Record<string, Flashcard> = Object.fromEntries(FLASHCARDS.map((c) => [c.id, c]))

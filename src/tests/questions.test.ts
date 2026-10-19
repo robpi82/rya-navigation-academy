@@ -1,8 +1,28 @@
 import { describe, expect, it } from 'vitest'
 import { QUESTION_BANK } from '@/questions'
 import { GLOSSARY, TERM_IDS } from '@/data/glossary'
-import { COASTAL_TOPIC_IDS } from '@/data/topics'
-import { courseToSteer, distanceFrom, heightByTwelfths, planPassage, simulate, speedFrom, timeFrom } from '@/calculations'
+import { COASTAL_TOPIC_IDS, DAY_TOPIC_IDS } from '@/data/topics'
+import {
+  anchorChainLength,
+  compassToTrue,
+  courseToSteer,
+  deviationAt,
+  distanceFrom,
+  geographicRange,
+  heightByTwelfths,
+  heightCosine,
+  passableWindow,
+  planPassage,
+  rhumbLine,
+  simulate,
+  speedFrom,
+  tidalRange,
+  timeFrom,
+  trueToCompass,
+  underKeelClearance,
+  variationForYear,
+  waterDepth,
+} from '@/calculations'
 import { isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
 import type { QuestionVerify } from '@/types/learning'
 
@@ -28,6 +48,42 @@ function compute(v: QuestionVerify): number | null {
       if (!r.feasible) return null
       return v.quantity === 'cts' ? r.courseToSteer : r.hours * 60
     }
+    case 'compass': {
+      switch (v.quantity) {
+        case 'true':
+          return compassToTrue(v.compass!, v.deviation ?? 0, v.variation ?? 0).true
+        case 'compass':
+          return trueToCompass(v.trueCourse!, v.variation ?? 0, v.deviation ?? 0).compass
+        case 'magnetic':
+          return trueToCompass(v.trueCourse!, v.variation ?? 0, 0).magnetic
+        case 'variationWest':
+          return -variationForYear(v.chartVariation!, v.chartYear!, v.annualChange!, v.year!)
+        case 'deviationEast':
+          return deviationAt(v.table!, v.compassHeading!)
+      }
+      return null
+    }
+    case 'tide': {
+      switch (v.quantity) {
+        case 'range':
+          return tidalRange(v.hw!, v.lw!)
+        case 'depth':
+          return waterDepth(v.chartedDepth!, v.heightOfTide!)
+        case 'height':
+          return heightCosine(v.hw!, v.lw!, v.hoursAfterHw!)
+        case 'ukc':
+          return underKeelClearance(waterDepth(v.chartedDepth!, v.heightOfTide!), v.draught!)
+        case 'windowMinutes': {
+          const w = passableWindow(v.hw!, v.lw!, v.draught! + (v.margin ?? 0) - v.chartedDepth!)
+          return w.kind === 'window' ? w.halfWidthHours * 60 : null
+        }
+        case 'chain':
+          return anchorChainLength(waterDepth(v.chartedDepth!, v.heightOfTide!), v.bowHeight!, v.ratio!)
+      }
+      return null
+    }
+    case 'chart':
+      return v.quantity === 'geoRange' ? geographicRange(v.lightHeight!, v.eyeHeight!) : rhumbLine(v.from!, v.to!).distance
     case 'dst': {
       if (v.quantity === 'distance') return distanceFrom(v.speed!, v.minutes! / 60)
       if (v.quantity === 'speed') return speedFrom(v.distance!, v.minutes! / 60)
@@ -55,7 +111,7 @@ describe('Fragenkatalog', () => {
       expect(q.prompt.length, q.id).toBeGreaterThan(10)
       expect(q.solution.length, q.id).toBeGreaterThan(0)
       expect(q.steps.length, q.id).toBeGreaterThan(0)
-      expect([...TERM_IDS, ...COASTAL_TOPIC_IDS], q.id).toContain(q.topic)
+      expect([...TERM_IDS, ...COASTAL_TOPIC_IDS, ...DAY_TOPIC_IDS], q.id).toContain(q.topic)
       expect([1, 2, 3], q.id).toContain(q.difficulty)
       if (q.type === 'mc') {
         expect(q.correctIndex, q.id).toBeGreaterThanOrEqual(0)
@@ -79,7 +135,7 @@ describe('Fragenkatalog', () => {
       expect(isAnswerCorrect(q, computed!), `${q.id}: berechnet ${computed}, Musterlösung ${q.answer}`).toBe(true)
       checked++
     }
-    expect(checked).toBeGreaterThanOrEqual(20)
+    expect(checked).toBeGreaterThanOrEqual(40)
   })
 
   it('alle Berechnungsaufgaben sind maschinell überprüft', () => {
