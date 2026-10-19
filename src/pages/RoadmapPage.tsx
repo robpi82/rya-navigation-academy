@@ -66,10 +66,21 @@ const PHASES = [
       '58 neue Prüfungsfragen (insgesamt 177) und 26 neue Lernkarten (insgesamt 71)',
     ],
   },
+  {
+    phase: 6,
+    title: 'Peilen und Probeprüfung',
+    done: true,
+    items: [
+      'Lektion Peilen: Peilung/Gegenpeilung, Kreuzpeilung mit Fehlerdreieck auf der Seekarte, Kompassfehler aus Deckpeilung',
+      'Probeprüfung unter `#/pruefung`: 20/40/60 Fragen mit Zeitlimit, gewichtet nach Themengruppen, Bestehensgrenze 70 %',
+      'Fragen markieren, frei springen, Stand bleibt nach Neuladen erhalten, automatische Abgabe bei Zeitablauf',
+      'Auswertung nach Themengruppe und Schwierigkeit mit allen Lösungen; 16 neue Fragen, 6 neue Lernkarten',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Peilen als eigene Lektion (Kreuz-, Deck-, Gefahrenpeilung) und Prüfungssimulation im Stil der echten Prüfung',
+  'Fragenpool ausbauen (mehr Fragen je Themengruppe) und Coastal-Probeprüfung',
   'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',

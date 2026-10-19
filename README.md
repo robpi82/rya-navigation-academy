@@ -163,7 +163,17 @@ CPA/TCPA (Gegenkurs, kreuzend, parallel, auseinanderlaufend) und Nachrechnung al
 Hinweis: Regelinhalte (COLREGs, Seefunk, Wetterbegriffe) sind eigenständig formuliert und vereinfacht. Vor ernsthafter Nutzung
 mit amtlichen Quellen (Regeltext, Funkhandbuch, Seehandbuch) abgleichen; für den Betrieb eines Seefunkgeräts ist ein Funkzeugnis nötig.
 
+### Phase 6 – fertig ✅ (Peilen, Probeprüfung)
+- **Lektion „Peilen"** (`#/themen/bearings`, `calculations/bearings.ts`): Peilung/Gegenpeilung und Schnittwinkel, Kreuzpeilung
+  mit Fehlerdreieck auf der Seekarte (Peilfehler einzeln und gemeinsam einstellbar), Kompassfehler und Deviation aus Deckpeilung.
+- **Probeprüfung** (`#/pruefung`, `lib/exam.ts`, `stores/examStore.ts`): Kurztest 20/30 min, Standard 40/60 min, Intensiv 60/90 min;
+  Fragen nach Themengruppen gewichtet gezogen, Bestehensgrenze 70 % (eigene Annahme), Markieren, freies Springen, automatische Abgabe
+  bei Zeitablauf, Stand überlebt Neuladen. Auswertung nach Themengruppe/Schwierigkeit mit Lösungen; Ergebnisse erscheinen im Dashboard-Verlauf.
+- **Inhalte:** 16 neue Fragen (insgesamt 193), 6 neue Lernkarten (insgesamt 77), neun Day-Skipper-Lektionen.
+
+Tests (175): u. a. Schnittpunkte und Fehlerdreieck, Kompassfehler, Gruppenquoten, Reproduzierbarkeit des Prüfungsaufbaus,
+Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
+
 ### Mögliche Erweiterungen
-Peilen als eigene Lektion, Prüfungssimulation im Stil der echten Prüfung,
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
 Service Worker für Offline-Betrieb.

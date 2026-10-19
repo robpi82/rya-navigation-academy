@@ -5,6 +5,7 @@ export type Route =
   | { name: 'glossary'; termId?: string }
   | { name: 'simulator' }
   | { name: 'quiz'; preset?: 'review' }
+  | { name: 'exam' }
   | { name: 'flashcards' }
   | { name: 'calculators' }
   | { name: 'themen'; lessonId?: string }
@@ -22,6 +23,8 @@ export function parseHash(hash: string): Route {
       return { name: 'simulator' }
     case 'quiz':
       return { name: 'quiz', preset: parts[1] === 'wiederholen' ? 'review' : undefined }
+    case 'pruefung':
+      return { name: 'exam' }
     case 'lernkarten':
       return { name: 'flashcards' }
     case 'rechner':

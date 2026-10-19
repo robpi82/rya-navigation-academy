@@ -222,3 +222,77 @@ describe('Elektronische Navigation', () => {
     expect(actualDepth(3, 'waterline', 0.4, 1.8)).toBe(3)
   })
 })
+
+import { compassErrorFromTransit, cutAngle, deviationFromError, fixFromBearings, intersectLines, rhumbLine, standlineDirection, toLocalNm, triangleAdvice, type BearingObservation } from '@/calculations'
+
+describe('Peilungen', () => {
+  const boat = { lat: 50.716, lon: -1.37 }
+  const marks = [
+    { lat: 50.762, lon: -1.452 },
+    { lat: 50.8, lon: -1.3 },
+    { lat: 50.624, lon: -1.398 },
+  ]
+  const exact = (): BearingObservation[] => marks.map((m) => ({ mark: m, bearing: rhumbLine(boat, m).bearing! }))
+  it('Standlinie zeigt in Richtung der Gegenpeilung', () => {
+    expect(standlineDirection(75)).toBe(255)
+    expect(standlineDirection(200)).toBe(20)
+  })
+  it('Schnitt zweier Geraden', () => {
+    const p = intersectLines({ origin: { x: 0, y: 0 }, direction: 90 }, { origin: { x: 3, y: -2 }, direction: 0 })!
+    expect(p.x).toBeCloseTo(3)
+    expect(p.y).toBeCloseTo(0)
+    expect(intersectLines({ origin: { x: 0, y: 0 }, direction: 45 }, { origin: { x: 1, y: 0 }, direction: 225 })).toBeNull()
+  })
+  it('Schnittwinkel von 0° bis 90°', () => {
+    expect(cutAngle(40, 130)).toBeCloseTo(90)
+    expect(cutAngle(40, 100)).toBeCloseTo(60)
+    expect(cutAngle(10, 350)).toBeCloseTo(20)
+    expect(cutAngle(40, 220)).toBeCloseTo(0)
+    expect(cutAngle(0, 135)).toBeCloseTo(45)
+  })
+  it('exakte Peilungen schneiden sich in der wahren Position (Dreieck entartet)', () => {
+    const fix = fixFromBearings(exact())!
+    expect(fix.size).toBeLessThan(0.05)
+    expect(rhumbLine(fix.center, boat).distance).toBeLessThan(0.05)
+    expect(fix.points).toHaveLength(3)
+  })
+  it('zwei exakte Peilungen genügen', () => {
+    const fix = fixFromBearings(exact().slice(0, 2))!
+    expect(rhumbLine(fix.center, boat).distance).toBeLessThan(0.05)
+    expect(fix.area).toBe(0)
+  })
+  it('Peilfehler ergeben ein Fehlerdreieck, das mit dem Fehler wächst', () => {
+    const biased = (e: number) => exact().map((o, i) => ({ ...o, bearing: o.bearing + (i === 1 ? e : 0) }))
+    const small = fixFromBearings(biased(1))!
+    const large = fixFromBearings(biased(5))!
+    expect(small.size).toBeGreaterThan(0.05)
+    expect(large.size).toBeGreaterThan(small.size)
+    expect(large.area).toBeGreaterThan(small.area)
+  })
+  it('einheitlicher Fehler verschiebt die Position, ohne dass das Dreieck verschwindet', () => {
+    const shifted = exact().map((o) => ({ ...o, bearing: o.bearing + 3 }))
+    const fix = fixFromBearings(shifted)!
+    expect(rhumbLine(fix.center, boat).distance).toBeGreaterThan(0.1)
+  })
+  it('parallele Peilungen liefern keinen Schnittpunkt', () => {
+    const m = { lat: 50.7, lon: -1.3 }
+    expect(fixFromBearings([{ mark: m, bearing: 45 }, { mark: { lat: 50.71, lon: -1.29 }, bearing: 45 }])).toBeNull()
+    expect(fixFromBearings([{ mark: m, bearing: 45 }])).toBeNull()
+  })
+  it('Kompassfehler aus Deckpeilung (Ost positiv)', () => {
+    expect(compassErrorFromTransit(123, 128)).toBeCloseTo(-5)
+    expect(compassErrorFromTransit(123, 120)).toBeCloseTo(3)
+    expect(compassErrorFromTransit(2, 358)).toBeCloseTo(4)
+    expect(deviationFromError(-5, -3)).toBeCloseTo(-2)
+  })
+  it('Bewertung des Fehlerdreiecks', () => {
+    expect(triangleAdvice(0.1)).toBe('small')
+    expect(triangleAdvice(0.3)).toBe('medium')
+    expect(triangleAdvice(0.8)).toBe('large')
+  })
+  it('lokale Koordinaten: Peilung zum Objekt passt zur Richtung des Vektors', () => {
+    const v = toLocalNm(boat, marks[1])
+    const brg = (Math.atan2(v.x, v.y) * 180) / Math.PI
+    expect(((brg + 360) % 360)).toBeCloseTo(rhumbLine(boat, marks[1]).bearing!, 0)
+  })
+})

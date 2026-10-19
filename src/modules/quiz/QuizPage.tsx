@@ -515,7 +515,7 @@ function givenText(q: Question, given: number | number[] | null): string {
   return `${formatNumber(given, 2)} ${q.unit}`
 }
 
-function Solution({ q, correct, given }: { q: Question; correct: boolean; given: number | number[] | null }) {
+export function Solution({ q, correct, given }: { q: Question; correct: boolean; given: number | number[] | null }) {
   return (
     <div className={cn('space-y-2 rounded-lg border p-4', correct ? 'border-success/40 bg-success/5' : 'border-destructive/40 bg-destructive/5')}>
       <p className={cn('flex items-center gap-2 font-semibold', correct ? 'text-success' : 'text-destructive')}>

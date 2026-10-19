@@ -10,14 +10,17 @@ export function MatchInput({
   value,
   onChange,
   revealed,
+  order: fixedOrder,
 }: {
   question: MatchQuestion
   value: (number | null)[]
   onChange: (v: (number | null)[]) => void
   revealed: boolean
+  /** feste Reihenfolge der rechten Seite (Original-Indizes), z. B. für die Probeprüfung */
+  order?: number[]
 }) {
   // Rechte Seite einmal pro Frage mischen; der Wert ist immer der Original-Index
-  const order = useMemo(() => shuffle(question.pairs.map((_, i) => i)), [question])
+  const order = useMemo(() => fixedOrder ?? shuffle(question.pairs.map((_, i) => i)), [question, fixedOrder])
 
   return (
     <div className="space-y-2">

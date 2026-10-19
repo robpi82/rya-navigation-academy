@@ -13,7 +13,7 @@ export type TermId =
 export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
-export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics'
+export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
 
 export type BuoyId =
   | 'port'
@@ -203,6 +203,16 @@ export type QuestionVerify =
       draught?: number
     }
   | {
+      kind: 'bearing'
+      quantity: 'reciprocal' | 'cutAngle' | 'errorWest' | 'errorEast' | 'deviationWest' | 'deviationEast'
+      bearing?: number
+      bearing2?: number
+      trueBearing?: number
+      observed?: number
+      /** Variation in ° (Ost positiv) */
+      variation?: number
+    }
+  | {
       kind: 'dst'
       distance?: number
       speed?: number
@@ -248,6 +258,8 @@ export interface QuizAttempt {
   mode: QuizMode
   durationSec: number
   answers: QuizAnswerRecord[]
+  /** nur bei Probeprüfungen */
+  exam?: { presetId: string; limitSec: number; percent: number; passed: boolean }
 }
 
 export interface QuestionStat {

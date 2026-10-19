@@ -23,6 +23,10 @@ import {
   passableWindow,
   planPassage,
   rhumbLine,
+  reciprocal,
+  cutAngle,
+  compassErrorFromTransit,
+  deviationFromError,
   simulate,
   speedFrom,
   tidalRange,
@@ -56,6 +60,23 @@ function compute(v: QuestionVerify): number | null {
       const r = planPassage(v)
       if (!r.feasible) return null
       return v.quantity === 'cts' ? r.courseToSteer : r.hours * 60
+    }
+    case 'bearing': {
+      switch (v.quantity) {
+        case 'reciprocal':
+          return reciprocal(v.bearing!)
+        case 'cutAngle':
+          return cutAngle(v.bearing!, v.bearing2!)
+        case 'errorWest':
+          return -compassErrorFromTransit(v.trueBearing!, v.observed!)
+        case 'errorEast':
+          return compassErrorFromTransit(v.trueBearing!, v.observed!)
+        case 'deviationWest':
+          return -deviationFromError(compassErrorFromTransit(v.trueBearing!, v.observed!), v.variation!)
+        case 'deviationEast':
+          return deviationFromError(compassErrorFromTransit(v.trueBearing!, v.observed!), v.variation!)
+      }
+      return null
     }
     case 'compass': {
       switch (v.quantity) {

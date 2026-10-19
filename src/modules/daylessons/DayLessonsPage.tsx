@@ -4,6 +4,7 @@ import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import { BuoyGalleryWidget, BuoyTrainerWidget, LateralDirectionWidget } from './buoyWidgets'
 import { LightDecoderWidget, LightRangeWidget, SoundingsWidget, SymbolBrowserWidget } from './chartWidgets'
 import { CompassConverterWidget, DeviationTableWidget, VariationYearWidget } from './compassWidgets'
+import { BEARING_LESSON } from './bearingLesson'
 import { SAFETY_LESSONS } from './safetyLessons'
 import type { DayLesson } from './types'
 import { AnchorTideWidget, SpringNeapWidget, TideHeightWidget } from './tideWidgets'
@@ -112,7 +113,7 @@ const CORE_LESSONS: DayLesson[] = [
   },
 ]
 
-export const DAY_LESSONS: DayLesson[] = [...CORE_LESSONS, ...SAFETY_LESSONS]
+export const DAY_LESSONS: DayLesson[] = [...CORE_LESSONS, ...SAFETY_LESSONS, BEARING_LESSON]
 
 export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
   const lesson = DAY_LESSONS.find((l) => l.id === lessonId)

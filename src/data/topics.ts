@@ -18,6 +18,7 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
   weather: { abbr: 'WETTER', english: 'Weather & Forecasts', german: 'Wetter' },
   safety: { abbr: 'SICHER', english: 'Safety & Radio', german: 'Sicherheit & Seefunk' },
   electronics: { abbr: 'E-NAV', english: 'Electronic Navigation', german: 'Elektronische Navigation' },
+  bearings: { abbr: 'PEIL', english: 'Bearings & Transits', german: 'Peilen' },
 }
 
 export const DAY_TOPIC_IDS = Object.keys(DAY_TOPICS) as DayTopicId[]

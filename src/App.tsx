@@ -9,6 +9,7 @@ const DashboardPage = lazy(() => import('@/modules/dashboard/DashboardPage').the
 const GlossaryPage = lazy(() => import('@/modules/glossary/GlossaryPage').then((m) => ({ default: m.GlossaryPage })))
 const SimulatorPage = lazy(() => import('@/modules/simulator/SimulatorPage').then((m) => ({ default: m.SimulatorPage })))
 const QuizPage = lazy(() => import('@/modules/quiz/QuizPage').then((m) => ({ default: m.QuizPage })))
+const ExamPage = lazy(() => import('@/modules/exam/ExamPage').then((m) => ({ default: m.ExamPage })))
 const FlashcardsPage = lazy(() => import('@/modules/flashcards/FlashcardsPage').then((m) => ({ default: m.FlashcardsPage })))
 const CalculatorsPage = lazy(() => import('@/modules/calculators/CalculatorsPage').then((m) => ({ default: m.CalculatorsPage })))
 const ChartPage = lazy(() => import('@/modules/chart/ChartPage').then((m) => ({ default: m.ChartPage })))
@@ -32,6 +33,9 @@ export default function App() {
       break
     case 'quiz':
       page = <QuizPage key={route.preset ?? 'default'} preset={route.preset} />
+      break
+    case 'exam':
+      page = <ExamPage />
       break
     case 'flashcards':
       page = <FlashcardsPage />
