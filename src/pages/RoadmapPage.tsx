@@ -77,10 +77,20 @@ const PHASES = [
       'Auswertung nach Themengruppe und Schwierigkeit mit allen Lösungen; 16 neue Fragen, 6 neue Lernkarten',
     ],
   },
+  {
+    phase: 7,
+    title: 'Coastal-Fragenpool und Coastal-Test',
+    done: true,
+    items: [
+      '23 neue Coastal-Fragen (insgesamt 35): Zwölftelregel, Wassertiefe, Barrenfenster, Ankerkette, Mehrstundenkurs, Versegelungs- und Gefahrenpeilung, Törnplanung',
+      'Alle Rechenaufgaben werden automatisch nachgerechnet',
+      'Neue Probeprüfung „Coastal-Test" (20 Fragen, 40 min) neben den Day-Skipper-Varianten',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Fragenpool ausbauen (mehr Fragen je Themengruppe) und Coastal-Probeprüfung',
+  'Weiteren Fragenpool ausbauen (mehr Fragen je Day-Skipper-Themengruppe)',
   'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',

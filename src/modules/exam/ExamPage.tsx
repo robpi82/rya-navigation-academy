@@ -35,17 +35,18 @@ function ExamSetup() {
   const attempts = useProgressStore((s) => s.attempts)
   const past = attempts.filter((a) => a.exam).slice(-5).reverse()
   const dayCount = QUESTION_BANK.filter((q) => q.level === 'day-skipper').length
+  const coastalCount = QUESTION_BANK.filter((q) => q.level === 'coastal-skipper').length
 
   const begin = (p: ExamPreset) => {
     const seed = Math.floor(Math.random() * 2 ** 31)
-    const questions = buildExam(p.questions, QUESTION_BANK, seededRandom(seed))
+    const questions = buildExam(p.questions, QUESTION_BANK, seededRandom(seed), p.level)
     start({ presetId: p.id, questionIds: questions.map((q) => q.id), seed, startedAt: Date.now(), limitSec: p.minutes * 60 })
   }
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Probeprüfung" subtitle={`Wie in einer echten Prüfung: feste Fragenzahl, feste Zeit, keine Rückmeldung bis zur Abgabe. Bestanden ab ${PASS_PERCENT} %. Fragenpool: ${dayCount} Day-Skipper-Fragen.`} />
-      <div className="grid gap-4 md:grid-cols-3">
+      <PageHeader title="Probeprüfung" subtitle={`Wie in einer echten Prüfung: feste Fragenzahl, feste Zeit, keine Rückmeldung bis zur Abgabe. Bestanden ab ${PASS_PERCENT} %. Fragenpool: ${dayCount} Day-Skipper- und ${coastalCount} Coastal-Fragen.`} />
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {EXAM_PRESETS.map((p) => (
           <Card key={p.id}>
             <CardHeader>

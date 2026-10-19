@@ -8,17 +8,20 @@ import { isAnswerCorrect, shuffle } from './quiz'
 export const PASS_PERCENT = 70
 
 export interface ExamPreset {
-  id: 'kurz' | 'standard' | 'lang'
+  id: 'kurz' | 'standard' | 'lang' | 'coastal'
   label: string
   questions: number
   minutes: number
   description: string
+  /** Kursniveau des Fragenpools */
+  level?: 'day-skipper' | 'coastal-skipper'
 }
 
 export const EXAM_PRESETS: ExamPreset[] = [
   { id: 'kurz', label: 'Kurztest', questions: 20, minutes: 30, description: 'Ein schneller Check zwischendurch.' },
   { id: 'standard', label: 'Standard', questions: 40, minutes: 60, description: 'Realistischer Umfang für eine Probeprüfung.' },
   { id: 'lang', label: 'Intensiv', questions: 60, minutes: 90, description: 'Breite Abdeckung aller Themen.' },
+  { id: 'coastal', label: 'Coastal-Test', questions: 20, minutes: 40, description: 'Gezeiten, Versegelungspeilung, Gefahrenpeilung und Törnplanung.', level: 'coastal-skipper' },
 ]
 
 export type ExamGroupId = 'basics' | 'compass' | 'tides' | 'rules' | 'coastal'
@@ -109,7 +112,8 @@ function pickMixed(pool: Question[], n: number, random: () => number): Question[
 }
 
 /** Stellt eine Prüfung zusammen: nur Day-Skipper-Fragen, nach Gruppen gewichtet, gemischt in Schwierigkeit und Reihenfolge. */
-export function buildExam(count: number, bank: Question[], random: () => number = Math.random): Question[] {
+export function buildExam(count: number, bank: Question[], random: () => number = Math.random, level: 'day-skipper' | 'coastal-skipper' = 'day-skipper'): Question[] {
+  if (level === 'coastal-skipper') return shuffle(pickMixed(bank.filter((q) => q.level === level), count, random), random)
   const pool = bank.filter((q) => q.level === 'day-skipper')
   const byGroup = { basics: [], compass: [], tides: [], rules: [], coastal: [] } as Record<ExamGroupId, Question[]>
   for (const q of pool) byGroup[groupOf(q.topic)].push(q)

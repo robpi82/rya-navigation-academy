@@ -174,6 +174,12 @@ mit amtlichen Quellen (Regeltext, Funkhandbuch, Seehandbuch) abgleichen; für de
 Tests (175): u. a. Schnittpunkte und Fehlerdreieck, Kompassfehler, Gruppenquoten, Reproduzierbarkeit des Prüfungsaufbaus,
 Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 
+### Phase 7 – fertig ✅ (Coastal-Fragenpool, Coastal-Test)
+- 23 neue Coastal-Skipper-Fragen (insgesamt 35, 216 im gesamten Katalog) zu allen fünf Coastal-Themen; alle Rechenaufgaben mit
+  `verify` werden in den Tests nachgerechnet.
+- Probeprüfung um den **Coastal-Test** erweitert (20 Fragen, 40 min, nur Coastal-Pool; `buildExam(..., level)` in `lib/exam.ts`).
+- Tests (177): u. a. Reproduzierbarkeit und Pool-Abdeckung des Coastal-Tests.
+
 ### Mögliche Erweiterungen
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
 Service Worker für Offline-Betrieb.

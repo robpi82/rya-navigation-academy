@@ -97,3 +97,19 @@ describe('Peilen-Lektion', () => {
     expect(QUESTION_BANK.filter((q) => q.topic === 'bearings').length).toBeGreaterThanOrEqual(14)
   })
 })
+
+describe('Coastal-Probeprüfung', () => {
+  it('zieht nur Coastal-Fragen, ohne Doppelte, reproduzierbar', () => {
+    const p = EXAM_PRESETS.find((x) => x.id === 'coastal')!
+    const a = buildExam(p.questions, QUESTION_BANK, seededRandom(4), p.level)
+    expect(a).toHaveLength(p.questions)
+    expect(a.every((q) => q.level === 'coastal-skipper')).toBe(true)
+    expect(new Set(a.map((q) => q.id)).size).toBe(p.questions)
+    expect(buildExam(p.questions, QUESTION_BANK, seededRandom(4), p.level).map((q) => q.id)).toEqual(a.map((q) => q.id))
+  })
+  it('Coastal-Pool ist groß genug und deckt alle fünf Themen ab', () => {
+    const coastal = QUESTION_BANK.filter((q) => q.level === 'coastal-skipper')
+    expect(coastal.length).toBeGreaterThanOrEqual(30)
+    for (const t of COASTAL_TOPIC_IDS) expect(coastal.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(4)
+  })
+})
