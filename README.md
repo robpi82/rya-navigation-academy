@@ -204,6 +204,11 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
   werden in den Tests nachgerechnet. Neuer Pool-Test (187 Tests) für die Themengruppen der Probeprüfung.
 - Der Link „Nächste Lektion" bricht jetzt um, statt am Rand abgeschnitten zu werden.
 
+### Phase 12 – fertig ✅ (Großkreis-Rechner)
+- Achter Rechner unter `#/rechner`: Großkreis gegen Loxodrome (`calculations/greatcircle.ts`). Zeigt Distanz, Anfangs- und Endkurs,
+  Scheitelpunkt, Ersparnis und Wegpunkte; Längenunterschied über die Datumsgrenze nimmt den kürzeren Weg. Kugelmodell.
+- 10 neue Tests (197 insgesamt). Es gibt bewusst noch keine Prüfungsfragen dazu, da das Kursniveau „Yachtmaster" im Trainer fehlt.
+
 ### Mögliche Erweiterungen
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation.
 

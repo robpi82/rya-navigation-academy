@@ -33,7 +33,7 @@ export const MAIN_MENU: MenuItem[] = [
   { label: 'Prüfungstrainer', href: '#/quiz', icon: GraduationCap, route: 'quiz', hint: `${QUESTION_BANK.length} Fragen` },
   { label: 'Probeprüfung', href: '#/pruefung', icon: ClipboardCheck, route: 'exam', hint: 'mit Zeitlimit' },
   { label: 'Lernkarten', href: '#/lernkarten', icon: Layers, route: 'flashcards' },
-  { label: 'Rechner', href: '#/rechner', icon: Calculator, route: 'calculators', hint: '7 Tools' },
+  { label: 'Rechner', href: '#/rechner', icon: Calculator, route: 'calculators', hint: '8 Tools' },
   { label: 'Seekarte', href: '#/seekarte', icon: Map, route: 'chart', hint: 'Aufgaben' },
 ]
 

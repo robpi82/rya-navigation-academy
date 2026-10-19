@@ -11,6 +11,7 @@ import {
   SogCalculator,
   TidalStreamCalculator,
 } from './calculators'
+import { GreatCircleCalculator } from './GreatCircleCalculator'
 
 const CALCS: { id: string; short: string; title: string; desc: string; Comp: ComponentType }[] = [
   { id: 'dst', short: 'DST', title: 'Distance, Speed, Time', desc: 'Distanz, Geschwindigkeit oder Zeit aus den beiden anderen Größen.', Comp: DstCalculator },
@@ -20,6 +21,7 @@ const CALCS: { id: string; short: string; title: string; desc: string; Comp: Com
   { id: 'tide', short: 'Strom', title: 'Tidal Stream Vector', desc: 'Stromrate zwischen Spring und Nipp interpolieren, Drift und Vektor.', Comp: TidalStreamCalculator },
   { id: 'cts', short: 'CTS', title: 'Course to Steer', desc: 'Zu steuernder Kurs, damit Strom und Leeway dich auf dem Sollkurs halten.', Comp: CtsCalculator },
   { id: 'ep', short: 'EP', title: 'Estimated Position', desc: 'Geschätzter Ort aus Fix, Heading, Log, Leeway und Strom.', Comp: EpCalculator },
+  { id: 'gc', short: 'Großkreis', title: 'Großkreis und Loxodrome', desc: 'Kürzester Weg auf langen Strecken: Distanz, Anfangskurs, Wegpunkte und Ersparnis gegenüber konstantem Kurs.', Comp: GreatCircleCalculator },
 ]
 
 const STORAGE_KEY = 'rya-nav-academy:calculator-tab'
@@ -45,7 +47,7 @@ export function CalculatorsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Navigationsrechner" subtitle="Sieben Rechner in nautischen Einheiten (NM, kn, °, h/min) – jeweils mit Eingabeprüfung und Rechenweg." />
+      <PageHeader title="Navigationsrechner" subtitle={`${CALCS.length} Rechner in nautischen Einheiten (NM, kn, °, h/min) – jeweils mit Eingabeprüfung und Rechenweg.`} />
       <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
         <div className="inline-flex gap-1 rounded-lg bg-muted p-1" role="tablist" aria-label="Rechner">
           {CALCS.map((c) => (

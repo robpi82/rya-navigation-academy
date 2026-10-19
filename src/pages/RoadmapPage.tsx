@@ -127,10 +127,19 @@ const PHASES = [
       '„Nächste Lektion"-Link wird auf dem Handy bei langen Titeln nicht mehr abgeschnitten',
     ],
   },
+  {
+    phase: 12,
+    title: 'Großkreis-Rechner (Yachtmaster-Vorgriff)',
+    done: true,
+    items: [
+      'Neuer achter Rechner: Großkreis und Loxodrome im Vergleich – Distanz, Anfangs- und Endkurs, Scheitelpunkt, Ersparnis, sechs Wegpunkte',
+      'Berechnung in calculations/greatcircle.ts, 10 neue Tests (Meridian, Äquator, Symmetrie, Datumsgrenze, bekannte Strecke)',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
+  'Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt) mit eigenem Kursniveau im Prüfungstrainer',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]
