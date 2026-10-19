@@ -188,6 +188,11 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
   fremde LocalStorage-Einträge bleiben unberührt.
 - Tests (181): Rundreise, Ablehnung ungültiger Dateien, Zusammenfassung.
 
+### Phase 9 – fertig ✅ (Fragenpool, Icons)
+- 29 neue Day-Skipper-Fragen (insgesamt 245), darunter 20 Rechenaufgaben zu Water Track, SOG/COG, Distanzen, Kompassumrechnung,
+  Gezeiten, Beaufort und VMG – alle werden in den Tests nachgerechnet. Jeder der neun Grundbegriffe hat mindestens fünf Fragen.
+- PNG-Icons für Manifest und iOS (`public/icon-*.png`, `apple-touch-icon.png`), damit die Installation überall ein Symbol zeigt.
+
 ### Mögliche Erweiterungen
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation.
 

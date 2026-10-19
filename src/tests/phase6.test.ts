@@ -113,3 +113,10 @@ describe('Coastal-Probeprüfung', () => {
     for (const t of COASTAL_TOPIC_IDS) expect(coastal.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(4)
   })
 })
+
+describe('Fragenpool Phase 9', () => {
+  it('jeder Grundbegriff hat mindestens fünf Fragen', () => {
+    for (const t of ['hdg', 'stw', 'water-track', 'cog', 'sog', 'ground-track', 'leeway', 'fix', 'ep'])
+      expect(QUESTION_BANK.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(5)
+  })
+})

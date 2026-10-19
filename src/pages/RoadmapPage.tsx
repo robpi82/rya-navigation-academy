@@ -97,10 +97,19 @@ const PHASES = [
       'Wiederherstellung ersetzt nur App-Daten und verlangt vorher eine Bestätigung',
     ],
   },
+  {
+    phase: 9,
+    title: 'Mehr Day-Skipper-Fragen und Installations-Icons',
+    done: true,
+    items: [
+      '29 neue Day-Skipper-Fragen, vor allem zu den bisher schwach abgedeckten Grundbegriffen (Heading, Water Track, Fahrt, Fix, EP)',
+      'Alle 20 neuen Rechenaufgaben werden automatisch nachgerechnet; jeder Grundbegriff hat jetzt mindestens fünf Fragen',
+      'PNG-Icons (192, 512, maskable, Apple) für die Installation auf dem Startbildschirm',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weiteren Fragenpool ausbauen (mehr Fragen je Day-Skipper-Themengruppe)',
   'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
