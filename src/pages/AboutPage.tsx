@@ -2,6 +2,8 @@ import { ShieldAlert } from 'lucide-react'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+import { BackupCard } from './BackupCard'
+
 export function AboutPage() {
   return (
     <div className="max-w-3xl space-y-6">
@@ -23,6 +25,7 @@ export function AboutPage() {
           </p>
         </CardContent>
       </Card>
+      <BackupCard />
       <Card>
         <CardHeader>
           <CardTitle>Konventionen in dieser App</CardTitle>

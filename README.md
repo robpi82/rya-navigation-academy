@@ -180,6 +180,14 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - Probeprüfung um den **Coastal-Test** erweitert (20 Fragen, 40 min, nur Coastal-Pool; `buildExam(..., level)` in `lib/exam.ts`).
 - Tests (177): u. a. Reproduzierbarkeit und Pool-Abdeckung des Coastal-Tests.
 
+### Phase 8 – fertig ✅ (Offline-Betrieb, Datensicherung)
+- **PWA/Offline:** `public/sw.js` (Netzwerk zuerst für Seiten, Cache zuerst für gehashte Assets, nur im Produktionsbuild registriert),
+  Manifest mit relativer Startadresse. Nach dem ersten Besuch läuft die App ohne Internet.
+- **Datensicherung:** `lib/backup.ts` und Karte auf „Über & Hinweise": Lernstand (Fortschritt, Lernkarten, Einstellungen, Probeprüfung)
+  als JSON herunterladen und wieder einspielen. Die Datei wird streng geprüft (Format, Version, nur bekannte Schlüssel, gültiges JSON);
+  fremde LocalStorage-Einträge bleiben unberührt.
+- Tests (181): Rundreise, Ablehnung ungültiger Dateien, Zusammenfassung.
+
 ### Mögliche Erweiterungen
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
-Service Worker für Offline-Betrieb.
+

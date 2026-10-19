@@ -2,7 +2,7 @@
   "name": "RYA Navigation Academy",
   "short_name": "NavAcademy",
   "description": "Unabhängige Lernplattform für Navigationstheorie (Day Skipper).",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0b1d33",
   "theme_color": "#0b1d33",

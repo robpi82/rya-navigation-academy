@@ -87,6 +87,16 @@ const PHASES = [
       'Neue Probeprüfung „Coastal-Test" (20 Fragen, 40 min) neben den Day-Skipper-Varianten',
     ],
   },
+  {
+    phase: 8,
+    title: 'Offline-Betrieb und Datensicherung',
+    done: true,
+    items: [
+      'Service Worker: Nach dem ersten Laden läuft die App ohne Internet (z. B. an Bord), installierbar auf dem Startbildschirm',
+      'Lernstand als Datei sichern und wiederherstellen (Über & Hinweise) – streng geprüfte Sicherungsdatei',
+      'Wiederherstellung ersetzt nur App-Daten und verlangt vorher eine Bestätigung',
+    ],
+  },
 ]
 
 const IDEAS = [
@@ -94,7 +104,6 @@ const IDEAS = [
   'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
-  'Offline-Betrieb über Service Worker (PWA)',
 ]
 
 export function RoadmapPage() {
