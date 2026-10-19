@@ -189,5 +189,5 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - Tests (181): Rundreise, Ablehnung ungültiger Dateien, Zusammenfassung.
 
 ### Mögliche Erweiterungen
-Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
+Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation.
 
