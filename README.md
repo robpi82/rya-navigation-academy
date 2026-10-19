@@ -210,5 +210,5 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - 10 neue Tests (197 insgesamt). Es gibt bewusst noch keine Prüfungsfragen dazu, da das Kursniveau „Yachtmaster" im Trainer fehlt.
 
 ### Mögliche Erweiterungen
-Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation.
+Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
