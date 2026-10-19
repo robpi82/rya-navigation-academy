@@ -102,7 +102,7 @@ const PHASES = [
     title: 'Mehr Day-Skipper-Fragen und Installations-Icons',
     done: true,
     items: [
-      '29 neue Day-Skipper-Fragen, vor allem zu den bisher schwach abgedeckten Grundbegriffen (Heading, Water Track, Fahrt, Fix, EP)',
+      '31 neue Day-Skipper-Fragen, vor allem zu den bisher schwach abgedeckten Grundbegriffen (Heading, Water Track, Fahrt, Fix, EP)',
       'Alle 20 neuen Rechenaufgaben werden automatisch nachgerechnet; jeder Grundbegriff hat jetzt mindestens fünf Fragen',
       'PNG-Icons (192, 512, maskable, Apple) für die Installation auf dem Startbildschirm',
     ],
