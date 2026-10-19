@@ -13,7 +13,7 @@ export type TermId =
 export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
-export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage'
+export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics'
 
 export type BuoyId =
   | 'port'
@@ -182,6 +182,27 @@ export type QuestionVerify =
       eyeHeight?: number
     }
   | {
+      kind: 'weather'
+      quantity: 'beaufort' | 'msToKn' | 'knToMs' | 'lowDirection' | 'shiftDegrees'
+      value?: number
+      windFrom?: number
+      from?: number
+      to?: number
+    }
+  | {
+      kind: 'enav'
+      quantity: 'vmg' | 'cpa' | 'tcpa' | 'ukc'
+      sog?: number
+      cog?: number
+      btw?: number
+      own?: { course: number; speed: number }
+      target?: { bearing: number; distance: number; course: number; speed: number }
+      displayed?: number
+      reference?: 'transducer' | 'keel' | 'waterline'
+      transducerDepth?: number
+      draught?: number
+    }
+  | {
       kind: 'dst'
       distance?: number
       speed?: number
@@ -193,7 +214,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | 'kn' | 'NM' | 'min' | 'm'
+  unit: '°' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

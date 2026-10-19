@@ -1,0 +1,42 @@
+import type { Flashcard } from './flashcards'
+
+const c = (id: string, english: string, german: string, definition: string, mnemonic: string, example: string, abbr?: string): Flashcard => ({
+  id,
+  english,
+  abbr,
+  german,
+  definition,
+  mnemonic,
+  example,
+  deck: 'themen',
+})
+
+/** Phase 5: Kollisionsverhütung, Wetter, Sicherheit/Seefunk, elektronische Navigation */
+export const SAFETY_CARDS: Flashcard[] = [
+  c('rule13', 'Overtaking (Rule 13)', 'Überholen', 'Wer sich einem anderen aus mehr als 22,5° achterlicher als querab nähert, überholt und muss ausweichen – vor allen anderen Regeln.', 'Der Überholende weicht immer aus.', 'Dein Motorboot nähert sich einem Segler von achtern: Du weichst aus.'),
+  c('rule14', 'Head-on (Rule 14)', 'Entgegengesetzte Kurse', 'Zwei Maschinenfahrzeuge nähern sich voraus: Beide weichen nach Steuerbord aus und passieren Backbord an Backbord.', 'Beide nach rechts.', 'Zwei Yachten unter Motor begegnen sich im Fahrwasser: beide drehen nach Steuerbord.'),
+  c('rule15', 'Crossing (Rule 15)', 'Kreuzende Kurse', 'Maschinenfahrzeuge, die sich kreuzen: Wer das andere an Steuerbord hat, weicht aus.', 'Rechts vor links.', 'Ein Frachter kommt von rechts: Du weichst aus, am besten hinter seinem Heck.'),
+  c('rule12', 'Sailing Vessels (Rule 12)', 'Segler untereinander', 'Wind von verschiedenen Seiten: Backbordbug weicht Steuerbordbug. Gleicher Bug: Luvboot weicht Leeboot.', 'Steuerbordbug hat Vorfahrt; Luv weicht Lee.', 'Du hast Wind von Backbord, der andere von Steuerbord: Du weichst aus.'),
+  c('rule18', 'Responsibilities (Rule 18)', 'Rangfolge der Ausweichpflicht', 'Maschine weicht Segler, Segler weicht Fischern, diese weichen manövrierbehinderten und manövrierunfähigen Fahrzeugen.', 'Segler unter Maschine = Maschinenfahrzeug.', 'Ein Segelboot mit Motor muss Fischern und Seglern ausweichen.'),
+  c('lights-power', 'Navigation Lights', 'Positionslichter', 'Topplicht (225°), Seitenlichter rot/grün (je 112,5°), Hecklicht (135°). Segler: ohne Topplicht. Vor Anker: weißes Rundumlicht.', 'Rot links, grün rechts. Segler ohne Topplicht.', 'Von vorn siehst du Rot und Grün; von achtern nur Weiß.'),
+  c('sound-signals', 'Manoeuvring Signals', 'Manöversignale', '1 kurz: Kurs nach Steuerbord. 2 kurz: nach Backbord. 3 kurz: Maschine rückwärts. 5 kurz: Zweifel/Warnung.', 'Eins rechts, zwei links, drei zurück.', 'Fünf kurze Töne, wenn der Ausweichpflichtige nicht reagiert.'),
+  c('beaufort', 'Beaufort Scale', 'Beaufort-Skala', 'Skala der Windstärken 0–12. Stärke 4 ≈ 11–16 kn, 6 ≈ 22–27 kn, 8 ≈ 34–40 kn (Sturm), 12 ab 64 kn.', 'Bft 8 = Gale: Hafen suchen.', '25 kn Wind entsprechen Windstärke 6.', 'Bft'),
+  c('buys-ballot', "Buys Ballot's Law", 'Buys-Ballot-Regel', 'Mit dem Rücken zum Wind liegt das Tief auf der Nordhalbkugel links, auf der Südhalbkugel rechts.', 'Rücken zum Wind – Tief links.', 'Wind aus Ost: Das Tief liegt im Süden.'),
+  c('veering-backing', 'Veering / Backing', 'Rechts- und Linksdrehung des Windes', 'Veering: Wind dreht rechts herum (Uhrzeigersinn). Backing: links herum.', 'Veering = rechts, Backing = links.', 'Nach einer Kaltfront dreht der Wind rechts.'),
+  c('pressure-trend', 'Pressure Tendency', 'Drucktendenz', 'Änderung des Luftdrucks in 3 Stunden: langsam 0,1–1,5 hPa, normal 1,6–3,5, schnell 3,6–6,0, sehr schnell über 6,0.', 'Schnell fallender Druck = Wetter wird schlechter.', '−7 hPa in 3 Stunden: „falling very rapidly".'),
+  c('shipping-forecast-time', 'Imminent / Soon / Later', 'Zeitangaben im Seewetterbericht', 'Imminent: unter 6 h. Soon: 6–12 h. Later: über 12 h.', 'I – S – L: unter 6, 6–12, über 12.', '„Gale warning imminent": Sturm in weniger als 6 Stunden.'),
+  c('fronts', 'Cold / Warm Front', 'Kalt- und Warmfront', 'Kaltfront: Schauer, Böen, Wind dreht rechts, Druck steigt. Warmfront: Druck fällt, Wind dreht links, Dauerregen.', 'Kalt = kurz und heftig, warm = lang und trüb.', 'Nach dem Kaltfrontdurchzug wird es kälter und die Sicht besser.'),
+  c('mayday', 'MAYDAY', 'Seenotruf', 'Schwere und unmittelbare Gefahr für Schiff oder Menschen. Auf Kanal 16 (oder per DSC) mit MAYDAY ×3.', 'Wer – wo – was – welche Hilfe – wie viele.', 'Schiff sinkt, Feuer, Mann über Bord: MAYDAY.'),
+  c('panpan', 'PAN-PAN', 'Dringlichkeitsmeldung', 'Dringende Meldung zur Sicherheit von Schiff oder Person – keine unmittelbare Gefahr.', 'Dringend, aber nicht sofort Lebensgefahr.', 'Ruderschaden bei ruhigem Wetter.'),
+  c('securite', 'SÉCURITÉ', 'Sicherheitsmeldung', 'Wichtige Navigations- oder Wetterwarnung an alle.', 'Warnung, kein Notfall.', 'Treibender Container im Fahrwasser.'),
+  c('ch16-70', 'Channel 16 / Channel 70', 'Kanal 16 und Kanal 70', 'Kanal 16: Anruf- und Notkanal (156,8 MHz). Kanal 70: Digitaler Selektivruf (DSC).', '16 = Stimme, 70 = digitaler Notknopf.', 'Der rote DSC-Knopf sendet auf Kanal 70.'),
+  c('mob', 'Man Overboard (MOB)', 'Mann über Bord', 'Rufen, zeigen, Rettungsmittel werfen, MOB-Taste, Notruf, zurückfahren, bergen, Unterkühlung bekämpfen.', 'Nie den Sichtkontakt verlieren.', 'Eine Person zeigt dauernd auf den Gestürzten.'),
+  c('epirb', 'EPIRB', 'Notfunkboje', 'Sendet nach dem Auslösen über Satelliten (406 MHz) einen Notruf mit Kennung und Position.', 'Auslösen, wenn das Schiff verlassen wird.', 'Hilft der Rettungsleitstelle, dich zu finden.', 'EPIRB'),
+  c('flares', 'Pyrotechnic Distress Signals', 'Seenotsignalmittel', 'Rote Fallschirmraketen und Handfackeln, orangefarbener Rauch. Haltbarkeitsdatum beachten.', 'Rot = Notfall. Weiß = Warnung vor Kollision.', 'Fallschirmrakete für große Entfernung, Handfackel zur Ortung.'),
+  c('xte', 'XTE – Cross Track Error', 'Seitlicher Abstand zur Routenlinie', 'Abstand des Bootes seitlich von der Linie zwischen den Wegpunkten.', 'XTE rechts → nach links zurücksteuern.', 'XTE 0,3 NM rechts der Linie.', 'XTE'),
+  c('btw-dtw', 'BTW / DTW', 'Peilung und Distanz zum Wegpunkt', 'BTW: Bearing To Waypoint. DTW: Distance To Waypoint.', 'B = Bearing, D = Distance, TW = To Waypoint.', 'BTW 060°, DTW 12 NM.', 'BTW/DTW'),
+  c('vmg', 'VMG', 'Fahrt in Richtung Wegpunkt', 'Velocity Made Good: Anteil der Fahrt über Grund, der zum Wegpunkt führt: SOG · cos(COG − BTW).', 'Für die Restzeit zählt die VMG.', 'SOG 6 kn, 30° neben dem Ziel: VMG ≈ 5,2 kn.', 'VMG'),
+  c('cpa-tcpa', 'CPA / TCPA', 'Kleinster Abstand / Zeit bis dorthin', 'Closest Point of Approach und Time to CPA, berechnet aus der Relativbewegung (AIS/Radar).', 'Kleiner CPA und kleine TCPA: früh handeln.', 'CPA 0,2 NM in 10 Minuten: Ausweichen!', 'CPA'),
+  c('ais', 'AIS', 'Automatisches Identifikationssystem', 'Sendet Name, MMSI, Position, Kurs und Fahrt. Nicht jedes Fahrzeug sendet – kein Ersatz für den Ausguck.', 'AIS ergänzt den Ausguck, ersetzt ihn nicht.', 'Auf dem Plotter erscheint ein Frachter mit CPA/TCPA.', 'AIS'),
+  c('echo-reference', 'Echo Sounder Reference', 'Bezug des Echolots', 'Die Anzeige kann sich auf den Geber, den Kiel oder die Wasserlinie beziehen – Bezug kennen!', 'Erst Bezug prüfen, dann Tiefe bewerten.', 'Anzeige unter Geber 2,6 m + Geber 0,5 m = 3,1 m Wassertiefe.'),
+]

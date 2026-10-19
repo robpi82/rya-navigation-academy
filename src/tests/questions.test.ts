@@ -3,8 +3,17 @@ import { QUESTION_BANK } from '@/questions'
 import { GLOSSARY, TERM_IDS } from '@/data/glossary'
 import { COASTAL_TOPIC_IDS, DAY_TOPIC_IDS } from '@/data/topics'
 import {
+  actualDepth,
   anchorChainLength,
+  beaufortFromKnots,
   compassToTrue,
+  cpa,
+  lowPressureDirection,
+  msToKnots,
+  knotsToMs,
+  vmg,
+  windShift,
+  underKeelClearance as _ukc,
   courseToSteer,
   deviationAt,
   distanceFrom,
@@ -82,6 +91,31 @@ function compute(v: QuestionVerify): number | null {
       }
       return null
     }
+    case 'weather': {
+      switch (v.quantity) {
+        case 'beaufort':
+          return beaufortFromKnots(v.value!)
+        case 'msToKn':
+          return msToKnots(v.value!)
+        case 'knToMs':
+          return knotsToMs(v.value!)
+        case 'lowDirection':
+          return lowPressureDirection(v.windFrom!)
+        case 'shiftDegrees':
+          return windShift(v.from!, v.to!).degrees
+      }
+      return null
+    }
+    case 'enav': {
+      if (v.quantity === 'vmg') return vmg(v.sog!, v.cog!, v.btw!)
+      if (v.quantity === 'ukc') return _ukc(actualDepth(v.displayed!, v.reference!, v.transducerDepth!, v.draught!), v.draught!)
+      const t = v.target!
+      const r = cpa(
+        { pos: { x: 0, y: 0 }, course: v.own!.course, speed: v.own!.speed },
+        { pos: { x: t.distance * Math.sin((t.bearing * Math.PI) / 180), y: t.distance * Math.cos((t.bearing * Math.PI) / 180) }, course: t.course, speed: t.speed },
+      )
+      return v.quantity === 'cpa' ? r.cpa : r.tcpaMinutes
+    }
     case 'chart':
       return v.quantity === 'geoRange' ? geographicRange(v.lightHeight!, v.eyeHeight!) : rhumbLine(v.from!, v.to!).distance
     case 'dst': {
@@ -135,7 +169,7 @@ describe('Fragenkatalog', () => {
       expect(isAnswerCorrect(q, computed!), `${q.id}: berechnet ${computed}, Musterlösung ${q.answer}`).toBe(true)
       checked++
     }
-    expect(checked).toBeGreaterThanOrEqual(40)
+    expect(checked).toBeGreaterThanOrEqual(50)
   })
 
   it('alle Berechnungsaufgaben sind maschinell überprüft', () => {

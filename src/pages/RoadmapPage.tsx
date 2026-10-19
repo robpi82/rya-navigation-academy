@@ -54,10 +54,22 @@ const PHASES = [
       '57 neue Prüfungsfragen und 24 neue Lernkarten zu diesen Themen',
     ],
   },
+  {
+    phase: 5,
+    title: 'Verkehr, Wetter, Sicherheit, Elektronik',
+    done: true,
+    items: [
+      'Kollisionsverhütung: Begegnungs-Trainer (wer weicht aus?), Lichter bei Nacht, Schall- und Nebelsignale',
+      'Wetter: Beaufort-Skala, Buys-Ballot-Regel, Winddrehung, Begriffe im Seewetterbericht',
+      'Sicherheit und Seefunk: Mayday-Notruf und Mann-über-Bord in der richtigen Reihenfolge, MAYDAY/PAN-PAN/SÉCURITÉ, Seenotzeichen',
+      'Elektronische Navigation: Plotter (XTE, BTW, DTW, VMG) auf der Seekarte, CPA/TCPA-Simulator, Echolot-Bezug',
+      '58 neue Prüfungsfragen (insgesamt 177) und 26 neue Lernkarten (insgesamt 71)',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Day-Skipper-Themen: Kollisionsverhütung (COLREGs), Wetter, Sicherheit und Seefunk, elektronische Navigation',
+  'Peilen als eigene Lektion (Kreuz-, Deck-, Gefahrenpeilung) und Prüfungssimulation im Stil der echten Prüfung',
   'Yachtmaster-Offshore-Inhalte (Astronavigation, Großkreis, Nachtfahrt)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',

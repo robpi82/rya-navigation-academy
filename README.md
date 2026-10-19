@@ -35,7 +35,10 @@ src/
 │   ├── passage.ts       Course to Steer über mehrere Stromstunden
 │   ├── coastal.ts       Zwölftelregel, Running Fix, Gefahrenpeilung
 │   ├── compass.ts       Variation, Deviation, Deviationstabelle
-│   └── lights.ts        Feuerkennungen lesen und beschreiben
+│   ├── lights.ts        Feuerkennungen lesen und beschreiben
+│   ├── colregs.ts       Begegnungssituationen, Lichtsektoren
+│   ├── weather.ts       Beaufort, Buys-Ballot, Drucktendenz
+│   └── enav.ts          XTE, VMG, CPA/TCPA, Echolot
 ├── types/             Gemeinsame TypeScript-Typen (Navigation, Lerninhalte)
 ├── data/glossary.ts   Die neun Begriffe mit allen Lerninhalten
 ├── data/flashcards.ts 21 Lernkarten
@@ -140,7 +143,27 @@ Nachrechnung aller 45+ Rechenaufgaben.
 Hinweis: Alle Inhalte sind eigenständig formuliert. Fachaussagen zu IALA-Betonnung und Kartensymbolen bitte vor ernsthafter
 Nutzung mit offiziellen Quellen abgleichen.
 
+### Phase 5 – fertig ✅ (Verkehr, Wetter, Sicherheit, Elektronik)
+Vier weitere Themen-Lektionen unter `#/themen` (insgesamt acht):
+- **Kollisionsverhütung (COLREGs/KVR):** Begegnungs-Trainer mit der geometrischen Beurteilung zweier Fahrzeuge
+  (Überholen, entgegengesetzte und kreuzende Kurse, Maschine/Segler, Segler untereinander mit Bug und Luv/Lee),
+  Lichter bei Nacht (Sektoren aus beliebiger Richtung, seitenverkehrte Seitenlichter), Schall- und Nebelsignale mit Trainer
+  (`calculations/colregs.ts`).
+- **Wetter:** Beaufort-Skala mit Umrechnung (kn, m/s, km/h), Buys-Ballot-Regel und Winddrehung (veering/backing),
+  Drucktendenz und Sichtweite im Begriffssystem des Seewetterberichts (`calculations/weather.ts`).
+- **Sicherheit und Seefunk:** Mayday-Notruf und Mann-über-Bord als Reihenfolge-Aufgaben, MAYDAY/PAN-PAN/SÉCURITÉ-Trainer,
+  Seenotzeichen erkennen (`data/safety.ts`).
+- **Elektronische Navigation:** Plotter-Simulation auf der Seekarte (XTE, BTW, DTW, VMG, Steuerempfehlung), CPA/TCPA-Simulator mit
+  Risikobewertung, Echolot-Bezug (Geber/Kiel/Wasserlinie) (`calculations/enav.ts`).
+- **Inhalte:** 58 neue Prüfungsfragen (insgesamt 177), 26 neue Lernkarten (insgesamt 71), neue Themenfilter im Prüfungstrainer.
+
+Tests (151): u. a. Begegnungssituationen und Lichtsektoren, Beaufort-Grenzen, Buys-Ballot, Cross-Track-Error mit Vorzeichen,
+CPA/TCPA (Gegenkurs, kreuzend, parallel, auseinanderlaufend) und Nachrechnung aller 57 Rechenaufgaben.
+
+Hinweis: Regelinhalte (COLREGs, Seefunk, Wetterbegriffe) sind eigenständig formuliert und vereinfacht. Vor ernsthafter Nutzung
+mit amtlichen Quellen (Regeltext, Funkhandbuch, Seehandbuch) abgleichen; für den Betrieb eines Seefunkgeräts ist ein Funkzeugnis nötig.
+
 ### Mögliche Erweiterungen
-Weitere Day-Skipper-Themen (Kollisionsverhütung, Wetter, Sicherheit/Seefunk, elektronische Navigation),
+Peilen als eigene Lektion, Prüfungssimulation im Stil der echten Prüfung,
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation,
 Service Worker für Offline-Betrieb.

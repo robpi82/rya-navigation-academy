@@ -1,15 +1,15 @@
+import { DAY_TOPIC_IDS } from '@/data/topics'
 import { QUESTION_BANK } from '@/questions'
 import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
-import type { Lesson } from '@/modules/lessons/types'
-import type { DayTopicId } from '@/types/learning'
 import { BuoyGalleryWidget, BuoyTrainerWidget, LateralDirectionWidget } from './buoyWidgets'
 import { LightDecoderWidget, LightRangeWidget, SoundingsWidget, SymbolBrowserWidget } from './chartWidgets'
 import { CompassConverterWidget, DeviationTableWidget, VariationYearWidget } from './compassWidgets'
+import { SAFETY_LESSONS } from './safetyLessons'
+import type { DayLesson } from './types'
 import { AnchorTideWidget, SpringNeapWidget, TideHeightWidget } from './tideWidgets'
 
-export type DayLesson = Lesson & { id: DayTopicId }
 
-export const DAY_LESSONS: DayLesson[] = [
+const CORE_LESSONS: DayLesson[] = [
   {
     id: 'compass',
     title: 'Kompass, Variation und Deviation',
@@ -112,6 +112,8 @@ export const DAY_LESSONS: DayLesson[] = [
   },
 ]
 
+export const DAY_LESSONS: DayLesson[] = [...CORE_LESSONS, ...SAFETY_LESSONS]
+
 export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
   const lesson = DAY_LESSONS.find((l) => l.id === lessonId)
   return lesson ? (
@@ -122,7 +124,7 @@ export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
       subtitle="Ergänzende Lektionen neben den neun Grundbegriffen der Stromnavigation: Kompasskorrektur, Gezeiten, Kartenkunde und Betonnung – jeweils mit interaktiven Übungen."
       lessons={DAY_LESSONS}
       basePath="#/themen"
-      quizLabel={`${QUESTION_BANK.filter((q) => ['compass', 'tides', 'chart-reading', 'buoyage'].includes(q.topic)).length} Fragen zu diesen Themen`}
+      quizLabel={`${QUESTION_BANK.filter((q) => DAY_TOPIC_IDS.includes(q.topic as never)).length} Fragen zu diesen Themen`}
     />
   )
 }

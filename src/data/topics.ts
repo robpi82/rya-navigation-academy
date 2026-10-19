@@ -14,6 +14,10 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
   tides: { abbr: 'TIDE', english: 'Tides & Heights of Tide', german: 'Gezeiten' },
   'chart-reading': { abbr: 'KARTE', english: 'Chart Reading', german: 'Kartenkunde' },
   buoyage: { abbr: 'TONNE', english: 'Buoyage (IALA A)', german: 'Seezeichen' },
+  colregs: { abbr: 'KVR', english: 'Collision Regulations (COLREGs)', german: 'Kollisionsverhütung' },
+  weather: { abbr: 'WETTER', english: 'Weather & Forecasts', german: 'Wetter' },
+  safety: { abbr: 'SICHER', english: 'Safety & Radio', german: 'Sicherheit & Seefunk' },
+  electronics: { abbr: 'E-NAV', english: 'Electronic Navigation', german: 'Elektronische Navigation' },
 }
 
 export const DAY_TOPIC_IDS = Object.keys(DAY_TOPICS) as DayTopicId[]

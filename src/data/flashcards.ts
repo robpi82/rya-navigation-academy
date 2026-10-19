@@ -1,4 +1,5 @@
 import type { TermId } from '@/types/learning'
+import { SAFETY_CARDS } from './flashcardsSafety'
 import { GLOSSARY } from './glossary'
 
 export interface Flashcard {
@@ -184,5 +185,5 @@ const TOPICS: Flashcard[] = [
   c('pref-channel', 'Preferred Channel Mark', 'Gabelungstonne (bevorzugtes Fahrwasser)', 'Lateraltonne mit Band in der anderen Farbe und Kennung Fl(2+1). Zeigt das Hauptfahrwasser an einer Abzweigung.', '2+1 gibt es nur bei Gabelungstonnen.', 'Rot mit grünem Band: Hauptfahrwasser an Steuerbord.'),
 ]
 
-export const FLASHCARDS: Flashcard[] = [...CORE, ...EXTENDED, ...TOPICS]
+export const FLASHCARDS: Flashcard[] = [...CORE, ...EXTENDED, ...TOPICS, ...SAFETY_CARDS]
 export const FLASHCARD_BY_ID: Record<string, Flashcard> = Object.fromEntries(FLASHCARDS.map((c) => [c.id, c]))
