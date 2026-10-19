@@ -137,7 +137,7 @@ export function LessonDetail({ lesson, lessons, basePath, backLabel }: { lesson:
         </Card>
       ))}
       <div className="flex justify-end border-t pt-4">
-        <Button asChild variant="ghost">
+        <Button asChild variant="ghost" className="h-auto min-h-9 max-w-full whitespace-normal py-2 text-left">
           <a href={`${basePath}/${next.id}`}>
             Nächste Lektion: {next.title} <ArrowRight />
           </a>

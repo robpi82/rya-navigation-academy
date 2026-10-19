@@ -199,6 +199,11 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - 9 neue Coastal-Fragen (insgesamt 44; alle Rechenaufgaben nachgerechnet), 3 Lernkarten, Tests: 186.
 - Hinweis: Die Hafendaten sind fiktive Übungswerte; im Ernstfall gelten nur die Angaben des aktuellen Almanachs.
 
+### Phase 11 – fertig ✅ (Fragenpool, Layout-Korrektur)
+- 26 neue Day-Skipper-Fragen (insgesamt 273 im Katalog) zu Kompass, Gezeiten, Kartenkunde, Seezeichen und Wetter; 15 Rechenaufgaben
+  werden in den Tests nachgerechnet. Neuer Pool-Test (187 Tests) für die Themengruppen der Probeprüfung.
+- Der Link „Nächste Lektion" bricht jetzt um, statt am Rand abgeschnitten zu werden.
+
 ### Mögliche Erweiterungen
 Yachtmaster-Offshore-Inhalte, Sekundärhäfen und Gezeitenkurven, Benutzerkonten mit Datenbank-Synchronisation.
 

@@ -117,6 +117,16 @@ const PHASES = [
       '9 neue Coastal-Fragen (Rechenaufgaben nachgerechnet) und 3 Lernkarten',
     ],
   },
+  {
+    phase: 11,
+    title: 'Fragenpool Kompass, Gezeiten, Karte, Seezeichen',
+    done: true,
+    items: [
+      '26 neue Day-Skipper-Fragen zu Kompass, Gezeiten, Kartenkunde, Seezeichen und Wetter; 15 Rechenaufgaben automatisch nachgerechnet',
+      'Test stellt sicher, dass jede Themengruppe für den Intensiv-Test ausreichend Fragen hat',
+      '„Nächste Lektion"-Link wird auf dem Handy bei langen Titeln nicht mehr abgeschnitten',
+    ],
+  },
 ]
 
 const IDEAS = [

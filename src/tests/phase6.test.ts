@@ -154,3 +154,12 @@ describe('Sekundärhäfen', () => {
     expect(secondaryTide(std, STANDARD_REFERENCES, zero)).toMatchObject({ hwTime: 630, hwHeight: 4.5, lwTime: 1005, lwHeight: 1.5 })
   })
 })
+
+describe('Fragenpool Phase 11', () => {
+  it('jede Themengruppe hat genug Fragen für den Intensiv-Test (Quote reicht)', () => {
+    const day = QUESTION_BANK.filter((q) => q.level === 'day-skipper')
+    const intensive = EXAM_PRESETS.find((p) => p.id === 'lang')!.questions
+    for (const g of ['basics', 'compass', 'tides', 'rules'] as const)
+      expect(day.filter((q) => groupOf(q.topic) === g).length, g).toBeGreaterThanOrEqual(Math.ceil(EXAM_GROUPS[g].weight * intensive * 2))
+  })
+})
