@@ -1,4 +1,4 @@
-import type { CoastalTopicId, DayTopicId, TopicId } from '@/types/learning'
+import type { CoastalTopicId, DayTopicId, TopicId, YachtTopicId } from '@/types/learning'
 import { TERM_BY_ID } from './glossary'
 
 export const COASTAL_TOPICS: Record<CoastalTopicId, { abbr: string; english: string; german: string }> = {
@@ -22,6 +22,13 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
   bearings: { abbr: 'PEIL', english: 'Bearings & Transits', german: 'Peilen' },
 }
 
+export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string; german: string }> = {
+  'great-circle': { abbr: 'GK', english: 'Great Circle Sailing', german: 'Großkreisnavigation' },
+  'night-navigation': { abbr: 'NACHT', english: 'Night Navigation', german: 'Nachtnavigation' },
+}
+
+export const YACHT_TOPIC_IDS = Object.keys(YACHT_TOPICS) as YachtTopicId[]
+
 export const DAY_TOPIC_IDS = Object.keys(DAY_TOPICS) as DayTopicId[]
 
 export const COASTAL_TOPIC_IDS = Object.keys(COASTAL_TOPICS) as CoastalTopicId[]
@@ -33,5 +40,6 @@ export function topicInfo(topic: TopicId): { abbr: string; english: string } {
     return { abbr: t.abbr, english: t.english }
   }
   if (topic in DAY_TOPICS) return DAY_TOPICS[topic as DayTopicId]
+  if (topic in YACHT_TOPICS) return YACHT_TOPICS[topic as YachtTopicId]
   return COASTAL_TOPICS[topic as CoastalTopicId]
 }

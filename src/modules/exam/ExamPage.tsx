@@ -46,7 +46,7 @@ function ExamSetup() {
   return (
     <div className="space-y-6">
       <PageHeader title="Probeprüfung" subtitle={`Wie in einer echten Prüfung: feste Fragenzahl, feste Zeit, keine Rückmeldung bis zur Abgabe. Bestanden ab ${PASS_PERCENT} %. Fragenpool: ${dayCount} Day-Skipper- und ${coastalCount} Coastal-Fragen.`} />
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-5">
         {EXAM_PRESETS.map((p) => (
           <Card key={p.id}>
             <CardHeader>

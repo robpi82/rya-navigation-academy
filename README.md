@@ -209,6 +209,12 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
   Scheitelpunkt, Ersparnis und Wegpunkte; Längenunterschied über die Datumsgrenze nimmt den kürzeren Weg. Kugelmodell.
 - 10 neue Tests (197 insgesamt). Es gibt bewusst noch keine Prüfungsfragen dazu, da das Kursniveau „Yachtmaster" im Trainer fehlt.
 
+### Phase 13 – fertig ✅ (Yachtmaster-Vorgriff)
+- Prüfungstrainer um die Stufe **Yachtmaster (Vorgriff)** erweitert (`YachtTopicId`, `data/topics.ts`): Großkreisnavigation und Nachtnavigation.
+- 17 neue Fragen (insgesamt 299 im Katalog); neues Prüfungsformat „Yachtmaster-Vorgriff" (12 Fragen, 25 min) neben Day-Skipper- und Coastal-Tests.
+- Tests: 200, u. a. Nachrechnung der Großkreis-Aufgaben und Trennung der Fragenpools nach Stufe.
+- Es gibt noch keine eigenen Lektionen für diese Themen – die Großkreis-Rechnung steht im Rechner (`#/rechner`).
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

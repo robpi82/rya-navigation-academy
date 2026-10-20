@@ -136,10 +136,20 @@ const PHASES = [
       'Berechnung in calculations/greatcircle.ts, 10 neue Tests (Meridian, Äquator, Symmetrie, Datumsgrenze, bekannte Strecke)',
     ],
   },
+  {
+    phase: 13,
+    title: 'Yachtmaster-Vorgriff im Trainer',
+    done: true,
+    items: [
+      'Neue Stufe „Yachtmaster (Vorgriff)" im Prüfungstrainer mit den Themen Großkreisnavigation und Nachtnavigation',
+      '17 neue Fragen (11 Großkreis, 6 Nachtnavigation); alle Rechenaufgaben automatisch nachgerechnet, auch gegen die Großkreis-Berechnung',
+      'Fünfte Probeprüfung „Yachtmaster-Vorgriff" (12 Fragen, 25 min); Day-Skipper-Prüfungen bleiben davon unberührt',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt) mit eigenem Kursniveau im Prüfungstrainer',
+  'Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Törnplanung über Nacht) mit eigenen Lektionen',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

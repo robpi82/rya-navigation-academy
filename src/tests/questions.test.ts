@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { QUESTION_BANK } from '@/questions'
 import { GLOSSARY, TERM_IDS } from '@/data/glossary'
-import { COASTAL_TOPIC_IDS, DAY_TOPIC_IDS } from '@/data/topics'
+import { COASTAL_TOPIC_IDS, DAY_TOPIC_IDS, YACHT_TOPIC_IDS } from '@/data/topics'
 import {
   actualDepth,
   anchorChainLength,
@@ -24,6 +24,8 @@ import {
   planPassage,
   rhumbLine,
   secondaryTide,
+  greatCircle,
+  compareRoutes,
   reciprocal,
   cutAngle,
   compassErrorFromTransit,
@@ -141,6 +143,11 @@ function compute(v: QuestionVerify): number | null {
     }
     case 'chart':
       return v.quantity === 'geoRange' ? geographicRange(v.lightHeight!, v.eyeHeight!) : rhumbLine(v.from!, v.to!).distance
+    case 'greatcircle': {
+      const g = greatCircle(v.from, v.to)!
+      if (v.quantity === 'saving') return compareRoutes(v.from, v.to)!.saving
+      return v.quantity === 'distance' ? g.distance : v.quantity === 'initialBearing' ? g.initialBearing : g.finalBearing
+    }
     case 'secondary': {
       const port = SECONDARY_PORTS.find((p) => p.id === v.port)!
       const r = secondaryTide({ hwTime: v.stdHwTime, hwHeight: v.stdHwHeight, lwTime: v.stdLwTime, lwHeight: v.stdLwHeight }, STANDARD_REFERENCES, port.differences)
@@ -173,7 +180,7 @@ describe('Fragenkatalog', () => {
       expect(q.prompt.length, q.id).toBeGreaterThan(10)
       expect(q.solution.length, q.id).toBeGreaterThan(0)
       expect(q.steps.length, q.id).toBeGreaterThan(0)
-      expect([...TERM_IDS, ...COASTAL_TOPIC_IDS, ...DAY_TOPIC_IDS], q.id).toContain(q.topic)
+      expect([...TERM_IDS, ...COASTAL_TOPIC_IDS, ...DAY_TOPIC_IDS, ...YACHT_TOPIC_IDS], q.id).toContain(q.topic)
       expect([1, 2, 3], q.id).toContain(q.difficulty)
       if (q.type === 'mc') {
         expect(q.correctIndex, q.id).toBeGreaterThanOrEqual(0)

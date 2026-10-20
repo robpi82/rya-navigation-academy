@@ -1,0 +1,41 @@
+import type { MultipleChoiceQuestion, NumericQuestion, Question, QuestionVerify, YachtTopicId } from '@/types/learning'
+
+/**
+ * Phase 13: erste Fragen auf Yachtmaster-Offshore-Niveau (Vorgriff): Großkreis und Nachtnavigation.
+ * Eigenständig erstellt, vereinfacht (Kugelmodell), keine Originalfragen. Rechenaufgaben werden in src/tests/questions.test.ts nachgerechnet.
+ */
+let counter = 0
+
+function mc(id: string, topic: YachtTopicId, difficulty: 1 | 2 | 3, category: MultipleChoiceQuestion['category'], prompt: string, correct: string, wrong: [string, string, string], steps: string[]): MultipleChoiceQuestion {
+  const idx = counter++ % 4
+  const options = [...wrong]
+  options.splice(idx, 0, correct)
+  return { id, type: 'mc', topic, difficulty, level: 'yachtmaster-offshore', category, prompt, options, correctIndex: idx, solution: correct, steps }
+}
+
+function num(id: string, topic: YachtTopicId, difficulty: 1 | 2 | 3, prompt: string, answer: number, tolerance: number, unit: NumericQuestion['unit'], verify: QuestionVerify, solution: string, steps: string[], isBearing = false): NumericQuestion {
+  return { id, type: 'numeric', topic, difficulty, level: 'yachtmaster-offshore', category: isBearing ? 'course' : 'calculation', prompt, answer, tolerance, unit, isBearing: isBearing || undefined, verify, solution, steps }
+}
+
+const A = { lat: 50, lon: -5 }
+const B = { lat: 50, lon: -60 }
+
+export const YACHTMASTER: Question[] = [
+  num('ym-001', 'great-circle', 1, 'Wie lang ist der Großkreis auf dem Äquator von 000° bis 060° Ost?', 3600, 2, 'NM', { kind: 'greatcircle', quantity: 'distance', from: { lat: 0, lon: 0 }, to: { lat: 0, lon: 60 } }, '3.600 NM', ['Der Äquator ist ein Großkreis: 1° Längenunterschied = 60 NM.', '60° × 60 NM = 3.600 NM.']),
+  num('ym-002', 'great-circle', 3, 'Start 45° N / 000°, Ziel 45° N / 090° E. Wie lang ist der Großkreis (Kugelmodell)?', 3600, 3, 'NM', { kind: 'greatcircle', quantity: 'distance', from: { lat: 45, lon: 0 }, to: { lat: 45, lon: 90 } }, '3.600 NM', ['cos d = sin φ₁ sin φ₂ + cos φ₁ cos φ₂ cos Δλ = 0,5 + 0,5 · 0 = 0,5.', 'd = 60° → 60 × 60 = 3.600 NM.']),
+  num('ym-003', 'great-circle', 2, 'Start 50° N / 005° W, Ziel 50° N / 060° W. Wie lang ist der Großkreis (Kugelmodell)?', 2072, 3, 'NM', { kind: 'greatcircle', quantity: 'distance', from: A, to: B }, 'etwa 2.072 NM', ['Haversine-Formel oder Kosinussatz der sphärischen Trigonometrie.', 'Δλ = 55°, φ = 50°: d ≈ 34,5° ≈ 2.072 NM.']),
+  num('ym-004', 'great-circle', 3, 'Gleiche Strecke (50° N / 005° W nach 50° N / 060° W). Wie lautet der Anfangskurs auf dem Großkreis?', 292, 1, '°', { kind: 'greatcircle', quantity: 'initialBearing', from: A, to: B }, '292°', ['Der Großkreis krümmt sich zum Pol: Der Anfangskurs liegt nördlicher als 270°.', 'Berechnung nach dem Azimutformel: ≈ 291,7°.'], true),
+  num('ym-005', 'great-circle', 3, 'Gleiche Strecke. Welchen Kurs hat der Großkreis bei der Ankunft?', 248, 1, '°', { kind: 'greatcircle', quantity: 'finalBearing', from: A, to: B }, '248°', ['Der Kurs dreht unterwegs von 292° auf 248° (symmetrisch zu 270°).', 'Der Scheitelpunkt liegt etwa auf 53° N.'], true),
+  num('ym-006', 'great-circle', 3, 'Auf derselben Strecke beträgt die Loxodrome 2.121 NM. Wie viele NM spart der Großkreis?', 49, 2, 'NM', { kind: 'greatcircle', quantity: 'saving', from: A, to: B }, 'etwa 49 NM', ['Großkreis ≈ 2.072 NM.', '2.121 − 2.072 ≈ 49 NM.']),
+  num('ym-007', 'great-circle', 2, 'Südküste England (50,7° N / 001,3° W) nach New York (40,7° N / 074° W): Wie lang ist der Großkreis?', 2979, 3, 'NM', { kind: 'greatcircle', quantity: 'distance', from: { lat: 50.7, lon: -1.3 }, to: { lat: 40.7, lon: -74 } }, 'etwa 2.979 NM', ['Kosinussatz oder Haversine-Formel.', 'Die Loxodrome wäre etwa 114 NM länger.']),
+  mc('ym-008', 'great-circle', 2, 'concept', 'Warum erscheint der kürzeste Weg auf einer Mercatorkarte gekrümmt?', 'Weil die Mercatorprojektion Kurslinien als Geraden abbildet, Großkreise aber nicht (außer Meridiane und Äquator)', ['Weil der Kompass ungenau ist', 'Weil der Großkreis länger als die Gerade ist', 'Weil die Karte den Mond berücksichtigt'], ['Die Mercatorkarte ist winkeltreu, aber nicht distanztreu.', 'Der Großkreis krümmt sich auf der Karte zum Pol hin.']),
+  mc('ym-009', 'great-circle', 1, 'concept', 'Wann sind Großkreis und Loxodrome gleich lang?', 'Bei Kursen entlang eines Meridians und entlang des Äquators', ['Bei jedem Ost-West-Kurs', 'Nur auf der Südhalbkugel', 'Nie'], ['Meridiane und der Äquator sind selbst Großkreise.', 'Alle anderen Breitenkreise sind länger als der Großkreis.']),
+  mc('ym-010', 'great-circle', 2, 'concept', 'Was ändert sich entlang eines Großkreises ständig?', 'Der Kurs – er wird in Teilstücken mit je konstantem Kurs gesegelt', ['Nichts, der Kurs bleibt gleich', 'Die Erdgröße', 'Die Variation springt auf null'], ['Ein Großkreis schneidet die Meridiane unter wechselnden Winkeln.', 'In der Praxis plant man Wegpunkte und segelt Loxodromen zwischen ihnen.']),
+  mc('ym-011', 'great-circle', 3, 'concept', 'Warum segelt man nicht immer den reinen Großkreis?', 'Er kann in zu hohe Breiten führen (Eis, Wetter, Strom) – man begrenzt ihn mit Wegpunkten', ['Weil er immer länger ist', 'Weil er nur bei Nacht gilt', 'Weil er nicht berechnet werden kann'], ['Der Scheitelpunkt liegt höher als Start und Ziel.', 'Ein Kompromiss („composite route") hält eine Grenzbreite ein.']),
+  num('yn-001', 'night-navigation', 2, 'Ein Leuchtfeuer hat eine Feuerhöhe von 25 m, deine Augenhöhe beträgt 3 m. Wie groß ist die geografische Sichtweite?', 14, 0.2, 'NM', { kind: 'chart', quantity: 'geoRange', lightHeight: 25, eyeHeight: 3 }, '14,0 NM', ['Geografische Sichtweite ≈ 2,08 · (√25 + √3) = 2,08 × (5 + 1,73).', '≈ 14,0 NM.']),
+  num('yn-002', 'night-navigation', 2, 'Feuerhöhe 9 m, Augenhöhe 2 m. Wie groß ist die geografische Sichtweite?', 9.2, 0.2, 'NM', { kind: 'chart', quantity: 'geoRange', lightHeight: 9, eyeHeight: 2 }, '9,2 NM', ['2,08 · (√9 + √2) = 2,08 × (3 + 1,41).', '≈ 9,2 NM.']),
+  num('yn-003', 'night-navigation', 3, 'Feuerhöhe 64 m, Augenhöhe 1,5 m. Wie groß ist die geografische Sichtweite?', 19.2, 0.3, 'NM', { kind: 'chart', quantity: 'geoRange', lightHeight: 64, eyeHeight: 1.5 }, '19,2 NM', ['2,08 · (√64 + √1,5) = 2,08 × (8 + 1,22).', '≈ 19,2 NM.']),
+  mc('yn-004', 'night-navigation', 2, 'concept', 'Ein Feuer hat eine Nenntragweite von 15 NM, die geografische Sichtweite ist aber nur 11 NM. Wie weit siehst du es höchstens?', 'Etwa 11 NM – die Erdkrümmung begrenzt die Sicht', ['15 NM, die Nenntragweite gilt immer', '26 NM, beide Werte addieren sich', 'Genau 13 NM, der Mittelwert'], ['Die Nenntragweite hängt von der Lichtstärke und der Sicht ab.', 'Die geografische Sichtweite hängt von Feuer- und Augenhöhe ab – der kleinere Wert gilt.']),
+  mc('yn-005', 'night-navigation', 1, 'concept', 'Warum nutzt man nachts im Kartenhaus rotes Licht?', 'Rotes Licht schont die Dunkeladaption der Augen', ['Rotes Licht ist heller', 'Weil rote Lichter nicht gesehen werden', 'Es ist gesetzlich vorgeschrieben'], ['Die Augen brauchen etwa 20–30 Minuten für die volle Dunkeladaption.', 'Rotes Licht stört sie am wenigsten.']),
+  mc('yn-006', 'night-navigation', 2, 'concept', 'Du siehst ein Sektorenfeuer mit weißem Licht. Was kannst du daraus schließen?', 'Du befindest dich im Sektor des sicheren Fahrwassers – Sektorgrenzen aus der Karte entnehmen', ['Du bist immer frei von Gefahren', 'Das Feuer ist ausgefallen', 'Du fährst genau auf der Peillinie'], ['Die Farben (weiß, rot, grün) gelten für bestimmte Peilbereiche, die in der Karte stehen.', 'Beim Sektorwechsel ändert sich die Farbe – eine einfache Standlinie.']),
+]

@@ -15,7 +15,7 @@ import { GLOSSARY } from '@/data/glossary'
 import { CATEGORY_LABEL, type Question, type QuestionCategory, type QuizAnswerRecord, type QuizMode, type TopicId, type CourseLevel } from '@/types/learning'
 import { BuoyIcon } from '@/components/nautical/BuoyIcon'
 import { BUOY_BY_ID } from '@/data/buoyage'
-import { COASTAL_TOPICS, COASTAL_TOPIC_IDS, DAY_TOPICS, DAY_TOPIC_IDS, topicInfo } from '@/data/topics'
+import { COASTAL_TOPICS, COASTAL_TOPIC_IDS, DAY_TOPICS, DAY_TOPIC_IDS, YACHT_TOPICS, YACHT_TOPIC_IDS, topicInfo } from '@/data/topics'
 import { MatchInput } from './MatchInput'
 import { QuestionDiagram } from './QuestionDiagram'
 import { formatClock, isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
@@ -152,6 +152,7 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
                   [
                     { v: 'day-skipper', l: 'Day Skipper' },
                     { v: 'coastal-skipper', l: 'Coastal Skipper' },
+                    { v: 'yachtmaster-offshore', l: 'Yachtmaster (Vorgriff)' },
                     { v: 'all', l: 'Alle Stufen' },
                   ] as const
                 ).map(({ v, l }) => (
@@ -177,9 +178,10 @@ function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart
               </legend>
               <div className="flex flex-wrap gap-2">
                 {[
-                  ...(level !== 'coastal-skipper' ? GLOSSARY.map((t) => ({ id: t.id as TopicId, label: t.abbr })) : []),
-                  ...(level !== 'coastal-skipper' ? DAY_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: DAY_TOPICS[id].german })) : []),
-                  ...(level !== 'day-skipper' ? COASTAL_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: COASTAL_TOPICS[id].german })) : []),
+                  ...(level === 'day-skipper' || level === 'all' ? GLOSSARY.map((t) => ({ id: t.id as TopicId, label: t.abbr })) : []),
+                  ...(level === 'day-skipper' || level === 'all' ? DAY_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: DAY_TOPICS[id].german })) : []),
+                  ...(level === 'coastal-skipper' || level === 'all' ? COASTAL_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: COASTAL_TOPICS[id].german })) : []),
+                  ...(level === 'yachtmaster-offshore' || level === 'all' ? YACHT_TOPIC_IDS.map((id) => ({ id: id as TopicId, label: YACHT_TOPICS[id].german })) : []),
                 ].map((t) => (
                   <Button key={t.id} size="sm" variant={topics.includes(t.id) ? 'default' : 'outline'} onClick={() => toggleTopic(t.id)} aria-pressed={topics.includes(t.id)}>
                     {t.label}

@@ -29,7 +29,10 @@ export type BuoyId =
   | 'special'
   | 'new-danger'
 
-export type TopicId = TermId | CoastalTopicId | DayTopicId
+/** Yachtmaster-Offshore-Themen (Vorgriff) */
+export type YachtTopicId = 'great-circle' | 'night-navigation'
+
+export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
 export type CourseLevel = 'day-skipper' | 'coastal-skipper' | 'yachtmaster-offshore'
 
@@ -220,6 +223,12 @@ export type QuestionVerify =
       stdLwTime: number
       stdLwHeight: number
       port: 'kranich' | 'nordbucht' | 'moewe'
+    }
+  | {
+      kind: 'greatcircle'
+      quantity: 'distance' | 'initialBearing' | 'finalBearing' | 'saving'
+      from: LatLonLike
+      to: LatLonLike
     }
   | {
       kind: 'dst'

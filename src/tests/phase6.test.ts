@@ -30,9 +30,9 @@ describe('Prüfungsaufbau', () => {
     expect(count('coastal')).toBe(0)
   })
   it('Quoten summieren sich zur Fragenzahl und respektieren knappe Gruppen', () => {
-    const q = groupQuotas(30, { basics: 100, compass: 100, tides: 100, rules: 100, coastal: 0 })
+    const q = groupQuotas(30, { basics: 100, compass: 100, tides: 100, rules: 100, coastal: 0, yacht: 0 })
     expect(Object.values(q).reduce((a, b) => a + b, 0)).toBe(30)
-    const tight = groupQuotas(30, { basics: 2, compass: 100, tides: 100, rules: 100, coastal: 0 })
+    const tight = groupQuotas(30, { basics: 2, compass: 100, tides: 100, rules: 100, coastal: 0, yacht: 0 })
     expect(tight.basics).toBe(2)
     expect(Object.values(tight).reduce((a, b) => a + b, 0)).toBe(30)
   })
@@ -161,5 +161,25 @@ describe('Fragenpool Phase 11', () => {
     const intensive = EXAM_PRESETS.find((p) => p.id === 'lang')!.questions
     for (const g of ['basics', 'compass', 'tides', 'rules'] as const)
       expect(day.filter((q) => groupOf(q.topic) === g).length, g).toBeGreaterThanOrEqual(Math.ceil(EXAM_GROUPS[g].weight * intensive * 2))
+  })
+})
+
+describe('Yachtmaster-Vorgriff', () => {
+  const yacht = QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore')
+  it('Pool deckt beide Themen ab und alle Fragen gehören zur Stufe', () => {
+    expect(yacht.length).toBeGreaterThanOrEqual(15)
+    for (const t of ['great-circle', 'night-navigation']) expect(yacht.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(5)
+    expect(groupOf('great-circle')).toBe('yacht')
+  })
+  it('Yachtmaster-Test enthält nur Yachtmaster-Fragen und ist reproduzierbar', () => {
+    const p = EXAM_PRESETS.find((x) => x.id === 'yacht')!
+    const a = buildExam(p.questions, QUESTION_BANK, seededRandom(9), p.level)
+    expect(a).toHaveLength(p.questions)
+    expect(a.every((q) => q.level === 'yachtmaster-offshore')).toBe(true)
+    expect(new Set(a.map((q) => q.id)).size).toBe(p.questions)
+    expect(buildExam(p.questions, QUESTION_BANK, seededRandom(9), p.level).map((q) => q.id)).toEqual(a.map((q) => q.id))
+  })
+  it('Day-Skipper-Prüfungen enthalten keine Yachtmaster-Fragen', () => {
+    for (const p of EXAM_PRESETS.filter((x) => !x.level)) expect(buildExam(p.questions, QUESTION_BANK, seededRandom(1)).some((q) => q.level !== 'day-skipper')).toBe(false)
   })
 })
