@@ -221,6 +221,11 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
   Teilstücken (`greatCircleLegs`), Feuer-Trainer für die Sichtweite von Feuern.
 - 3 neue Lernkarten (insgesamt 83), Tests: 205.
 
+### Phase 15 – fertig ✅ (Fragenpool KVR, Wetter, Sicherheit, E-Navigation)
+- 31 neue Day-Skipper-Fragen (insgesamt 329 im Katalog, davon 268 Day Skipper), darunter 12 nachgerechnete Rechenaufgaben
+  (CPA/TCPA, Echolot-Bezug, VMG, Beaufort, m/s ↔ kn). Pool-Test: Jedes der vier Themen hat mindestens 20 Fragen; Tests: 206.
+- Regelinhalte (KVR, Seefunk, Wetterbegriffe) sind eigenständig formuliert und vereinfacht – bitte mit den amtlichen Texten abgleichen.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

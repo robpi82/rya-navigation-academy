@@ -157,6 +157,16 @@ const PHASES = [
       'Neue Berechnung `greatCircleLegs`, 3 Lernkarten, 5 neue Tests (205 insgesamt)',
     ],
   },
+  {
+    phase: 15,
+    title: 'Fragenpool KVR, Wetter, Sicherheit, E-Navigation',
+    done: true,
+    items: [
+      '31 neue Day-Skipper-Fragen zu Kollisionsverhütung, Wetter, Sicherheit/Seefunk und elektronischer Navigation',
+      '12 Rechenaufgaben (CPA, TCPA, Echolot, VMG, Beaufort, Windeinheiten) automatisch nachgerechnet',
+      'Jedes dieser vier Themen hat jetzt mindestens 20 Fragen (Pool-Test)',
+    ],
+  },
 ]
 
 const IDEAS = [

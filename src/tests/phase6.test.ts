@@ -197,3 +197,9 @@ describe('Yachtmaster-Lektionen', () => {
     }
   })
 })
+
+describe('Fragenpool Phase 15', () => {
+  it('KVR, Wetter, Sicherheit und E-Navigation haben je mindestens 20 Fragen', () => {
+    for (const t of ['colregs', 'weather', 'safety', 'electronics']) expect(QUESTION_BANK.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(20)
+  })
+})
