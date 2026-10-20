@@ -183,3 +183,17 @@ describe('Yachtmaster-Vorgriff', () => {
     for (const p of EXAM_PRESETS.filter((x) => !x.level)) expect(buildExam(p.questions, QUESTION_BANK, seededRandom(1)).some((q) => q.level !== 'day-skipper')).toBe(false)
   })
 })
+
+import { YACHT_LESSONS } from '@/modules/yachtmaster/YachtmasterPage'
+
+describe('Yachtmaster-Lektionen', () => {
+  it('jede Lektion hat Text, Merksatz, Widget und passende Fragen', () => {
+    expect(YACHT_LESSONS.map((l) => l.id).sort()).toEqual(['great-circle', 'night-navigation'])
+    for (const l of YACHT_LESSONS) {
+      expect(l.body.length).toBeGreaterThanOrEqual(3)
+      expect(l.mnemonic.length).toBeGreaterThan(10)
+      expect(l.widgets.length).toBeGreaterThanOrEqual(1)
+      expect(QUESTION_BANK.filter((q) => q.topic === l.id).length).toBeGreaterThanOrEqual(5)
+    }
+  })
+})

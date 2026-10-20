@@ -74,3 +74,25 @@ export function compareRoutes(from: LatLon, to: LatLon): RouteComparison | null 
   const r = rhumbLine(from, { lat: to.lat, lon: from.lon + dLon })
   return { greatCircle: gc, rhumbDistance: r.distance, rhumbBearing: r.bearing, saving: r.distance - gc.distance }
 }
+
+export interface Leg {
+  from: LatLon
+  to: LatLon
+  /** Loxodromkurs des Teilstücks (rechtweisend) */
+  bearing: number | null
+  distance: number
+}
+
+/**
+ * Großkreis in Teilstücken: Zwischenpunkte auf dem Großkreis, dazwischen je eine Loxodrome (konstanter Kurs).
+ * Je mehr Teilstücke, desto näher liegt die Gesamtstrecke an der Großkreisdistanz.
+ */
+export function greatCircleLegs(from: LatLon, to: LatLon, segments: number): { legs: Leg[]; total: number } {
+  const pts = greatCirclePoints(from, to, Math.max(1, Math.round(segments)))
+  const legs: Leg[] = []
+  for (let i = 0; i < pts.length - 1; i++) {
+    const r = rhumbLine(pts[i], pts[i + 1])
+    legs.push({ from: pts[i], to: pts[i + 1], bearing: r.bearing, distance: r.distance })
+  }
+  return { legs, total: legs.reduce((s, l) => s + l.distance, 0) }
+}

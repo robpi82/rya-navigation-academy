@@ -146,10 +146,21 @@ const PHASES = [
       'Fünfte Probeprüfung „Yachtmaster-Vorgriff" (12 Fragen, 25 min); Day-Skipper-Prüfungen bleiben davon unberührt',
     ],
   },
+  {
+    phase: 14,
+    title: 'Yachtmaster-Lektionen',
+    done: true,
+    items: [
+      'Neuer Bereich „Yachtmaster" (`#/yachtmaster`) mit zwei Lektionen: Großkreisnavigation und Nachtnavigation',
+      'Großkreis auf der Nordatlantik-Karte: Loxodrome gegen Großkreis, einstellbare Teilstücke mit Kurs und Distanz je Etappe',
+      'Feuer-Trainer: Feuerhöhe, Augenhöhe und Nenntragweite – wann taucht das Feuer auf?',
+      'Neue Berechnung `greatCircleLegs`, 3 Lernkarten, 5 neue Tests (205 insgesamt)',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Törnplanung über Nacht) mit eigenen Lektionen',
+  'Weitere Yachtmaster-Lektionen (Astronavigation, Wetterrouting, Törnplanung über Nacht)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

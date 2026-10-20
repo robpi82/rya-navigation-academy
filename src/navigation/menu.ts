@@ -11,6 +11,7 @@ import {
   LayoutDashboard,
   Map,
   Milestone,
+  Ship,
   type LucideIcon,
 } from 'lucide-react'
 import type { Route } from '@/hooks/useHashRoute'
@@ -38,6 +39,8 @@ export const MAIN_MENU: MenuItem[] = [
 ]
 
 export const COASTAL_MENU: MenuItem[] = [{ label: 'Coastal Skipper', href: '#/coastal', icon: Anchor, route: 'coastal', hint: `${COASTAL_LESSON_IDS.length} Lektionen` }]
+
+export const YACHT_MENU: MenuItem[] = [{ label: 'Yachtmaster', href: '#/yachtmaster', icon: Ship, route: 'yachtmaster', hint: 'Vorgriff' }]
 
 export const ROADMAP_ITEM: MenuItem = { label: 'Roadmap', href: '#/roadmap', icon: Milestone, route: 'roadmap' }
 

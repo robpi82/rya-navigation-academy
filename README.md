@@ -215,6 +215,12 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - Tests: 200, u. a. Nachrechnung der Großkreis-Aufgaben und Trennung der Fragenpools nach Stufe.
 - Es gibt noch keine eigenen Lektionen für diese Themen – die Großkreis-Rechnung steht im Rechner (`#/rechner`).
 
+### Phase 14 – fertig ✅ (Yachtmaster-Lektionen)
+- Eigener Menüpunkt **Yachtmaster** (`#/yachtmaster`) mit den Lektionen Großkreisnavigation und Nachtnavigation
+  (`modules/yachtmaster/`). Interaktiv: Großkreis und Loxodrome auf einer Mercatorkarte des Nordatlantiks mit einstellbaren
+  Teilstücken (`greatCircleLegs`), Feuer-Trainer für die Sichtweite von Feuern.
+- 3 neue Lernkarten (insgesamt 83), Tests: 205.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
