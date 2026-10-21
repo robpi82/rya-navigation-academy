@@ -15,6 +15,7 @@ export type Route =
   | { name: 'plan' }
   | { name: 'formulas'; formulaId?: string }
   | { name: 'calc' }
+  | { name: 'syllabus' }
   | { name: 'roadmap' }
   | { name: 'about' }
 
@@ -48,6 +49,8 @@ export function parseHash(hash: string): Route {
       return { name: 'calc' }
     case 'lernplan':
       return { name: 'plan' }
+    case 'syllabus':
+      return { name: 'syllabus' }
     case 'roadmap':
       return { name: 'roadmap' }
     case 'info':

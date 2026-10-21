@@ -18,6 +18,7 @@ const CoastalPage = lazy(() => import('@/modules/coastal/CoastalPage').then((m) 
 const YachtmasterPage = lazy(() => import('@/modules/yachtmaster/YachtmasterPage').then((m) => ({ default: m.YachtmasterPage })))
 const StudyPlanPage = lazy(() => import('@/modules/plan/StudyPlanPage').then((m) => ({ default: m.StudyPlanPage })))
 const FormulasPage = lazy(() => import('@/modules/formulas/FormulasPage').then((m) => ({ default: m.FormulasPage })))
+const SyllabusPage = lazy(() => import('@/pages/SyllabusPage').then((m) => ({ default: m.SyllabusPage })))
 const RoadmapPage = lazy(() => import('@/pages/RoadmapPage').then((m) => ({ default: m.RoadmapPage })))
 const AboutPage = lazy(() => import('@/pages/AboutPage').then((m) => ({ default: m.AboutPage })))
 
@@ -66,6 +67,9 @@ export default function App() {
       break
     case 'plan':
       page = <StudyPlanPage />
+      break
+    case 'syllabus':
+      page = <SyllabusPage />
       break
     case 'roadmap':
       page = <RoadmapPage />

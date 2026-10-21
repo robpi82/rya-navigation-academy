@@ -453,6 +453,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   (wachsendes Quadrat, Sektorsuche) um das mitwandernde Datum, EPIRB und SART, Verlassen des Schiffes.
 - 11 neue Fragen (insgesamt 480), 2 Lernkarten, Formelsammlung 41 Formeln; Yachtmaster-Probeprüfung 33 Fragen / 70 min. Tests: 409.
 
+### Phase 47 – fertig ✅ (Inhaltsprüfung 44–46, Syllabus-Abdeckung)
+- Inhalte der Phasen 44–46 gegengelesen; klargestellt, dass Großkreis, Astronavigation und Ozeanpassage beim RYA zum Kurs
+  Yachtmaster Ocean gehören.
+- Neue Seite **Syllabus-Abdeckung** (`#/syllabus`): 35 Themenbereiche der RYA-Theoriekurse (sinngemäß, ohne Gewähr) mit ehrlichem
+  Status – 27 abgedeckt, 5 teilweise, 3 fehlen (Leinen und Knoten, Meeresumwelt). Tests: 415.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

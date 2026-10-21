@@ -475,6 +475,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/sar.ts, 11 Fragen, 2 Lernkarten, 1 Formel; Yachtmaster-Probeprüfung jetzt 33 Fragen in 70 Minuten; 6 neue Tests',
     ],
   },
+  {
+    phase: 47,
+    title: 'Inhaltsprüfung 44–46 und Syllabus-Abdeckung',
+    done: true,
+    items: [
+      'Gegengelesen: „Was fehlt noch?“, Ozeanpassage, Notfälle auf Hochsee – stimmig. Klargestellt: Großkreis, Astronavigation und Ozeanpassage gehören beim RYA zum eigenen Kurs Yachtmaster Ocean; veralteter Untertitel der Yachtmaster-Seite erneuert',
+      'Neue Seite Syllabus-Abdeckung: 35 Themenbereiche aus Day Skipper, Coastal Skipper/Yachtmaster Offshore und Yachtmaster Ocean mit Status abgedeckt/teilweise/fehlt, Links und Fragenzahl, druckbar',
+      'Offen benannte Lücken: Leinen und Knoten, Meeresumwelt, Bootskunde; 6 neue Tests (u. a. jede Lektion ist einem Bereich zugeordnet)',
+    ],
+  },
 ]
 
 const IDEAS = [

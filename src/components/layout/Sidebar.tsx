@@ -1,5 +1,5 @@
 import type { Route } from '@/hooks/useHashRoute'
-import { COASTAL_MENU, INFO_ITEM, MAIN_MENU, ROADMAP_ITEM, YACHT_MENU, type MenuItem } from '@/navigation/menu'
+import { COASTAL_MENU, INFO_ITEM, MAIN_MENU, ROADMAP_ITEM, SYLLABUS_ITEM, YACHT_MENU, type MenuItem } from '@/navigation/menu'
 import { cn } from '@/lib/utils'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
@@ -46,6 +46,7 @@ export function Sidebar({ route, onNavigate }: { route: Route; onNavigate?: () =
         {YACHT_MENU.map((item) => (
           <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
         ))}
+        <NavLink item={SYLLABUS_ITEM} active={route.name === 'syllabus'} onNavigate={onNavigate} />
         <NavLink item={ROADMAP_ITEM} active={route.name === 'roadmap'} onNavigate={onNavigate} />
         <div className="pt-4">
           <NavLink item={INFO_ITEM} active={route.name === 'about'} onNavigate={onNavigate} />

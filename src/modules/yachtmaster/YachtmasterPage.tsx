@@ -301,7 +301,7 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
   ) : (
     <LessonCatalog
       title="Yachtmaster (Vorgriff)"
-      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting, Törnplanung über Nacht, Radarplotting und Astronavigation (Mittagsbreite, Höhenstandlinie) – jeweils mit interaktiver Übung."
+      subtitle="Themen über den Coastal-Stoff hinaus: Wetterkarten, Stromatlas, Wetterrouting, Nachtfahrt, Radarplotting und Notfälle auf Hochsee. Großkreis, Astronavigation und Ozeanpassage gehören beim RYA zum eigenen Kurs Yachtmaster Ocean – siehe Syllabus-Abdeckung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length} Yachtmaster-Fragen üben`}
