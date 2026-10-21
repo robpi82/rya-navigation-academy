@@ -19,6 +19,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress'
 import type { LucideIcon } from 'lucide-react'
 import { ExamInsightsCard } from './ExamInsightsCard'
+import { PlanWeekCard } from '@/modules/plan/PlanWeekCard'
 
 function formatStudyTime(sec: number): string {
   const min = Math.round(sec / 60)
@@ -152,6 +153,8 @@ export function DashboardPage() {
         title="Willkommen an Bord"
         subtitle="Dein Lernstand für die Navigationstheorie auf Day-Skipper-Niveau. Alle Daten bleiben lokal in deinem Browser."
       />
+
+      <PlanWeekCard />
 
       {/* Schnellstart */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

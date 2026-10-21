@@ -335,6 +335,16 @@ const PHASES = [
       'Neue Coastal-Probeprüfung: 40 Fragen in 75 Minuten, jedes der elf Coastal-Themen mindestens dreimal',
     ],
   },
+  {
+    phase: 33,
+    title: 'Lernplan bis zum Prüfungstermin',
+    done: true,
+    items: [
+      'Neue Seite Lernplan: Stufe, Beginn, Prüfungstermin und Lerneinheiten pro Woche wählen – Lektionen werden in empfohlener Reihenfolge auf die Wochen verteilt',
+      'Vorletzte Woche Fehlerwiederholung, letzte Woche zwei Probeprüfungen; Warnung, wenn der Plan zu dicht ist',
+      'Erledigt-Status automatisch aus Lektionen, Glossar und Probeprüfungen; Dashboard-Karte „Diese Woche im Lernplan“, 6 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

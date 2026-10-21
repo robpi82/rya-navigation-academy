@@ -375,6 +375,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Neue Vorgabe **Coastal-Probeprüfung** (40 Fragen, 75 min, gleichmäßig über elf Themen); der bisherige Coastal-Test bleibt als Kurzcheck.
   Tests: 305.
 
+### Phase 33 – fertig ✅ (Lernplan)
+- Neue Seite **Lernplan** (`#/lernplan`): Stufe, Beginn, Prüfungstermin und Lerneinheiten pro Woche wählen; die Lektionen
+  werden in empfohlener Reihenfolge auf die Wochen verteilt, danach Fehlerwiederholung und zwei Probeprüfungen.
+- Erledigt-Status automatisch aus Lektionen, gelernten Begriffen und Probeprüfungen ab Planbeginn; Warnung bei zu dichtem Plan.
+- Dashboard-Karte „Diese Woche im Lernplan“. Tests: 311.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

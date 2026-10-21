@@ -2,6 +2,7 @@ import {
   Anchor,
   BookOpen,
   Calculator,
+  CalendarDays,
   ClipboardCheck,
   Compass,
   GraduationCap,
@@ -28,6 +29,7 @@ export interface MenuItem {
 
 export const MAIN_MENU: MenuItem[] = [
   { label: 'Dashboard', href: '#/', icon: LayoutDashboard, route: 'dashboard' },
+  { label: 'Lernplan', href: '#/lernplan', icon: CalendarDays, route: 'plan', hint: 'bis zur Prüfung' },
   { label: 'Glossar', href: '#/glossar', icon: BookOpen, route: 'glossary', hint: '9 Begriffe' },
   { label: 'Simulator', href: '#/simulator', icon: Compass, route: 'simulator', hint: 'Vektoren' },
   { label: 'Themen', href: '#/themen', icon: Library, route: 'themen', hint: `${DAY_LESSON_IDS.length} Lektionen` },
