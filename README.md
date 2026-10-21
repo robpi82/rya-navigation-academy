@@ -260,6 +260,25 @@ abgesichert; korrigiert wurden Erklärtexte:
 Unverändert und stimmig: Umrechnungskette C–D–M–V–T, Feuerkennungen (Q 50–79/min, VQ 80–159/min, LFl ≥ 2 s), Abkürzungen,
 Peilregeln (Schnittwinkel, Reihenfolge, Deckpeilung).
 
+### Phase 18 – fertig ✅ (Inhaltsprüfung, Abschluss)
+Gegengelesen wurden die übrigen 206 Fragen (Grundbegriffe, Seezeichen, Wetter, E-Navigation, Coastal, Sekundärhäfen, Yachtmaster),
+die Lektionstexte zu Wetter, Sicherheit, E-Navigation und Coastal sowie die Beschreibungen in `data/buoyage.ts`. Zusammen mit den
+Phasen 16 und 17 ist damit jede der 329 Fragen einmal inhaltlich geprüft.
+
+| Stelle | Vorher | Jetzt |
+| --- | --- | --- |
+| Lektion Wetter, Stichpunkt Fronten | „Warmfront: Wind dreht links" | vor der Warmfront links und auffrischend, beim Durchgang rechts |
+| Zuordnung Wetterbegriffe | veering/backing „(Nordhalbkugel)" | auf beiden Halbkugeln gleich definiert |
+| Frage Winddrehung | „rechts herum (mit der Sonne)" | „rechts herum (im Uhrzeigersinn)" |
+| Frage GPS-Satelliten | „drei für Länge/Breite, der vierte korrigiert die Uhr" | vier Unbekannte (drei Raumkoordinaten + Uhrfehler); mit bekannter Höhe genügen drei für 2D |
+| Abzweigungstonnen | „oberes Band = Farbe der Fahrwasserseite" | Grundfarbe und Toppzeichen gehören zur Seite des Hauptfahrwassers (beide Tonnen) |
+| Frage Sektorenfeuer | weißer Sektor = sicheres Fahrwasser | meist das sichere Fahrwasser – Bedeutung und Grenzen aus der Karte |
+| Lektion Sicherheit | „Hauptgefahr ist die Unterkühlung" | zuerst Kälteschock, dann Unterkühlung |
+| Lektion Running Fix | „wird mit dem Zusatz RF gekennzeichnet" | Uhrzeit; häufig zusätzlich „RF" vermerkt |
+
+Ohne Befund: Stromdreieck und Kurskonventionen, Kardinal- und Lateralzeichen, Seewetterbegriffe, CPA/TCPA, Zwölftelregel,
+Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

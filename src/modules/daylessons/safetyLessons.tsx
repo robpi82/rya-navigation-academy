@@ -45,7 +45,7 @@ export const SAFETY_LESSONS: DayLesson[] = [
       'Windstärken: 4 ≈ 11–16 kn, 6 ≈ 22–27 kn, 8 ≈ 34–40 kn.',
       'Druck fällt schnell (mehr als 3,6 hPa in 3 Stunden): Achtung, Wetter verschlechtert sich.',
       'Buys-Ballot: Rücken zum Wind – auf der Nordhalbkugel liegt das Tief links.',
-      'Kaltfront: Wind dreht rechts (veering), Böen. Warmfront: Wind dreht links (backing).',
+      'Vor einer Warmfront dreht der Wind links (backing) und frischt auf, beim Durchgang dreht er rechts. Kaltfront: schlagartig rechts (veering), Böen.',
     ],
     mnemonic: 'Rücken zum Wind – Tief links. Druck fällt schnell – früh reffen und den Hafen im Blick behalten.',
     widgets: [
@@ -63,7 +63,7 @@ export const SAFETY_LESSONS: DayLesson[] = [
     body: [
       'Sicherheit beginnt mit Vorbereitung: Jeder an Bord kennt Rettungswesten, Lifebelts und Strecktaue, Seeventile, Feuerlöscher, Rettungsinsel, Notfunk und Signalmittel. Rettungswesten sollten bei rauem Wetter, in der Dunkelheit, allein an Deck und von Nichtschwimmern und Kindern getragen werden; Lifebelts werden eingepickt, bevor man das Cockpit verlässt.',
       'UKW-Seefunk: Kanal 16 (156,8 MHz) ist Anruf- und Notkanal, Kanal 70 dient dem Digitalen Selektivruf (DSC). Es gibt drei Meldungsarten: MAYDAY (schwere, unmittelbare Gefahr), PAN-PAN (Dringlichkeit) und SÉCURITÉ (wichtige Sicherheits- und Wetterwarnung). Für den Betrieb eines Seefunkgeräts ist ein Funkzeugnis erforderlich (z. B. SRC); hier geht es nur um das Grundverständnis.',
-      'Mann über Bord (MOB): Die Person nicht aus den Augen verlieren, Rettungsmittel werfen, MOB-Position speichern, Notruf absetzen, zurückfahren. Hauptgefahr ist die Unterkühlung – auch Geborgene brauchen Betreuung. Feuer an Bord: Gas absperren, Feuerlöscher auf die Flammenbasis richten, bei Fettbrand die Löschdecke nutzen. Flüssiggas ist schwerer als Luft und sammelt sich in der Bilge – nach Gebrauch am Behälter absperren.',
+      'Mann über Bord (MOB): Die Person nicht aus den Augen verlieren, Rettungsmittel werfen, MOB-Position speichern, Notruf absetzen, zurückfahren. In den ersten Minuten droht der Kälteschock, danach die Unterkühlung – auch Geborgene brauchen Betreuung. Feuer an Bord: Gas absperren, Feuerlöscher auf die Flammenbasis richten, bei Fettbrand die Löschdecke nutzen. Flüssiggas ist schwerer als Luft und sammelt sich in der Bilge – nach Gebrauch am Behälter absperren.',
     ],
     keyPoints: [
       'Kanal 16: Anruf- und Notkanal. MAYDAY = Seenot, PAN-PAN = Dringlichkeit, SÉCURITÉ = Sicherheit.',

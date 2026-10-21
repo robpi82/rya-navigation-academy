@@ -29,7 +29,7 @@ export const LESSONS: CoastalLesson[] = [
     body: [
       'Ist nur ein einziges identifizierbares Objekt in Sicht (z. B. ein Leuchtturm), peilt man es zweimal im Abstand von etwa 20–60 Minuten. Die Peilung sollte sich dabei um mindestens 30° geändert haben.',
       'Die erste Standlinie wird parallel um den Weg verschoben, den das Boot zwischen den Peilungen über Grund zurückgelegt hat – also Water Track und Logdistanz plus Strom. Der Schnitt mit der zweiten Standlinie ist der Running Fix.',
-      'Die Genauigkeit hängt direkt von der Qualität des geschätzten Weges ab. Fehler bei Strom oder Leeway gehen voll in den Fix ein. Im Plot wird der Running Fix wie ein Fix mit Uhrzeit, aber mit dem Zusatz „RF" gekennzeichnet.',
+      'Die Genauigkeit hängt direkt von der Qualität des geschätzten Weges ab. Fehler bei Strom oder Leeway gehen voll in den Fix ein. Im Plot wird der Running Fix mit Uhrzeit eingetragen; viele Navigatoren vermerken zusätzlich „RF", damit klar ist, dass er auf einem geschätzten Weg beruht.',
     ],
     mnemonic: 'Peilen – versegeln – Standlinie mitnehmen – erneut peilen – schneiden.',
     widgets: [{ title: 'Running Fix konstruieren', Comp: RunningFixWidget }],

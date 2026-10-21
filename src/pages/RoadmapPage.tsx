@@ -186,6 +186,15 @@ const PHASES = [
       'Korrigiert: Höhenbezug von Brücken (HAT statt MHWS auf neueren Karten), Trockenhöhe („kann trockenfallen"), Springtide mit ein bis zwei Tagen Verzögerung, Fix-Definition (eine Deckpeilung allein ist kein Fix), Handpeilkompass-Formulierung, Kartennull (LAT)',
     ],
   },
+  {
+    phase: 18,
+    title: 'Inhaltsprüfung Grundbegriffe, Seezeichen, Wetter, E-Navigation, Coastal, Yachtmaster',
+    done: true,
+    items: [
+      'Restliche 206 Fragen sowie Lektionstexte zu Wetter, Sicherheit, E-Navigation, Coastal und Seezeichen-Daten gegengelesen – damit ist der gesamte Katalog einmal geprüft',
+      'Korrigiert: Winddrehung an der Warmfront (vorher links, beim Durchgang rechts), veering/backing auf beiden Halbkugeln gleich, GPS-Satellitenzahl begründet, Abzweigungstonnen beschrieben, weißer Sektor „meist" sicher, Kälteschock in der Sicherheitslektion, Running-Fix-Kennzeichnung',
+    ],
+  },
 ]
 
 const IDEAS = [

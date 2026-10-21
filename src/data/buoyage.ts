@@ -63,7 +63,7 @@ export const BUOYS: BuoyInfo[] = [
     light: 'Fl(2+1) R 10s (rot, zusammengesetzte Gruppe 2+1)',
     lightExample: 'Fl(2+1) R 10s',
     meaning: 'An einer Fahrwassergabelung: Das Hauptfahrwasser liegt an Steuerbord dieser Tonne.',
-    action: 'Man kann sie auf beiden Seiten passieren; das Hauptfahrwasser verläuft an Steuerbord. Gilt als Backbordtonne des Hauptfahrwassers (oberes Band = Farbe der Fahrwasserseite).',
+    action: 'Man kann sie auf beiden Seiten passieren; das Hauptfahrwasser verläuft an Steuerbord. Für das Hauptfahrwasser ist sie eine Backbordtonne: Grundfarbe und Toppzeichen gehören zur Seite des Hauptfahrwassers.',
     mnemonic: 'Die Hauptfarbe (rot/grün) zeigt, wie die Tonne im Hauptfahrwasser wirkt; das Band zeigt die Abzweigung.',
   },
   {
@@ -77,7 +77,7 @@ export const BUOYS: BuoyInfo[] = [
     light: 'Fl(2+1) G 10s (grün, zusammengesetzte Gruppe 2+1)',
     lightExample: 'Fl(2+1) G 10s',
     meaning: 'An einer Fahrwassergabelung: Das Hauptfahrwasser liegt an Backbord dieser Tonne.',
-    action: 'Man kann sie auf beiden Seiten passieren; das Hauptfahrwasser verläuft an Backbord.',
+    action: 'Man kann sie auf beiden Seiten passieren; das Hauptfahrwasser verläuft an Backbord. Für das Hauptfahrwasser ist sie eine Steuerbordtonne: Grundfarbe und Toppzeichen gehören zur Seite des Hauptfahrwassers.',
     mnemonic: 'Wie bei der anderen Gabelungstonne: zusammengesetzte Gruppe (2+1) verrät die Abzweigung.',
   },
   {
