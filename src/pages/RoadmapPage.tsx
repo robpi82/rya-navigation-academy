@@ -247,10 +247,21 @@ const PHASES = [
       'Neue Berechnungen in calculations/nightPassage.ts, 6 Fragen, 2 Lernkarten, Eingabe „h"/„Uhr" im Trainer, 10 neue Tests',
     ],
   },
+  {
+    phase: 24,
+    title: 'Yachtmaster-Lektion Radarplotting',
+    done: true,
+    items: [
+      'Nordstabilisiertes Radarbild mit Plotdreieck O–W–A (vergrößert), Relativbewegung, CPA/TCPA und Aspekt (Rot/Grün)',
+      'Wahrer Kurs und Fahrt des Ziels aus zwei Beobachtungen; drei Beispiele (Kreuzer, Überholer, stillliegendes Ziel)',
+      'Ausweichmanöver testen: neuer CPA nach Kursänderung, Hinweis auf Rule 19 bei Backbord-Manövern',
+      'Neue Berechnungen in calculations/radarPlot.ts, 6 Fragen, 2 Lernkarten, 7 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Running Fix mit Sonnenstandlinien, Radarplotting)',
+  'Weitere Yachtmaster-Lektionen (Running Fix mit Sonnenstandlinien) und eine Yachtmaster-Probeprüfung mit mehr Fragen',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

@@ -320,6 +320,14 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   - Feuerplan: Sichtabschnitt ± √(Reichweite² − Querabstand²) um den Querab-Punkt, Uhrzeiten und Tag/Nacht je Feuer.
 - 6 neue Yachtmaster-Fragen (4 nachgerechnet, neue Einheit „h"), 2 Lernkarten; der Trainer akzeptiert „h" und „Uhr". Tests: 261.
 
+### Phase 24 – fertig ✅ (Radarplotting)
+- Siebte Yachtmaster-Lektion **Radarplotting** (`#/yachtmaster/radar-plotting`, `calculations/radarPlot.ts`, `modules/yachtmaster/radarWidgets.tsx`):
+  - Aus zwei Beobachtungen (Peilung/Abstand) und dem eigenen Kurs/der eigenen Fahrt: Relativbewegung, wahrer Kurs und Fahrt
+    des Ziels (Plotdreieck O–W–A), CPA/TCPA, Aspekt.
+  - Ausweichmanöver: neuer CPA nach Kursänderung ab der zweiten Beobachtung (`cpaAfterAlteration`).
+  - Radarbild plus vergrößertes Plotdreieck; drei Beispiele.
+- 6 neue Yachtmaster-Fragen (4 nachgerechnet), 2 Lernkarten. Tests: 268.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

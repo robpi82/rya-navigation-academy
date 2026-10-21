@@ -26,6 +26,7 @@ export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string;
   'great-circle': { abbr: 'GK', english: 'Great Circle Sailing', german: 'Großkreisnavigation' },
   'night-navigation': { abbr: 'NACHT', english: 'Night Navigation', german: 'Nachtnavigation' },
   'weather-routing': { abbr: 'ROUTE', english: 'Weather Routing', german: 'Wetterrouting' },
+  'radar-plotting': { abbr: 'RADAR', english: 'Radar Plotting', german: 'Radarplotting' },
   'night-passage': { abbr: 'TÖRN', english: 'Night Passage Planning', german: 'Törnplanung über Nacht' },
   'sight-reduction': { abbr: 'HSL', english: 'Position Lines from Sights', german: 'Höhenstandlinie' },
   celestial: { abbr: 'ASTRO', english: 'Celestial Navigation: Noon Sight', german: 'Astronavigation (Mittagsbreite)' },

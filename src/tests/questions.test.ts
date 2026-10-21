@@ -26,6 +26,7 @@ import {
   secondaryTide,
   greatCircle,
   tackingDistance,
+  plotTarget,
   daylightDepartureWindow,
   watchLoad,
   watchSchedule,
@@ -161,6 +162,13 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
       if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
+    case 'radar': {
+      const p = plotTarget(v.first, v.second, v.minutes, v.ownCourse, v.ownSpeed)
+      if (v.quantity === 'targetSpeed') return p.targetSpeed
+      if (v.quantity === 'targetCourse') return p.targetCourse
+      if (v.quantity === 'relativeSpeed') return p.relativeSpeed
+      return p.cpa
+    }
     case 'night': {
       if (v.quantity === 'visibleStretch') return 2 * Math.sqrt(v.range! ** 2 - v.offset! ** 2)
       if (v.quantity === 'earliestDeparture') return daylightDepartureWindow(v.distance!, v.speed!, v.sunrise!, v.sunset!, v.margin ?? 1, 1)!.earliest

@@ -6,6 +6,7 @@ import { DepartureWidget, PolarWidget, TackingWidget } from './routingWidgets'
 import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidgets'
 import { InterceptWidget, SightFixWidget } from './sightWidgets'
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
+import { RadarPlotWidget } from './radarWidgets'
 
 export const YACHT_LESSONS: Lesson[] = [
   {
@@ -149,6 +150,29 @@ export const YACHT_LESSONS: Lesson[] = [
       { label: 'Törnplanung (Coastal)', href: '#/coastal/passage-planning' },
     ],
   },
+  {
+    id: 'radar-plotting',
+    title: 'Radarplotting',
+    english: 'Radar Plotting',
+    summary: 'Aus zwei Radarbeobachtungen Kurs, Fahrt und CPA eines Ziels bestimmen – und ein Ausweichmanöver prüfen.',
+    body: [
+      'Auf einem nordstabilisierten Radar steht das eigene Schiff in der Mitte. Ein Ziel bewegt sich auf dem Schirm nicht mit seinem wahren Kurs, sondern relativ zu uns. Beobachtet man es zweimal im Abstand von zum Beispiel sechs Minuten (Punkte O und A), zeigt die Verlängerung von O nach A, wie nahe es kommt: den kleinsten Abstand (CPA) und die Zeit bis dahin (TCPA). Bleibt die Peilung konstant und der Abstand nimmt ab, besteht Kollisionsgefahr.',
+      'Den wahren Kurs und die wahre Fahrt des Ziels erhält man mit dem Plotdreieck: Von O trägt man den eigenen Weg in dieser Zeit rückwärts ab (Punkt W). W→O ist der eigene Weg, W→A der wahre Weg des Ziels, O→A die Relativbewegung. Daraus folgt auch der Aspekt – unter welchem Winkel das Ziel uns sieht – und damit, welche Lichter wir nachts sehen würden.',
+      'Mit dem Plot lässt sich ein Ausweichmanöver vorab prüfen: Ändert man Kurs oder Fahrt, ändert sich die Relativbewegung und damit der CPA. Ausweichmanöver müssen früh und deutlich sein (Rule 8), damit sie auch auf dem Radar des anderen erkennbar sind. Bei verminderter Sicht gilt Rule 19: Bei einem Fahrzeug vorlicher als querab nach Möglichkeit nicht nach Backbord ausweichen (außer beim Überholen). Die Daten der Übung sind fiktiv; ARPA/AIS-Werte immer mit eigener Beobachtung plausibilisieren.',
+    ],
+    keyPoints: [
+      'Zwei Beobachtungen O und A (z. B. 6 min) → Relativbewegung; verlängert → CPA und TCPA.',
+      'Plotdreieck: W→O eigener Weg, W→A wahrer Weg des Ziels, O→A Relativbewegung.',
+      'Konstante Peilung bei abnehmendem Abstand = Kollisionsgefahr.',
+      'Manöver früh und groß; bei verminderter Sicht nicht nach Backbord für Ziele vorlicher als querab.',
+    ],
+    mnemonic: 'O → A zeigt, wohin es relativ geht; W → A zeigt, wohin es wirklich fährt.',
+    widgets: [{ title: 'Radarplot mit Plotdreieck', description: 'Beispiele wählen oder eigene Beobachtungen eingeben, dann ein Ausweichmanöver testen.', Comp: RadarPlotWidget }],
+    links: [
+      { label: 'CPA/TCPA (E-Navigation)', href: '#/themen/electronics' },
+      { label: 'Kollisionsverhütung', href: '#/themen/colregs' },
+    ],
+  },
 ]
 
 export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
@@ -158,7 +182,7 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
   ) : (
     <LessonCatalog
       title="Yachtmaster (Vorgriff)"
-      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting, Törnplanung über Nacht und Astronavigation (Mittagsbreite, Höhenstandlinie) – jeweils mit interaktiver Übung."
+      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting, Törnplanung über Nacht, Radarplotting und Astronavigation (Mittagsbreite, Höhenstandlinie) – jeweils mit interaktiver Übung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length} Yachtmaster-Fragen üben`}
