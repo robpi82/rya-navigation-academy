@@ -329,7 +329,7 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
     <LessonDetail lesson={lesson} lessons={YACHT_LESSONS} basePath="#/yachtmaster" backLabel="Alle Lektionen" />
   ) : (
     <LessonCatalog
-      title="Yachtmaster (Vorgriff)"
+      title="Yachtmaster"
       subtitle="Themen über den Coastal-Stoff hinaus: Wetterkarten, Stromatlas, Wetterrouting, Nachtfahrt, Radarplotting und Notfälle auf Hochsee. Großkreis, Astronavigation und Ozeanpassage gehören beim RYA zum eigenen Kurs Yachtmaster Ocean – siehe Syllabus-Abdeckung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"

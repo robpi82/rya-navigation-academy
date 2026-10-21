@@ -485,6 +485,10 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   NAVTEX, GMDSS-Seegebiete, Satellit und Kurzwelle.
 - 12 neue Fragen (insgesamt 528), 2 Lernkarten; Yachtmaster-Probeprüfung 36 Fragen / 75 min. **Syllabus: alle 35 Bereiche abgedeckt.** Tests: 448.
 
+### Seitenleiste neu gegliedert
+- Gruppen „Lektionen“ (Day Skipper, Coastal Skipper, Yachtmaster nebeneinander), „Üben“ und „Werkzeuge“; der frühere Punkt
+  „Themen“ heißt jetzt „Day Skipper“. Seitentitel und Untertitel der Day-Skipper- und Yachtmaster-Seite aktualisiert. Tests: 451.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

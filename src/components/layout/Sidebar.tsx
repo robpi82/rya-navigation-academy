@@ -1,5 +1,5 @@
 import type { Route } from '@/hooks/useHashRoute'
-import { COASTAL_MENU, INFO_ITEM, MAIN_MENU, ROADMAP_ITEM, SYLLABUS_ITEM, YACHT_MENU, type MenuItem } from '@/navigation/menu'
+import { INFO_ITEM, MENU_GROUPS, ROADMAP_ITEM, SYLLABUS_ITEM, type MenuItem } from '@/navigation/menu'
 import { cn } from '@/lib/utils'
 import { Logo } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
@@ -34,20 +34,18 @@ export function Sidebar({ route, onNavigate }: { route: Route; onNavigate?: () =
         </div>
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto px-3" aria-label="Hauptnavigation">
-        <p className="px-3 pt-2 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">Day Skipper</p>
-        {MAIN_MENU.map((item) => (
-          <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
+        {MENU_GROUPS.map((g) => (
+          <div key={g.title ?? 'start'} className={g.title ? 'pt-4' : undefined}>
+            {g.title && <p className="px-3 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">{g.title}</p>}
+            {g.items.map((item) => (
+              <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
+            ))}
+          </div>
         ))}
-        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">Coastal Skipper</p>
-        {COASTAL_MENU.map((item) => (
-          <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
-        ))}
-        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">Yachtmaster</p>
-        {YACHT_MENU.map((item) => (
-          <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
-        ))}
+        <div className="space-y-1 pt-4">
         <NavLink item={SYLLABUS_ITEM} active={route.name === 'syllabus'} onNavigate={onNavigate} />
         <NavLink item={ROADMAP_ITEM} active={route.name === 'roadmap'} onNavigate={onNavigate} />
+        </div>
         <div className="pt-4">
           <NavLink item={INFO_ITEM} active={route.name === 'about'} onNavigate={onNavigate} />
         </div>

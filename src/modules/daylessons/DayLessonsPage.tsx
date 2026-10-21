@@ -125,8 +125,8 @@ export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
     <LessonDetail lesson={lesson} lessons={DAY_LESSONS} basePath="#/themen" backLabel="Alle Themen" />
   ) : (
     <LessonCatalog
-      title="Day-Skipper-Themen"
-      subtitle="Ergänzende Lektionen neben den neun Grundbegriffen der Stromnavigation: Kompasskorrektur, Gezeiten, Kartenkunde und Betonnung – jeweils mit interaktiven Übungen."
+      title="Day Skipper"
+      subtitle="Die Grundlagen für Tagestörns in bekannten Gewässern: Kompass, Gezeiten, Karte und Betonnung, Kollisionsverhütung, Wetter, Sicherheit, Seemannschaft, Umwelt und Pilotage – jede Lektion mit interaktiven Übungen. Dazu die neun Grundbegriffe im Glossar."
       lessons={DAY_LESSONS}
       basePath="#/themen"
       quizLabel={`${QUESTION_BANK.filter((q) => DAY_TOPIC_IDS.includes(q.topic as never)).length} Fragen zu diesen Themen`}
