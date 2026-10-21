@@ -415,6 +415,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/noGps.ts, 10 Fragen, 2 Lernkarten, 3 Formeln, Rechenart „Navigation ohne GPS“; Coastal-Probeprüfung jetzt 42 Fragen in 80 Minuten; 8 neue Tests',
     ],
   },
+  {
+    phase: 41,
+    title: 'Antworten ohne Längen-Hinweis',
+    done: true,
+    items: [
+      '163 Multiple-Choice-Fragen überarbeitet: Die richtige Antwort ist nie mehr die längste – Erklärungen stehen im Rechenweg, falsche Antworten sind gleich lang und plausibel',
+      'Kein umgekehrter Hinweis: Die richtige Antwort ist nur bei 17 von 226 Fragen die kürzeste; ein Test sichert Länge, Position und eindeutige Antworten für alle Fragen ab',
+      'Dabei korrigiert: Nordtonne steht an der Nordseite der Gefahr (dt-053), Rule 30(e) für Ankerlicht unter 7 m, Kegel „wo am besten sichtbar“, überlappende Ablenker (Gale, LAT) ersetzt; 5 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

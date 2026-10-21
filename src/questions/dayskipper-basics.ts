@@ -16,7 +16,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     prompt: 'Du steuerst 180° nach Kompass. Ein kräftiger Strom setzt nach Osten. Welche Aussage stimmt?',
     options: [
       'Heading und COG sind beide 180°',
-      'Das Heading bleibt 180°, der COG liegt östlich davon (kleiner als 180°)',
+      'Heading 180°, COG kleiner als 180°',
       'Das Heading ändert sich durch den Strom auf über 180°',
       'Der COG liegt westlich von 180°',
     ],
@@ -129,7 +129,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     level: 'day-skipper',
     category: 'concept',
     prompt: 'Bei welchem Kurs zum Wind ist die Leeway eines Segelboots typischerweise am größten?',
-    options: ['Vor dem Wind', 'Raumschots', 'Am Wind bei kräftigem Wind', 'Unter Motor bei Flaute'],
+    options: ['Vor dem Wind', 'Raumschots bei kräftigem Wind', 'Am Wind bei kräftigem Wind', 'Unter Motor bei Flaute'],
     correctIndex: 2,
     solution: 'Am Wind bei viel Wind.',
     steps: [
@@ -148,14 +148,14 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     prompt: 'Worin unterscheiden sich Leeway und Tidal Set?',
     options: [
       'Beide beschreiben dasselbe: die Abdrift durch Strom',
-      'Leeway ist die windbedingte Abdrift des Bootes durchs Wasser, Set ist die Richtung, in die der Strom setzt',
+      'Leeway ist Abdrift durch Wind, Set die Stromrichtung',
       'Leeway ist die Stromrate in Knoten, Set der Winkel zum Wind',
       'Set wird vom Log gemessen, Leeway vom GPS',
     ],
     correctIndex: 1,
     solution: 'Leeway = Wind (Winkel), Set = Stromrichtung.',
     steps: [
-      'Leeway: Winkel zwischen Heading und Water Track, verursacht durch Wind.',
+      'Leeway: Winkel zwischen Heading und Water Track, verursacht durch Wind – die Abdrift des Bootes durchs Wasser.',
       'Set: Richtung, in die sich die Wassermasse bewegt. Zusammen mit der Rate bildet sie den Stromvektor.',
     ],
   },
@@ -211,14 +211,14 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     prompt: 'Was ist ein Position Fix?',
     options: [
       'Eine aus Kurs, Fahrt und Strom berechnete Position',
-      'Eine durch Beobachtung bekannter Referenzen ermittelte Position',
+      'Eine durch Beobachtung ermittelte Position',
       'Die geplante Zielposition',
       'Die Position des nächsten Wegpunkts im Plotter',
     ],
     correctIndex: 1,
     solution: 'Ein beobachteter Ort (z. B. GPS, Kreuzpeilung).',
     steps: [
-      'Ein Fix beruht auf Messungen (Peilungen, Abstände, Satelliten).',
+      'Ein Fix beruht auf Messungen zu bekannten Referenzen (Peilungen, Abstände, Satelliten).',
       'Berechnete Positionen ohne Beobachtung sind DR oder EP.',
     ],
   },
@@ -234,7 +234,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     options: [
       'Den Mittelpunkt nehmen und weiterfahren',
       'Die Peilungen ignorieren und dem Log vertrauen',
-      'Den gefahrnächsten Punkt annehmen und die Peilung bzw. Objekte überprüfen',
+      'Gefahrnächste Ecke annehmen und neu peilen',
       'Nur die erste Peilung verwenden',
     ],
     correctIndex: 2,
@@ -242,7 +242,7 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     steps: [
       'Ein großes Dreieck deutet auf Fehler hin (falsches Objekt, Ablesefehler, Deviation, Zeitversatz).',
       'Sicherheitshalber gilt die Ecke, die einer Gefahr am nächsten liegt.',
-      'Danach Objekte identifizieren und neu peilen.',
+      'Danach Objekte identifizieren, Peilungen überprüfen und neu peilen.',
     ],
   },
   {
@@ -255,9 +255,9 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     prompt: 'Welche Reihenfolge ist für die Konstruktion einer EP korrekt?',
     options: [
       'Letzter Fix → Stromvektor → Ground Track',
-      'Letzter Fix → Water Track mit Logdistanz → Stromvektor für dieselbe Zeit',
+      'Letzter Fix → Water Track (Logdistanz) → Strom',
       'Ziel → Course to Steer → Water Track',
-      'Letzter Fix → Heading mit SOG-Distanz',
+      'Letzter Fix → Heading mit SOG-Distanz → Stromvektor',
     ],
     correctIndex: 1,
     solution: 'Fix → Water Track (Logdistanz) → Strom.',
@@ -277,16 +277,16 @@ export const DAY_SKIPPER_BASICS: Question[] = [
     prompt:
       'Dein Boot fährt mit 3 kn durchs Wasser genau gegen einen 3-kn-Strom. Was zeigt das GPS als COG an?',
     options: [
-      'Das Heading',
+      'Das Heading, da der Bug weiter voraus zeigt',
       'Die Gegenrichtung des Heading',
-      'Keinen sinnvollen Wert – bei SOG 0 ist die Bewegungsrichtung nicht definiert',
+      'Keinen sinnvollen Wert (SOG ist 0)',
       '000°',
     ],
     correctIndex: 2,
     solution: 'Bei SOG = 0 ist der COG nicht definiert.',
     steps: [
       'Die Vektoren heben sich auf: STW-Vektor + Stromvektor = Nullvektor.',
-      'Ein Nullvektor hat keine Richtung – das GPS zeigt springende Zufallswerte oder „---".',
+      'Bei SOG 0 ist die Bewegungsrichtung nicht definiert: Ein Nullvektor hat keine Richtung – das GPS zeigt springende Zufallswerte oder „---".',
     ],
   },
   {

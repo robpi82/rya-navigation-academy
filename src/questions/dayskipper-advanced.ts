@@ -380,7 +380,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
     options: [
       'SOG ist kleiner als STW, COG entspricht dem Heading',
       'SOG ist größer als STW, COG entspricht dem Heading',
-      'SOG entspricht STW, COG weicht vom Heading ab',
+      'SOG entspricht STW, COG weicht deutlich vom Heading ab',
       'Das Boot bewegt sich rückwärts über Grund',
     ],
     correctIndex: 0,
@@ -418,7 +418,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
       'Im Wetterbericht heißt es: „Strom aus Ost, 2 kn". Eine Crew trägt für die EP einen Stromvektor mit Richtung 090° ein. Wo liegt der Fehler?',
     options: [
       'Kein Fehler – Strom aus Ost bedeutet Set 090°',
-      'Der Strom kommt aus Osten und setzt nach Westen: Set 270°',
+      'Strom aus Ost setzt nach West: Set 270°',
       'Strom darf bei der EP nicht berücksichtigt werden',
       'Die Rate müsste halbiert werden',
     ],
@@ -440,7 +440,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
     prompt: 'Ein Schüler gibt als Ergebnis seiner Rechnung „COG = 372°" an. Was ist zu korrigieren?',
     options: [
       'Nichts, 372° ist ein gültiger Kurs',
-      'Der Kurs muss auf 0–360° normiert werden: 012°',
+      'Auf 0–360° normieren: 012°',
       'Der Kurs muss halbiert werden: 186°',
       'Es muss 360° addiert werden: 732°',
     ],
@@ -459,7 +459,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
       'Heading 090°, der Wind kommt aus Nord, geschätzte Leeway 5°. Ein Crewmitglied plottet den Water Track mit 085°. Was ist falsch?',
     options: [
       'Nichts – Leeway wird immer abgezogen',
-      'Leeway wird nach Lee angebracht: Wind aus Nord drückt nach Süd → 095°',
+      'Leeway wirkt nach Lee (Süd) → 095°',
       'Leeway muss verdoppelt werden → 080°',
       'Bei Wind aus Nord gibt es keine Leeway',
     ],
@@ -481,7 +481,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
     prompt: 'Eine Crew trägt die vom GPS abgelesene Position als Dreieck mit Punkt in die Karte ein. Was ist daran falsch?',
     options: [
       'Nichts – GPS-Positionen sind geschätzt',
-      'Eine GPS-Position ist ein Fix und wird als Kreis mit Punkt markiert',
+      'GPS liefert einen Fix: Kreis mit Punkt',
       'GPS-Positionen dürfen nicht eingetragen werden',
       'Es fehlt der Stromvektor',
     ],
@@ -499,7 +499,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
     prompt:
       'Für die EP trägt ein Schüler entlang des Water Track die Strecke SOG × Zeit an und hängt dann den Stromvektor an. Was ist der Fehler?',
     options: [
-      'Entlang des Water Track gehört die Logdistanz (STW × Zeit)',
+      'Richtig wäre die Logdistanz (STW × Zeit)',
       'Der Strom hätte zuerst gezeichnet werden müssen',
       'Die Zeit müsste in Minuten eingesetzt werden',
       'Es gibt keinen Fehler',
@@ -523,13 +523,13 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
       'STW 5 kn, 1,5 kn Gegenstrom. Der Skipper berechnet die ETA für 10 NM mit 5 kn und kommt auf 2 Stunden. Was ist falsch?',
     options: [
       'Nichts – für die ETA zählt die STW',
-      'Für die ETA zählt die SOG (3,5 kn) → ca. 2 h 51 min',
+      'Es zählt die SOG (3,5 kn) → ca. 2 h 51 min',
       'Gegenstrom wird zur STW addiert → 6,5 kn',
       'Die Distanz müsste durchs Wasser gemessen werden',
     ],
     correctIndex: 1,
     solution: '10 NM / 3,5 kn ≈ 2,86 h ≈ 2 h 51 min',
-    steps: ['Das Ziel liegt fest auf dem Meeresboden.', 'SOG = 5 − 1,5 = 3,5 kn.', 'Zeit = 10 / 3,5 ≈ 2,86 h.'],
+    steps: ['Das Ziel liegt fest auf dem Meeresboden – für die ETA zählt daher die SOG.', 'SOG = 5 − 1,5 = 3,5 kn.', 'Zeit = 10 / 3,5 ≈ 2,86 h.'],
   },
 
   /* ---------------------------------------------------------- Begriff-Zuordnung */
@@ -610,8 +610,8 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
     category: 'concept',
     prompt: 'Womit beginnt die Konstruktion eines Course to Steer in der Seekarte?',
     options: [
-      'Mit dem Stromvektor am Ziel',
-      'Mit dem gewünschten Ground Track vom Start zum Ziel',
+      'Mit dem Stromvektor für eine Stunde am Ziel',
+      'Mit dem gewünschten Ground Track',
       'Mit dem Heading vom Ziel zurück',
       'Mit dem Fehlerdreieck',
     ],
@@ -645,7 +645,7 @@ export const DAY_SKIPPER_ADVANCED: Question[] = [
     level: 'day-skipper',
     category: 'concept',
     prompt: 'Was muss berücksichtigt werden, um einen Kompasskurs (°C) in einen rechtweisenden Kurs (°T) umzurechnen?',
-    options: ['Nur die Leeway', 'Deviation und Variation', 'Set und Rate', 'COG und SOG'],
+    options: ['Nur die Leeway des Bootes', 'Deviation und Variation', 'Set und Rate des Stroms', 'COG und SOG'],
     correctIndex: 1,
     solution: 'Deviation (Schiff) und Variation (Erdmagnetfeld).',
     steps: [

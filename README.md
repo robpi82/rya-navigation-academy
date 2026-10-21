@@ -422,6 +422,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Vierzehnte Coastal-Lektion **Navigation ohne GPS**: Bugwinkel-Verdoppelung, Vierstrichpeilung, Fehlerkreis, Lotung auf Kartennull.
   10 neue Fragen (insgesamt 439), 2 Lernkarten, Formelsammlung 37 Formeln, Coastal-Probeprüfung 42 Fragen / 80 min. Tests: 365.
 
+### Phase 41 – fertig ✅ (Antworten ohne Längen-Hinweis)
+- 163 MC-Fragen überarbeitet, sodass die richtige Antwort nie die längste ist (Details in den Rechenweg verschoben, Ablenker
+  gleich lang und plausibel). Ein Test prüft das jetzt für alle 226 MC-Fragen, dazu: kein umgekehrter Hinweis, ausgewogene Positionen.
+- Fachlich korrigiert: Nordtonne steht nördlich der Gefahr (dt-053), Rule 30(e) vollständig, Kegelposition nach Regeltext,
+  überlappende Ablenker ersetzt. Tests: 371.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
