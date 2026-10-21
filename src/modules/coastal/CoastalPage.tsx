@@ -3,6 +3,7 @@ import type { CoastalTopicId } from '@/types/learning'
 import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
+import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
 import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
 
 export type CoastalLesson = Lesson & { id: CoastalTopicId }
@@ -112,6 +113,32 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Gefahrenpeilung', href: '#/coastal/clearing-bearing' },
       { label: 'Peilen (Day Skipper)', href: '#/themen/bearings' },
+    ],
+  },
+  {
+    id: 'fog',
+    title: 'Navigation bei Nebel',
+    english: 'Restricted Visibility',
+    summary: 'Was tun, wenn die Sicht wegbleibt: Position sichern, Fahrt anpassen, Signale geben, Verkehr meiden.',
+    body: [
+      'Nebel kann innerhalb von Minuten aufziehen, oft bei warmer Luft über kaltem Wasser (Advektionsnebel). Das Wichtigste zuerst: eine Position bestimmen, solange man noch weiß, wo man ist. Danach die Fahrt auf eine sichere Geschwindigkeit verringern (Rule 6 und 19), die Maschine manöverbereit halten, Nebelsignale geben und Lichter einschalten. Rettungswesten anlegen, Radarreflektor prüfen, Ausguck verstärken – mit Augen, Ohren, Radar und AIS.',
+      'Die Gefahr ist die kurze Zeit nach dem Sichtkontakt: Bei 200 m Sicht und 18 kn Annäherung bleiben rund 20 Sekunden. Deshalb meidet man Schifffahrtswege und Verkehrstrennungsgebiete und sucht flacheres Wasser auf, in das große Schiffe nicht kommen. Eine Tiefenlinie, die man mit dem Echolot verfolgt, ist dort eine gute Leitlinie; notfalls ankert man und gibt das Ankersignal.',
+      'In verminderter Sicht gelten die Ausweichregeln für Fahrzeuge in Sicht nicht. Nach Rule 19 handelt jeder, der ein Fahrzeug nur per Radar ortet, frühzeitig – bei einem Fahrzeug vorlicher als querab möglichst nicht nach Backbord. Hört man ein Nebelsignal scheinbar vorlicher als querab, verringert man die Fahrt auf das Mindestmaß und fährt äußerst vorsichtig, bis die Gefahr vorüber ist. Die Rechenwerte der Übung sind vereinfachte Faustregeln.',
+    ],
+    keyPoints: [
+      'Zuerst Position sichern, dann Fahrt reduzieren, Signale, Lichter, Ausguck, Westen.',
+      'Sichere Geschwindigkeit: innerhalb der halben Sichtweite anhalten können (Faustregel).',
+      'Schifffahrtswege meiden, flaches Wasser oder Tiefenlinie aufsuchen, ggf. ankern.',
+      'Rule 19: früh handeln; bei Radarkontakt vorlicher als querab nicht nach Backbord ausweichen.',
+    ],
+    mnemonic: 'Position – Fahrt – Signale – Ausguck – Westen – Plan.',
+    widgets: [
+      { title: 'Wie viel Zeit bleibt?', description: 'Sichtweite, Fahrt und Annäherung einstellen.', Comp: FogEncounterWidget },
+      { title: 'Nebel zieht auf: Reihenfolge der Maßnahmen', Comp: FogActionsWidget },
+    ],
+    links: [
+      { label: 'Schall- und Nebelsignale', href: '#/themen/colregs' },
+      { label: 'Radarplotting (Yachtmaster)', href: '#/yachtmaster/radar-plotting' },
     ],
   },
 ]

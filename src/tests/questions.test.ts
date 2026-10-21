@@ -28,6 +28,8 @@ import {
   tackingDistance,
   plotTarget,
   transitOffset,
+  closingSpeed,
+  secondsToMeet,
   daylightDepartureWindow,
   watchLoad,
   watchSchedule,
@@ -163,6 +165,10 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
       if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
+    case 'fog': {
+      const c = closingSpeed(v.ownKn, v.otherKn, v.angle ?? 180)
+      return v.quantity === 'closing' ? c : secondsToMeet(v.visibilityNm!, c)
+    }
     case 'pilotage':
       return Math.abs(transitOffset(v.observed, v.transitBearing, v.distanceToFront)) * 1852
     case 'radar': {

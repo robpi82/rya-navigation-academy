@@ -288,10 +288,20 @@ const PHASES = [
       'Neue Berechnungen in calculations/pilotage.ts, 8 Coastal-Fragen, 2 Lernkarten, 6 neue Tests',
     ],
   },
+  {
+    phase: 28,
+    title: 'Coastal-Lektion Navigation bei Nebel',
+    done: true,
+    items: [
+      'Achte Coastal-Lektion: Maßnahmen bei Nebel, Rule 6/19, Schifffahrtswege meiden, Tiefenlinie, Ankern',
+      'Übung „Wie viel Zeit bleibt?": Annäherung, Sekunden ab Sichtkontakt, Anhalteweg und sichere Fahrt nach der Halbe-Sicht-Faustregel',
+      'Reihenfolge-Übung „Nebel zieht auf"; neue Berechnungen in calculations/fog.ts, 7 Fragen, 1 Lernkarte, Eingabe „s"/„sek" im Trainer',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Coastal-Stufe weiter ausbauen (z. B. Ankern und Festmachen bei Tide, Nebelnavigation)',
+  'Coastal-Stufe weiter ausbauen (z. B. Ankern und Festmachen bei Tide, Schwerwetter)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

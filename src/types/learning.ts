@@ -10,7 +10,7 @@ export type TermId =
   | 'ep'
 
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
-export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage'
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
 export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
@@ -245,6 +245,14 @@ export type QuestionVerify =
       equationOfTime?: number
     }
   | {
+      kind: 'fog'
+      quantity: 'secondsToMeet' | 'closing'
+      visibilityNm?: number
+      ownKn: number
+      otherKn: number
+      angle?: number
+    }
+  | {
       kind: 'pilotage'
       quantity: 'transitOffsetM'
       observed: number
@@ -293,7 +301,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | '′' | 'h' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
+  unit: '°' | '′' | 'h' | 's' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

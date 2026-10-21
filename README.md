@@ -345,6 +345,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Steuerempfehlung (`transitOffset`, `transitSeparation`).
 - `SeaChart` akzeptiert einen Anfangsausschnitt (`focus`). 8 neue Coastal-Fragen (insgesamt 52), 2 Lernkarten. Tests: 279.
 
+### Phase 28 – fertig ✅ (Navigation bei Nebel)
+- Achte Coastal-Lektion **Navigation bei Nebel** (`#/coastal/fog`, `calculations/fog.ts`, `modules/coastal/fogWidgets.tsx`, `data/fog.ts`):
+  Annäherungsgeschwindigkeit, Zeit ab Sichtkontakt, Anhalteweg (30 s Reaktion, 0,3 m/s² Verzögerung) und sichere Fahrt nach der
+  Faustregel „innerhalb der halben Sichtweite anhalten"; Reihenfolge-Übung der Maßnahmen bei aufziehendem Nebel.
+- 7 neue Coastal-Fragen (insgesamt 59), 1 Lernkarte; neue Einheit „s", der Trainer akzeptiert „s"/„sek". Tests: 285.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

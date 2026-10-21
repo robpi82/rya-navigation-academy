@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 
 /* ------------------------------------------------------------------ Reihenfolge-Aufgabe */
 
-function OrderExercise({ steps, intro }: { steps: Step[]; intro: string }) {
+export function OrderExercise({ steps, intro }: { steps: Step[]; intro: string }) {
   const [pool, setPool] = useState(() => shuffle(steps))
   const [chosen, setChosen] = useState<Step[]>([])
   const [checked, setChecked] = useState(false)
