@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
+import { dayKey } from '@/lib/stats'
 import { buildPlan, currentWeekIndex, isDone, planStatus, type PlanItem, type PlanStatus, type StudyPlan } from '@/lib/studyPlan'
 import { usePlanStore, type PlanSettings } from '@/stores/planStore'
 import { useProgressStore } from '@/stores/progressStore'
 
-export const todayIso = () => new Date().toISOString().slice(0, 10)
+/** Heutiges Datum in Ortszeit (YYYY-MM-DD). */
+export const todayIso = () => dayKey()
 
 export interface PlanView {
   settings: PlanSettings

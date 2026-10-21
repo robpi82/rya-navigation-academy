@@ -1,3 +1,5 @@
+import { anchorChainLength } from './tides'
+
 /**
  * Ankern (Coastal): Kettenlänge, Schwojkreis und Wassertiefe am Ankerplatz über die ganze Tide.
  * Höhen in m über Kartennull, Längen in m. Vereinfachte Faustregeln für Lernzwecke.
@@ -11,7 +13,7 @@ export const SCOPE_ROPE = 6
 export const maxDepth = (chartedDepth: number, hwHeight: number): number => chartedDepth + hwHeight
 
 /** Zu steckende Kette (m): Verhältnis × größte Wassertiefe (plus optional Höhe der Bugrolle über Wasser). */
-export const anchorRode = (chartedDepth: number, hwHeight: number, scope = SCOPE_CHAIN, bowHeight = 0): number => scope * (maxDepth(chartedDepth, hwHeight) + bowHeight)
+export const anchorRode = (chartedDepth: number, hwHeight: number, scope = SCOPE_CHAIN, bowHeight = 0): number => anchorChainLength(maxDepth(chartedDepth, hwHeight), bowHeight, scope)
 
 /**
  * Schwojkreis (m) um den Anker: horizontale Länge der Kette bei Niedrigwasser (Kette fast gestreckt angenommen) plus Bootslänge.

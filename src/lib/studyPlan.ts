@@ -1,6 +1,7 @@
 import type { CourseLevel, QuizAttempt, TermId } from '@/types/learning'
 import { COASTAL_TOPICS, DAY_TOPICS, YACHT_TOPICS } from '@/data/topics'
 import { presetLevel } from './examInsights'
+import { dayKey } from './stats'
 
 /**
  * Lernplan: verteilt die Lektionen einer Ausbildungsstufe in empfohlener Reihenfolge auf die Wochen bis zum Prüfungstermin.
@@ -47,7 +48,7 @@ export function curriculum(level: CourseLevel): PlanItem[] {
     ]
   }
   if (level === 'coastal-skipper') {
-    const ids: (keyof typeof COASTAL_TOPICS)[] = ['tidal-height', 'secondary-ports', 'multi-hour-tide', 'running-fix', 'clearing-bearing', 'pilotage', 'passage-planning', 'fog', 'heavy-weather', 'mooring', 'anchoring', 'emergencies']
+    const ids: (keyof typeof COASTAL_TOPICS)[] = ['tidal-height', 'secondary-ports', 'multi-hour-tide', 'running-fix', 'clearing-bearing', 'pilotage', 'tidal-races', 'passage-planning', 'fog', 'heavy-weather', 'mooring', 'anchoring', 'emergencies']
     return ids.map((id) => lesson(id, COASTAL_TOPICS[id].german, '#/coastal'))
   }
   const ids: (keyof typeof YACHT_TOPICS)[] = ['great-circle', 'weather-routing', 'night-passage', 'night-navigation', 'radar-plotting', 'celestial', 'sight-reduction']
@@ -110,7 +111,7 @@ export interface ProgressSnapshot {
 export function isDone(item: PlanItem, p: ProgressSnapshot): boolean {
   if (item.kind === 'lesson') return p.completedLessons.includes(item.id)
   if (item.kind === 'terms') return (item.terms ?? []).every((t) => p.learnedTerms.includes(t))
-  const since = p.attempts.filter((a) => a.date.slice(0, 10) >= p.planStart)
+  const since = p.attempts.filter((a) => dayKey(new Date(a.date)) >= p.planStart)
   if (item.kind === 'review') return since.some((a) => !a.exam && a.mode === 'learn' && a.answers.length > 0)
   const exams = since.filter((a) => a.exam && presetLevel(a.exam.presetId) === p.level)
   return exams.length >= (item.id === 'exam-2' ? 2 : 1)

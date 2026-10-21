@@ -10,7 +10,7 @@ export type TermId =
   | 'ep'
 
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
-export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies' | 'anchoring'
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies' | 'anchoring' | 'tidal-races'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
 export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
@@ -258,6 +258,22 @@ export type QuestionVerify =
       volumeL?: number
       inflowLpm?: number
       pumpingLpm?: number
+    }
+  | {
+      kind: 'races'
+      quantity: 'windOverWater' | 'rate' | 'sog' | 'departBeforeHw'
+      windFrom?: number
+      windKn?: number
+      streamSet?: number
+      streamKn?: number
+      springRate?: number
+      neapRate?: number
+      range?: number
+      springRange?: number
+      neapRange?: number
+      stwKn?: number
+      distanceNm?: number
+      slackHour?: number
     }
   | {
       kind: 'anchoring'

@@ -5,6 +5,7 @@ import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
 import { MooringLinesWidget, MooringOrderWidget } from './mooringWidgets'
+import { CapeRouteWidget, CapeTimingWidget, WindAgainstTideWidget } from './tidalRaceWidgets'
 import { AnchorageChoiceWidget, AnchoringOrderWidget, AnchorScopeWidget } from './anchoringWidgets'
 import { DismastingWidget, DriftWidget, LeakWidget } from './emergencyWidgets'
 import { ApparentWindWidget, HeavyWeatherPrepWidget, WindForceWidget } from './heavyWeatherWidgets'
@@ -196,6 +197,34 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Gezeiten (Day Skipper)', href: '#/themen/tides' },
       { label: 'Gezeitenhöhe (Coastal)', href: '#/coastal/tidal-height' },
+    ],
+  },
+  {
+    id: 'tidal-races',
+    title: 'Strom an Kaps und Engstellen',
+    english: 'Tidal Races and Overfalls',
+    summary: 'Wind gegen Strom, Races und Overfalls: warum Kaps gefährlich werden können und wie man sie zur richtigen Zeit und im richtigen Abstand rundet.',
+    body: [
+      'An Kaps und in Engstellen wird der Gezeitenstrom zusammengedrängt und beschleunigt. Läuft er über unebenen Grund, eine Untiefe oder eine Kante, entstehen Overfalls: kurze, steile, teils brechende Wellen – selbst bei wenig Wind. Ein Race ist ein Gebiet mit starkem Strom und solchem Kabbelwasser vor einem Kap. Seekarte und Revierführer markieren beides; Races reichen oft mehrere Seemeilen weit hinaus.',
+      'Am gefährlichsten ist Wind gegen Strom. Seegang entsteht durch den Wind relativ zur Wasseroberfläche: Fließt das Wasser dem Wind entgegen, weht er über dem Wasser stärker, und der Gegenstrom staucht die Wellen zusätzlich – sie werden kürzer, steiler und brechen. Ein Kap, das bei Wind mit Strom harmlos ist, kann sechs Stunden später gefährlich sein.',
+      'Deshalb wird die Ankunft am Kap auf das Stillwasser gelegt, am besten kurz bevor der Strom in die eigene Richtung kippt. Die Stromrate des Tages wird zwischen Spring- und Nippwerten interpoliert. Bei ungünstigen Bedingungen hilft ein großer Abstand außerhalb des Race; Inshore-Passagen dicht unter Land, wie sie Revierführer beschreiben, sind Schönwetter-Routen. Die Kap-Daten in dieser Lektion sind Übungsdaten.',
+    ],
+    keyPoints: [
+      'Races und Overfalls: starker Strom über unebenem Grund an Kaps und Engstellen.',
+      'Wind gegen Strom: Wind über dem Wasser = Wind + Strom, dazu steilere Wellen.',
+      'Ankunft am Kap auf das Stillwasser legen – kurz vor dem Kippen in die eigene Richtung.',
+      'Bei schlechten Bedingungen weit außen herum; Inshore-Passage nur bei ruhigem Wetter.',
+    ],
+    mnemonic: 'Kap bei Stillwasser, nie Wind gegen Strom.',
+    widgets: [
+      { title: 'Wind gegen Strom: Wind über dem Wasser', Comp: WindAgainstTideWidget },
+      { title: 'Kap runden: den richtigen Zeitpunkt wählen', Comp: CapeTimingWidget },
+      { title: 'Kap runden: der richtige Abstand', Comp: CapeRouteWidget },
+    ],
+    links: [
+      { label: 'Gezeiten (Day Skipper)', href: '#/themen/tides' },
+      { label: 'Törnplanung', href: '#/coastal/passage-planning' },
+      { label: 'Schwerwetter', href: '#/coastal/heavy-weather' },
     ],
   },
   {

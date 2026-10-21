@@ -365,6 +365,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/anchoring.ts, 8 Fragen, 2 Lernkarten, Ankern in Lernplan und Coastal-Probeprüfung; 9 neue Tests',
     ],
   },
+  {
+    phase: 36,
+    title: 'Inhaltsprüfung 33–35 und Coastal-Lektion Strom an Kaps',
+    done: true,
+    items: [
+      'Gegengelesen: Lernplan, Plan-Status und Ankern. Korrigiert: Day-Skipper-Hinweis „3:1 bei ruhigem Wetter“ auf die einheitliche Faustregel 4:1 Kette / 6:1 Leine; Kettenformel nur noch an einer Stelle; Lernplan rechnet „heute“ in Ortszeit statt UTC',
+      'Dreizehnte Coastal-Lektion: Wind gegen Strom (Wind über dem Wasser), Kap runden zum Stillwasser mit Stromtabelle eines fiktiven Kaps, Abstand zum Race',
+      'Neue Berechnungen in calculations/tidalRaces.ts, 9 Fragen, 2 Lernkarten; 9 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

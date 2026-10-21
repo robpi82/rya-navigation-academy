@@ -393,6 +393,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - 8 neue Fragen (insgesamt 410), 2 Lernkarten, neue prüfbare Rechnungsart `anchoring`; Ankern in Lernplan und Coastal-Probeprüfung.
   Tests: 327.
 
+### Phase 36 – fertig ✅ (Inhaltsprüfung 33–35, Coastal-Lektion Strom an Kaps)
+- Gegengelesen: Lernplan, Plan-Status, Ankern. Korrigiert: Day-Skipper-Ankerhinweis jetzt einheitlich 4:1 Kette / 6:1 Leine
+  (vorher „3:1 bei ruhigem Wetter“), gemeinsame Kettenformel, Lernplan-Datum in Ortszeit.
+- Dreizehnte Coastal-Lektion **Strom an Kaps und Engstellen**: Wind gegen Strom, Races und Overfalls, Kap zum Stillwasser runden
+  (Übungs-Stromtabelle), Abstand zum Race. 9 neue Fragen (insgesamt 419), 2 Lernkarten. Tests: 336.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

@@ -259,8 +259,8 @@ export function AnchorTideWidget() {
           <span className="font-medium">Kettenverhältnis</span>
           <span className="font-mono">{ratio} : 1</span>
         </div>
-        <Slider value={[ratio]} min={3} max={7} step={1} onValueChange={([v]) => setRatio(v)} aria-label="Kettenverhältnis" />
-        <p className="text-xs text-muted-foreground">3:1 bei ruhigem Wetter, 5:1 und mehr bei Wind – am besten Kette plus Leine oder Ankergewicht.</p>
+        <Slider value={[ratio]} min={4} max={8} step={1} onValueChange={([v]) => setRatio(v)} aria-label="Kettenverhältnis" />
+        <p className="text-xs text-muted-foreground">Faustregel: Kette mindestens 4 : 1, Leine mit Kettenvorlauf 6 : 1 – bei viel Wind mehr.</p>
       </div>
       {valid && (
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">

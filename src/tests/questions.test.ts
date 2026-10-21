@@ -33,6 +33,9 @@ import {
   lineAdjustment,
   driftToCoast,
   anchorRode,
+  windOverWater,
+  sogAlongStream,
+  interpolateTidalRate,
   swingRadius,
   clearanceAtLw,
   minChartedDepth,
@@ -180,6 +183,11 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'races':
+      if (v.quantity === 'windOverWater') return windOverWater(v.windFrom!, v.windKn!, v.streamSet!, v.streamKn!).speed
+      if (v.quantity === 'rate') return interpolateTidalRate({ springRate: v.springRate!, neapRate: v.neapRate!, range: v.range!, springRange: v.springRange!, neapRange: v.neapRange! })!.rate
+      if (v.quantity === 'sog') return sogAlongStream(v.stwKn!, v.streamKn!)
+      return v.distanceNm! / v.stwKn! - v.slackHour!
     case 'anchoring':
       if (v.quantity === 'rode') return anchorRode(v.chartedDepth!, v.hwHeight!, v.scope)
       if (v.quantity === 'swing') return swingRadius(anchorRode(v.chartedDepth!, v.hwHeight!, v.scope), v.chartedDepth! + v.lwHeight!, v.boatLength!)
