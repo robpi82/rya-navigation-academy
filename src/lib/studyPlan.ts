@@ -42,6 +42,7 @@ export function curriculum(level: CourseLevel): PlanItem[] {
       day('chart-reading'),
       day('bearings'),
       day('buoyage'),
+      day('inshore'),
       day('colregs'),
       day('weather'),
       day('safety'),

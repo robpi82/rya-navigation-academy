@@ -8,6 +8,7 @@ import { BEARING_LESSON } from './bearingLesson'
 import { PREPARATION_LESSON } from './preparationLesson'
 import { SEAMANSHIP_LESSON } from './seamanshipLesson'
 import { ENVIRONMENT_LESSON } from './environmentLesson'
+import { INSHORE_LESSON } from './inshoreLesson'
 import { SAFETY_LESSONS } from './safetyLessons'
 import type { DayLesson } from './types'
 import { AnchorTideWidget, SpringNeapWidget, TideHeightWidget } from './tideWidgets'
@@ -116,7 +117,7 @@ const CORE_LESSONS: DayLesson[] = [
   },
 ]
 
-export const DAY_LESSONS: DayLesson[] = [...CORE_LESSONS, ...SAFETY_LESSONS, BEARING_LESSON, PREPARATION_LESSON, SEAMANSHIP_LESSON, ENVIRONMENT_LESSON]
+export const DAY_LESSONS: DayLesson[] = [...CORE_LESSONS, ...SAFETY_LESSONS, BEARING_LESSON, PREPARATION_LESSON, SEAMANSHIP_LESSON, ENVIRONMENT_LESSON, INSHORE_LESSON]
 
 export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
   const lesson = DAY_LESSONS.find((l) => l.id === lessonId)

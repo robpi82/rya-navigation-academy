@@ -515,6 +515,16 @@ const PHASES = [
       'Barrierefreiheit (axe-core, WCAG 2.1 AA, 35 Seiten und Interaktionszustände in hellem und dunklem Design): Kontraste von Seitenleiste, Grün, Rot, Simulator und Routen-Kalender verbessert, Fortschrittsbalken benannt, Signal-Grafiken mit Rolle, Sprunglink „Zum Inhalt springen“, Bootsskizze per Tastatur bedienbar; 7 neue Tests',
     ],
   },
+  {
+    phase: 51,
+    title: 'Day-Skipper-Lektion Pilotage und Nebel (küstennah)',
+    done: true,
+    items: [
+      'Dreizehnte Day-Skipper-Lektion: Pilotageplan, Deckpeilung halten, Sektorenfeuer, internationale Hafensignale (drei Grundsignale), erste Maßnahmen bei Nebel',
+      'Sektorenfeuer-Übung mit Skizze (Versatz quer zur Einfahrtslinie), Hafensignal-Quiz, Reihenfolge „Nebel zieht auf“',
+      'Neue Berechnungen in calculations/inshore.ts, 12 Fragen, 2 Lernkarten; Syllabus-Bereiche Pilotage und verminderte Sicht für Day Skipper jetzt abgedeckt; 7 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

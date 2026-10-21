@@ -29,6 +29,7 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
   electronics: { abbr: 'E-NAV', english: 'Electronic Navigation', german: 'Elektronische Navigation' },
   bearings: { abbr: 'PEIL', english: 'Bearings & Transits', german: 'Peilen' },
   seamanship: { abbr: 'SEEM', english: 'Ropes, Knots & Parts of a Yacht', german: 'Leinen, Knoten und Bootskunde' },
+  inshore: { abbr: 'PILOT', english: 'Inshore Pilotage & Restricted Visibility', german: 'Pilotage und Nebel (küstennah)' },
   environment: { abbr: 'UMWELT', english: 'The Marine Environment', german: 'Meeresumwelt' },
   preparation: { abbr: 'VORB', english: 'Passage Preparation & Seamanship', german: 'Törnvorbereitung' },
 }

@@ -51,6 +51,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   preparation: 'rules',
   seamanship: 'basics',
   environment: 'rules',
+  inshore: 'rules',
   'tidal-height': 'coastal',
   'running-fix': 'coastal',
   'clearing-bearing': 'coastal',

@@ -476,6 +476,10 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - **Barrierefreiheit:** axe-core (WCAG 2.1 AA) auf 35 Seiten und Interaktionszuständen, hell und dunkel, ohne Befund; Kontraste,
   Namen für Fortschrittsbalken, Sprunglink „Zum Inhalt springen“, Tastaturbedienung der Bootsskizze. Tests: 433.
 
+### Phase 51 – fertig ✅ (Day-Skipper-Lektion Pilotage und Nebel)
+- Neue Lektion **Pilotage und Nebel (küstennah)**: Pilotageplan, Deckpeilung, Sektorenfeuer, Hafensignale, erste Maßnahmen bei Nebel.
+- 12 neue Fragen (insgesamt 516), 2 Lernkarten. Syllabus jetzt 33 abgedeckt, 2 teilweise (Ozeanwetter, Kommunikation auf Hochsee). Tests: 440.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
