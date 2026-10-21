@@ -435,6 +435,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/weatherCharts.ts, 10 Fragen, 2 Lernkarten, 1 Formel; Lektionstest prüft jetzt gegen die Themenliste; 9 neue Tests',
     ],
   },
+  {
+    phase: 43,
+    title: 'Yachtmaster-Lektion Gezeitenstromatlas',
+    done: true,
+    items: [
+      'Neunte Yachtmaster-Lektion: Atlasangaben „NN,SS“ lesen, Rate über den Tidenhub umrechnen (auch über Spring hinaus), richtige Stundenseite wählen, Kurs über mehrere Stunden',
+      'Übungsatlas mit vier Stellen und 13 Seiten zum Blättern, Seiten-Übung, Überfahrt quer durch die Rinne mit Stundentabelle und gemeinsamem CTS',
+      'Neue Berechnungen in calculations/tidalAtlas.ts, 10 Fragen, 1 Lernkarte, 1 Formel; 8 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

@@ -34,6 +34,12 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  parseAtlasLabel,
+  atlasRateForDay,
+  atlasPage,
+  pagesForPassage,
+  tideOverTime,
+  magnitude,
   geostrophicWind,
   surfaceWindSpeed,
   surfaceWindFrom,
@@ -196,6 +202,11 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'atlas':
+      if (v.quantity === 'rate') return atlasRateForDay(parseAtlasLabel(v.label!)!, v.range!, v.neapRange!, v.springRange!)
+      if (v.quantity === 'page') return atlasPage(v.minutesFromHw!)
+      if (v.quantity === 'passagePage') return pagesForPassage(v.minutesFromHw!, v.hourIndex! + 1)[v.hourIndex!]
+      return magnitude(tideOverTime(v.tides!, v.hours!))
     case 'wxchart': {
       if (v.quantity === 'frontHours') return frontArrivalHours(v.distanceNm!, v.speedKn!)
       if (v.quantity === 'surfaceDir') return surfaceWindFrom(v.bearingFromCentre!, v.system!)

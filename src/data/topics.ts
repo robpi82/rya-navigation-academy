@@ -34,6 +34,7 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
 export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string; german: string }> = {
   'great-circle': { abbr: 'GK', english: 'Great Circle Sailing', german: 'Großkreisnavigation' },
   'night-navigation': { abbr: 'NACHT', english: 'Night Navigation', german: 'Nachtnavigation' },
+  'tidal-atlas': { abbr: 'ATLAS', english: 'Tidal Stream Atlas', german: 'Gezeitenstromatlas' },
   'weather-charts': { abbr: 'KARTE', english: 'Reading Weather Charts', german: 'Wetterkarten lesen' },
   'weather-routing': { abbr: 'ROUTE', english: 'Weather Routing', german: 'Wetterrouting' },
   'radar-plotting': { abbr: 'RADAR', english: 'Radar Plotting', german: 'Radarplotting' },

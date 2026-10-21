@@ -7,6 +7,7 @@ import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidget
 import { InterceptWidget, SightFixWidget, SunRunSunWidget } from './sightWidgets'
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 import { RadarPlotWidget } from './radarWidgets'
+import { AtlasBrowserWidget, AtlasPageQuizWidget, AtlasPassageWidget } from './atlasWidgets'
 import { DepressionOrderWidget, IsobarWindWidget, WindAroundSystemWidget } from './weatherChartWidgets'
 
 export const YACHT_LESSONS: Lesson[] = [
@@ -52,6 +53,34 @@ export const YACHT_LESSONS: Lesson[] = [
     mnemonic: 'Der kleinere Wert gewinnt: Kimm oder Lichtstärke.',
     widgets: [{ title: 'Wann taucht das Feuer auf?', description: 'Feuer-, Augenhöhe und Nenntragweite verändern.', Comp: LightHorizonWidget }],
     links: [{ label: 'Feuerkennung entschlüsseln', href: '#/themen/chart-reading' }],
+  },
+  {
+    id: 'tidal-atlas',
+    title: 'Gezeitenstromatlas',
+    english: 'Tidal Stream Atlas',
+    summary: 'Den Stromatlas richtig lesen: Stundenseite wählen, Atlasangaben auf den Tag umrechnen und daraus einen Kurs für eine Überfahrt über mehrere Stunden planen.',
+    body: [
+      'Ein Gezeitenstromatlas zeigt den Strom eines Seegebiets auf dreizehn Seiten: eine für jede Stunde von sechs Stunden vor bis sechs Stunden nach Hochwasser des Bezugshafens. Pfeile geben die Setzrichtung an, Zahlenpaare wie „08,15“ die Rate in Zehntelknoten – zuerst bei Nippzeit (0,8 kn), dann bei Springzeit (1,5 kn). Gegenüber den Stromangaben einzelner Gezeitenraute in der Karte zeigt der Atlas das ganze Gebiet auf einen Blick.',
+      'Die Seite richtet sich nach der Zeit relativ zum Hochwasser des Bezugshafens: Jede Seite gilt von 30 Minuten vor bis 30 Minuten nach ihrer Stunde. Für eine Überfahrt nimmt man für jede Fahrtstunde die Seite, die der Mitte dieser Stunde am nächsten liegt. Die Rate des Tages wird linear über den Tidenhub zwischen Nipp und Spring berechnet; ist der Hub größer als der Spring-Hub, wird darüber hinaus extrapoliert.',
+      'Für einen Schlag über mehrere Stunden addiert man die Stromvektoren aller Stunden und steuert einen gemeinsamen Kurs. Der Strom versetzt das Boot zwischendurch von der Kurslinie, gleicht sich aber teilweise wieder aus – das spart Weg und Zeit gegenüber stündlichem Gegenhalten. Liegt eine Gefahr nahe der Kurslinie, muss man die Zwischenorte prüfen. Der Atlas in dieser Lektion ist ein Übungsatlas.',
+    ],
+    keyPoints: [
+      '„08,15“ = Nipp 0,8 kn, Spring 1,5 kn; Richtung aus dem Pfeil.',
+      'Seite = nächste volle Stunde relativ zu HW des Bezugshafens (±30 min).',
+      'Für jede Fahrtstunde die Seite zur Mitte der Stunde; Rate über den Tidenhub umrechnen.',
+      'Über mehrere Stunden: Stromvektoren addieren, ein CTS – Gefahren nahe der Kurslinie prüfen.',
+    ],
+    mnemonic: 'Erst die Seite, dann die Rate, dann ein Kurs für alle Stunden.',
+    widgets: [
+      { title: 'Atlas blättern', Comp: AtlasBrowserWidget },
+      { title: 'Welche Seite gilt?', Comp: AtlasPageQuizWidget },
+      { title: 'Überfahrt mit dem Atlas planen', Comp: AtlasPassageWidget },
+    ],
+    links: [
+      { label: 'Kurs über mehrere Stromstunden (Coastal)', href: '#/coastal/multi-hour-tide' },
+      { label: 'Strom an Kaps und Engstellen', href: '#/coastal/tidal-races' },
+      { label: 'Gezeiten (Day Skipper)', href: '#/themen/tides' },
+    ],
   },
   {
     id: 'weather-charts',

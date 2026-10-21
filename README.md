@@ -433,6 +433,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Tief und Hoch, Windrichtung nach Buys Ballot, Fronten und Tiefdurchzug.
 - 10 neue Fragen (insgesamt 449), 2 Lernkarten, Formelsammlung 38 Formeln. Tests: 380.
 
+### Phase 43 – fertig ✅ (Yachtmaster-Lektion Gezeitenstromatlas)
+- Neue Lektion **Gezeitenstromatlas**: Atlasangaben „08,15“ lesen und auf den Tag umrechnen, Stundenseite zur Zeit relativ zu HW
+  wählen (für jede Fahrtstunde die Seite zur Stundenmitte), Überfahrt über mehrere Stunden mit einem CTS; fiktiver Übungsatlas.
+- 10 neue Fragen (insgesamt 459), 1 Lernkarte, Formelsammlung 39 Formeln. Tests: 388.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
