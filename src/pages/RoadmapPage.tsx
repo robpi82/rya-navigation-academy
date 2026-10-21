@@ -505,6 +505,16 @@ const PHASES = [
       'Neue Regel-Logik in calculations/environment.ts, 12 Fragen, 2 Lernkarten; letzte Syllabus-Lücke geschlossen; 6 neue Tests',
     ],
   },
+  {
+    phase: 50,
+    title: 'Gesamtprüfung: Inhalte, Ladeleistung, Barrierefreiheit',
+    done: true,
+    items: [
+      'Inhalte 47–49 gegengelesen; veraltete Dashboard-Zeile „Yachtmaster – noch keine Inhalte“ durch echten Yachtmaster-Fortschritt ersetzt',
+      'Ladeleistung: Beim Start werden statt rund 920 kB (277 kB gzip) nur noch rund 296 kB (93 kB gzip) geladen – Fragensammlung aus dem Start-Chunk entfernt, Diagrammbibliothek nur noch bei Bedarf',
+      'Barrierefreiheit (axe-core, WCAG 2.1 AA, 35 Seiten und Interaktionszustände in hellem und dunklem Design): Kontraste von Seitenleiste, Grün, Rot, Simulator und Routen-Kalender verbessert, Fortschrittsbalken benannt, Signal-Grafiken mit Rolle, Sprunglink „Zum Inhalt springen“, Bootsskizze per Tastatur bedienbar; 7 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

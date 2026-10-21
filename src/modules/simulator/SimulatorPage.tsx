@@ -194,11 +194,20 @@ export function SimulatorPage() {
 /** Sekunden Echtzeit für 60 Simulationsminuten bei 1× */
 const BASE_REAL_SECONDS = 60 / BASE_MIN_PER_SEC
 
+/** Vektorfarbe als Randmarkierung – farbiger Text wäre auf hellem Grund zu kontrastarm. */
+const VEC_BORDER: Record<string, string> = {
+  'text-vec-heading': 'border-l-4 border-vec-heading',
+  'text-vec-water': 'border-l-4 border-vec-water',
+  'text-vec-tide': 'border-l-4 border-vec-tide',
+  'text-vec-ground': 'border-l-4 border-vec-ground',
+  'text-vec-leeway': 'border-l-4 border-vec-leeway',
+}
+
 function Result({ label, value, color, hint }: { label: string; value: string; color?: string; hint?: string }) {
   return (
-    <div className="rounded-lg bg-muted/60 p-3">
+    <div className={cn('rounded-lg bg-muted/60 p-3', color && VEC_BORDER[color])}>
       <dt className="text-xs text-muted-foreground">{label}</dt>
-      <dd className={cn('font-mono text-lg font-semibold tabular-nums', color)}>{value}</dd>
+      <dd className="font-mono text-lg font-semibold tabular-nums">{value}</dd>
       {hint && <dd className="text-[11px] text-muted-foreground">{hint}</dd>}
     </div>
   )

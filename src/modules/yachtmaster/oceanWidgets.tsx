@@ -30,9 +30,9 @@ function Tile({ label, value, tone }: { label: string; value: string; tone?: 'ok
 }
 
 const SUIT: Record<Suitability, { label: string; cls: string }> = {
-  good: { label: 'gut', cls: 'bg-success/80 text-white' },
-  fair: { label: 'mäßig', cls: 'bg-amber-500/80 text-white' },
-  poor: { label: 'ungünstig', cls: 'bg-destructive/80 text-white' },
+  good: { label: 'gut', cls: 'bg-success text-white dark:text-slate-950' },
+  fair: { label: 'mäßig', cls: 'bg-amber-400 text-slate-950' },
+  poor: { label: 'ungünstig', cls: 'bg-destructive text-white dark:text-slate-950' },
 }
 
 /* ------------------------------------------------------------------ Route und Jahreszeit */
@@ -63,7 +63,7 @@ export function SeasonRouteWidget() {
             onClick={() => setMonth(i)}
             aria-pressed={i === month}
             title={`${MONTHS[i]}: ${SUIT[m].label}`}
-            className={cn('rounded-md py-1.5 text-xs font-semibold', SUIT[m].cls, i === month ? 'ring-2 ring-foreground ring-offset-1 ring-offset-background' : 'opacity-75 hover:opacity-100')}
+            className={cn('rounded-md py-1.5 text-xs font-semibold', SUIT[m].cls, i === month ? 'ring-2 ring-foreground ring-offset-2 ring-offset-background' : 'hover:brightness-110')}
           >
             {MONTHS[i].slice(0, 3)}
           </button>

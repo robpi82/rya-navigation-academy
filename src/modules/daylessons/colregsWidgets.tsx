@@ -230,7 +230,7 @@ export function LightsWidget() {
 
 function Pattern({ pattern }: { pattern: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5" aria-label={`Signal: ${pattern.replace(/\./g, 'kurz ').replace(/-/g, 'lang ')}`}>
+    <span role="img" className="inline-flex items-center gap-1.5" aria-label={`Signal: ${pattern.replace(/\./g, 'kurz ').replace(/-/g, 'lang ')}`}>
       {pattern.split('').map((c, i) => (
         <span key={i} className={cn('inline-block h-3 rounded-full bg-foreground', c === '.' ? 'w-3' : 'w-9')} />
       ))}

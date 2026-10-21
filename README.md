@@ -469,6 +469,13 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Tiere und Lebensräume; Übungen „Darf das über Bord?“ und Tierbegegnungen.
 - 12 neue Fragen (insgesamt 504), 2 Lernkarten. Syllabus jetzt 31 abgedeckt, 4 teilweise, keine Lücke mehr. Tests: 426.
 
+### Phase 50 – fertig ✅ (Gesamtprüfung)
+- **Inhalte:** Phasen 47–49 gegengelesen; Dashboard zeigt jetzt einen echten Yachtmaster-Fortschritt statt „noch keine Inhalte“.
+- **Ladeleistung:** Start lädt ~296 kB (93 kB gzip) statt ~920 kB (277 kB gzip). Die Fragensammlung ist nicht mehr im Start-Chunk
+  (Menü nutzt `data/counts.ts`, ein Test hält die Zahl aktuell), recharts lädt erst mit Diagrammen (`manualChunks` mit eigenem `vendor`).
+- **Barrierefreiheit:** axe-core (WCAG 2.1 AA) auf 35 Seiten und Interaktionszuständen, hell und dunkel, ohne Befund; Kontraste,
+  Namen für Fortschrittsbalken, Sprunglink „Zum Inhalt springen“, Tastaturbedienung der Bootsskizze. Tests: 433.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

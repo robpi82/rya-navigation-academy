@@ -18,6 +18,17 @@ export function AppShell({ route, children }: { route: Route; children: ReactNod
 
   return (
     <div className="min-h-dvh lg:pl-64 print:pl-0">
+      <a
+        href="#inhalt"
+        onClick={(e) => {
+          // Hash-Routing: nicht die Route wechseln, sondern nur den Fokus in den Inhalt setzen
+          e.preventDefault()
+          document.getElementById('inhalt')?.focus()
+        }}
+        className="sr-only z-50 rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+      >
+        Zum Inhalt springen
+      </a>
       {/* Desktop-Sidebar */}
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 lg:block print:hidden">
         <Sidebar route={route} />
@@ -53,7 +64,7 @@ export function AppShell({ route, children }: { route: Route; children: ReactNod
         </div>
       )}
 
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8 print:max-w-none print:p-0">{children}</main>
+      <main id="inhalt" tabIndex={-1} className="mx-auto max-w-7xl outline-none px-4 py-6 sm:px-6 lg:px-8 lg:py-8 print:max-w-none print:p-0">{children}</main>
       <footer className="mx-auto max-w-7xl px-4 pb-8 text-xs text-muted-foreground sm:px-6 lg:px-8 print:max-w-none print:px-0 print:pt-4">
         Lernhilfe – kein Ersatz für zugelassene Navigationsmittel, amtliche Seekarten oder eine anerkannte Ausbildung. Kein offizielles
         Produkt der Royal Yachting Association.

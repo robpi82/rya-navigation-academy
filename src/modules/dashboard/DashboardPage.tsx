@@ -6,7 +6,7 @@ import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { FLASHCARDS } from '@/data/flashcards'
 import { CHART_EXERCISES } from '@/lib/chartExercises'
 import { COASTAL_LESSON_IDS, DAY_LESSON_IDS } from '@/data/lessonIds'
-import { topicInfo } from '@/data/topics'
+import { topicInfo, YACHT_TOPIC_IDS } from '@/data/topics'
 import { isDue, isMastered } from '@/lib/spacedRepetition'
 import { reviewsPerDay, useFlashcardStore } from '@/stores/flashcardStore'
 import { CATEGORY_LABEL, type QuestionCategory } from '@/types/learning'
@@ -144,6 +144,11 @@ export function DashboardPage() {
       (coastalChart.filter((e) => chartResults[e.id]?.solved).length / Math.max(1, coastalChart.length)) * 20,
   )
   const chartProgress = Math.round((chartSolved / CHART_EXERCISES.length) * 100)
+  // Yachtmaster: 50 % Lektionen, 50 % beherrschte Yachtmaster-Aufgaben
+  const yachtLessonsDone = YACHT_TOPIC_IDS.filter((id) => completedLessons.includes(id)).length
+  const yachtQuestions = QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore')
+  const yachtMastered = yachtQuestions.filter((q) => questionStats[q.id]?.lastCorrect).length
+  const yachtProgress = Math.round((yachtLessonsDone / YACHT_TOPIC_IDS.length) * 50 + (yachtMastered / Math.max(1, yachtQuestions.length)) * 50)
 
   const nextTerm = GLOSSARY.find((t) => !learnedTerms.includes(t.id))
   const hasTopicData = topicData.some((t) => t.answered > 0)
@@ -343,7 +348,7 @@ export function DashboardPage() {
             <LevelRow label="Day Skipper Theory" value={dayskipperProgress} note={`Begriffe, Themen-Lektionen (${dayLessonsDone}/${DAY_LESSON_IDS.length}), beherrschte Aufgaben, gefestigte Lernkarten`} />
             <LevelRow label="Coastal Skipper" value={coastalProgress} note={`${lessonsDone} / ${COASTAL_LESSON_IDS.length} Lektionen, ${coastalMastered} / ${coastalQuestions.length} Aufgaben beherrscht`} />
             <LevelRow label="Kartenaufgaben (Seekarte)" value={chartProgress} note={`${chartSolved} / ${CHART_EXERCISES.length} Aufgaben gelöst`} />
-            <LevelRow label="Yachtmaster Offshore" value={0} note="Noch keine Inhalte – mögliche Erweiterung" disabled />
+            <LevelRow label="Yachtmaster" value={yachtProgress} note={`${yachtLessonsDone} / ${YACHT_TOPIC_IDS.length} Lektionen, ${yachtMastered} / ${yachtQuestions.length} Aufgaben beherrscht`} />
           </CardContent>
         </Card>
 
@@ -397,14 +402,14 @@ export function DashboardPage() {
   )
 }
 
-function LevelRow({ label, value, note, disabled }: { label: string; value: number; note: string; disabled?: boolean }) {
+function LevelRow({ label, value, note }: { label: string; value: number; note: string }) {
   return (
-    <div className={disabled ? 'opacity-55' : undefined}>
+    <div>
       <div className="mb-1 flex justify-between gap-2 text-sm">
         <span className="font-medium">{label}</span>
-        <span className="font-mono">{disabled ? '–' : `${value} %`}</span>
+        <span className="font-mono">{value} %</span>
       </div>
-      <Progress value={value} />
+      <Progress value={value} aria-label={`Fortschritt ${label}`} />
       <p className="mt-1 text-xs text-muted-foreground">{note}</p>
     </div>
   )

@@ -12,6 +12,7 @@ export function Progress({
     <ProgressPrimitive.Root
       className={cn('relative h-2 w-full overflow-hidden rounded-full bg-muted', className)}
       value={value}
+      aria-label="Fortschritt"
       {...props}
     >
       <ProgressPrimitive.Indicator

@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import type { Route } from '@/hooks/useHashRoute'
 import { COASTAL_LESSON_IDS, DAY_LESSON_IDS } from '@/data/lessonIds'
-import { QUESTION_BANK } from '@/questions'
+import { QUESTION_COUNT } from '@/data/counts'
 
 export interface MenuItem {
   label: string
@@ -36,7 +36,7 @@ export const MAIN_MENU: MenuItem[] = [
   { label: 'Glossar', href: '#/glossar', icon: BookOpen, route: 'glossary', hint: '9 Begriffe' },
   { label: 'Simulator', href: '#/simulator', icon: Compass, route: 'simulator', hint: 'Vektoren' },
   { label: 'Themen', href: '#/themen', icon: Library, route: 'themen', hint: `${DAY_LESSON_IDS.length} Lektionen` },
-  { label: 'Prüfungstrainer', href: '#/quiz', icon: GraduationCap, route: 'quiz', hint: `${QUESTION_BANK.length} Fragen` },
+  { label: 'Prüfungstrainer', href: '#/quiz', icon: GraduationCap, route: 'quiz', hint: `${QUESTION_COUNT} Fragen` },
   { label: 'Rechentraining', href: '#/rechnen', icon: Sigma, route: 'calc' },
   { label: 'Probeprüfung', href: '#/pruefung', icon: ClipboardCheck, route: 'exam', hint: 'mit Zeitlimit' },
   { label: 'Lernkarten', href: '#/lernkarten', icon: Layers, route: 'flashcards' },

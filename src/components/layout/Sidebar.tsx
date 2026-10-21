@@ -18,7 +18,7 @@ function NavLink({ item, active, onNavigate }: { item: MenuItem; active: boolean
     >
       <Icon className={cn('size-[18px]', active && 'text-teal-300')} />
       <span className="flex-1">{item.label}</span>
-      {item.hint && <span className="text-[11px] text-sidebar-foreground/50">{item.hint}</span>}
+      {item.hint && <span className="text-[11px] text-sidebar-foreground/70">{item.hint}</span>}
     </a>
   )
 }
@@ -34,15 +34,15 @@ export function Sidebar({ route, onNavigate }: { route: Route; onNavigate?: () =
         </div>
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto px-3" aria-label="Hauptnavigation">
-        <p className="px-3 pt-2 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/50 uppercase">Day Skipper</p>
+        <p className="px-3 pt-2 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">Day Skipper</p>
         {MAIN_MENU.map((item) => (
           <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
         ))}
-        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/50 uppercase">Coastal Skipper</p>
+        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">Coastal Skipper</p>
         {COASTAL_MENU.map((item) => (
           <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
         ))}
-        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/50 uppercase">Yachtmaster</p>
+        <p className="px-3 pt-5 pb-1 text-[11px] font-semibold tracking-wider text-sidebar-foreground/70 uppercase">Yachtmaster</p>
         {YACHT_MENU.map((item) => (
           <NavLink key={item.href} item={item} active={route.name === item.route} onNavigate={onNavigate} />
         ))}

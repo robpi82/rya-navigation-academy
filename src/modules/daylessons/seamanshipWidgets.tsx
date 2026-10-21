@@ -27,7 +27,20 @@ function BoatSketch({ active, marked, onPick }: { active: string | null; marked?
       {BOAT_PARTS.map((p, i) => {
         const state = marked?.[p.id]
         return (
-          <g key={p.id} onClick={() => onPick(p.id)} className="cursor-pointer" role="button" aria-label={`Teil ${i + 1}`}>
+          <g
+            key={p.id}
+            onClick={() => onPick(p.id)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onPick(p.id)
+              }
+            }}
+            tabIndex={0}
+            className="cursor-pointer outline-none [&:focus-visible>circle]:stroke-[3px] [&:focus-visible>circle]:stroke-[var(--ring)]"
+            role="button"
+            aria-label={`Teil ${i + 1}`}
+          >
             <circle
               cx={p.x}
               cy={p.y}
