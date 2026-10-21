@@ -30,7 +30,7 @@ export type BuoyId =
   | 'new-danger'
 
 /** Yachtmaster-Offshore-Themen (Vorgriff) */
-export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction'
+export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction' | 'night-passage'
 
 export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
@@ -245,6 +245,21 @@ export type QuestionVerify =
       equationOfTime?: number
     }
   | {
+      kind: 'night'
+      quantity: 'visibleStretch' | 'earliestDeparture' | 'onWatch'
+      range?: number
+      offset?: number
+      distance?: number
+      speed?: number
+      sunrise?: number
+      sunset?: number
+      margin?: number
+      from?: number
+      to?: number
+      watchHours?: number
+      teams?: number
+    }
+  | {
       kind: 'routing'
       quantity: 'tackDistance'
       distance: number
@@ -262,7 +277,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | '′' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
+  unit: '°' | '′' | 'h' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

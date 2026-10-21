@@ -168,7 +168,7 @@ describe('Yachtmaster-Vorgriff', () => {
   const yacht = QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore')
   it('Pool deckt beide Themen ab und alle Fragen gehören zur Stufe', () => {
     expect(yacht.length).toBeGreaterThanOrEqual(15)
-    for (const t of ['celestial', 'great-circle', 'night-navigation', 'sight-reduction', 'weather-routing']) expect(yacht.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(5)
+    for (const t of ['celestial', 'great-circle', 'night-navigation', 'night-passage', 'sight-reduction', 'weather-routing']) expect(yacht.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(5)
     expect(groupOf('great-circle')).toBe('yacht')
   })
   it('Yachtmaster-Test enthält nur Yachtmaster-Fragen und ist reproduzierbar', () => {
@@ -188,7 +188,7 @@ import { YACHT_LESSONS } from '@/modules/yachtmaster/YachtmasterPage'
 
 describe('Yachtmaster-Lektionen', () => {
   it('jede Lektion hat Text, Merksatz, Widget und passende Fragen', () => {
-    expect(YACHT_LESSONS.map((l) => l.id).sort()).toEqual(['celestial', 'great-circle', 'night-navigation', 'sight-reduction', 'weather-routing'])
+    expect(YACHT_LESSONS.map((l) => l.id).sort()).toEqual(['celestial', 'great-circle', 'night-navigation', 'night-passage', 'sight-reduction', 'weather-routing'])
     for (const l of YACHT_LESSONS) {
       expect(l.body.length).toBeGreaterThanOrEqual(3)
       expect(l.mnemonic.length).toBeGreaterThan(10)

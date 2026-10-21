@@ -5,6 +5,7 @@ import { GreatCircleMapWidget, LightHorizonWidget } from './widgets'
 import { DepartureWidget, PolarWidget, TackingWidget } from './routingWidgets'
 import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidgets'
 import { InterceptWidget, SightFixWidget } from './sightWidgets'
+import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 
 export const YACHT_LESSONS: Lesson[] = [
   {
@@ -121,6 +122,33 @@ export const YACHT_LESSONS: Lesson[] = [
     ],
     links: [{ label: 'Mittagsbreite', href: '#/yachtmaster/celestial' }],
   },
+  {
+    id: 'night-passage',
+    title: 'Törnplanung über Nacht',
+    english: 'Night Passage Planning',
+    summary: 'Wachplan, Abfahrt für eine Ankunft bei Tageslicht und ein Feuerplan für die Nacht.',
+    body: [
+      'Eine Nachtfahrt beginnt mit der Planung bei Tageslicht. Zuerst die Zeiten: Wann geht die Sonne unter und auf, wie lange dauert die Überfahrt, und wann muss man ablegen, um den Zielhafen – besonders einen unbekannten – bei Tageslicht anzulaufen? Gezeitenfenster, Stromkentern und eine Reserve für langsamere Fahrt gehören dazu.',
+      'Dann der Wachplan: Die Crew wird in Wachen eingeteilt, die sich in festen Abständen ablösen (meist 2–4 Stunden). Zwei Wachen sind bei kleiner Crew üblich, drei Wachen geben mehr Schlaf. Der Skipper legt fest, wann er geweckt wird (Verkehr, Winddreher, Unsicherheit), und jede Übergabe umfasst Kurs, Position, Verkehr, Wetter und Segelstellung. Nachts gilt: Lifebelt einpicken, bevor man das Cockpit verlässt; vorbereitete Mahlzeiten und warme Kleidung beugen Müdigkeit vor.',
+      'Schließlich der Feuerplan: Welche Leuchtfeuer kommen wann in Sicht, mit welcher Kennung, und in welcher Peilung? Ein Feuer, das zur erwarteten Zeit nicht auftaucht, ist ein Warnsignal. Gefahren, Verkehrstrennungsgebiete und Fischereigebiete werden markiert, Ausweichhäfen für die Nacht festgelegt. Alle Daten der Übungen sind fiktiv.',
+    ],
+    keyPoints: [
+      'Zeitplan rückwärts von der Ankunft bei Tageslicht planen – mit Reserve.',
+      'Wachplan: 2–4 h je Wache; drei Wachen = mehr Ruhe; klare Weckregeln für den Skipper.',
+      'Feuerplan: Sichtabschnitt ± √(Reichweite² − Querabstand²) um den Querab-Punkt; Kennung vorab notieren.',
+      'Nachts: Lifebelt, Rotlicht, warme Kleidung, vorbereitetes Essen, Übergabe ins Logbuch.',
+    ],
+    mnemonic: 'Bei Tag planen, in der Nacht nur noch ausführen.',
+    widgets: [
+      { title: 'Wachplan', description: 'Crew, Wachsystem und Wachdauer einstellen.', Comp: WatchPlanWidget },
+      { title: 'Ankunft bei Tageslicht', Comp: DaylightArrivalWidget },
+      { title: 'Feuerplan für die Nacht', description: 'Wann kommt welches Feuer in Sicht?', Comp: RouteLightsWidget },
+    ],
+    links: [
+      { label: 'Nachtnavigation', href: '#/yachtmaster/night-navigation' },
+      { label: 'Törnplanung (Coastal)', href: '#/coastal/passage-planning' },
+    ],
+  },
 ]
 
 export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
@@ -130,7 +158,7 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
   ) : (
     <LessonCatalog
       title="Yachtmaster (Vorgriff)"
-      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting und Astronavigation (Mittagsbreite, Höhenstandlinie) – jeweils mit interaktiver Übung."
+      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting, Törnplanung über Nacht und Astronavigation (Mittagsbreite, Höhenstandlinie) – jeweils mit interaktiver Übung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length} Yachtmaster-Fragen üben`}

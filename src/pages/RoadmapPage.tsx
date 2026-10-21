@@ -236,10 +236,21 @@ const PHASES = [
       'Neue Berechnungen in calculations/sight.ts, 7 Fragen, 1 Lernkarte, 11 neue Tests',
     ],
   },
+  {
+    phase: 23,
+    title: 'Yachtmaster-Lektion Törnplanung über Nacht',
+    done: true,
+    items: [
+      'Wachplan mit Zeitleiste: Crewgröße, zwei oder drei Wachen, Wachdauer – Stunden an Deck, längste Ruhe und Sicherheitshinweise',
+      'Ankunft bei Tageslicht: früheste und späteste Abfahrt aus Distanz, Fahrt, Sonnenauf- und -untergang mit Puffer',
+      'Feuerplan: wann welches Leuchtfeuer entlang der Route in Sicht kommt (mit Kennung, Passierabstand, Tag/Nacht)',
+      'Neue Berechnungen in calculations/nightPassage.ts, 6 Fragen, 2 Lernkarten, Eingabe „h"/„Uhr" im Trainer, 10 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Törnplanung über Nacht, Running Fix mit Sonnenstandlinien)',
+  'Weitere Yachtmaster-Lektionen (Running Fix mit Sonnenstandlinien, Radarplotting)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

@@ -312,6 +312,14 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   - Sonnen-GHA als Näherung 15° · (UT − 12) + Zeitgleichung/4.
 - 7 neue Yachtmaster-Fragen (5 nachgerechnet), 1 Lernkarte, Tests: 251.
 
+### Phase 23 – fertig ✅ (Törnplanung über Nacht)
+- Sechste Yachtmaster-Lektion **Törnplanung über Nacht** (`#/yachtmaster/night-passage`, `calculations/nightPassage.ts`,
+  `modules/yachtmaster/nightWidgets.tsx`):
+  - Wachplan (zwei oder drei Wachen, 2–4 h) mit Zeitleiste, Stunden an Deck und längster Ruhe je Wache.
+  - Abfahrtsfenster für eine Ankunft bei Tageslicht am Folgetag (Sonnenauf-/-untergang, Puffer).
+  - Feuerplan: Sichtabschnitt ± √(Reichweite² − Querabstand²) um den Querab-Punkt, Uhrzeiten und Tag/Nacht je Feuer.
+- 6 neue Yachtmaster-Fragen (4 nachgerechnet, neue Einheit „h"), 2 Lernkarten; der Trainer akzeptiert „h" und „Uhr". Tests: 261.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
