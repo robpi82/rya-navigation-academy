@@ -13,7 +13,7 @@ export type TermId =
 export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies' | 'anchoring' | 'tidal-races' | 'no-gps'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
-export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings' | 'preparation' | 'seamanship'
+export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings' | 'preparation' | 'seamanship' | 'environment'
 
 export type BuoyId =
   | 'port'
@@ -258,6 +258,15 @@ export type QuestionVerify =
       volumeL?: number
       inflowLpm?: number
       pumpingLpm?: number
+    }
+  | {
+      kind: 'env'
+      quantity: 'minDistance' | 'tankDays'
+      item?: 'plastic' | 'food-ground' | 'food-whole' | 'glass-metal' | 'paper' | 'oily-rags'
+      specialArea?: boolean
+      tankLitres?: number
+      crew?: number
+      litresPerPersonDay?: number
     }
   | {
       kind: 'sar'

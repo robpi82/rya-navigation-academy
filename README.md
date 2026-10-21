@@ -464,6 +464,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Grenzen, Zuordnungsübung, Belegen auf der Klampe.
 - 12 neue Fragen (insgesamt 492), 3 Lernkarten. Syllabus jetzt 29 abgedeckt, 4 teilweise, 2 fehlen (Meeresumwelt). Tests: 420.
 
+### Phase 49 – fertig ✅ (Day-Skipper-Lektion Meeresumwelt)
+- Neue Lektion **Meeresumwelt und Umweltschutz**: Müllregeln (vereinfacht nach MARPOL Anlage V), Fäkalientank, Öl, Antifouling,
+  Tiere und Lebensräume; Übungen „Darf das über Bord?“ und Tierbegegnungen.
+- 12 neue Fragen (insgesamt 504), 2 Lernkarten. Syllabus jetzt 31 abgedeckt, 4 teilweise, keine Lücke mehr. Tests: 426.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

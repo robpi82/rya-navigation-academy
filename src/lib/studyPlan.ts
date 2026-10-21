@@ -46,6 +46,7 @@ export function curriculum(level: CourseLevel): PlanItem[] {
       day('weather'),
       day('safety'),
       day('preparation'),
+      day('environment'),
       day('electronics'),
     ]
   }

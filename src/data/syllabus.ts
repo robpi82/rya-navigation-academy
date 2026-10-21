@@ -51,7 +51,7 @@ export const SYLLABUS: SyllabusLevel[] = [
       { id: 'd-weather', title: 'Wetter', status: 'covered', links: [day('weather', 'Wetter')], topics: ['weather'] },
       { id: 'd-passage', title: 'Törnplanung', status: 'covered', links: [day('preparation', 'Törnvorbereitung'), { label: 'Lernplan', href: '#/lernplan' }], topics: ['preparation'] },
       { id: 'd-fog', title: 'Navigation bei verminderter Sicht', status: 'partial', links: [coastal('fog', 'Nebel (Coastal)')], topics: ['fog'], note: 'Nur auf Coastal-Niveau.' },
-      { id: 'd-env', title: 'Meeresumwelt und Umweltschutz', status: 'none', links: [], topics: [], note: 'Noch nicht enthalten.' },
+      { id: 'd-env', title: 'Meeresumwelt und Umweltschutz', status: 'covered', links: [day('environment', 'Meeresumwelt und Umweltschutz')], topics: ['environment'], note: 'Regeln vereinfacht nach MARPOL Anlage V; nationale Vorschriften beachten.' },
     ],
   },
   {
@@ -70,7 +70,7 @@ export const SYLLABUS: SyllabusLevel[] = [
       { id: 'c-heavy', title: 'Schwerwetter', status: 'covered', links: [coastal('heavy-weather', 'Schwerwetter')], topics: ['heavy-weather'] },
       { id: 'c-fog', title: 'Navigation bei verminderter Sicht', status: 'covered', links: [coastal('fog', 'Nebel')], topics: ['fog'] },
       { id: 'c-anchor', title: 'Ankern, Festmachen und Strom an Kaps', status: 'covered', links: [coastal('anchoring', 'Ankern'), coastal('mooring', 'Festmachen'), coastal('tidal-races', 'Strom an Kaps')], topics: ['anchoring', 'mooring', 'tidal-races'] },
-      { id: 'c-env', title: 'Meeresumwelt und Umweltschutz', status: 'none', links: [], topics: [], note: 'Noch nicht enthalten.' },
+      { id: 'c-env', title: 'Meeresumwelt und Umweltschutz', status: 'covered', links: [day('environment', 'Meeresumwelt und Umweltschutz')], topics: ['environment'], note: 'Gemeinsame Lektion mit Day Skipper.' },
     ],
   },
   {

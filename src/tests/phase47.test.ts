@@ -42,9 +42,8 @@ describe('Syllabus-Abdeckung', () => {
     const linked = new Set(areas.flatMap((a) => a.links.map((l) => l.href)))
     for (const [area, ids] of Object.entries(LESSON_IDS)) for (const id of ids) expect(linked.has(`#/${area}/${id}`), `${area}/${id}`).toBe(true)
   })
-  it('Ocean-Themen sind gekennzeichnet, Lücken werden offen genannt', () => {
+  it('Ocean-Themen sind gekennzeichnet', () => {
     expect(SYLLABUS[2].areas.every((a) => a.ocean)).toBe(true)
-    expect(areas.filter((a) => a.status === 'none').length).toBeGreaterThan(0)
   })
   it('Route #/syllabus', () => {
     expect(parseHash('#/syllabus').name).toBe('syllabus')

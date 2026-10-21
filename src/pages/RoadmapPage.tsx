@@ -495,6 +495,16 @@ const PHASES = [
       '12 Fragen, 3 Lernkarten; Syllabus-Lücken „Leinen und Knoten“ und „Bootskunde“ geschlossen; 5 neue Tests',
     ],
   },
+  {
+    phase: 49,
+    title: 'Day-Skipper-Lektion Meeresumwelt und Umweltschutz',
+    done: true,
+    items: [
+      'Zwölfte Day-Skipper-Lektion: Müllregeln vereinfacht nach MARPOL Anlage V (Sondergebiete, 3/12 NM, Aushang ab 12 m), Fäkalientank, Öl in der Bilge, Antifouling, eingeschleppte Arten, Tiere und Lebensräume',
+      'Übung „Darf das über Bord?“ (Abfallart, Abstand, Seegebiet), fünf Tierbegegnungen, Rechner Fäkalientank',
+      'Neue Regel-Logik in calculations/environment.ts, 12 Fragen, 2 Lernkarten; letzte Syllabus-Lücke geschlossen; 6 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

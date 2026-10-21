@@ -34,6 +34,8 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  minDistanceForDischarge,
+  holdingTankDays,
   distanceAwayM,
   datumDriftNm,
   expandingSquareLength,
@@ -214,6 +216,9 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'env':
+      if (v.quantity === 'minDistance') return minDistanceForDischarge(v.item!, v.specialArea!)
+      return holdingTankDays(v.tankLitres!, v.crew!, v.litresPerPersonDay!)
     case 'sar':
       if (v.quantity === 'distanceAwayM') return distanceAwayM(v.speedKn!, v.seconds!)
       if (v.quantity === 'datumDriftNm') return datumDriftNm(v.currentKn!, v.minutes!)
