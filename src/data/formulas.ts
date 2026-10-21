@@ -1,4 +1,7 @@
 import {
+  addVectors,
+  direction,
+  fromPolar,
   anchorChainLength,
   apparentWind,
   closingSpeed,
@@ -72,6 +75,7 @@ export const FORMULA_GROUPS: FormulaGroup[] = [
       { id: 't-to-c', title: 'Rechtweisend → Kompass', formula: 'MgK = rwK − Missw. − Abl. (Ost +, West −)', example: 'rechtweisend 098°, Missweisung 5° W, Ablenkung 3° E', compute: () => trueToCompass(98, -5, 3).compass, expected: 100, digits: 0, unit: '°', href: '#/themen/compass' },
       { id: 'fuel', title: 'Diesel für die Strecke', formula: 'Diesel = Distanz / Fahrt × Verbrauch × 1,2 (20 % Reserve)', example: '24 NM, 6 kn, 3 l/h', compute: () => fuelNeeded(24, 6, 3), expected: 14.4, digits: 1, unit: ' l', href: '#/themen/preparation' },
       { id: 'thirds', title: 'Drittelregel', formula: 'max. hinaus = Tank / 3 / Verbrauch × Fahrt', example: '60 l Tank, 4 l/h, 6 kn', compute: () => thirdsRange(60, 4, 6), expected: 30, digits: 0, unit: ' NM', href: '#/themen/preparation' },
+      { id: 'ground-track', title: 'Kurs über Grund (Stromdreieck)', formula: 'Über Grund = Fahrt durchs Wasser (Water Track) + Strom, als Vektoren addiert', example: 'Water Track 000° mit 5 kn, Strom 090° mit 2 kn', compute: () => direction(addVectors(fromPolar(5, 0), fromPolar(2, 90)))!, expected: 21.8, digits: 0, unit: '° COG', href: '#/simulator' },
       { id: 'leeway', title: 'Water Track', formula: 'Water Track = Heading ± Leeway (Abdrift nach Lee)', example: 'Heading 090°, 5° Abdrift nach Steuerbord', compute: () => waterTrackFromHeading(90, 5), expected: 95, digits: 0, unit: '°', href: '#/glossar/leeway' },
     ],
   },

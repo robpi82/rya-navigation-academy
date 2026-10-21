@@ -13,7 +13,8 @@ export type Route =
   | { name: 'coastal'; lessonId?: string }
   | { name: 'yachtmaster'; lessonId?: string }
   | { name: 'plan' }
-  | { name: 'formulas' }
+  | { name: 'formulas'; formulaId?: string }
+  | { name: 'calc' }
   | { name: 'roadmap' }
   | { name: 'about' }
 
@@ -42,7 +43,9 @@ export function parseHash(hash: string): Route {
     case 'yachtmaster':
       return { name: 'yachtmaster', lessonId: parts[1] }
     case 'formeln':
-      return { name: 'formulas' }
+      return { name: 'formulas', formulaId: parts[1] }
+    case 'rechnen':
+      return { name: 'calc' }
     case 'lernplan':
       return { name: 'plan' }
     case 'roadmap':

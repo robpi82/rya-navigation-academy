@@ -58,8 +58,11 @@ export default function App() {
     case 'yachtmaster':
       page = <YachtmasterPage lessonId={route.lessonId} />
       break
+    case 'calc':
+      page = <QuizPage key="calc" preset="calc" />
+      break
     case 'formulas':
-      page = <FormulasPage />
+      page = <FormulasPage key={route.formulaId ?? 'all'} formulaId={route.formulaId} />
       break
     case 'plan':
       page = <StudyPlanPage />

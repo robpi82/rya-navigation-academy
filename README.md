@@ -410,6 +410,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Maschinen-Check, Sicherheitsbriefing; Checkliste vor dem Ablegen, Rechner Diesel/Drittelregel/Tageslicht, Briefing-Auswahl.
 - 10 neue Fragen (insgesamt 429), 2 Lernkarten, neue Einheit „l“, Formelsammlung jetzt 33 Formeln. Tests: 349.
 
+### Phase 39 – fertig ✅ (Rechentraining)
+- Neuer Modus **Rechentraining** (`#/rechnen`): nur die 191 Rechenaufgaben, gruppiert in 13 Rechenarten mit Trefferquote,
+  Auswahl nach Stufe und Rechenart, Option „Schwächen zuerst“ (zuletzt falsch → neu → unsicher).
+- Nach jeder Rechenaufgabe (auch im normalen Prüfungstrainer) Link zur passenden Formel und Lektion; die Formelsammlung springt
+  per `#/formeln/<id>` zur Formel und hebt sie hervor. Auswertung nach Rechenart. Formelsammlung: 34 Formeln. Tests: 357.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

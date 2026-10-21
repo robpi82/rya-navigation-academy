@@ -395,6 +395,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/preparation.ts, 10 Fragen, 2 Lernkarten, Einheit „l“, 2 Formeln mehr in der Formelsammlung; 8 neue Tests',
     ],
   },
+  {
+    phase: 39,
+    title: 'Rechentraining',
+    done: true,
+    items: [
+      'Neuer Trainingsmodus „Rechentraining“ (#/rechnen): nur Rechenaufgaben, nach Stufe und 13 Rechenarten wählbar, Trefferquote je Rechenart',
+      '„Schwächen zuerst“: zuletzt falsch gelöste, dann neue, dann unsichere Aufgaben kommen nach vorn',
+      'Jede Rechenaufgabe verlinkt nach der Antwort auf die passende Formel (#/formeln/<id>, hervorgehoben) und Lektion; Auswertung nach Rechenart; neue Formel Stromdreieck; 9 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

@@ -1,18 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Sigma } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { PrintButton } from '@/components/PrintButton'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FORMULA_GROUPS, formatResult } from '@/data/formulas'
 import { dayKey } from '@/lib/stats'
 import { Toggle } from '@/modules/calculators/fields'
+import { cn } from '@/lib/utils'
 import type { CourseLevel } from '@/types/learning'
 
 type Filter = 'all' | CourseLevel
 
 const LEVEL_ORDER: CourseLevel[] = ['day-skipper', 'coastal-skipper', 'yachtmaster-offshore']
 
-export function FormulasPage() {
+export function FormulasPage({ formulaId }: { formulaId?: string }) {
   const [filter, setFilter] = useState<Filter>('all')
+  // #/formeln/<id>: zur Formel springen und sie hervorheben
+  useEffect(() => {
+    if (formulaId) document.getElementById(`formula-${formulaId}`)?.scrollIntoView({ block: 'center' })
+  }, [formulaId])
   // Höhere Stufen schließen die Formeln der niedrigeren ein
   const groups = filter === 'all' ? FORMULA_GROUPS : FORMULA_GROUPS.filter((g) => LEVEL_ORDER.indexOf(g.level) <= LEVEL_ORDER.indexOf(filter))
   const count = groups.reduce((n, g) => n + g.items.length, 0)
@@ -21,7 +28,16 @@ export function FormulasPage() {
       <PageHeader
         title="Formelsammlung"
         subtitle="Alle Rechenwege der App auf einen Blick, jeweils mit Beispiel. Die Ergebnisse rechnet die App mit denselben Funktionen wie in den Lektionen."
-        actions={<PrintButton />}
+        actions={
+          <>
+            <Button asChild variant="outline" className="print:hidden">
+              <a href="#/rechnen">
+                <Sigma className="size-4" /> Rechentraining
+              </a>
+            </Button>
+            <PrintButton />
+          </>
+        }
       />
       <div className="flex flex-wrap items-center gap-3 print:hidden">
         <Toggle
@@ -53,7 +69,15 @@ export function FormulasPage() {
             </div>
             <dl className="divide-y">
               {g.items.map((f) => (
-                <div key={f.id} className="grid gap-1 py-3 break-inside-avoid print:py-2 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_minmax(0,16rem)] print:grid-cols-[8.5rem_minmax(0,1fr)_minmax(0,12rem)] sm:gap-4">
+                <div
+                  key={f.id}
+                  id={`formula-${f.id}`}
+                  aria-current={f.id === formulaId ? 'true' : undefined}
+                  className={cn(
+                    '-mx-2 grid gap-1 rounded-lg px-2 py-3 break-inside-avoid sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_minmax(0,16rem)] sm:gap-4 print:grid-cols-[8.5rem_minmax(0,1fr)_minmax(0,12rem)] print:py-2',
+                    f.id === formulaId && 'bg-accent ring-2 ring-primary print:bg-transparent print:ring-0',
+                  )}
+                >
                   <dt className="font-medium break-words hyphens-auto">
                     <a href={f.href} className="hover:underline print:no-underline">
                       {f.title}

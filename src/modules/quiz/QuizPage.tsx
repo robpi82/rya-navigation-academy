@@ -17,6 +17,9 @@ import { BuoyIcon } from '@/components/nautical/BuoyIcon'
 import { BUOY_BY_ID } from '@/data/buoyage'
 import { COASTAL_TOPICS, COASTAL_TOPIC_IDS, DAY_TOPICS, DAY_TOPIC_IDS, YACHT_TOPICS, YACHT_TOPIC_IDS, topicInfo } from '@/data/topics'
 import { MatchInput } from './MatchInput'
+import { CalcTrainingSetup } from './CalcTrainingSetup'
+import { CALC_SKILLS, skillOf } from '@/lib/calcSkills'
+import { FORMULA_GROUPS } from '@/data/formulas'
 import { QuestionDiagram } from './QuestionDiagram'
 import { formatClock, isAnswerCorrect, parseNumberInput, shuffle } from '@/lib/quiz'
 import { questionsNeedingReview } from '@/lib/stats'
@@ -36,7 +39,7 @@ type Phase =
 
 const DIFFICULTY_LABEL = { 1: 'leicht', 2: 'mittel', 3: 'schwer' } as const
 
-export function QuizPage({ preset, topic }: { preset?: 'review'; topic?: string }) {
+export function QuizPage({ preset, topic }: { preset?: 'review' | 'calc'; topic?: string }) {
   const [phase, setPhase] = useState<Phase>({ kind: 'setup' })
   const recordAttempt = useProgressStore((s) => s.recordAttempt)
 
@@ -74,6 +77,7 @@ export function QuizPage({ preset, topic }: { preset?: 'review'; topic?: string 
       />
     )
 
+  if (preset === 'calc') return <CalcTrainingSetup onStart={start} />
   return <QuizSetup initialReview={preset === 'review'} initialTopic={topic} onStart={start} />
 }
 
@@ -538,7 +542,64 @@ export function Solution({ q, correct, given }: { q: Question; correct: boolean;
           <li key={s}>{s}</li>
         ))}
       </ol>
+      <FormulaLink q={q} />
     </div>
+  )
+}
+
+const FORMULA_TITLE: Record<string, string> = Object.fromEntries(FORMULA_GROUPS.flatMap((g) => g.items.map((f) => [f.id, f.title.replace('\u00AD', '')])))
+
+/** Verweis von einer Rechenaufgabe auf Formel und Lektion ihrer Rechenart. */
+function FormulaLink({ q }: { q: Question }) {
+  const skill = skillOf(q)
+  if (!skill) return null
+  return (
+    <p className="flex flex-wrap gap-x-3 gap-y-1 border-t pt-2 text-sm">
+      <span className="text-muted-foreground">{skill.label}:</span>
+      <a className="font-medium text-primary hover:underline" href={`#/formeln/${skill.formulaId}`}>
+        Formel „{FORMULA_TITLE[skill.formulaId]}“
+      </a>
+      <a className="text-primary hover:underline" href={skill.href}>
+        Zur Lektion
+      </a>
+    </p>
+  )
+}
+
+/** Trefferquote je Rechenart in einem Durchgang. */
+function SkillBreakdown({ questions, answers }: { questions: Question[]; answers: QuizAnswerRecord[] }) {
+  const rows = CALC_SKILLS.map((skill) => {
+    const qs = questions.filter((q) => skillOf(q)?.id === skill.id)
+    const right = qs.filter((q) => answers.find((a) => a.questionId === q.id)?.correct).length
+    return { skill, total: qs.length, right }
+  }).filter((r) => r.total > 0)
+  if (rows.length === 0) return null
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Nach Rechenart</CardTitle>
+        <CardDescription>Wo es hakt, hilft ein Blick in die Formelsammlung.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ul className="divide-y">
+          {rows.map((r) => (
+            <li key={r.skill.id} className="flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
+              <span>{r.skill.label}</span>
+              <span className="flex items-center gap-3">
+                {r.right < r.total && (
+                  <a className="text-primary hover:underline" href={`#/formeln/${r.skill.formulaId}`}>
+                    Formel
+                  </a>
+                )}
+                <Badge variant={r.right === r.total ? 'success' : 'destructive'}>
+                  {r.right}/{r.total}
+                </Badge>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -602,6 +663,8 @@ function QuizResults({
           <a href="#/">Zum Dashboard</a>
         </Button>
       </div>
+
+      <SkillBreakdown questions={questions} answers={answers} />
 
       <Card>
         <CardHeader>
