@@ -399,6 +399,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Dreizehnte Coastal-Lektion **Strom an Kaps und Engstellen**: Wind gegen Strom, Races und Overfalls, Kap zum Stillwasser runden
   (Übungs-Stromtabelle), Abstand zum Race. 9 neue Fragen (insgesamt 419), 2 Lernkarten. Tests: 336.
 
+### Phase 37 – fertig ✅ (Formelsammlung und Druckansicht)
+- Neue Seite **Formelsammlung** (`#/formeln`): 31 Formeln mit Beispiel, Filter nach Stufe; Beispielergebnisse werden live mit den
+  Rechenfunktionen der App berechnet und per Test gegen festgehaltene Werte geprüft.
+- **Druckansicht** („Drucken / PDF“) für Formelsammlung und Lernplan: Navigation ausgeblendet, Druck immer im hellen Design
+  (auch aus dem Dark Mode), Farben erhalten, keine Seitenumbrüche mitten in Zeilen oder Wochen. Tests: 341.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

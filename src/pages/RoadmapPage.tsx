@@ -375,6 +375,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/tidalRaces.ts, 9 Fragen, 2 Lernkarten; 9 neue Tests',
     ],
   },
+  {
+    phase: 37,
+    title: 'Formelsammlung und Druckansicht',
+    done: true,
+    items: [
+      'Neue Seite Formelsammlung: 31 Formeln von Day Skipper bis Yachtmaster, jeweils mit Beispiel, filterbar nach Stufe; die Beispielergebnisse rechnet die App live, ein Test hält sie fest',
+      'Druckansicht für Formelsammlung und Lernplan („Drucken / PDF“): ohne Navigation, immer helles Design, Farben bleiben erhalten, Zeilen und Wochen werden nicht über Seiten getrennt',
+      '5 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

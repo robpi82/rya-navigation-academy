@@ -17,6 +17,7 @@ const DayLessonsPage = lazy(() => import('@/modules/daylessons/DayLessonsPage').
 const CoastalPage = lazy(() => import('@/modules/coastal/CoastalPage').then((m) => ({ default: m.CoastalPage })))
 const YachtmasterPage = lazy(() => import('@/modules/yachtmaster/YachtmasterPage').then((m) => ({ default: m.YachtmasterPage })))
 const StudyPlanPage = lazy(() => import('@/modules/plan/StudyPlanPage').then((m) => ({ default: m.StudyPlanPage })))
+const FormulasPage = lazy(() => import('@/modules/formulas/FormulasPage').then((m) => ({ default: m.FormulasPage })))
 const RoadmapPage = lazy(() => import('@/pages/RoadmapPage').then((m) => ({ default: m.RoadmapPage })))
 const AboutPage = lazy(() => import('@/pages/AboutPage').then((m) => ({ default: m.AboutPage })))
 
@@ -56,6 +57,9 @@ export default function App() {
       break
     case 'yachtmaster':
       page = <YachtmasterPage lessonId={route.lessonId} />
+      break
+    case 'formulas':
+      page = <FormulasPage />
       break
     case 'plan':
       page = <StudyPlanPage />

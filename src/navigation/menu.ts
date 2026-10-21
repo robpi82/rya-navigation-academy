@@ -5,6 +5,7 @@ import {
   CalendarDays,
   ClipboardCheck,
   Compass,
+  FunctionSquare,
   GraduationCap,
   Info,
   Library,
@@ -37,6 +38,7 @@ export const MAIN_MENU: MenuItem[] = [
   { label: 'Probeprüfung', href: '#/pruefung', icon: ClipboardCheck, route: 'exam', hint: 'mit Zeitlimit' },
   { label: 'Lernkarten', href: '#/lernkarten', icon: Layers, route: 'flashcards' },
   { label: 'Rechner', href: '#/rechner', icon: Calculator, route: 'calculators', hint: '8 Tools' },
+  { label: 'Formelsammlung', href: '#/formeln', icon: FunctionSquare, route: 'formulas', hint: 'druckbar' },
   { label: 'Seekarte', href: '#/seekarte', icon: Map, route: 'chart', hint: 'Aufgaben' },
 ]
 

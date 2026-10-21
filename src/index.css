@@ -143,3 +143,18 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Druckansicht: weißes Papier, keine Schatten, Ränder über @page */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  body {
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  [data-slot='card'] {
+    box-shadow: none;
+  }
+}

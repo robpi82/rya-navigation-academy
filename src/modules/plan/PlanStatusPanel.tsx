@@ -76,7 +76,7 @@ export function PlanStatusPanel({ view }: { view: PlanView }) {
           </div>
         )}
         {replan && status.pace === 'behind' && (
-          <div className="space-y-1">
+          <div className="space-y-1 print:hidden">
             <Button variant="outline" size="sm" onClick={replan}>
               <Shuffle className="size-4" /> Restplan ab heute neu verteilen
             </Button>
