@@ -279,6 +279,16 @@ Phasen 16 und 17 ist damit jede der 330 Fragen einmal inhaltlich geprüft.
 Ohne Befund: Stromdreieck und Kurskonventionen, Kardinal- und Lateralzeichen, Seewetterbegriffe, CPA/TCPA, Zwölftelregel,
 Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 
+### Phase 19 – fertig ✅ (Prüfungsreife im Dashboard)
+- Karte **Prüfungsreife** im Dashboard (`lib/examInsights.ts`, `modules/dashboard/ExamInsightsCard.tsx`):
+  - Einschätzung aus den letzten drei Day-Skipper-Probeprüfungen mit mindestens 20 Fragen: *noch nicht reif* (Schnitt unter 70 %),
+    *auf gutem Weg* (Schnitt ab 70 %), *prüfungsreif* (drei bestanden, Schnitt ab 80 %) – eine eigene Heuristik, keine offizielle Aussage.
+  - Trefferquote je Themengruppe über alle Probeprüfungen, mit Markierung der Bestehensgrenze.
+  - Die drei schwächsten Themen nach den jeweils letzten zehn Antworten (ab vier Antworten, Fehlerquote über 25 %) mit Links zur
+    Lektion und zum gezielten Üben.
+- Neue Route `#/quiz/thema/<Thema>`: Prüfungstrainer mit vorgewählter Stufe und vorgewähltem Thema.
+- Diagramm „Prüfungsergebnisse" zeigt die Bestehensgrenze. Tests: 216.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

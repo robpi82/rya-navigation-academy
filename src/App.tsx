@@ -33,7 +33,7 @@ export default function App() {
       page = <SimulatorPage />
       break
     case 'quiz':
-      page = <QuizPage key={route.preset ?? 'default'} preset={route.preset} />
+      page = <QuizPage key={route.topic ?? route.preset ?? 'default'} preset={route.preset} topic={route.topic} />
       break
     case 'exam':
       page = <ExamPage />

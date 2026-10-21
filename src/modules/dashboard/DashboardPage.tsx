@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, BookOpen, Clock, Compass, Flame, GraduationCap, Layers, RotateCcw, Target } from 'lucide-react'
-import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { GLOSSARY, TERM_BY_ID, TERM_IDS } from '@/data/glossary'
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { FLASHCARDS } from '@/data/flashcards'
@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import type { LucideIcon } from 'lucide-react'
+import { ExamInsightsCard } from './ExamInsightsCard'
 
 function formatStudyTime(sec: number): string {
   const min = Math.round(sec / 60)
@@ -314,6 +315,7 @@ export function DashboardPage() {
                     labelFormatter={(_l, p) => p?.[0]?.payload.date ?? ''}
                     formatter={(v: number) => [`${v} %`, 'Ergebnis']}
                   />
+                  <ReferenceLine y={70} stroke="var(--muted-foreground)" strokeDasharray="4 4" label={{ value: 'Bestehensgrenze', position: 'insideTopRight', fill: 'var(--muted-foreground)', fontSize: 11 }} />
                   <Line type="monotone" dataKey="Ergebnis" stroke="var(--vec-tide)" strokeWidth={2} dot={{ r: 4, fill: 'var(--vec-tide)' }} activeDot={{ r: 6 }} />
                 </LineChart>
               </ResponsiveContainer>
@@ -323,6 +325,8 @@ export function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <ExamInsightsCard attempts={attempts} />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>

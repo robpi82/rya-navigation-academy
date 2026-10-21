@@ -36,7 +36,7 @@ type Phase =
 
 const DIFFICULTY_LABEL = { 1: 'leicht', 2: 'mittel', 3: 'schwer' } as const
 
-export function QuizPage({ preset }: { preset?: 'review' }) {
+export function QuizPage({ preset, topic }: { preset?: 'review'; topic?: string }) {
   const [phase, setPhase] = useState<Phase>({ kind: 'setup' })
   const recordAttempt = useProgressStore((s) => s.recordAttempt)
 
@@ -74,18 +74,20 @@ export function QuizPage({ preset }: { preset?: 'review' }) {
       />
     )
 
-  return <QuizSetup initialReview={preset === 'review'} onStart={start} />
+  return <QuizSetup initialReview={preset === 'review'} initialTopic={topic} onStart={start} />
 }
 
 /* ------------------------------------------------------------------ Setup */
 
-function QuizSetup({ initialReview, onStart }: { initialReview: boolean; onStart: (m: QuizMode, q: Question[]) => void }) {
+function QuizSetup({ initialReview, initialTopic, onStart }: { initialReview: boolean; initialTopic?: string; onStart: (m: QuizMode, q: Question[]) => void }) {
   const questionStats = useProgressStore((s) => s.questionStats)
   const attempts = useProgressStore((s) => s.attempts)
   const reviewIds = useMemo(() => questionsNeedingReview(questionStats), [questionStats])
   const [mode, setMode] = useState<QuizMode>('learn')
-  const [level, setLevel] = useState<CourseLevel | 'all'>('day-skipper')
-  const [topics, setTopics] = useState<TopicId[]>([])
+  // Vorauswahl über #/quiz/thema/<id>: Stufe passend zur ersten Frage des Themas
+  const presetQuestion = initialTopic ? QUESTION_BANK.find((q) => q.topic === initialTopic) : undefined
+  const [level, setLevel] = useState<CourseLevel | 'all'>(presetQuestion?.level ?? 'day-skipper')
+  const [topics, setTopics] = useState<TopicId[]>(presetQuestion ? [presetQuestion.topic] : [])
   const [categories, setCategories] = useState<QuestionCategory[]>([])
   const [difficulty, setDifficulty] = useState<0 | 1 | 2 | 3>(0)
   const [count, setCount] = useState<number>(10)

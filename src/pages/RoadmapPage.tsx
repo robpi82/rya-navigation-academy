@@ -195,6 +195,16 @@ const PHASES = [
       'Korrigiert: Winddrehung an der Warmfront (vorher links, beim Durchgang rechts), veering/backing auf beiden Halbkugeln gleich, GPS-Satellitenzahl begründet, Abzweigungstonnen beschrieben, weißer Sektor „meist" sicher, Kälteschock in der Sicherheitslektion, Running-Fix-Kennzeichnung',
     ],
   },
+  {
+    phase: 19,
+    title: 'Prüfungsreife im Dashboard',
+    done: true,
+    items: [
+      'Neue Dashboard-Karte „Prüfungsreife": Einschätzung aus den letzten drei Day-Skipper-Probeprüfungen (noch nicht reif / auf gutem Weg / prüfungsreif)',
+      'Trefferquote je Themengruppe mit Markierung der Bestehensgrenze und die drei schwächsten Themen nach den jüngsten Antworten',
+      'Direkte Links zur passenden Lektion und zum gezielten Üben (#/quiz/thema/<Thema> wählt Stufe und Thema vor); Bestehensgrenze im Ergebnis-Diagramm',
+    ],
+  },
 ]
 
 const IDEAS = [
