@@ -297,6 +297,13 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - 6 neue Yachtmaster-Fragen (Kreuzstrecke nachgerechnet), 2 Lernkarten, Tests: 229.
 - Vereinfachungen: kein Strom, keine Abdrift, Wendezeiten vernachlässigt, Wind innerhalb einer Stunde konstant.
 
+### Phase 21 – fertig ✅ (Astronavigation: Mittagsbreite)
+- Vierte Yachtmaster-Lektion **Astronavigation** (`#/yachtmaster/celestial`, `calculations/astro.ts`, `modules/yachtmaster/astroWidgets.tsx`):
+  - Beschickung der Sextantenhöhe (Indexberichtigung, Kimmtiefe −1,76′·√h, Refraktion nach Bennett, Sonnenhalbmesser 16′).
+  - Mittagsbreite: Breite = Deklination ± (90° − Ho), mit Skizze des Meridians; Kulmination (UT) = 12:00 − Länge/15 − Zeitgleichung.
+- 7 neue Yachtmaster-Fragen (5 nachgerechnet), 2 Lernkarten. Der Trainer akzeptiert jetzt auch typografisches Minus und „′". Tests: 240.
+- Näherungsformeln statt Almanach-Tafeln; die Bestimmung der Länge (Höhenstandlinie) ist nicht enthalten.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

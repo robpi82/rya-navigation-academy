@@ -30,7 +30,7 @@ export type BuoyId =
   | 'new-danger'
 
 /** Yachtmaster-Offshore-Themen (Vorgriff) */
-export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing'
+export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial'
 
 export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
@@ -231,6 +231,16 @@ export type QuestionVerify =
       to: LatLonLike
     }
   | {
+      kind: 'astro'
+      quantity: 'noonLatitude' | 'dip' | 'noonTimeMin'
+      observedAltitude?: number
+      declination?: number
+      sunBearing?: 'S' | 'N'
+      eyeHeight?: number
+      longitude?: number
+      equationOfTime?: number
+    }
+  | {
       kind: 'routing'
       quantity: 'tackDistance'
       distance: number
@@ -248,7 +258,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
+  unit: '°' | '′' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

@@ -216,10 +216,20 @@ const PHASES = [
       'Neue Berechnungen in calculations/routing.ts, 6 Fragen, 2 Lernkarten, 13 neue Tests',
     ],
   },
+  {
+    phase: 21,
+    title: 'Yachtmaster-Lektion Astronavigation (Mittagsbreite)',
+    done: true,
+    items: [
+      'Sextantenhöhe beschicken: Indexberichtigung, Kimmtiefe, Refraktion und Sonnenhalbmesser Schritt für Schritt bis Ho',
+      'Mittagsbreite aus Ho und Deklination (Sonne im Süden oder Norden) mit Skizze des Meridians; Zeit der Kulmination aus Länge und Zeitgleichung',
+      'Neue Berechnungen in calculations/astro.ts, 7 Fragen, 2 Lernkarten, Eingabe von „−" und „′" im Trainer, 11 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Astronavigation, Törnplanung über Nacht)',
+  'Weitere Yachtmaster-Lektionen (Höhenstandlinie und Länge, Törnplanung über Nacht)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

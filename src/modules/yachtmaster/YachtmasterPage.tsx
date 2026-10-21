@@ -3,6 +3,7 @@ import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
 import { GreatCircleMapWidget, LightHorizonWidget } from './widgets'
 import { DepartureWidget, PolarWidget, TackingWidget } from './routingWidgets'
+import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidgets'
 
 export const YACHT_LESSONS: Lesson[] = [
   {
@@ -72,6 +73,30 @@ export const YACHT_LESSONS: Lesson[] = [
     ],
     links: [{ label: 'Wetter (Day Skipper)', href: '#/themen/weather' }],
   },
+  {
+    id: 'celestial',
+    title: 'Astronavigation: die Mittagsbreite',
+    english: 'Celestial Navigation: Noon Sight',
+    summary: 'Ohne Elektronik die Breite bestimmen: Sonnenhöhe zur Kulmination messen, beschicken und mit der Deklination rechnen.',
+    body: [
+      'Fällt die Elektronik aus, bleibt auf hoher See die Astronavigation. Der einfachste Einstieg ist die Mittagsbreite: Zur Kulmination steht die Sonne genau im Meridian – im Süden oder Norden – und erreicht ihre größte Höhe. Man misst diese Höhe mit dem Sextanten zwischen Kimm und Sonnenrand.',
+      'Die abgelesene Sextantenhöhe wird beschickt: Indexfehler des Sextanten, Kimmtiefe wegen der Augenhöhe, Refraktion (Lichtbrechung in der Atmosphäre) und der Sonnenhalbmesser, weil man den Rand und nicht die Mitte misst. Das Ergebnis ist die beobachtete Höhe Ho. Im Almanach stehen diese Korrekturen in Tafeln; hier werden Näherungsformeln benutzt.',
+      'Mit der Zenitdistanz z = 90° − Ho und der Deklination der Sonne (Almanach) folgt die Breite: Steht die Sonne im Süden, ist Breite = Deklination + z; steht sie im Norden, Breite = Deklination − z (Nord positiv). Den Zeitpunkt der Kulmination schätzt man aus der Länge und der Zeitgleichung, beginnt aber einige Minuten vorher mit dem Messen. Die Länge erfordert weitere Verfahren (Höhenstandlinie) – sie sind nicht Teil dieser Lektion.',
+    ],
+    keyPoints: [
+      'Beschickung: Hs → Indexberichtigung → Kimmtiefe → Ha → Refraktion → Halbmesser → Ho.',
+      'Zenitdistanz z = 90° − Ho.',
+      'Sonne im Süden: Breite = Deklination + z. Sonne im Norden: Breite = Deklination − z.',
+      'Kulmination (UT) ≈ 12:00 − Länge/15 − Zeitgleichung; je 15° West eine Stunde später.',
+    ],
+    mnemonic: 'Hoch steht sie nur einmal am Tag: messen, beschicken, 90 minus, Deklination dazu.',
+    widgets: [
+      { title: 'Sextantenhöhe beschicken', Comp: SextantWidget },
+      { title: 'Mittagsbreite berechnen', description: 'Mit Skizze des Meridians.', Comp: NoonLatitudeWidget },
+      { title: 'Wann kulminiert die Sonne?', Comp: NoonTimeWidget },
+    ],
+    links: [{ label: 'Großkreisnavigation', href: '#/yachtmaster/great-circle' }],
+  },
 ]
 
 export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
@@ -81,7 +106,7 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
   ) : (
     <LessonCatalog
       title="Yachtmaster (Vorgriff)"
-      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation und Wetterrouting – jeweils mit interaktiver Übung."
+      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting und Astronavigation (Mittagsbreite) – jeweils mit interaktiver Übung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length} Yachtmaster-Fragen üben`}

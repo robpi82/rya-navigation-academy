@@ -26,6 +26,7 @@ export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string;
   'great-circle': { abbr: 'GK', english: 'Great Circle Sailing', german: 'Großkreisnavigation' },
   'night-navigation': { abbr: 'NACHT', english: 'Night Navigation', german: 'Nachtnavigation' },
   'weather-routing': { abbr: 'ROUTE', english: 'Weather Routing', german: 'Wetterrouting' },
+  celestial: { abbr: 'ASTRO', english: 'Celestial Navigation: Noon Sight', german: 'Astronavigation (Mittagsbreite)' },
 }
 
 export const YACHT_TOPIC_IDS = Object.keys(YACHT_TOPICS) as YachtTopicId[]

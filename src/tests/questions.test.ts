@@ -26,6 +26,9 @@ import {
   secondaryTide,
   greatCircle,
   tackingDistance,
+  noonLatitude,
+  noonTimeUT,
+  dip,
   compareRoutes,
   reciprocal,
   cutAngle,
@@ -144,6 +147,10 @@ function compute(v: QuestionVerify): number | null {
     }
     case 'chart':
       return v.quantity === 'geoRange' ? geographicRange(v.lightHeight!, v.eyeHeight!) : rhumbLine(v.from!, v.to!).distance
+    case 'astro':
+      if (v.quantity === 'noonLatitude') return noonLatitude(v.observedAltitude!, v.declination!, v.sunBearing!)
+      if (v.quantity === 'dip') return dip(v.eyeHeight!)
+      return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
     case 'routing':
       return tackingDistance(v.distance, v.angleOffWind)
     case 'greatcircle': {
