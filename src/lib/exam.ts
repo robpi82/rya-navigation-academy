@@ -56,6 +56,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   'night-navigation': 'yacht',
   'weather-routing': 'yacht',
   celestial: 'yacht',
+  'sight-reduction': 'yacht',
 }
 
 /** Themengruppe einer Frage; alles andere sind die neun Grundbegriffe. */

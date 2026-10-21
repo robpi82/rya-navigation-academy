@@ -4,6 +4,7 @@ import type { Lesson } from '@/modules/lessons/types'
 import { GreatCircleMapWidget, LightHorizonWidget } from './widgets'
 import { DepartureWidget, PolarWidget, TackingWidget } from './routingWidgets'
 import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidgets'
+import { InterceptWidget, SightFixWidget } from './sightWidgets'
 
 export const YACHT_LESSONS: Lesson[] = [
   {
@@ -97,6 +98,29 @@ export const YACHT_LESSONS: Lesson[] = [
     ],
     links: [{ label: 'Großkreisnavigation', href: '#/yachtmaster/great-circle' }],
   },
+  {
+    id: 'sight-reduction',
+    title: 'Astronavigation: die Höhenstandlinie',
+    english: 'Position Lines from Sights (Intercept Method)',
+    summary: 'Aus jeder Gestirnshöhe zu jeder Zeit eine Standlinie gewinnen – und aus zwei Standlinien einen Fix.',
+    body: [
+      'Die Mittagsbreite liefert nur einmal am Tag eine Breite. Mit dem Verfahren nach Marcq St. Hilaire gewinnt man aus jeder Höhenmessung eine Standlinie: Alle Orte, an denen ein Gestirn gleichzeitig in derselben Höhe steht, liegen auf einem Kreis um seinen Bildpunkt. Nahe der eigenen Position ist dieser Kreis praktisch eine Gerade – die Höhenstandlinie.',
+      'Man nimmt eine gegisste Position (AP) an und berechnet mit Greenwicher Stundenwinkel (GHA) und Deklination aus dem Almanach die Höhe Hc und das Azimut Zn, die man dort hätte. Der Unterschied zur gemessenen Höhe Ho ist der Intercept: (Ho − Hc) in Bogenminuten entspricht Seemeilen. Ist Ho größer, steht man näher am Bildpunkt (toward), sonst weiter weg (away). Vom AP trägt man den Intercept auf dem Azimut ab und zeichnet die Standlinie senkrecht dazu.',
+      'Zwei oder drei Sterne in der Dämmerung ergeben einen Fix; Sonne vormittags und mittags ergeben mit Versegelung einen Running Fix. Je größer der Schnittwinkel, desto besser. Liegt die AP weit entfernt, rechnet man mit dem Ergebnis als neuer AP nach. Hier werden GHA und Deklination vereinfacht vorgegeben; echte Beobachtungen brauchen den Nautischen Almanach und eine genaue Uhrzeit (1 s Zeitfehler ≈ 0,25′ Länge).',
+    ],
+    keyPoints: [
+      'LHA = GHA + Länge (Ost +, West −).',
+      'Hc und Zn aus Breite, Deklination und LHA (sphärisches Dreieck).',
+      'Intercept = (Ho − Hc) · 60 NM: toward, wenn Ho > Hc, sonst away.',
+      'Standlinie senkrecht zum Azimut; zwei Standlinien = Fix, bei ferner AP nachrechnen.',
+    ],
+    mnemonic: 'Ho More Toward: Ist die gemessene Höhe größer, geht es zum Gestirn hin.',
+    widgets: [
+      { title: 'Intercept berechnen', description: 'Von der AP zur Höhenstandlinie.', Comp: InterceptWidget },
+      { title: 'Fix aus zwei Sternen', description: 'Messfehler einstellen und den Fix beobachten.', Comp: SightFixWidget },
+    ],
+    links: [{ label: 'Mittagsbreite', href: '#/yachtmaster/celestial' }],
+  },
 ]
 
 export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
@@ -106,7 +130,7 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
   ) : (
     <LessonCatalog
       title="Yachtmaster (Vorgriff)"
-      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting und Astronavigation (Mittagsbreite) – jeweils mit interaktiver Übung."
+      subtitle="Erste Themen über den Coastal-Stoff hinaus: Großkreisnavigation, Nachtnavigation, Wetterrouting und Astronavigation (Mittagsbreite, Höhenstandlinie) – jeweils mit interaktiver Übung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length} Yachtmaster-Fragen üben`}

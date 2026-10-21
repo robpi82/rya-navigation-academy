@@ -226,10 +226,20 @@ const PHASES = [
       'Neue Berechnungen in calculations/astro.ts, 7 Fragen, 2 Lernkarten, Eingabe von „−" und „′" im Trainer, 11 neue Tests',
     ],
   },
+  {
+    phase: 22,
+    title: 'Yachtmaster-Lektion Höhenstandlinie',
+    done: true,
+    items: [
+      'Intercept-Verfahren nach Marcq St. Hilaire: LHA, berechnete Höhe Hc, Azimut Zn und Intercept (toward/away) mit Skizze',
+      'Fix aus zwei Sternen mit einstellbaren Messfehlern, Schnittwinkel und Nachrechnen mit dem Fix als neuer AP',
+      'Neue Berechnungen in calculations/sight.ts, 7 Fragen, 1 Lernkarte, 11 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Höhenstandlinie und Länge, Törnplanung über Nacht)',
+  'Weitere Yachtmaster-Lektionen (Törnplanung über Nacht, Running Fix mit Sonnenstandlinien)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

@@ -304,6 +304,14 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - 7 neue Yachtmaster-Fragen (5 nachgerechnet), 2 Lernkarten. Der Trainer akzeptiert jetzt auch typografisches Minus und „′". Tests: 240.
 - Näherungsformeln statt Almanach-Tafeln; die Bestimmung der Länge (Höhenstandlinie) ist nicht enthalten.
 
+### Phase 22 – fertig ✅ (Höhenstandlinie)
+- Fünfte Yachtmaster-Lektion **Höhenstandlinie** (`#/yachtmaster/sight-reduction`, `calculations/sight.ts`, `modules/yachtmaster/sightWidgets.tsx`):
+  - LHA = GHA + Länge, Hc und Zn aus dem sphärischen Dreieck, Intercept (Ho − Hc) · 60 NM, Standlinie senkrecht zum Azimut.
+  - Fix aus zwei Sternen mit Messfehlern; Nachrechnen mit dem Fix als neuer AP (`iteratedSightFix`) beseitigt den Näherungsfehler
+    der geraden Standlinie bei ferner AP.
+  - Sonnen-GHA als Näherung 15° · (UT − 12) + Zeitgleichung/4.
+- 7 neue Yachtmaster-Fragen (5 nachgerechnet), 1 Lernkarte, Tests: 251.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

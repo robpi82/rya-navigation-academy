@@ -55,4 +55,5 @@ export const SAFETY_CARDS: Flashcard[] = [
   c('vmg-wind', 'VMG to Windward', 'VMG gegen den Wind', 'Annäherung an ein Ziel in Luv: Fahrt × cos(Windwinkel). Beim Kreuzen wächst die gesegelte Strecke auf Distanz / cos(Kreuzwinkel).', 'Kreuzen bei 45°: rund 41 % mehr Weg.', '6 kn auf 45° zum Wind: VMG ≈ 4,2 kn.'),
   c('noon-sight', 'Noon Sight', 'Mittagsbreite', 'Sonnenhöhe zur Kulmination messen, beschicken (Ho) und Breite = Deklination ± (90° − Ho) rechnen: + bei Sonne im Süden, − bei Sonne im Norden.', '90 minus, Deklination dazu.', 'Ho 52°, Deklination 12° N, Sonne im Süden: Breite 50° N.'),
   c('sextant-corr', 'Sextant Corrections', 'Beschickung der Sextantenhöhe', 'Indexberichtigung, Kimmtiefe (−1,76′·√Augenhöhe), Refraktion (negativ) und Sonnenhalbmesser (+16′ Unterrand) ergeben die beobachtete Höhe Ho.', 'Hs → Ha → Ho.', 'Augenhöhe 4 m: Kimmtiefe −3,5′.'),
+  c('intercept', 'Intercept Method', 'Höhenstandlinie (Marcq St. Hilaire)', 'Von einer gegissten Position Hc und Azimut berechnen; Intercept = (Ho − Hc) · 60 NM entlang des Azimuts; Standlinie senkrecht dazu.', 'Ho More Toward.', 'Ho 38°27′, Hc 38°20′: 7 NM toward.'),
 ]

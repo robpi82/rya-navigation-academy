@@ -30,7 +30,7 @@ export type BuoyId =
   | 'new-danger'
 
 /** Yachtmaster-Offshore-Themen (Vorgriff) */
-export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial'
+export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction'
 
 export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
@@ -232,7 +232,11 @@ export type QuestionVerify =
     }
   | {
       kind: 'astro'
-      quantity: 'noonLatitude' | 'dip' | 'noonTimeMin'
+      quantity: 'noonLatitude' | 'dip' | 'noonTimeMin' | 'lha' | 'hc' | 'intercept' | 'sunGha'
+      position?: LatLonLike
+      gha?: number
+      computedAltitude?: number
+      ut?: number
       observedAltitude?: number
       declination?: number
       sunBearing?: 'S' | 'N'

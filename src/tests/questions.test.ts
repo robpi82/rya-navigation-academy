@@ -27,6 +27,9 @@ import {
   greatCircle,
   tackingDistance,
   noonLatitude,
+  localHourAngle,
+  computeAltitudeAzimuth,
+  sunGHA,
   noonTimeUT,
   dip,
   compareRoutes,
@@ -150,6 +153,10 @@ function compute(v: QuestionVerify): number | null {
     case 'astro':
       if (v.quantity === 'noonLatitude') return noonLatitude(v.observedAltitude!, v.declination!, v.sunBearing!)
       if (v.quantity === 'dip') return dip(v.eyeHeight!)
+      if (v.quantity === 'lha') return localHourAngle(v.gha!, v.longitude!)
+      if (v.quantity === 'hc') return computeAltitudeAzimuth(v.position!, v.gha!, v.declination!).hc
+      if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
+      if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
     case 'routing':
       return tackingDistance(v.distance, v.angleOffWind)
