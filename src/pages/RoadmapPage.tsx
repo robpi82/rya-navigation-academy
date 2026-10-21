@@ -307,10 +307,19 @@ const PHASES = [
       'Neue Berechnungen in calculations/heavyWeather.ts, 8 Fragen, 2 Lernkarten, Einheit „×" für Faktoren, 8 neue Tests',
     ],
   },
+  {
+    phase: 30,
+    title: 'Coastal-Lektion Festmachen bei Gezeiten',
+    done: true,
+    items: [
+      'Zehnte Coastal-Lektion: Leinen an der Pier über den Tidenhub (Seitenansicht, Leinenlängen bei HW/NW, Nachstellen), Kletterhöhe zur Pier, Päckchen',
+      'Reihenfolge-Übung „Anlegen im Tidenhafen"; neue Berechnungen in calculations/mooring.ts, 7 Fragen, 1 Lernkarte, 4 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Coastal-Stufe weiter ausbauen (z. B. Festmachen bei Tide, Notfälle unter Segeln)',
+  'Coastal-Stufe weiter ausbauen (z. B. Notfälle unter Segeln, Motor- und Riggausfall)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

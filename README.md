@@ -357,6 +357,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Reihenfolge-Übung zur Vorbereitung auf Starkwind.
 - 8 neue Coastal-Fragen (insgesamt 67), 2 Lernkarten, neue Einheit „×". Tests: 293.
 
+### Phase 30 – fertig ✅ (Festmachen bei Gezeiten)
+- Zehnte Coastal-Lektion **Festmachen bei Gezeiten** (`#/coastal/mooring`, `calculations/mooring.ts`, `modules/coastal/mooringWidgets.tsx`,
+  `data/mooring.ts`): Leinenlänge = √(horizontal² + Höhenunterschied²) über den Tidenhub, Vergleich Querleine und Spring,
+  Kletterhöhe zur Pier, Reihenfolge-Übung zum Anlegen.
+- 7 neue Coastal-Fragen (insgesamt 74), 1 Lernkarte. Tests: 297.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

@@ -30,6 +30,8 @@ import {
   transitOffset,
   closingSpeed,
   apparentWind,
+  lineAdjustment,
+  climb,
   windForceRatio,
   secondsToMeet,
   daylightDepartureWindow,
@@ -167,6 +169,8 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
       if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
+    case 'mooring':
+      return v.quantity === 'climb' ? climb(v.bollardHeight, v.fromTide, v.freeboard) : lineAdjustment(v.horizontal!, v.bollardHeight, v.freeboard, v.fromTide, v.toTide!)
     case 'wind': {
       if (v.quantity === 'forceRatio') return windForceRatio(v.from!, v.to!)
       const a = apparentWind(v.trueSpeed!, v.trueAngle!, v.boatSpeed!)

@@ -4,6 +4,7 @@ import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
+import { MooringLinesWidget, MooringOrderWidget } from './mooringWidgets'
 import { ApparentWindWidget, HeavyWeatherPrepWidget, WindForceWidget } from './heavyWeatherWidgets'
 import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
 
@@ -167,6 +168,32 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Wetter (Day Skipper)', href: '#/themen/weather' },
       { label: 'Wetterrouting (Yachtmaster)', href: '#/yachtmaster/weather-routing' },
+    ],
+  },
+  {
+    id: 'mooring',
+    title: 'Festmachen bei Gezeiten',
+    english: 'Mooring in Tidal Waters',
+    summary: 'Längsseits an der Pier im Tidenhafen: Leinen, die den Tidenhub mitmachen, Tiefe bei Niedrigwasser und der Weg an Land.',
+    body: [
+      'In einem Tidenhafen steigt und fällt das Boot mit dem Wasser, die Pier aber nicht. Bei 4 m Tidenhub liegt das Deck bei Niedrigwasser vier Meter tiefer als bei Hochwasser. Leinen, die bei Hochwasser straff belegt wurden, würden das Boot bei fallendem Wasser „aufhängen" – mit Schäden an Klampen, Rumpf oder Pier.',
+      'Deshalb führt man die Leinen möglichst lang: Lange Springs und weit ausgebrachte Vor- und Achterleinen ändern ihre nötige Länge über den Tidenhub kaum, kurze Querleinen dagegen stark. Wo es Schwimmstege gibt, ist das Problem gelöst; an festen Piers kontrolliert man die Leinen bei jeder Tide, besonders nachts. Fender müssen in jeder Höhe das Boot schützen; ein Fenderbrett hilft an Pfählen.',
+      'Vor dem Anlegen prüft man die Tiefe am Liegeplatz für das kommende Niedrigwasser – manche Häfen fallen trocken, und nicht jedes Boot kann auf dem Kiel stehen. Liegen mehrere Boote im Päckchen, liegt das größte innen; über fremde Boote geht man über das Vorschiff. Für den Weg an Land braucht man bei Niedrigwasser oft eine Leiter. Alle Werte der Übung sind fiktiv.',
+    ],
+    keyPoints: [
+      'Leinen lang führen: Springs und weit ausgebrachte Leinen machen den Tidenhub mit.',
+      'Kurze Querleinen müssen stark nachgestellt werden – oder vermieden werden.',
+      'Tiefe am Liegeplatz für das nächste Niedrigwasser prüfen.',
+      'Leinen und Fender bei jeder Tide kontrollieren; Päckchen: größtes Boot innen.',
+    ],
+    mnemonic: 'Lange Leinen schlafen ruhig – kurze Leinen wecken dich nachts.',
+    widgets: [
+      { title: 'Leinen an der Pier bei Tide', description: 'Zeit nach Hochwasser und Tidenhub einstellen.', Comp: MooringLinesWidget },
+      { title: 'Anlegen im Tidenhafen: Reihenfolge', Comp: MooringOrderWidget },
+    ],
+    links: [
+      { label: 'Gezeiten (Day Skipper)', href: '#/themen/tides' },
+      { label: 'Gezeitenhöhe (Coastal)', href: '#/coastal/tidal-height' },
     ],
   },
 ]
