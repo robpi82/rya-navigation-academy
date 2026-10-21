@@ -296,3 +296,15 @@ describe('Peilungen', () => {
     expect(((brg + 360) % 360)).toBeCloseTo(rhumbLine(boat, marks[1]).bearing!, 0)
   })
 })
+
+describe('Inhaltsprüfung Phase 16', () => {
+  it('manövrierbehindertes Fahrzeug mit Fahrt zeigt von vorn auch das Topplicht (Rule 27(b))', () => {
+    const ids = visibleLights('restricted', 0, true).map((l) => l.id)
+    expect(ids).toEqual(expect.arrayContaining(['r1', 'r2', 'r3', 'masthead', 'red', 'green']))
+    expect(visibleLights('restricted', 180, true).map((l) => l.id)).not.toContain('masthead')
+    expect(visibleLights('restricted', 0, false).map((l) => l.id)).not.toContain('masthead')
+  })
+  it('manövrierunfähiges Fahrzeug zeigt nie ein Topplicht (Rule 27(a))', () => {
+    expect(visibleLights('nuc', 0, true).map((l) => l.id)).not.toContain('masthead')
+  })
+})

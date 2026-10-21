@@ -167,6 +167,16 @@ const PHASES = [
       'Jedes dieser vier Themen hat jetzt mindestens 20 Fragen (Pool-Test)',
     ],
   },
+  {
+    phase: 16,
+    title: 'Inhaltsprüfung KVR, Sicherheit, Seezeichen, Wetter',
+    done: true,
+    items: [
+      'Alle KVR- und Sicherheitsfragen, Lichter-, Schall- und Nebelsignal-Daten, Seezeichen und Wetterbegriffe gegen die Regeltexte gegengelesen',
+      'Korrigiert: Rangfolge nach Rule 18 (NUC und RAM gleichrangig, Tiefgangbehinderte „nicht behindern"), Topplicht des manövrierbehinderten Fahrzeugs mit Fahrt, Ankerlicht-Position, Queren von Verkehrstrennungsgebieten (Steuerkurs, Rule 10(c)/(j)), Geltungsbereich (Rule 1), Reichweite von Rule 13',
+      'Präzisiert: Nebelsignale mit Rule-Verweisen, Kälteschock bei Mann über Bord, Lichterfrage mit Kollisionskurs',
+    ],
+  },
 ]
 
 const IDEAS = [

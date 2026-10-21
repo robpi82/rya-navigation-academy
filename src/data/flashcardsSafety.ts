@@ -13,7 +13,7 @@ const c = (id: string, english: string, german: string, definition: string, mnem
 
 /** Phase 5: Kollisionsverhütung, Wetter, Sicherheit/Seefunk, elektronische Navigation */
 export const SAFETY_CARDS: Flashcard[] = [
-  c('rule13', 'Overtaking (Rule 13)', 'Überholen', 'Wer sich einem anderen aus mehr als 22,5° achterlicher als querab nähert, überholt und muss ausweichen – vor allen anderen Regeln.', 'Der Überholende weicht immer aus.', 'Dein Motorboot nähert sich einem Segler von achtern: Du weichst aus.'),
+  c('rule13', 'Overtaking (Rule 13)', 'Überholen', 'Wer sich einem anderen aus mehr als 22,5° achterlicher als querab nähert, überholt und muss ausweichen – vor den übrigen Ausweichregeln bei Sicht (auch gegenüber Seglern).', 'Der Überholende weicht immer aus.', 'Dein Motorboot nähert sich einem Segler von achtern: Du weichst aus.'),
   c('rule14', 'Head-on (Rule 14)', 'Entgegengesetzte Kurse', 'Zwei Maschinenfahrzeuge nähern sich voraus: Beide weichen nach Steuerbord aus und passieren Backbord an Backbord.', 'Beide nach rechts.', 'Zwei Yachten unter Motor begegnen sich im Fahrwasser: beide drehen nach Steuerbord.'),
   c('rule15', 'Crossing (Rule 15)', 'Kreuzende Kurse', 'Maschinenfahrzeuge, die sich kreuzen: Wer das andere an Steuerbord hat, weicht aus.', 'Rechts vor links.', 'Ein Frachter kommt von rechts: Du weichst aus, am besten hinter seinem Heck.'),
   c('rule12', 'Sailing Vessels (Rule 12)', 'Segler untereinander', 'Wind von verschiedenen Seiten: Backbordbug weicht Steuerbordbug. Gleicher Bug: Luvboot weicht Leeboot.', 'Steuerbordbug hat Vorfahrt; Luv weicht Lee.', 'Du hast Wind von Backbord, der andere von Steuerbord: Du weichst aus.'),

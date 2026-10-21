@@ -226,6 +226,23 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
   (CPA/TCPA, Echolot-Bezug, VMG, Beaufort, m/s ↔ kn). Pool-Test: Jedes der vier Themen hat mindestens 20 Fragen; Tests: 206.
 - Regelinhalte (KVR, Seefunk, Wetterbegriffe) sind eigenständig formuliert und vereinfacht – bitte mit den amtlichen Texten abgleichen.
 
+### Phase 16 – fertig ✅ (Inhaltsprüfung)
+Gegengelesen wurden alle Fragen zu KVR und Sicherheit sowie `data/colregs.ts`, `calculations/colregs.ts` (Begegnungen, Lichter),
+`data/buoyage.ts`, `data/safety.ts`, `data/weather.ts` und der Lektionstext zur Kollisionsverhütung. Korrekturen:
+
+| Stelle | Vorher | Jetzt |
+| --- | --- | --- |
+| Rangfolge Rule 18 | NUC über RAM, Tiefgangbehinderte als Ausweichrang | NUC und RAM gleichrangig; Tiefgangbehinderte nicht behindern (Rule 18(d)) |
+| Lichter manövrierbehindert mit Fahrt | ohne Topplicht („vereinfacht") | mit Topplicht, Seiten- und Hecklicht (Rule 27(b)(iii)); 2 neue Tests |
+| Ankerlicht unter 50 m | „im Vorschiff" | wo es am besten gesehen werden kann (Rule 30(b)) |
+| Verkehrstrennungsgebiet | „rechtwinklig queren, Berufsschifffahrt nicht behindern" | Steuerkurs rechtwinklig (Rule 10(c)); Segler/unter 20 m behindern Maschinenfahrzeuge im Einbahnweg nicht (Rule 10(j)) |
+| Lektion KVR | „gelten auf allen Gewässern"; Rule 13 „geht allen anderen vor" | Geltungsbereich nach Rule 1, örtliche Vorschriften gehen vor; Rule 13 vor den übrigen Ausweichregeln |
+| Nebel-/Manöversignale | knappe Erklärungen | mit Verweisen auf Rule 34/35 |
+| Mann über Bord | nur Unterkühlung | zuerst Kälteschock, dann Unterkühlung |
+
+Seezeichen (IALA A), Seefunk-Abläufe und Wetterbegriffe des Seewetterberichts waren stimmig und blieben unverändert. Tests: 208.
+Die Prüfung ersetzt keinen Abgleich mit den amtlichen Texten (COLREGs/KVR, Funkhandbuch, Seewetterdienst).
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

@@ -174,7 +174,11 @@ export function visibleLights(vessel: LightVessel, bearingOfObserver: number, ma
         { id: 'r2', color: 'white', height: 1.0, allRound: true, description: 'Mittleres weißes Rundumlicht' },
         { id: 'r3', color: 'red', height: 0.7, allRound: true, description: 'Unteres rotes Rundumlicht' },
       )
-      if (makingWay) sides()
+      if (makingWay) {
+        // Rule 27(b)(iii): mit Fahrt durchs Wasser zusätzlich Topplicht, Seitenlichter und Hecklicht
+        if (masthead) out.push({ id: 'masthead', color: 'white', height: 1.6, description: 'Topplicht (weiß, 225° nach vorn)' })
+        sides()
+      }
       break
     case 'trawling':
       out.push({ id: 't1', color: 'green', height: 1.1, allRound: true, description: 'Oberes grünes Rundumlicht (Schleppnetzfischerei)' }, { id: 't2', color: 'white', height: 0.8, allRound: true, description: 'Unteres weißes Rundumlicht' })
