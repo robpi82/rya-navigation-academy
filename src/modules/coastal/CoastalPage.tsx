@@ -5,6 +5,7 @@ import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
 import { MooringLinesWidget, MooringOrderWidget } from './mooringWidgets'
+import { AnchorageChoiceWidget, AnchoringOrderWidget, AnchorScopeWidget } from './anchoringWidgets'
 import { DismastingWidget, DriftWidget, LeakWidget } from './emergencyWidgets'
 import { ApparentWindWidget, HeavyWeatherPrepWidget, WindForceWidget } from './heavyWeatherWidgets'
 import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
@@ -195,6 +196,34 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Gezeiten (Day Skipper)', href: '#/themen/tides' },
       { label: 'Gezeitenhöhe (Coastal)', href: '#/coastal/tidal-height' },
+    ],
+  },
+  {
+    id: 'anchoring',
+    title: 'Ankern',
+    english: 'Anchoring',
+    summary: 'Ankerplatz wählen, genug Kette stecken, Schwojkreis und Tiefe bei Niedrigwasser prüfen, Ankerwache halten.',
+    body: [
+      'Ein guter Ankerplatz bietet Schutz vor dem Wind – nicht nur vor dem jetzigen, sondern vor dem, der für die Nacht vorhergesagt ist. Dazu kommen guter Haltegrund (Sand und Schlick halten gut, Fels, Kies und Seegras schlecht), genug Wasser bei Niedrigwasser und genug Platz zum Schwojen. Kabel, Fahrwasser und Muschelbänke in der Seekarte sind tabu.',
+      'Gesteckt wird nach der größten Wassertiefe, also der Tiefe bei Hochwasser: Kartentiefe plus Höhe der Gezeit. Als Faustregel gilt bei Kette mindestens das Vierfache, bei Leine mit Kettenvorlauf das Sechsfache; bei viel Wind mehr. Bei Niedrigwasser liegt die Kette flacher, der Schwojkreis wird am größten. Gleichzeitig muss bei Niedrigwasser noch Wasser unter dem Kiel bleiben: Kartentiefe plus Höhe der Gezeit bei NW minus Tiefgang.',
+      'Nach dem Eindampfen werden Ankerposition und Peilungen zu festen Landmarken notiert; ein GPS-Ankeralarm hilft, ersetzt aber nicht den Blick nach draußen. Am Tag zeigt ein Fahrzeug vor Anker einen schwarzen Ball im Vorschiff, nachts ein weißes Rundumlicht (KVR Regel 30). Bei Wind gegen Strom schwojen Boote an Kette und an Leine verschieden – Abstand halten.',
+    ],
+    keyPoints: [
+      'Schutz vor dem vorhergesagten Wind, nicht nur vor dem jetzigen.',
+      'Kette ≥ 4 × Tiefe bei HW, Leine ≥ 6 ×.',
+      'Bei NW: Wasser unter dem Kiel prüfen und größten Schwojkreis einplanen.',
+      'Ankerwache: Peilungen, Ankeralarm, Ankerball bzw. Ankerlicht.',
+    ],
+    mnemonic: 'Schutz, Grund, Tiefe, Raum – dann vier mal Tiefe Kette.',
+    widgets: [
+      { title: 'Kettenlänge, Schwojkreis und Tiefe bei Niedrigwasser', Comp: AnchorScopeWidget },
+      { title: 'Ankerplatz für die Nacht wählen', Comp: AnchorageChoiceWidget },
+      { title: 'Das Ankermanöver', Comp: AnchoringOrderWidget },
+    ],
+    links: [
+      { label: 'Gezeitenhöhe (Coastal)', href: '#/coastal/tidal-height' },
+      { label: 'Festmachen bei Gezeiten', href: '#/coastal/mooring' },
+      { label: 'Kollisionsverhütung (Lichter und Signalkörper)', href: '#/themen/colregs' },
     ],
   },
   {

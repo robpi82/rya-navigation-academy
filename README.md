@@ -387,6 +387,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - „Restplan ab heute neu verteilen“: Erledigtes fällt heraus, Prüfungstermin bleibt, Probeprüfungen zählen weiter ab dem ersten Planbeginn.
   Tests: 318.
 
+### Phase 35 – fertig ✅ (Coastal-Lektion Ankern)
+- Zwölfte Coastal-Lektion **Ankern**: Kettenlänge nach der größten Tiefe (Kartentiefe + Höhe der Gezeit bei HW; Kette 4 ×, Leine 6 ×),
+  Schwojkreis bei Niedrigwasser, Wasser unter dem Kiel, Skizze HW/NW; Aufgabe „Ankerplatz für die Nacht“; Ankermanöver als Reihenfolge.
+- 8 neue Fragen (insgesamt 410), 2 Lernkarten, neue prüfbare Rechnungsart `anchoring`; Ankern in Lernplan und Coastal-Probeprüfung.
+  Tests: 327.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

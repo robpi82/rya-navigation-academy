@@ -32,6 +32,10 @@ import {
   apparentWind,
   lineAdjustment,
   driftToCoast,
+  anchorRode,
+  swingRadius,
+  clearanceAtLw,
+  minChartedDepth,
   leakRate,
   minutesUntil,
   climb,
@@ -176,6 +180,11 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'anchoring':
+      if (v.quantity === 'rode') return anchorRode(v.chartedDepth!, v.hwHeight!, v.scope)
+      if (v.quantity === 'swing') return swingRadius(anchorRode(v.chartedDepth!, v.hwHeight!, v.scope), v.chartedDepth! + v.lwHeight!, v.boatLength!)
+      if (v.quantity === 'clearance') return clearanceAtLw(v.chartedDepth!, v.lwHeight!, v.draught!)
+      return minChartedDepth(v.draught!, v.margin!, v.lwHeight!)
     case 'mooring':
       return v.quantity === 'climb' ? climb(v.bollardHeight, v.fromTide, v.freeboard) : lineAdjustment(v.horizontal!, v.bollardHeight, v.freeboard, v.fromTide, v.toTide!)
     case 'wind': {

@@ -355,6 +355,16 @@ const PHASES = [
       'Diagramm geplant gegen erledigt je Woche; „Restplan ab heute neu verteilen“ – Erledigtes fällt heraus, der Prüfungstermin bleibt; 7 neue Tests',
     ],
   },
+  {
+    phase: 35,
+    title: 'Coastal-Lektion Ankern',
+    done: true,
+    items: [
+      'Zwölfte Coastal-Lektion: Kettenlänge nach der Tiefe bei Hochwasser (4 × Kette, 6 × Leine), Schwojkreis bei Niedrigwasser, Wasser unter dem Kiel, Seitenansicht HW/NW',
+      'Aufgabe „Ankerplatz für die Nacht“ mit Winddrehung, Tiefe, Grund und Schwojraum; Ankermanöver als Reihenfolge-Übung',
+      'Neue Berechnungen in calculations/anchoring.ts, 8 Fragen, 2 Lernkarten, Ankern in Lernplan und Coastal-Probeprüfung; 9 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
