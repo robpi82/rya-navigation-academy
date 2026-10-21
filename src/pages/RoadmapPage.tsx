@@ -325,10 +325,20 @@ const PHASES = [
       'Neue Berechnungen in calculations/emergency.ts, 7 Fragen, 2 Lernkarten, Einheit „l/min", 7 neue Tests',
     ],
   },
+  {
+    phase: 32,
+    title: 'Inhaltsprüfung Phasen 20–31 und Coastal-Probeprüfung',
+    done: true,
+    items: [
+      'Alle 72 Fragen der Phasen 20–31 (Wetterrouting, Astronavigation, Nachtfahrt, Radar, Pilotage, Nebel, Schwerwetter, Festmachen, Notfälle) gegen Regeltexte und Formeln gegengelesen – ohne inhaltlichen Fehler',
+      'Präzisiert: Rule 19(d) in den Lektionen Nebel und Radarplotting vollständig (auch: nicht auf ein Fahrzeug querab oder achterlicher zu ändern)',
+      'Neue Coastal-Probeprüfung: 40 Fragen in 75 Minuten, jedes der elf Coastal-Themen mindestens dreimal',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Coastal-Probeprüfung erweitern (Pool inzwischen über 80 Fragen) und Lektionen inhaltlich gegenlesen lassen',
+  'Inhalte von einer Skipperin oder einem Ausbilder fachlich gegenlesen lassen',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

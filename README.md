@@ -369,6 +369,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Wassereinbruch Q = 0,6 · A · √(2 g h) gegen Pumpleistung, Reihenfolge-Übung Mastbruch.
 - 7 neue Coastal-Fragen (insgesamt 81), 2 Lernkarten, neue Einheit „l/min". Tests: 304.
 
+### Phase 32 – fertig ✅ (Inhaltsprüfung 20–31, Coastal-Probeprüfung)
+- Gegengelesen: alle 72 Fragen der Phasen 20–31 und die zugehörigen Lektionstexte. Rechenwege und Aussagen waren stimmig;
+  präzisiert wurde Rule 19(d) in den Lektionen Nebel und Radarplotting (vollständig mit 19(d)(ii)).
+- Neue Vorgabe **Coastal-Probeprüfung** (40 Fragen, 75 min, gleichmäßig über elf Themen); der bisherige Coastal-Test bleibt als Kurzcheck.
+  Tests: 305.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

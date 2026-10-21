@@ -8,7 +8,7 @@ import { isAnswerCorrect, shuffle } from './quiz'
 export const PASS_PERCENT = 70
 
 export interface ExamPreset {
-  id: 'kurz' | 'standard' | 'lang' | 'coastal' | 'yacht' | 'yacht-full'
+  id: 'kurz' | 'standard' | 'lang' | 'coastal' | 'coastal-full' | 'yacht' | 'yacht-full'
   label: string
   questions: number
   minutes: number
@@ -21,7 +21,8 @@ export const EXAM_PRESETS: ExamPreset[] = [
   { id: 'kurz', label: 'Kurztest', questions: 20, minutes: 30, description: 'Ein schneller Check zwischendurch.' },
   { id: 'standard', label: 'Standard', questions: 40, minutes: 60, description: 'Realistischer Umfang für eine Probeprüfung.' },
   { id: 'lang', label: 'Intensiv', questions: 60, minutes: 90, description: 'Breite Abdeckung aller Themen.' },
-  { id: 'coastal', label: 'Coastal-Test', questions: 20, minutes: 40, description: 'Gezeiten, Versegelungspeilung, Gefahrenpeilung und Törnplanung.', level: 'coastal-skipper' },
+  { id: 'coastal', label: 'Coastal-Test', questions: 20, minutes: 40, description: 'Kurzer Check über die Coastal-Themen.', level: 'coastal-skipper' },
+  { id: 'coastal-full', label: 'Coastal-Probeprüfung', questions: 40, minutes: 75, description: 'Alle elf Coastal-Themen gleichmäßig: Gezeiten, Peilungen, Pilotage, Nebel, Schwerwetter, Festmachen, Notfälle.', level: 'coastal-skipper' },
   { id: 'yacht', label: 'Yachtmaster kurz', questions: 12, minutes: 25, description: 'Kurzer Check über die Yachtmaster-Themen.', level: 'yachtmaster-offshore' },
   { id: 'yacht-full', label: 'Yachtmaster-Probeprüfung', questions: 30, minutes: 60, description: 'Alle sieben Yachtmaster-Themen gleichmäßig: Großkreis, Nacht, Routing, Törnplanung, Radar, Astronavigation.', level: 'yachtmaster-offshore' },
 ]
