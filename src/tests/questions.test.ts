@@ -31,6 +31,9 @@ import {
   closingSpeed,
   apparentWind,
   lineAdjustment,
+  driftToCoast,
+  leakRate,
+  minutesUntil,
   climb,
   windForceRatio,
   secondsToMeet,
@@ -169,6 +172,10 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
       if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
+    case 'emergency':
+      if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
+      if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
+      return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
     case 'mooring':
       return v.quantity === 'climb' ? climb(v.bollardHeight, v.fromTide, v.freeboard) : lineAdjustment(v.horizontal!, v.bollardHeight, v.freeboard, v.fromTide, v.toTide!)
     case 'wind': {

@@ -3,7 +3,7 @@ import type { Question } from '@/types/learning'
 
 /** Liest eine Zahleneingabe mit deutschem oder englischem Dezimaltrennzeichen. */
 export function parseNumberInput(raw: string): number | null {
-  const cleaned = raw.trim().replace(/[−–]/g, '-').replace(/[°′'×\s]|kn|nm|min|uhr|sek|h|s/gi, '').replace(',', '.')
+  const cleaned = raw.trim().replace(/[−–]/g, '-').replace(/[°′'×\s]|l\/min|kn|nm|min|uhr|sek|h|s/gi, '').replace(',', '.')
   if (cleaned === '' || !/^-?\d*\.?\d+$/.test(cleaned)) return null
   const n = Number(cleaned)
   return Number.isFinite(n) ? n : null

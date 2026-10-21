@@ -363,6 +363,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Kletterhöhe zur Pier, Reihenfolge-Übung zum Anlegen.
 - 7 neue Coastal-Fragen (insgesamt 74), 1 Lernkarte. Tests: 297.
 
+### Phase 31 – fertig ✅ (Notfälle unter Segeln)
+- Elfte Coastal-Lektion **Notfälle unter Segeln** (`#/coastal/emergencies`, `calculations/emergency.ts`, `modules/coastal/emergencyWidgets.tsx`,
+  `data/emergency.ts`): Drift ohne Antrieb (4 % der Windgeschwindigkeit plus Strom) und Zeit bis zur Leeküste mit Handlungsempfehlung,
+  Wassereinbruch Q = 0,6 · A · √(2 g h) gegen Pumpleistung, Reihenfolge-Übung Mastbruch.
+- 7 neue Coastal-Fragen (insgesamt 81), 2 Lernkarten, neue Einheit „l/min". Tests: 304.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

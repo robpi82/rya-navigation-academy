@@ -5,6 +5,7 @@ import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
 import { MooringLinesWidget, MooringOrderWidget } from './mooringWidgets'
+import { DismastingWidget, DriftWidget, LeakWidget } from './emergencyWidgets'
 import { ApparentWindWidget, HeavyWeatherPrepWidget, WindForceWidget } from './heavyWeatherWidgets'
 import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
 
@@ -194,6 +195,33 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Gezeiten (Day Skipper)', href: '#/themen/tides' },
       { label: 'Gezeitenhöhe (Coastal)', href: '#/coastal/tidal-height' },
+    ],
+  },
+  {
+    id: 'emergencies',
+    title: 'Notfälle unter Segeln',
+    english: 'Emergencies under Way',
+    summary: 'Motorausfall vor einer Leeküste, Wassereinbruch und Mastbruch: Zeit einschätzen, richtig priorisieren, Hilfe holen.',
+    body: [
+      'Viele Notfälle beginnen harmlos: Der Motor fällt aus, eine Leine gerät in die Schraube, ein Seeventil leckt. Gefährlich wird es, wenn die Zeit knapp wird. Die erste Frage lautet deshalb: Wie viel Zeit habe ich? Treibt das Boot ohne Antrieb auf eine Leeküste zu, entscheiden Windabdrift, Strom und Abstand. Bei wenig Zeit: Anker klar, ankern, sobald die Tiefe es zulässt, und rechtzeitig Hilfe rufen – PAN-PAN bei Dringlichkeit, MAYDAY bei unmittelbarer Gefahr.',
+      'Bei Wassereinbruch gilt: Quelle finden und abdichten (Holzkeile an jedem Seeventil, Kissen, Lecksegel), dann pumpen. Schon ein Loch von wenigen Zentimetern unter der Wasserlinie lässt mehr Wasser herein, als eine Handpumpe schafft. Bei unbeherrschbarem Wassereinbruch Mayday absetzen und das Verlassen des Bootes vorbereiten – man steigt erst in die Rettungsinsel, wenn das Boot nicht mehr zu halten ist.',
+      'Nach einem Mastbruch zuerst die Crew prüfen, dann das Rigg sichern, damit es den Rumpf nicht beschädigt, und erst den Motor starten, wenn keine Leine oder Want mehr im Wasser ist. Ruderbruch: mit Segeltrimm, Treibanker oder einem Notruder (Spinnakerbaum mit Bodenbrett) steuern. Alle Rechenwerte der Übungen sind vereinfachte Richtwerte.',
+    ],
+    keyPoints: [
+      'Zuerst die Zeit einschätzen: Drift, Strom und Abstand zur Leeküste.',
+      'Wenig Zeit: Anker klar, ankern, rechtzeitig PAN-PAN oder MAYDAY.',
+      'Leck: erst abdichten, dann pumpen; Keile an allen Seeventilen.',
+      'Mastbruch: Crew – Rigg sichern – Motor erst, wenn nichts mehr im Wasser hängt.',
+    ],
+    mnemonic: 'Zeit schätzen, Crew sichern, Hilfe rufen – lieber zu früh als zu spät.',
+    widgets: [
+      { title: 'Motorausfall: Wie lange bis zur Leeküste?', Comp: DriftWidget },
+      { title: 'Wassereinbruch: Leck und Pumpen', Comp: LeakWidget },
+      { title: 'Mastbruch: Sofortmaßnahmen', Comp: DismastingWidget },
+    ],
+    links: [
+      { label: 'Sicherheit und Seefunk', href: '#/themen/safety' },
+      { label: 'Schwerwetter', href: '#/coastal/heavy-weather' },
     ],
   },
 ]

@@ -10,7 +10,7 @@ export type TermId =
   | 'ep'
 
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
-export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring'
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
 export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
@@ -245,6 +245,21 @@ export type QuestionVerify =
       equationOfTime?: number
     }
   | {
+      kind: 'emergency'
+      quantity: 'driftHours' | 'leakLpm' | 'minutesUntil'
+      windFrom?: number
+      windKn?: number
+      currentSet?: number
+      currentKn?: number
+      coastBearing?: number
+      distanceNm?: number
+      diameterCm?: number
+      depthM?: number
+      volumeL?: number
+      inflowLpm?: number
+      pumpingLpm?: number
+    }
+  | {
       kind: 'mooring'
       quantity: 'adjustment' | 'climb'
       horizontal?: number
@@ -319,7 +334,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | '′' | 'h' | 's' | '×' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
+  unit: '°' | '′' | 'h' | 's' | '×' | 'l/min' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

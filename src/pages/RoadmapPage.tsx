@@ -316,10 +316,19 @@ const PHASES = [
       'Reihenfolge-Übung „Anlegen im Tidenhafen"; neue Berechnungen in calculations/mooring.ts, 7 Fragen, 1 Lernkarte, 4 neue Tests',
     ],
   },
+  {
+    phase: 31,
+    title: 'Coastal-Lektion Notfälle unter Segeln',
+    done: true,
+    items: [
+      'Elfte Coastal-Lektion: Motorausfall vor der Leeküste (Drift aus Wind und Strom, Zeit bis zur Küste, Handlungsempfehlung), Wassereinbruch (Leckmenge gegen Pumpleistung), Mastbruch (Reihenfolge)',
+      'Neue Berechnungen in calculations/emergency.ts, 7 Fragen, 2 Lernkarten, Einheit „l/min", 7 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Coastal-Stufe weiter ausbauen (z. B. Notfälle unter Segeln, Motor- und Riggausfall)',
+  'Coastal-Probeprüfung erweitern (Pool inzwischen über 80 Fragen) und Lektionen inhaltlich gegenlesen lassen',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

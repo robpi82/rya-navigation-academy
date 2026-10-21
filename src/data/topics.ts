@@ -2,6 +2,7 @@ import type { CoastalTopicId, DayTopicId, TopicId, YachtTopicId } from '@/types/
 import { TERM_BY_ID } from './glossary'
 
 export const COASTAL_TOPICS: Record<CoastalTopicId, { abbr: string; english: string; german: string }> = {
+  emergencies: { abbr: 'NOT', english: 'Emergencies under Way', german: 'Notfälle unter Segeln' },
   mooring: { abbr: 'FEST', english: 'Mooring in Tidal Waters', german: 'Festmachen bei Gezeiten' },
   'heavy-weather': { abbr: 'STURM', english: 'Heavy Weather', german: 'Schwerwetter' },
   fog: { abbr: 'NEBEL', english: 'Restricted Visibility', german: 'Navigation bei Nebel' },
