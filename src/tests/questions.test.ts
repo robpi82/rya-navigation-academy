@@ -34,6 +34,12 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  distanceAwayM,
+  datumDriftNm,
+  expandingSquareLength,
+  sectorSearchLength,
+  searchMinutes,
+  rescueHours,
   etmalSpeed,
   passageDays,
   passageWater,
@@ -208,6 +214,13 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'sar':
+      if (v.quantity === 'distanceAwayM') return distanceAwayM(v.speedKn!, v.seconds!)
+      if (v.quantity === 'datumDriftNm') return datumDriftNm(v.currentKn!, v.minutes!)
+      if (v.quantity === 'squareLength') return expandingSquareLength(v.spacingNm!, v.legs!)
+      if (v.quantity === 'squareMinutes') return searchMinutes(expandingSquareLength(v.spacingNm!, v.legs!), v.speedKn!)
+      if (v.quantity === 'sectorLength') return sectorSearchLength(v.radiusNm!)
+      return rescueHours(v.distanceNm!, v.speedKn!)
     case 'ocean':
       if (v.quantity === 'speed') return etmalSpeed(v.etmalNm!)
       if (v.quantity === 'days') return passageDays(v.distanceNm!, v.etmalNm!)

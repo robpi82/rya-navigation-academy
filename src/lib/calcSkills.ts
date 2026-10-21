@@ -25,7 +25,7 @@ export const CALC_SKILLS: CalcSkill[] = [
   { id: 'streams', label: 'Strom an Kaps und Stromrate', match: ['races', 'atlas'], formulaId: 'rate', href: '#/coastal/tidal-races' },
   { id: 'collision', label: 'Begegnung, CPA und Nebel', match: ['enav:cpa', 'enav:tcpa', 'fog', 'radar'], formulaId: 'meet', href: '#/coastal/fog' },
   { id: 'enav', label: 'VMG, Echolot und Leitlinien', match: ['enav', 'pilotage'], formulaId: 'vmg', href: '#/themen/electronics' },
-  { id: 'safety', label: 'Vorbereitung und Notfälle', match: ['prep', 'emergency'], formulaId: 'fuel', href: '#/themen/preparation' },
+  { id: 'safety', label: 'Vorbereitung und Notfälle', match: ['prep', 'emergency', 'sar'], formulaId: 'fuel', href: '#/themen/preparation' },
   { id: 'offshore', label: 'Großkreis, Routing und Nachtfahrt', match: ['greatcircle', 'routing', 'night', 'ocean'], formulaId: 'gc', href: '#/yachtmaster/great-circle' },
   { id: 'astro', label: 'Astronavigation', match: ['astro'], formulaId: 'noon-lat', href: '#/yachtmaster/celestial' },
 ]

@@ -465,6 +465,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/ocean.ts, 10 Fragen, 1 Lernkarte, 1 Formel, Einheit „Tage“; 9 neue Tests',
     ],
   },
+  {
+    phase: 46,
+    title: 'Yachtmaster-Lektion Notfälle auf Hochsee',
+    done: true,
+    items: [
+      'Elfte Yachtmaster-Lektion: Mensch über Bord bei Nacht (Quick-Stop, Williamson-Turn, Regel 1-10-1), mitwanderndes Datum, Suchmuster, EPIRB und SART, Verlassen des Schiffes',
+      'Rechner MOB-Abstand und Stromversatz, Suchmuster wachsendes Quadrat und Sektorsuche mit Skizze, Zeit bis zur Hilfe, Reihenfolge-Übung Verlassen des Schiffes',
+      'Neue Berechnungen in calculations/sar.ts, 11 Fragen, 2 Lernkarten, 1 Formel; Yachtmaster-Probeprüfung jetzt 33 Fragen in 70 Minuten; 6 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

@@ -7,6 +7,7 @@ import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidget
 import { InterceptWidget, SightFixWidget, SunRunSunWidget } from './sightWidgets'
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 import { RadarPlotWidget } from './radarWidgets'
+import { AbandonShipOrderWidget, MobDriftWidget, RescueTimeWidget, SearchPatternWidget } from './sarWidgets'
 import { EtmalProvisionWidget, SeasonRouteWidget, TimeZoneWidget } from './oceanWidgets'
 import { AtlasBrowserWidget, AtlasPageQuizWidget, AtlasPassageWidget } from './atlasWidgets'
 import { DepressionOrderWidget, IsobarWindWidget, WindAroundSystemWidget } from './weatherChartWidgets'
@@ -260,6 +261,35 @@ export const YACHT_LESSONS: Lesson[] = [
     links: [
       { label: 'CPA/TCPA (E-Navigation)', href: '#/themen/electronics' },
       { label: 'Kollisionsverhütung', href: '#/themen/colregs' },
+    ],
+  },
+  {
+    id: 'offshore-emergency',
+    title: 'Notfälle auf Hochsee',
+    english: 'Offshore Emergencies',
+    summary: 'Weit draußen ist Hilfe Stunden entfernt: Mensch über Bord bei Nacht, Suchmuster, EPIRB und SART, Überleben im kalten Wasser und Verlassen des Schiffes.',
+    body: [
+      'Fällt nachts jemand über Bord, zählt jede Sekunde: rufen, Rettungsmittel werfen, einen Ausguck bestimmen, der nur zeigt, MOB-Taste drücken. Unter Segeln wendet man sofort (Quick-Stop) und bleibt nah bei der Person; unter Maschine bringt der Williamson-Turn ein Fahrzeug auf das eigene Kielwasser zurück. Im kalten Wasser hilft die Regel 1-10-1: eine Minute Kälteschock, etwa zehn Minuten sinnvolle Bewegung, rund eine Stunde bis zur Bewusstlosigkeit durch Unterkühlung – Rettungsweste und Lifeline sind die beste Versicherung.',
+      'Ist die Person nicht mehr zu sehen, sucht man systematisch um einen Bezugspunkt (Datum). Dieser wandert mit dem Strom: Die MOB-Taste speichert einen Ort über Grund, die Person treibt mit dem Wasser – genau wie das Boot. Das wachsende Quadrat deckt eine Fläche gleichmäßig ab, die Sektorsuche führt immer wieder über das Datum, wenn der Ort recht genau bekannt ist.',
+      'Auf Hochsee kommt Hilfe meist erst nach Stunden, oft von einem umgeleiteten Handelsschiff. Eine EPIRB (406 MHz) meldet den Notfall über Satellit, ein Radar-SART erscheint auf dem Radar des Suchschiffs als Linie aus 12 Punkten, ein AIS-SART als AIS-Ziel. Die Rettungsinsel ist das letzte Mittel: Man steigt erst um, wenn das Schiff nicht mehr zu halten ist – mit Notfalltasche, Wasser, SART und Handfunkgerät. Alle Zahlen der Übungen sind vereinfachte Richtwerte.',
+    ],
+    keyPoints: [
+      'MOB: rufen, werfen, zeigen, MOB-Taste – unter Segeln Quick-Stop, unter Maschine ggf. Williamson-Turn.',
+      '1-10-1: Kälteschock, zehn Minuten Bewegung, eine Stunde bis zur Unterkühlung.',
+      'Suche um das mitwandernde Datum: wachsendes Quadrat oder Sektorsuche (9 R).',
+      'EPIRB über Satellit, SART für die letzte Annäherung; Insel erst, wenn das Schiff sinkt.',
+    ],
+    mnemonic: 'Erst ins Boot zurück, dann ins Wasser schauen – und die Insel nur, wenn es nach oben geht.',
+    widgets: [
+      { title: 'Mensch über Bord: Sekunden und Strom', Comp: MobDriftWidget },
+      { title: 'Suchmuster', Comp: SearchPatternWidget },
+      { title: 'Hilfe ist weit weg', Comp: RescueTimeWidget },
+      { title: 'Verlassen des Schiffes', Comp: AbandonShipOrderWidget },
+    ],
+    links: [
+      { label: 'Sicherheit & Seefunk (Day Skipper)', href: '#/themen/safety' },
+      { label: 'Notfälle unter Segeln (Coastal)', href: '#/coastal/emergencies' },
+      { label: 'Radarplotting', href: '#/yachtmaster/radar-plotting' },
     ],
   },
 ]

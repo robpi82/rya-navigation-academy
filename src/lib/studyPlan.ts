@@ -52,7 +52,7 @@ export function curriculum(level: CourseLevel): PlanItem[] {
     const ids: (keyof typeof COASTAL_TOPICS)[] = ['tidal-height', 'secondary-ports', 'multi-hour-tide', 'running-fix', 'clearing-bearing', 'pilotage', 'no-gps', 'tidal-races', 'passage-planning', 'fog', 'heavy-weather', 'mooring', 'anchoring', 'emergencies']
     return ids.map((id) => lesson(id, COASTAL_TOPICS[id].german, '#/coastal'))
   }
-  const ids: (keyof typeof YACHT_TOPICS)[] = ['great-circle', 'tidal-atlas', 'weather-charts', 'weather-routing', 'ocean-passage', 'night-passage', 'night-navigation', 'radar-plotting', 'celestial', 'sight-reduction']
+  const ids: (keyof typeof YACHT_TOPICS)[] = ['great-circle', 'tidal-atlas', 'weather-charts', 'weather-routing', 'ocean-passage', 'night-passage', 'night-navigation', 'radar-plotting', 'offshore-emergency', 'celestial', 'sight-reduction']
   return ids.map((id) => lesson(id, YACHT_TOPICS[id].german, '#/yachtmaster'))
 }
 
