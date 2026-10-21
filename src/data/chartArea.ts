@@ -1,4 +1,5 @@
 import type { LatLon } from '@/types/navigation'
+import { refineOutline, rng } from '@/lib/coastline'
 
 /**
  * Fiktives Übungsrevier „Nordbucht" – synthetisch erstellt, geografisch und mathematisch konsistent
@@ -11,30 +12,65 @@ export interface LandArea {
   name: string
   /** Polygon als [lon, lat] */
   outline: [number, number][]
+  /** 'drying' = trockenfallender Fels (bei Hochwasser überspült), sonst festes Land */
+  kind?: 'land' | 'drying'
+}
+
+/** Häfen und küstennahe Landmarken: Dort bleibt die Küste beim Verfeinern unverändert. */
+const PROTECT: [number, number][] = [
+  [-1.305, 50.781], [-1.3, 50.659], [-1.452, 50.762], [-1.398, 50.624], [-1.208, 50.633],
+  [-1.315, 50.784], [-1.29, 50.784], [-1.305, 50.79],
+]
+
+const refine = (outline: [number, number][], seed: number, amplitude = 0.2) =>
+  refineOutline(outline, {
+    seed,
+    levels: 4,
+    amplitude,
+    protect: PROTECT,
+    protectRadius: 0.006,
+    // Kanten jenseits des Kartenrands nicht gliedern
+    keep: (a, b) => a[1] > CHART_BOUNDS.north || b[1] > CHART_BOUNDS.north || a[0] < CHART_BOUNDS.west || b[0] < CHART_BOUNDS.west || a[0] > CHART_BOUNDS.east || b[0] > CHART_BOUNDS.east,
+  })
+
+/** Grundform (Ankerpunkte) der Landflächen – die Kartendarstellung gliedert sie fein, ohne diese Punkte zu verschieben. */
+const MAINLAND_ANCHORS: [number, number][] = [
+  [-1.75, 50.80], [-1.66, 50.795], [-1.6, 50.787], [-1.55, 50.776], [-1.51, 50.778], [-1.475, 50.768],
+  [-1.455, 50.757], [-1.44, 50.759], [-1.425, 50.771], [-1.38, 50.779], [-1.335, 50.787], [-1.315, 50.784],
+  [-1.305, 50.79], [-1.29, 50.784], [-1.25, 50.794], [-1.2, 50.789], [-1.16, 50.786], [-1.12, 50.792],
+  [-1.07, 50.801], [-1.01, 50.806], [-0.95, 50.812], [-0.9, 50.815], [-0.9, 50.9], [-1.75, 50.9],
+]
+
+const ISLAND_ANCHORS: [number, number][] = [
+  [-1.405, 50.622], [-1.385, 50.636], [-1.36, 50.646], [-1.33, 50.652], [-1.3, 50.656], [-1.27, 50.654],
+  [-1.24, 50.65], [-1.215, 50.641], [-1.2, 50.629], [-1.21, 50.615], [-1.235, 50.604], [-1.27, 50.597],
+  [-1.31, 50.596], [-1.35, 50.601], [-1.385, 50.61],
+]
+
+/** Kleine Insel bzw. Klippe als unregelmäßiges Vieleck um einen Mittelpunkt (Radius in NM). */
+function islet(lon: number, lat: number, radiusNm: number, seed: number, n = 9): [number, number][] {
+  const rand = rng(seed)
+  const pts: [number, number][] = []
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * 2 * Math.PI
+    const r = (radiusNm / 60) * (0.65 + rand() * 0.6)
+    pts.push([lon + (Math.sin(a) * r) / Math.cos((lat * Math.PI) / 180), lat + Math.cos(a) * r])
+  }
+  return pts
 }
 
 export const LAND: LandArea[] = [
-  {
-    name: 'Festland',
-    outline: [
-      [-1.75, 50.80], [-1.66, 50.795], [-1.6, 50.787], [-1.55, 50.776], [-1.51, 50.778], [-1.475, 50.768],
-      [-1.455, 50.757], [-1.44, 50.759], [-1.425, 50.771], [-1.38, 50.779], [-1.335, 50.787], [-1.315, 50.784],
-      [-1.305, 50.79], [-1.29, 50.784], [-1.25, 50.794], [-1.2, 50.789], [-1.16, 50.786], [-1.12, 50.792],
-      [-1.07, 50.801], [-1.01, 50.806], [-0.95, 50.812], [-0.9, 50.815], [-0.9, 50.9], [-1.75, 50.9],
-    ],
-  },
-  {
-    name: 'Insel Kranich',
-    outline: [
-      [-1.405, 50.622], [-1.385, 50.636], [-1.36, 50.646], [-1.33, 50.652], [-1.3, 50.656], [-1.27, 50.654],
-      [-1.24, 50.65], [-1.215, 50.641], [-1.2, 50.629], [-1.21, 50.615], [-1.235, 50.604], [-1.27, 50.597],
-      [-1.31, 50.596], [-1.35, 50.601], [-1.385, 50.61],
-    ],
-  },
+  { name: 'Festland', outline: refine(MAINLAND_ANCHORS, 11) },
+  { name: 'Insel Kranich', outline: refine(ISLAND_ANCHORS, 23) },
   {
     name: 'Grauer Stein',
+    kind: 'drying',
     outline: [[-1.153, 50.699], [-1.147, 50.7], [-1.145, 50.696], [-1.151, 50.694], [-1.155, 50.696]],
   },
+  { name: 'Möwenklippen', outline: islet(-1.4585, 50.7505, 0.08, 5) },
+  { name: 'Möwenklippen', outline: islet(-1.4485, 50.7525, 0.05, 6, 7) },
+  { name: 'Kranichklippen', outline: islet(-1.4185, 50.6175, 0.09, 7) },
+  { name: 'Ostklippe', outline: islet(-1.1915, 50.6255, 0.06, 8, 8) },
 ]
 
 export type MarkKind = 'lighthouse' | 'church' | 'mast' | 'daymark' | 'harbour' | 'buoy-north' | 'buoy-south' | 'buoy-safe' | 'danger'

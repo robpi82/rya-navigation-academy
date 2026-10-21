@@ -51,7 +51,7 @@ src/
 ├── components/
 │   ├── ui/            shadcn/ui-Komponenten (Button, Card, Slider, Tabs, …)
 │   ├── layout/        AppShell, Sidebar, ThemeToggle
-│   ├── chart/         SeaChart: interaktive Seekarte (Zoom, Pan, Overlays)
+│   ├── chart/         SeaChart: interaktive Seekarte (Zoom, Pan, Ebenen, Overlays) und Kartenzeichen
 │   └── nautical/      SVG-Bausteine: Vektorpfeile (RYA-Pfeilkonvention), Boot, Nordpfeil, Winkelbogen
 ├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators, chart, coastal,
 │                      daylessons (Themen), lessons (gemeinsames Lektionsgerüst)
@@ -488,6 +488,17 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 ### Seitenleiste neu gegliedert
 - Gruppen „Lektionen“ (Day Skipper, Coastal Skipper, Yachtmaster nebeneinander), „Üben“ und „Werkzeuge“; der frühere Punkt
   „Themen“ heißt jetzt „Day Skipper“. Seitentitel und Untertitel der Day-Skipper- und Yachtmaster-Seite aktualisiert. Tests: 451.
+
+### Phase 53 – fertig ✅ (Realistische Seekarte)
+- Die Seekarte (`components/chart/SeaChart.tsx`) zeigt das Übungsrevier jetzt im Stil einer amtlichen Papierseekarte:
+  fein gegliederte Küsten (`lib/coastline.ts`, reproduzierbar, Häfen und Landmarken geschützt), Klippen, Molen, Ortsflächen,
+  Tiefenflächen (≤ 10 m, ≤ 5 m, trockenfallend) und Tiefenlinien 2/5/10/20/30 m aus einem synthetischen Tiefenmodell
+  (`lib/bathymetry.ts`, Konturen mit `d3-contour`, ISC-Lizenz), Tiefenzahlen mit Dezimeter-Index, trockenfallende Höhen unterstrichen.
+- Kartenzeichen sinngemäß nach INT 1 (`components/chart/chartSymbols.tsx`), Zusatzobjekte in `data/chartFeatures.ts`:
+  Lateraltonnen IALA A, Kardinaltonnen mit Toppzeichen, Feuerflaggen und Kennungen, Wracks, Unterwasserfelsen, Ankerplätze, Sperrgebiet.
+- Ebenen-Menü, Detailstufen je Zoom, kollisionsfreie Beschriftung; `.chart-paper` hält die Karte im Dark Mode hell.
+- Alle Karten- und Revierdaten sind selbst erstellt (keine IHO-, UKHO- oder OpenSeaMap-Daten) – damit gibt es keine Lizenzpflichten
+  aus Kartendaten. Die 11 Aufgabenobjekte sind per Test eingefroren. Tests: 468.
 
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.

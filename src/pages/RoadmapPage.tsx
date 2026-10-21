@@ -535,6 +535,16 @@ const PHASES = [
       '12 Fragen, 2 Lernkarten; Yachtmaster-Probeprüfung 36 Fragen; Syllabus vollständig abgedeckt; gemeinsamer Umschalter bricht auf schmalen Bildschirmen um (alle 56 Seiten ohne seitliches Scrollen); 8 neue Tests',
     ],
   },
+  {
+    phase: 53,
+    title: 'Realistische Seekarte',
+    done: true,
+    items: [
+      'Übungsrevier im Stil einer amtlichen Papierseekarte: natürlich gegliederte Küsten, Klippen und Inselchen, Molen, Ortsflächen, Tiefenflächen und Tiefenlinien 2/5/10/20/30 m, trockenfallende Bereiche, über 3 000 Tiefenzahlen',
+      'Kartenzeichen sinngemäß nach INT 1: Lateral- und Kardinaltonnen (IALA A) mit Toppzeichen und Kennung, Feuerflaggen, Wracks, Unterwasserfelsen, Ankerplätze, Sperrgebiet, magentafarbene Kompassrose und Stromraute',
+      'Ebenen ein- und ausblendbar, Detailstufen je Zoom, Beschriftungen ohne Überlappung; Karte bleibt auch im dunklen Design hell. Alle 11 Aufgaben und ihre Objekte unverändert; 17 neue Tests (u. a. Tiefe entlang aller Kurslinien, Molen, IALA-Seiten)',
+    ],
+  },
 ]
 
 const IDEAS = [
