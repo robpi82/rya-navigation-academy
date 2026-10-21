@@ -438,6 +438,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   wählen (für jede Fahrtstunde die Seite zur Stundenmitte), Überfahrt über mehrere Stunden mit einem CTS; fiktiver Übungsatlas.
 - 10 neue Fragen (insgesamt 459), 1 Lernkarte, Formelsammlung 39 Formeln. Tests: 388.
 
+### Phase 44 – fertig ✅ (Inhaltsprüfung 40–43, „Was fehlt noch?“)
+- Inhalte der Phasen 40–43 gegengelesen (fachlich stimmig); neuer Test prüft alle Querverweise auf vorhandene Lektionen und Begriffe.
+- Dashboard-Karte **Was fehlt noch?**: je Stufe Lektionen, Rechenarten (Ziel 70 %), Probeprüfungen und fällige Lernkarten
+  als Checkliste mit bis zu drei nächsten Schritten. Tests: 394.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

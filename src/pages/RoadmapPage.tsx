@@ -445,6 +445,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/tidalAtlas.ts, 10 Fragen, 1 Lernkarte, 1 Formel; 8 neue Tests',
     ],
   },
+  {
+    phase: 44,
+    title: 'Inhaltsprüfung 40–43 und „Was fehlt noch?“',
+    done: true,
+    items: [
+      'Gegengelesen: Navigation ohne GPS, Wetterkarten, Gezeitenstromatlas – fachlich stimmig; ein Grammatikfehler korrigiert. Neuer Test: alle Querverweise in Lektionen, Lernplan, Formelsammlung und Rechentraining zeigen auf vorhandene Inhalte',
+      'Dashboard-Karte „Was fehlt noch?“ je Stufe: Lektionen (bei Day Skipper mit Begriffen), Rechenarten unter 70 % oder ungeübt, Probeprüfungen, fällige Lernkarten',
+      'Bis zu drei nächste Schritte, je Bereich einer, Lektionen in der Lernplan-Reihenfolge; Stufe folgt dem Lernplan; 6 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

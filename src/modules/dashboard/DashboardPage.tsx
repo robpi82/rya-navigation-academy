@@ -19,6 +19,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress'
 import type { LucideIcon } from 'lucide-react'
 import { ExamInsightsCard } from './ExamInsightsCard'
+import { LevelReadinessCard } from './LevelReadinessCard'
 import { PlanWeekCard } from '@/modules/plan/PlanWeekCard'
 
 function formatStudyTime(sec: number): string {
@@ -328,6 +329,8 @@ export function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <LevelReadinessCard />
 
       <ExamInsightsCard attempts={attempts} />
 
