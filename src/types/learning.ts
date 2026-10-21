@@ -13,7 +13,7 @@ export type TermId =
 export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies' | 'anchoring' | 'tidal-races'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
-export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
+export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings' | 'preparation'
 
 export type BuoyId =
   | 'port'
@@ -260,6 +260,20 @@ export type QuestionVerify =
       pumpingLpm?: number
     }
   | {
+      kind: 'prep'
+      quantity: 'fuel' | 'thirds' | 'water' | 'margin'
+      distanceNm?: number
+      sogKn?: number
+      litresPerHour?: number
+      reserve?: number
+      tankLitres?: number
+      crew?: number
+      days?: number
+      litresPerPersonDay?: number
+      departHour?: number
+      sunsetHour?: number
+    }
+  | {
       kind: 'races'
       quantity: 'windOverWater' | 'rate' | 'sog' | 'departBeforeHw'
       windFrom?: number
@@ -361,7 +375,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | '′' | 'h' | 's' | '×' | 'l/min' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
+  unit: '°' | '′' | 'h' | 's' | '×' | 'l/min' | 'l' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

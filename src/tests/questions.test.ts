@@ -34,6 +34,10 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  fuelNeeded,
+  thirdsRange,
+  waterNeeded,
+  daylightMargin,
   sogAlongStream,
   interpolateTidalRate,
   swingRadius,
@@ -183,6 +187,11 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'prep':
+      if (v.quantity === 'fuel') return fuelNeeded(v.distanceNm!, v.sogKn!, v.litresPerHour!, v.reserve)
+      if (v.quantity === 'thirds') return thirdsRange(v.tankLitres!, v.litresPerHour!, v.sogKn!)
+      if (v.quantity === 'water') return waterNeeded(v.crew!, v.days!, v.litresPerPersonDay)
+      return daylightMargin(v.departHour!, v.distanceNm!, v.sogKn!, v.sunsetHour!)
     case 'races':
       if (v.quantity === 'windOverWater') return windOverWater(v.windFrom!, v.windKn!, v.streamSet!, v.streamKn!).speed
       if (v.quantity === 'rate') return interpolateTidalRate({ springRate: v.springRate!, neapRate: v.neapRate!, range: v.range!, springRange: v.springRange!, neapRange: v.neapRange! })!.rate

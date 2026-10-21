@@ -11,8 +11,9 @@ import { YACHTMASTER } from './yachtmaster'
 import { COASTAL_SECONDARY } from './coastal-secondary'
 import { COASTAL_EXTRA } from './coastal-extra'
 import { DAY_SKIPPER_BEARINGS } from './dayskipper-bearings'
+import { DAY_SKIPPER_PREP } from './dayskipper-prep'
 
-export const QUESTION_BANK: Question[] = [...DAY_SKIPPER_BASICS, ...DAY_SKIPPER_ADVANCED, ...DAY_SKIPPER_TOPICS, ...DAY_SKIPPER_SAFETY, ...DAY_SKIPPER_BEARINGS, ...DAY_SKIPPER_EXTRA, ...DAY_SKIPPER_EXTRA2, ...DAY_SKIPPER_EXTRA3, ...COASTAL_SKIPPER, ...COASTAL_EXTRA, ...COASTAL_SECONDARY, ...YACHTMASTER]
+export const QUESTION_BANK: Question[] = [...DAY_SKIPPER_BASICS, ...DAY_SKIPPER_ADVANCED, ...DAY_SKIPPER_TOPICS, ...DAY_SKIPPER_SAFETY, ...DAY_SKIPPER_BEARINGS, ...DAY_SKIPPER_EXTRA, ...DAY_SKIPPER_EXTRA2, ...DAY_SKIPPER_EXTRA3, ...DAY_SKIPPER_PREP, ...COASTAL_SKIPPER, ...COASTAL_EXTRA, ...COASTAL_SECONDARY, ...YACHTMASTER]
 
 export const QUESTION_BY_ID: Record<string, Question> = Object.fromEntries(
   QUESTION_BANK.map((q) => [q.id, q]),

@@ -385,6 +385,16 @@ const PHASES = [
       '5 neue Tests',
     ],
   },
+  {
+    phase: 38,
+    title: 'Day-Skipper-Lektion Törnvorbereitung',
+    done: true,
+    items: [
+      'Zehnte Day-Skipper-Lektion: Vorhersage für die ganze Törndauer, Tidentore, Ausweichhäfen, Törnplan an Land (UK: RYA SafeTrx), Maschinen-Check, Sicherheitsbriefing',
+      'Checkliste vor dem Ablegen zum Abhaken, Rechner für Diesel (+20 %, Drittelregel) und Tageslicht-Reserve, Auswahlübung zum Sicherheitsbriefing',
+      'Neue Berechnungen in calculations/preparation.ts, 10 Fragen, 2 Lernkarten, Einheit „l“, 2 Formeln mehr in der Formelsammlung; 8 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

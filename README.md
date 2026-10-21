@@ -405,6 +405,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - **Druckansicht** („Drucken / PDF“) für Formelsammlung und Lernplan: Navigation ausgeblendet, Druck immer im hellen Design
   (auch aus dem Dark Mode), Farben erhalten, keine Seitenumbrüche mitten in Zeilen oder Wochen. Tests: 341.
 
+### Phase 38 – fertig ✅ (Day-Skipper-Lektion Törnvorbereitung)
+- Zehnte Day-Skipper-Lektion **Törnvorbereitung**: Vorhersage für die ganze Törndauer, Tidentore, Ausweichhäfen, Törnplan an Land,
+  Maschinen-Check, Sicherheitsbriefing; Checkliste vor dem Ablegen, Rechner Diesel/Drittelregel/Tageslicht, Briefing-Auswahl.
+- 10 neue Fragen (insgesamt 429), 2 Lernkarten, neue Einheit „l“, Formelsammlung jetzt 33 Formeln. Tests: 349.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

@@ -48,6 +48,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   weather: 'rules',
   safety: 'rules',
   electronics: 'rules',
+  preparation: 'rules',
   'tidal-height': 'coastal',
   'running-fix': 'coastal',
   'clearing-bearing': 'coastal',

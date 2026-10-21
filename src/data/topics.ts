@@ -27,6 +27,7 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
   safety: { abbr: 'SICHER', english: 'Safety & Radio', german: 'Sicherheit & Seefunk' },
   electronics: { abbr: 'E-NAV', english: 'Electronic Navigation', german: 'Elektronische Navigation' },
   bearings: { abbr: 'PEIL', english: 'Bearings & Transits', german: 'Peilen' },
+  preparation: { abbr: 'VORB', english: 'Passage Preparation & Seamanship', german: 'Törnvorbereitung' },
 }
 
 export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string; german: string }> = {
