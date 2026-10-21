@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { ArrowRight, BookOpen, GraduationCap, Target } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -9,7 +9,8 @@ import { TERM_BY_ID } from '@/data/glossary'
 import { PASS_PERCENT } from '@/lib/exam'
 import { groupPerformance, readiness, topicLinks, weakestTopics, type Readiness } from '@/lib/examInsights'
 import { cn } from '@/lib/utils'
-import type { QuizAttempt, TopicId } from '@/types/learning'
+import type { CourseLevel, QuizAttempt, TopicId } from '@/types/learning'
+import { Toggle } from '@/modules/calculators/fields'
 
 const STATUS: Record<Readiness, { label: string; variant: 'secondary' | 'destructive' | 'default' | 'success' }> = {
   none: { label: 'Noch keine Probeprüfung', variant: 'secondary' },
@@ -27,7 +28,8 @@ const germanName = (t: TopicId): string => {
 
 /** Stärken und Schwächen aus Probeprüfungen und Übungen, mit Empfehlungen zum gezielten Lernen. */
 export function ExamInsightsCard({ attempts }: { attempts: QuizAttempt[] }) {
-  const ready = useMemo(() => readiness(attempts), [attempts])
+  const [level, setLevel] = useState<CourseLevel>('day-skipper')
+  const ready = useMemo(() => readiness(attempts, level), [attempts, level])
   const groups = useMemo(() => groupPerformance(attempts), [attempts])
   const weak = useMemo(() => weakestTopics(attempts), [attempts])
   const status = STATUS[ready.status]
@@ -41,6 +43,16 @@ export function ExamInsightsCard({ attempts }: { attempts: QuizAttempt[] }) {
           </CardTitle>
           <Badge variant={status.variant}>{status.label}</Badge>
         </div>
+        <Toggle
+          value={level}
+          onChange={setLevel}
+          label="Ausbildungsstufe"
+          options={[
+            { value: 'day-skipper', label: 'Day Skipper' },
+            { value: 'coastal-skipper', label: 'Coastal' },
+            { value: 'yachtmaster-offshore', label: 'Yachtmaster' },
+          ]}
+        />
         <CardDescription>
           {ready.message}
           {ready.recentAverage !== null && ` Schnitt der letzten ${ready.examsCounted === 1 ? 'Prüfung' : `${ready.examsCounted} Prüfungen`}: ${Math.round(ready.recentAverage)} % (Grenze ${PASS_PERCENT} %).`}

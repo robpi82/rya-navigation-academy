@@ -328,6 +328,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   - Radarbild plus vergrößertes Plotdreieck; drei Beispiele.
 - 6 neue Yachtmaster-Fragen (4 nachgerechnet), 2 Lernkarten. Tests: 268.
 
+### Phase 25 – fertig ✅ (Yachtmaster-Probeprüfung, Prüfungsreife je Stufe)
+- Neue Vorgabe **Yachtmaster-Probeprüfung** (30 Fragen, 60 min); der bisherige Yachtmaster-Test heißt „Yachtmaster kurz" (12 Fragen).
+- Coastal- und Yachtmaster-Prüfungen verteilen die Fragen gleichmäßig auf die Themen der Stufe (`topicQuotas` in `lib/exam.ts`).
+- `readiness(attempts, level)` bewertet die Prüfungsreife je Stufe; die Dashboard-Karte hat eine Stufenauswahl. Tests: 271.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

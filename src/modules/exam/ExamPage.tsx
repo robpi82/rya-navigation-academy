@@ -36,6 +36,7 @@ function ExamSetup() {
   const past = attempts.filter((a) => a.exam).slice(-5).reverse()
   const dayCount = QUESTION_BANK.filter((q) => q.level === 'day-skipper').length
   const coastalCount = QUESTION_BANK.filter((q) => q.level === 'coastal-skipper').length
+  const yachtCount = QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length
 
   const begin = (p: ExamPreset) => {
     const seed = Math.floor(Math.random() * 2 ** 31)
@@ -45,8 +46,8 @@ function ExamSetup() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Probeprüfung" subtitle={`Wie in einer echten Prüfung: feste Fragenzahl, feste Zeit, keine Rückmeldung bis zur Abgabe. Bestanden ab ${PASS_PERCENT} %. Fragenpool: ${dayCount} Day-Skipper- und ${coastalCount} Coastal-Fragen.`} />
-      <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-5">
+      <PageHeader title="Probeprüfung" subtitle={`Wie in einer echten Prüfung: feste Fragenzahl, feste Zeit, keine Rückmeldung bis zur Abgabe. Bestanden ab ${PASS_PERCENT} %. Fragenpool: ${dayCount} Day-Skipper-, ${coastalCount} Coastal- und ${yachtCount} Yachtmaster-Fragen.`} />
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {EXAM_PRESETS.map((p) => (
           <Card key={p.id}>
             <CardHeader>
@@ -78,7 +79,7 @@ function ExamSetup() {
           <CardTitle className="text-base">So läuft die Prüfung</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p>Die Fragen werden nach Themen gewichtet gezogen: {Object.values(EXAM_GROUPS).filter((g) => g.weight > 0).map((g) => `${g.label} (${Math.round(g.weight * 100)} %)`).join(', ')}.</p>
+          <p>Day Skipper: Die Fragen werden nach Themengruppen gewichtet gezogen – {Object.values(EXAM_GROUPS).filter((g) => g.weight > 0).map((g) => `${g.label} (${Math.round(g.weight * 100)} %)`).join(', ')}. Coastal und Yachtmaster: gleichmäßig über alle Themen der Stufe verteilt.</p>
           <p>Du kannst frei zwischen den Fragen springen, Fragen markieren und deine Antworten ändern. Nach Ablauf der Zeit wird automatisch abgegeben; unbeantwortete Fragen zählen als falsch. Der Stand bleibt auch nach einem Neuladen erhalten.</p>
           <p>Eigenständig erstellte, vereinfachte Fragen – kein Original der RYA und keine Garantie für eine echte Prüfung.</p>
         </CardContent>

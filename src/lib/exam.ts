@@ -8,7 +8,7 @@ import { isAnswerCorrect, shuffle } from './quiz'
 export const PASS_PERCENT = 70
 
 export interface ExamPreset {
-  id: 'kurz' | 'standard' | 'lang' | 'coastal' | 'yacht'
+  id: 'kurz' | 'standard' | 'lang' | 'coastal' | 'yacht' | 'yacht-full'
   label: string
   questions: number
   minutes: number
@@ -22,7 +22,8 @@ export const EXAM_PRESETS: ExamPreset[] = [
   { id: 'standard', label: 'Standard', questions: 40, minutes: 60, description: 'Realistischer Umfang für eine Probeprüfung.' },
   { id: 'lang', label: 'Intensiv', questions: 60, minutes: 90, description: 'Breite Abdeckung aller Themen.' },
   { id: 'coastal', label: 'Coastal-Test', questions: 20, minutes: 40, description: 'Gezeiten, Versegelungspeilung, Gefahrenpeilung und Törnplanung.', level: 'coastal-skipper' },
-  { id: 'yacht', label: 'Yachtmaster-Vorgriff', questions: 12, minutes: 25, description: 'Großkreis und Nachtnavigation – über den Day-Skipper-Stoff hinaus.', level: 'yachtmaster-offshore' },
+  { id: 'yacht', label: 'Yachtmaster kurz', questions: 12, minutes: 25, description: 'Kurzer Check über die Yachtmaster-Themen.', level: 'yachtmaster-offshore' },
+  { id: 'yacht-full', label: 'Yachtmaster-Probeprüfung', questions: 30, minutes: 60, description: 'Alle sieben Yachtmaster-Themen gleichmäßig: Großkreis, Nacht, Routing, Törnplanung, Radar, Astronavigation.', level: 'yachtmaster-offshore' },
 ]
 
 export type ExamGroupId = 'basics' | 'compass' | 'tides' | 'rules' | 'coastal' | 'yacht'
@@ -105,6 +106,22 @@ export function groupQuotas(count: number, available: Record<ExamGroupId, number
   return quota
 }
 
+/** Gleichmäßige Verteilung von `count` Fragen auf Themen, begrenzt durch die verfügbaren Fragen. */
+export function topicQuotas(count: number, available: Record<string, number>): Record<string, number> {
+  const topics = Object.keys(available).sort((a, b) => available[b] - available[a] || a.localeCompare(b))
+  const quota: Record<string, number> = Object.fromEntries(topics.map((t) => [t, 0]))
+  let left = Math.min(count, topics.reduce((s, t) => s + available[t], 0))
+  while (left > 0) {
+    for (const t of topics) {
+      if (left > 0 && quota[t] < available[t]) {
+        quota[t]++
+        left--
+      }
+    }
+  }
+  return quota
+}
+
 const DIFFICULTY_CYCLE: Difficulty[] = [2, 1, 2, 3, 1, 2, 3, 2]
 
 function pickMixed(pool: Question[], n: number, random: () => number): Question[] {
@@ -123,7 +140,14 @@ function pickMixed(pool: Question[], n: number, random: () => number): Question[
 
 /** Stellt eine Prüfung zusammen: nur Day-Skipper-Fragen, nach Gruppen gewichtet, gemischt in Schwierigkeit und Reihenfolge. */
 export function buildExam(count: number, bank: Question[], random: () => number = Math.random, level: CourseLevel = 'day-skipper'): Question[] {
-  if (level !== 'day-skipper') return shuffle(pickMixed(bank.filter((q) => q.level === level), count, random), random)
+  if (level !== 'day-skipper') {
+    // Coastal und Yachtmaster: gleichmäßig über die Themen verteilt (Rest an die größten Themen)
+    const pool = bank.filter((q) => q.level === level)
+    const byTopic = new Map<TopicId, Question[]>()
+    for (const q of pool) byTopic.set(q.topic, [...(byTopic.get(q.topic) ?? []), q])
+    const quotas = topicQuotas(count, Object.fromEntries([...byTopic].map(([t, qs]) => [t, qs.length])))
+    return shuffle(Object.entries(quotas).flatMap(([t, n]) => pickMixed(byTopic.get(t as TopicId)!, n, random)), random)
+  }
   const pool = bank.filter((q) => q.level === 'day-skipper')
   const byGroup = { basics: [], compass: [], tides: [], rules: [], coastal: [], yacht: [] } as Record<ExamGroupId, Question[]>
   for (const q of pool) byGroup[groupOf(q.topic)].push(q)

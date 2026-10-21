@@ -258,10 +258,20 @@ const PHASES = [
       'Neue Berechnungen in calculations/radarPlot.ts, 6 Fragen, 2 Lernkarten, 7 neue Tests',
     ],
   },
+  {
+    phase: 25,
+    title: 'Yachtmaster-Probeprüfung und Prüfungsreife je Stufe',
+    done: true,
+    items: [
+      'Neue Yachtmaster-Probeprüfung: 30 Fragen in 60 Minuten, gleichmäßig über alle sieben Yachtmaster-Themen',
+      'Coastal- und Yachtmaster-Prüfungen ziehen ihre Fragen jetzt gleichmäßig je Thema (vorher rein zufällig)',
+      'Dashboard „Prüfungsreife" mit Auswahl Day Skipper / Coastal / Yachtmaster',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Running Fix mit Sonnenstandlinien) und eine Yachtmaster-Probeprüfung mit mehr Fragen',
+  'Weitere Yachtmaster-Lektionen (Running Fix mit Sonnenstandlinien)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

@@ -1,6 +1,7 @@
 import type { QuizAttempt, TopicId } from '@/types/learning'
 import { COASTAL_TOPICS, DAY_TOPICS, YACHT_TOPICS } from '@/data/topics'
-import { EXAM_GROUPS, PASS_PERCENT, groupOf, type ExamGroupId } from './exam'
+import { EXAM_GROUPS, EXAM_PRESETS, PASS_PERCENT, groupOf, type ExamGroupId } from './exam'
+import type { CourseLevel } from '@/types/learning'
 
 /**
  * Auswertung der Probeprüfungen und aller beantworteten Fragen: Wo liegen Stärken und Schwächen, ist man prüfungsreif?
@@ -78,10 +79,15 @@ export interface ReadinessResult {
   message: string
 }
 
-/** Prüfungsreife: die letzten drei Day-Skipper-Probeprüfungen mit mindestens 20 Fragen. */
-export function readiness(attempts: QuizAttempt[]): ReadinessResult {
-  const exams = attempts.filter((a) => a.exam && a.exam.presetId !== 'coastal' && a.exam.presetId !== 'yacht' && a.answers.length >= 20).slice(-3)
-  if (exams.length === 0) return { status: 'none', recentAverage: null, examsCounted: 0, message: 'Noch keine Day-Skipper-Probeprüfung abgelegt. Starte einen Kurztest, um deinen Stand zu sehen.' }
+const LEVEL_NAME: Record<CourseLevel, string> = { 'day-skipper': 'Day-Skipper', 'coastal-skipper': 'Coastal', 'yachtmaster-offshore': 'Yachtmaster' }
+
+/** Stufe einer Probeprüfung nach ihrer Vorgabe */
+export const presetLevel = (presetId: string): CourseLevel => EXAM_PRESETS.find((p) => p.id === presetId)?.level ?? 'day-skipper'
+
+/** Prüfungsreife: die letzten drei Probeprüfungen der Stufe mit mindestens 20 Fragen. */
+export function readiness(attempts: QuizAttempt[], level: CourseLevel = 'day-skipper'): ReadinessResult {
+  const exams = attempts.filter((a) => a.exam && presetLevel(a.exam.presetId) === level && a.answers.length >= 20).slice(-3)
+  if (exams.length === 0) return { status: 'none', recentAverage: null, examsCounted: 0, message: `Noch keine ${LEVEL_NAME[level]}-Probeprüfung mit mindestens 20 Fragen abgelegt.` }
   const avg = exams.reduce((s, a) => s + a.exam!.percent, 0) / exams.length
   const allPassed = exams.every((a) => a.exam!.passed)
   if (exams.length >= 3 && allPassed && avg >= PASS_PERCENT + 10)

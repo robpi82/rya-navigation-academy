@@ -203,3 +203,20 @@ describe('Fragenpool Phase 15', () => {
     for (const t of ['colregs', 'weather', 'safety', 'electronics']) expect(QUESTION_BANK.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(20)
   })
 })
+
+import { topicQuotas } from '@/lib/exam'
+
+describe('Themenverteilung Coastal/Yachtmaster', () => {
+  it('verteilt gleichmäßig und respektiert knappe Themen', () => {
+    expect(topicQuotas(10, { a: 10, b: 10 })).toEqual({ a: 5, b: 5 })
+    expect(topicQuotas(10, { a: 10, b: 2 })).toEqual({ a: 8, b: 2 })
+    expect(Object.values(topicQuotas(30, { a: 5, b: 5 })).reduce((x, y) => x + y, 0)).toBe(10)
+  })
+  it('Yachtmaster-Probeprüfung deckt alle Yachtmaster-Themen mit mindestens drei Fragen ab', () => {
+    const p = EXAM_PRESETS.find((x) => x.id === 'yacht-full')!
+    const exam = buildExam(p.questions, QUESTION_BANK, seededRandom(21), p.level)
+    expect(exam).toHaveLength(30)
+    const topics = new Set(QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').map((q) => q.topic))
+    for (const t of topics) expect(exam.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(3)
+  })
+})

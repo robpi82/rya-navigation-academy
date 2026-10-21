@@ -72,3 +72,15 @@ describe('Links zum gezielten Üben', () => {
     expect(parseHash('#/quiz/wiederholen')).toEqual({ name: 'quiz', preset: 'review' })
   })
 })
+
+describe('Prüfungsreife je Stufe', () => {
+  it('Coastal- und Yachtmaster-Prüfungen werden ihrer Stufe zugeordnet', () => {
+    const mk = (presetId: string, percent: number, n = 30) =>
+      attempt('2026-03-0' + percent.toString().slice(0, 1), Array.from({ length: n }, (_, i) => ans('great-circle', i < (percent / 100) * n, i)), { percent, passed: percent >= 70, presetId })
+    const list = [mk('yacht-full', 90), mk('yacht-full', 85), mk('yacht-full', 88), mk('coastal', 60, 20)]
+    expect(readiness(list, 'yachtmaster-offshore').status).toBe('ready')
+    expect(readiness(list, 'coastal-skipper').status).toBe('early')
+    expect(readiness(list, 'day-skipper').status).toBe('none')
+    expect(readiness([mk('yacht', 100, 12)], 'yachtmaster-offshore').status).toBe('none') // Kurztest unter 20 Fragen
+  })
+})
