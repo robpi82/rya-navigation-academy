@@ -34,6 +34,12 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  etmalSpeed,
+  passageDays,
+  passageWater,
+  clockChangeHours,
+  etmalNeeded,
+  daysPerClockHour,
   parseAtlasLabel,
   atlasRateForDay,
   atlasPage,
@@ -202,6 +208,13 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'ocean':
+      if (v.quantity === 'speed') return etmalSpeed(v.etmalNm!)
+      if (v.quantity === 'days') return passageDays(v.distanceNm!, v.etmalNm!)
+      if (v.quantity === 'water') return passageWater(v.crew!, v.days!, v.litresPerPersonDay, v.reserve)
+      if (v.quantity === 'clockBack') return -clockChangeHours(v.fromLon!, v.toLon!)
+      if (v.quantity === 'etmalNeeded') return etmalNeeded(v.distanceNm!, v.days!)
+      return daysPerClockHour(v.etmalNm!, v.latDeg!)
     case 'atlas':
       if (v.quantity === 'rate') return atlasRateForDay(parseAtlasLabel(v.label!)!, v.range!, v.neapRange!, v.springRange!)
       if (v.quantity === 'page') return atlasPage(v.minutesFromHw!)

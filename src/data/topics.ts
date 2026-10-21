@@ -37,6 +37,7 @@ export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string;
   'tidal-atlas': { abbr: 'ATLAS', english: 'Tidal Stream Atlas', german: 'Gezeitenstromatlas' },
   'weather-charts': { abbr: 'KARTE', english: 'Reading Weather Charts', german: 'Wetterkarten lesen' },
   'weather-routing': { abbr: 'ROUTE', english: 'Weather Routing', german: 'Wetterrouting' },
+  'ocean-passage': { abbr: 'OZEAN', english: 'Ocean Passage Planning', german: 'Ozeanpassage' },
   'radar-plotting': { abbr: 'RADAR', english: 'Radar Plotting', german: 'Radarplotting' },
   'night-passage': { abbr: 'TÖRN', english: 'Night Passage Planning', german: 'Törnplanung über Nacht' },
   'sight-reduction': { abbr: 'HSL', english: 'Position Lines from Sights', german: 'Höhenstandlinie' },

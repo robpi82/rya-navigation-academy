@@ -30,7 +30,7 @@ export type BuoyId =
   | 'new-danger'
 
 /** Yachtmaster-Offshore-Themen (Vorgriff) */
-export type YachtTopicId = 'tidal-atlas' | 'weather-charts' | 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction' | 'night-passage' | 'radar-plotting'
+export type YachtTopicId = 'ocean-passage' | 'tidal-atlas' | 'weather-charts' | 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction' | 'night-passage' | 'radar-plotting'
 
 export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
@@ -260,6 +260,19 @@ export type QuestionVerify =
       pumpingLpm?: number
     }
   | {
+      kind: 'ocean'
+      quantity: 'speed' | 'days' | 'water' | 'clockBack' | 'etmalNeeded' | 'daysPerHour'
+      etmalNm?: number
+      distanceNm?: number
+      days?: number
+      crew?: number
+      litresPerPersonDay?: number
+      reserve?: number
+      fromLon?: number
+      toLon?: number
+      latDeg?: number
+    }
+  | {
       kind: 'atlas'
       quantity: 'rate' | 'page' | 'passagePage' | 'drift'
       label?: string
@@ -412,7 +425,7 @@ export interface NumericQuestion extends QuestionBase {
   type: 'numeric'
   answer: number
   tolerance: number
-  unit: '°' | '′' | 'h' | 's' | '×' | 'l/min' | 'l' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
+  unit: '°' | '′' | 'h' | 's' | '×' | 'l/min' | 'l' | 'Tage' | 'kn' | 'NM' | 'min' | 'm' | 'Bft' | 'm/s'
   /** true für Richtungsangaben – Toleranz wird dann über 000° hinweg geprüft */
   isBearing?: boolean
   /**

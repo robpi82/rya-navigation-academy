@@ -443,6 +443,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Dashboard-Karte **Was fehlt noch?**: je Stufe Lektionen, Rechenarten (Ziel 70 %), Probeprüfungen und fällige Lernkarten
   als Checkliste mit bis zu drei nächsten Schritten. Tests: 394.
 
+### Phase 45 – fertig ✅ (Yachtmaster-Lektion Ozeanpassage)
+- Neue Lektion **Ozeanpassage**: Routen und Jahreszeiten im Nordatlantik (Hurrikansaison Juni–November), Pilot Charts, Etmal,
+  Reisedauer und Ankunft, Trinkwasser mit Reserve, Bordzeit über die Längengrade.
+- 10 neue Fragen (insgesamt 469), 1 Lernkarte, Formelsammlung 40 Formeln, neue Einheit „Tage“. Tests: 403.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

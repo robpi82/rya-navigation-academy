@@ -68,6 +68,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   'weather-routing': 'yacht',
   'weather-charts': 'yacht',
   'tidal-atlas': 'yacht',
+  'ocean-passage': 'yacht',
   celestial: 'yacht',
   'sight-reduction': 'yacht',
   'night-passage': 'yacht',

@@ -7,6 +7,7 @@ import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidget
 import { InterceptWidget, SightFixWidget, SunRunSunWidget } from './sightWidgets'
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 import { RadarPlotWidget } from './radarWidgets'
+import { EtmalProvisionWidget, SeasonRouteWidget, TimeZoneWidget } from './oceanWidgets'
 import { AtlasBrowserWidget, AtlasPageQuizWidget, AtlasPassageWidget } from './atlasWidgets'
 import { DepressionOrderWidget, IsobarWindWidget, WindAroundSystemWidget } from './weatherChartWidgets'
 
@@ -133,6 +134,34 @@ export const YACHT_LESSONS: Lesson[] = [
       { title: 'Abfahrtszeit nach Vorhersage', description: 'Welche Abfahrt bringt die kürzeste Überfahrt?', Comp: DepartureWidget },
     ],
     links: [{ label: 'Wetter (Day Skipper)', href: '#/themen/weather' }],
+  },
+  {
+    id: 'ocean-passage',
+    title: 'Ozeanpassage',
+    english: 'Ocean Passage Planning',
+    summary: 'Hochseeplanung: die richtige Jahreszeit und Route, Etmal und Reisedauer, Vorräte mit Reserve und die Bordzeit über die Längengrade.',
+    body: [
+      'Auf einer Ozeanpassage entscheidet die Jahreszeit mehr als jede Kurswahl. Im Nordatlantik dauert die Hurrikansaison offiziell vom 1. Juni bis 30. November. Wer von Europa in die Karibik will, quert die Biskaya im Sommer, wartet auf den Kanaren und startet ab Ende November auf der Passatroute – „nach Süden, bis die Butter schmilzt, dann rechts abbiegen“, also erst in den beständigen Nordostpassat. Zurück nach Europa geht es meist im Mai oder Juni nordwärts in die Westwinde, über Bermuda oder die Azoren.',
+      'Pilot Charts zeigen für jeden Monat langjährige Mittelwerte von Wind, Strom, Sturmhäufigkeit, Nebel und Eisgrenzen. Sie sagen, was typisch ist – die tatsächliche Wetterentwicklung kommt unterwegs aus Wetterberichten, GRIB-Daten und der eigenen Beobachtung. Die Tagesleistung misst man im Etmal, der Strecke von Mittag zu Mittag; daraus folgen mittlere Fahrt, Reisedauer und Ankunft.',
+      'Vorräte und Wasser plant man für die geschätzte Reisedauer plus Reserve (hier 30 %), denn Flauten, Bruch oder Umwege verlängern jede Überfahrt. Wasser wird auf mehrere Tanks und Kanister verteilt. Auf einer Ost-West-Passage verschiebt sich die Sonnenzeit um eine Stunde je 15° Länge; die Bordzeit wird schrittweise umgestellt, während Funk- und Wetterzeiten in UTC bleiben. Alle Werte der Übungen sind Richtwerte.',
+    ],
+    keyPoints: [
+      'Jahreszeit zuerst: Hurrikansaison Nordatlantik Juni–November.',
+      'Europa → Karibik: Biskaya im Sommer, Passatroute ab Ende November; zurück im Mai/Juni über Bermuda oder Azoren.',
+      'Etmal / 24 = mittlere Fahrt; Distanz / Etmal = Reisedauer; Vorräte mit Reserve.',
+      'Bordzeit: je 15° Länge eine Stunde, nach Westen zurückstellen.',
+    ],
+    mnemonic: 'Nach Süden, bis die Butter schmilzt – dann rechts abbiegen.',
+    widgets: [
+      { title: 'Route und Jahreszeit', Comp: SeasonRouteWidget },
+      { title: 'Etmal, Ankunft und Wasser', Comp: EtmalProvisionWidget },
+      { title: 'Bordzeit über die Längengrade', Comp: TimeZoneWidget },
+    ],
+    links: [
+      { label: 'Wetterrouting', href: '#/yachtmaster/weather-routing' },
+      { label: 'Großkreisnavigation', href: '#/yachtmaster/great-circle' },
+      { label: 'Törnvorbereitung (Day Skipper)', href: '#/themen/preparation' },
+    ],
   },
   {
     id: 'celestial',

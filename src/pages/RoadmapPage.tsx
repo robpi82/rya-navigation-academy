@@ -455,6 +455,16 @@ const PHASES = [
       'Bis zu drei nächste Schritte, je Bereich einer, Lektionen in der Lernplan-Reihenfolge; Stufe folgt dem Lernplan; 6 neue Tests',
     ],
   },
+  {
+    phase: 45,
+    title: 'Yachtmaster-Lektion Ozeanpassage',
+    done: true,
+    items: [
+      'Zehnte Yachtmaster-Lektion: Jahreszeit und Route im Nordatlantik (Hurrikansaison, Passatroute, Rückweg über Bermuda/Azoren), Pilot Charts, Etmal, Vorräte, Bordzeit',
+      'Routen-Kalender mit Bewertung je Monat, Rechner Etmal/Ankunft/Trinkwasser mit Reserve, Bordzeit über die Längengrade',
+      'Neue Berechnungen in calculations/ocean.ts, 10 Fragen, 1 Lernkarte, 1 Formel, Einheit „Tage“; 9 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
