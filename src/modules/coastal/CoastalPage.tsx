@@ -4,6 +4,7 @@ import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
+import { ApparentWindWidget, HeavyWeatherPrepWidget, WindForceWidget } from './heavyWeatherWidgets'
 import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
 
 export type CoastalLesson = Lesson & { id: CoastalTopicId }
@@ -139,6 +140,33 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Schall- und Nebelsignale', href: '#/themen/colregs' },
       { label: 'Radarplotting (Yachtmaster)', href: '#/yachtmaster/radar-plotting' },
+    ],
+  },
+  {
+    id: 'heavy-weather',
+    title: 'Schwerwetter',
+    english: 'Heavy Weather',
+    summary: 'Scheinbarer Wind, Winddruck, rechtzeitiges Reffen und Vorbereitung von Boot und Crew auf Starkwind.',
+    body: [
+      'Starkwind kündigt sich meist an: Seewetterbericht, fallendes Barometer, Wolken und Seegang. Die wichtigste Entscheidung fällt vorher – auslaufen oder nicht, Ausweichhafen oder Seeraum. Auf See bereitet man Boot und Crew vor, solange es noch ruhig ist: Position bestimmen, reffen, Deck und unter Deck klarieren, Westen und Lifebelts anlegen, warm essen und Wachen einteilen.',
+      'Die Belastung steigt schneller, als man denkt: Der Winddruck wächst mit dem Quadrat der Windgeschwindigkeit. Und an Bord zählt der scheinbare Wind – wahrer Wind plus Fahrtwind. Vor dem Wind fühlt sich ein Sturm harmlos an; wer dann anluven muss, hat plötzlich deutlich mehr Wind. Deshalb reffen erfahrene Skipper früh und nach dem scheinbaren Wind am Wind.',
+      'Wind gegen Strom erzeugt steile, kurze Wellen – solche Phasen und Gebiete (Kaps, Barren, Engstellen) meidet man. Bei schwerem Wetter hält man Seeraum von Leeküsten, segelt einen Kurs, der die Wellen nicht genau von der Seite nimmt, und kann beiliegen, um der Crew eine Pause zu geben. Die Richtwerte der Übungen gelten für eine typische Fahrtenyacht und ersetzen nicht die Erfahrung mit dem eigenen Boot.',
+    ],
+    keyPoints: [
+      'Früh entscheiden und früh vorbereiten – vor dem Starkwind.',
+      'Scheinbarer Wind = wahrer Wind + Fahrtwind; am Wind stärker, raumschots schwächer.',
+      'Winddruck ~ Windgeschwindigkeit²: doppelter Wind, vierfacher Druck.',
+      'Wind gegen Strom und Leeküsten meiden; Seeraum halten, ggf. beiliegen.',
+    ],
+    mnemonic: 'Wenn du ans Reffen denkst, ist es Zeit zu reffen.',
+    widgets: [
+      { title: 'Scheinbarer Wind und Besegelung', description: 'Wahren Wind, Windwinkel und Fahrt einstellen.', Comp: ApparentWindWidget },
+      { title: 'Winddruck wächst mit dem Quadrat', Comp: WindForceWidget },
+      { title: 'Vorbereitung auf Starkwind', Comp: HeavyWeatherPrepWidget },
+    ],
+    links: [
+      { label: 'Wetter (Day Skipper)', href: '#/themen/weather' },
+      { label: 'Wetterrouting (Yachtmaster)', href: '#/yachtmaster/weather-routing' },
     ],
   },
 ]

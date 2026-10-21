@@ -298,10 +298,19 @@ const PHASES = [
       'Reihenfolge-Übung „Nebel zieht auf"; neue Berechnungen in calculations/fog.ts, 7 Fragen, 1 Lernkarte, Eingabe „s"/„sek" im Trainer',
     ],
   },
+  {
+    phase: 29,
+    title: 'Coastal-Lektion Schwerwetter',
+    done: true,
+    items: [
+      'Neunte Coastal-Lektion: scheinbarer Wind mit Vektordreieck und Reff-Richtwert, Winddruck wächst mit dem Quadrat, Vorbereitung auf Starkwind (Reihenfolge)',
+      'Neue Berechnungen in calculations/heavyWeather.ts, 8 Fragen, 2 Lernkarten, Einheit „×" für Faktoren, 8 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Coastal-Stufe weiter ausbauen (z. B. Ankern und Festmachen bei Tide, Schwerwetter)',
+  'Coastal-Stufe weiter ausbauen (z. B. Festmachen bei Tide, Notfälle unter Segeln)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

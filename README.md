@@ -351,6 +351,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Faustregel „innerhalb der halben Sichtweite anhalten"; Reihenfolge-Übung der Maßnahmen bei aufziehendem Nebel.
 - 7 neue Coastal-Fragen (insgesamt 59), 1 Lernkarte; neue Einheit „s", der Trainer akzeptiert „s"/„sek". Tests: 285.
 
+### Phase 29 – fertig ✅ (Schwerwetter)
+- Neunte Coastal-Lektion **Schwerwetter** (`#/coastal/heavy-weather`, `calculations/heavyWeather.ts`, `modules/coastal/heavyWeatherWidgets.tsx`,
+  `data/heavyWeather.ts`): scheinbarer Wind (Betrag und Winkel) mit Vektordreieck und Reff-Richtwerten, Winddruck ~ v²,
+  Reihenfolge-Übung zur Vorbereitung auf Starkwind.
+- 8 neue Coastal-Fragen (insgesamt 67), 2 Lernkarten, neue Einheit „×". Tests: 293.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

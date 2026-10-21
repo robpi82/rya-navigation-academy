@@ -29,6 +29,8 @@ import {
   plotTarget,
   transitOffset,
   closingSpeed,
+  apparentWind,
+  windForceRatio,
   secondsToMeet,
   daylightDepartureWindow,
   watchLoad,
@@ -165,6 +167,11 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
       if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
+    case 'wind': {
+      if (v.quantity === 'forceRatio') return windForceRatio(v.from!, v.to!)
+      const a = apparentWind(v.trueSpeed!, v.trueAngle!, v.boatSpeed!)
+      return v.quantity === 'apparentSpeed' ? a.speed : a.angle
+    }
     case 'fog': {
       const c = closingSpeed(v.ownKn, v.otherKn, v.angle ?? 180)
       return v.quantity === 'closing' ? c : secondsToMeet(v.visibilityNm!, c)
