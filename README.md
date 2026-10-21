@@ -222,7 +222,7 @@ Bestehensgrenze (7/10 besteht, 6/10 nicht), unbeantwortete Fragen und Restzeit.
 - 3 neue Lernkarten (insgesamt 83), Tests: 205.
 
 ### Phase 15 – fertig ✅ (Fragenpool KVR, Wetter, Sicherheit, E-Navigation)
-- 31 neue Day-Skipper-Fragen (insgesamt 329 im Katalog, davon 268 Day Skipper), darunter 12 nachgerechnete Rechenaufgaben
+- 31 neue Day-Skipper-Fragen (insgesamt 330 im Katalog, davon 269 Day Skipper), darunter 12 nachgerechnete Rechenaufgaben
   (CPA/TCPA, Echolot-Bezug, VMG, Beaufort, m/s ↔ kn). Pool-Test: Jedes der vier Themen hat mindestens 20 Fragen; Tests: 206.
 - Regelinhalte (KVR, Seefunk, Wetterbegriffe) sind eigenständig formuliert und vereinfacht – bitte mit den amtlichen Texten abgleichen.
 
@@ -263,7 +263,7 @@ Peilregeln (Schnittwinkel, Reihenfolge, Deckpeilung).
 ### Phase 18 – fertig ✅ (Inhaltsprüfung, Abschluss)
 Gegengelesen wurden die übrigen 206 Fragen (Grundbegriffe, Seezeichen, Wetter, E-Navigation, Coastal, Sekundärhäfen, Yachtmaster),
 die Lektionstexte zu Wetter, Sicherheit, E-Navigation und Coastal sowie die Beschreibungen in `data/buoyage.ts`. Zusammen mit den
-Phasen 16 und 17 ist damit jede der 329 Fragen einmal inhaltlich geprüft.
+Phasen 16 und 17 ist damit jede der 330 Fragen einmal inhaltlich geprüft.
 
 | Stelle | Vorher | Jetzt |
 | --- | --- | --- |
