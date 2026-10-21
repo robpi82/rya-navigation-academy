@@ -485,6 +485,16 @@ const PHASES = [
       'Offen benannte Lücken: Leinen und Knoten, Meeresumwelt, Bootskunde; 6 neue Tests (u. a. jede Lektion ist einem Bereich zugeordnet)',
     ],
   },
+  {
+    phase: 48,
+    title: 'Day-Skipper-Lektion Leinen, Knoten und Bootskunde',
+    done: true,
+    items: [
+      'Elfte Day-Skipper-Lektion: Teile von Rumpf, Rigg und Segel, die acht wichtigsten Knoten mit Zweck und Grenzen, Belegen auf der Klampe, Leinenpflege',
+      'Bootsskizze mit 15 Teilen zum Erkunden und Abfragen, Knotenübersicht, Zuordnungsübung „Welcher Knoten passt?“',
+      '12 Fragen, 3 Lernkarten; Syllabus-Lücken „Leinen und Knoten“ und „Bootskunde“ geschlossen; 5 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

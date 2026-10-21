@@ -35,8 +35,8 @@ export const SYLLABUS: SyllabusLevel[] = [
     level: 'day-skipper',
     title: 'Day Skipper (Theorie)',
     areas: [
-      { id: 'd-terms', title: 'Seemännische Begriffe und Bootskunde', status: 'partial', links: [{ label: 'Glossar', href: '#/glossar' }, { label: 'Lernkarten', href: '#/lernkarten' }], topics: ['hdg', 'stw', 'water-track', 'leeway', 'cog', 'sog', 'ground-track', 'fix', 'ep'], note: 'Nur die Navigationsbegriffe – Rumpf, Rigg und Segel fehlen.' },
-      { id: 'd-ropes', title: 'Leinen und Knoten', status: 'none', links: [], topics: [], note: 'Praktisches Thema, in der App noch nicht enthalten.' },
+      { id: 'd-terms', title: 'Seemännische Begriffe und Bootskunde', status: 'covered', links: [day('seamanship', 'Leinen, Knoten und Bootskunde'), { label: 'Glossar', href: '#/glossar' }], topics: ['seamanship', 'hdg', 'stw', 'water-track', 'leeway', 'cog', 'sog', 'ground-track', 'fix', 'ep'] },
+      { id: 'd-ropes', title: 'Leinen und Knoten', status: 'covered', links: [day('seamanship', 'Leinen, Knoten und Bootskunde')], topics: ['seamanship'], note: 'Theorie und Zuordnung – das Knüpfen selbst lernt man nur mit der Leine in der Hand.' },
       { id: 'd-anchor', title: 'Ankern und Festmachen', status: 'covered', links: [day('tides', 'Gezeiten (Ankern bei Gezeiten)'), coastal('anchoring', 'Ankern'), coastal('mooring', 'Festmachen')], topics: ['anchoring', 'mooring'], note: 'Vertiefung in den Coastal-Lektionen.' },
       { id: 'd-safety', title: 'Sicherheit und Seenot', status: 'covered', links: [day('safety', 'Sicherheit & Seefunk'), day('preparation', 'Törnvorbereitung')], topics: ['safety', 'preparation'] },
       { id: 'd-colregs', title: 'Kollisionsverhütung (KVR/COLREGs)', status: 'covered', links: [day('colregs', 'Kollisionsverhütung')], topics: ['colregs'] },

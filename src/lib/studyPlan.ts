@@ -36,6 +36,7 @@ export function curriculum(level: CourseLevel): PlanItem[] {
       { id: 'terms-1', kind: 'terms', title: 'Grundbegriffe: Heading, STW, Water Track', href: '#/glossar', terms: ['hdg', 'stw', 'water-track'] },
       { id: 'terms-2', kind: 'terms', title: 'Grundbegriffe: Leeway, COG, SOG', href: '#/glossar', terms: ['leeway', 'cog', 'sog'] },
       { id: 'terms-3', kind: 'terms', title: 'Grundbegriffe: Ground Track, Fix, EP', href: '#/glossar', terms: ['ground-track', 'fix', 'ep'] },
+      day('seamanship'),
       day('compass'),
       day('tides'),
       day('chart-reading'),

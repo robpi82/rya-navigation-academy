@@ -28,6 +28,7 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
   safety: { abbr: 'SICHER', english: 'Safety & Radio', german: 'Sicherheit & Seefunk' },
   electronics: { abbr: 'E-NAV', english: 'Electronic Navigation', german: 'Elektronische Navigation' },
   bearings: { abbr: 'PEIL', english: 'Bearings & Transits', german: 'Peilen' },
+  seamanship: { abbr: 'SEEM', english: 'Ropes, Knots & Parts of a Yacht', german: 'Leinen, Knoten und Bootskunde' },
   preparation: { abbr: 'VORB', english: 'Passage Preparation & Seamanship', german: 'Törnvorbereitung' },
 }
 

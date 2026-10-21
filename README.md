@@ -459,6 +459,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Neue Seite **Syllabus-Abdeckung** (`#/syllabus`): 35 Themenbereiche der RYA-Theoriekurse (sinngemäß, ohne Gewähr) mit ehrlichem
   Status – 27 abgedeckt, 5 teilweise, 3 fehlen (Leinen und Knoten, Meeresumwelt). Tests: 415.
 
+### Phase 48 – fertig ✅ (Day-Skipper-Lektion Leinen, Knoten und Bootskunde)
+- Neue Lektion **Leinen, Knoten und Bootskunde**: Bootsskizze mit 15 Teilen (Erkunden/Abfragen), acht Knoten mit Zweck und
+  Grenzen, Zuordnungsübung, Belegen auf der Klampe.
+- 12 neue Fragen (insgesamt 492), 3 Lernkarten. Syllabus jetzt 29 abgedeckt, 4 teilweise, 2 fehlen (Meeresumwelt). Tests: 420.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

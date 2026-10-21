@@ -58,7 +58,7 @@ describe('Was fehlt noch?', () => {
     expect(r.steps[0].href).toBe(`#/glossar/${TERM_IDS[0]}`)
     expect(r.steps.map((s) => s.href)).toEqual([`#/glossar/${TERM_IDS[0]}`, '#/rechnen', '#/pruefung'])
     const afterTerms = levelReadiness('day-skipper', { ...empty, learnedTerms: [...TERM_IDS] })
-    expect(afterTerms.steps[0].href).toBe('#/themen/compass')
+    expect(afterTerms.steps[0].href).toBe(curriculum('day-skipper').find((i) => i.kind === 'lesson')!.href)
     expect(levelReadiness('coastal-skipper', empty).steps[0].href).toBe('#/coastal/tidal-height')
     expect(r.steps.length).toBeLessThanOrEqual(3)
   })
