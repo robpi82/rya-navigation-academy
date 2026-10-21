@@ -4,7 +4,7 @@ import type { Lesson } from '@/modules/lessons/types'
 import { GreatCircleMapWidget, LightHorizonWidget } from './widgets'
 import { DepartureWidget, PolarWidget, TackingWidget } from './routingWidgets'
 import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidgets'
-import { InterceptWidget, SightFixWidget } from './sightWidgets'
+import { InterceptWidget, SightFixWidget, SunRunSunWidget } from './sightWidgets'
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 import { RadarPlotWidget } from './radarWidgets'
 
@@ -115,11 +115,13 @@ export const YACHT_LESSONS: Lesson[] = [
       'Hc und Zn aus Breite, Deklination und LHA (sphärisches Dreieck).',
       'Intercept = (Ho − Hc) · 60 NM: toward, wenn Ho > Hc, sonst away.',
       'Standlinie senkrecht zum Azimut; zwei Standlinien = Fix, bei ferner AP nachrechnen.',
+      'Nur Sonne: erste Standlinie um den gesegelten Weg versetzen und mit der zweiten schneiden (Running Fix) – Azimutänderung mindestens 30°.',
     ],
     mnemonic: 'Ho More Toward: Ist die gemessene Höhe größer, geht es zum Gestirn hin.',
     widgets: [
       { title: 'Intercept berechnen', description: 'Von der AP zur Höhenstandlinie.', Comp: InterceptWidget },
       { title: 'Fix aus zwei Sternen', description: 'Messfehler einstellen und den Fix beobachten.', Comp: SightFixWidget },
+      { title: 'Sonne – Versegelung – Sonne', description: 'Running Fix aus zwei Sonnenstandlinien, mit unbekanntem Strom.', Comp: SunRunSunWidget },
     ],
     links: [{ label: 'Mittagsbreite', href: '#/yachtmaster/celestial' }],
   },

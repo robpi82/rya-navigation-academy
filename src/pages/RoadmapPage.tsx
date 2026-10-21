@@ -268,10 +268,20 @@ const PHASES = [
       'Dashboard „Prüfungsreife" mit Auswahl Day Skipper / Coastal / Yachtmaster',
     ],
   },
+  {
+    phase: 26,
+    title: 'Running Fix aus Sonnenstandlinien',
+    done: true,
+    items: [
+      'Lektion Höhenstandlinie um „Sonne – Versegelung – Sonne" erweitert: erste Standlinie versetzen, mit der zweiten schneiden',
+      'Übung mit Beobachtungszeiten, Kurs, Fahrt und unbekanntem Strom; Vergleich Fix, Koppelort und wahre Position, Warnung bei zu kleiner Azimutänderung',
+      'Neue Berechnung sunRunSun in calculations/sight.ts, 3 Fragen, 1 Lernkarte, 2 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Running Fix mit Sonnenstandlinien)',
+  'Coastal-Stufe ausbauen (mehr Fragen und Lektionen, z. B. Pilotage und Ansteuerung)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

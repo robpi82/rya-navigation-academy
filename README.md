@@ -333,6 +333,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Coastal- und Yachtmaster-Prüfungen verteilen die Fragen gleichmäßig auf die Themen der Stufe (`topicQuotas` in `lib/exam.ts`).
 - `readiness(attempts, level)` bewertet die Prüfungsreife je Stufe; die Dashboard-Karte hat eine Stufenauswahl. Tests: 271.
 
+### Phase 26 – fertig ✅ (Sonne – Versegelung – Sonne)
+- Die Lektion **Höhenstandlinie** hat eine dritte Übung: Running Fix aus zwei Sonnenstandlinien (`sunRunSun` in `calculations/sight.ts`).
+  Einstellbar sind Zeitpunkt und Abstand der Beobachtungen, Kurs und Fahrt sowie ein unbekannter Strom; angezeigt werden
+  Azimutänderung, Running Fix, Koppelort und der Abstand beider zur wahren Position.
+- 3 neue Yachtmaster-Fragen, 1 Lernkarte. Tests: 273.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

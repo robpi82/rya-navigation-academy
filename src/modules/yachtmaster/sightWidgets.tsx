@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { computeAltitudeAzimuth, cutAngle, formatBearing, formatLatLon, formatNumber, fromPolar, intercept, iteratedSightFix, rhumbLine, sunGHA, toDegMin, toLocalNm, type Intercept } from '@/calculations'
+import { computeAltitudeAzimuth, cutAngle, formatBearing, formatLatLon, formatNumber, fromPolar, intercept, iteratedSightFix, offsetPosition as offsetPositionLocal, rhumbLine, sunGHA, sunRunSun, toDegMin, toLocalNm, type Intercept } from '@/calculations'
 import { Slider } from '@/components/ui/slider'
 import { cn } from '@/lib/utils'
 import { NumberField, fieldsValid, useNumberField } from '@/modules/calculators/fields'
@@ -9,6 +9,18 @@ const f1 = (n: number) => formatNumber(n, 1)
 const degMin = (v: number) => {
   const d = toDegMin(v)
   return `${d.sign < 0 ? '−' : ''}${d.deg}°${f1(d.min).padStart(4, '0')}′`
+}
+
+function Slide({ label, value, min, max, step, v, on }: { label: string; value: string; min: number; max: number; step: number; v: number; on: (n: number) => void }) {
+  return (
+    <div className="space-y-1">
+      <div className="flex justify-between text-sm">
+        <span className="font-medium">{label}</span>
+        <span className="font-mono">{value}</span>
+      </div>
+      <Slider value={[v]} min={min} max={max} step={step} onValueChange={([n]) => on(n)} aria-label={label} />
+    </div>
+  )
 }
 
 function Step({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
@@ -162,6 +174,90 @@ export function SightFixWidget() {
         points={[...(fix ? [{ pos: fix, color: '#e11d48', name: 'Fix' }] : []), { pos: TRUTH, color: '#64748b', name: 'wahr', symbol: 'cross' as const }]}
         label="Skizze: AP, zwei Höhenstandlinien, Fix und wahre Position"
       />
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ Sonne – Versegelung – Sonne */
+
+const RS_START = { lat: 48, lon: -20 }
+const RS_DEC = 15
+
+export function SunRunSunWidget() {
+  const [t1, setT1] = useState(9.5)
+  const [gap, setGap] = useState(3)
+  const [course, setCourse] = useState(240)
+  const [speed, setSpeed] = useState(6)
+  const [current, setCurrent] = useState(0)
+  const [set, setSet] = useState(180)
+  const run = fromPolar(speed * gap, course)
+  const drift = fromPolar(current * gap, set)
+  const truth2 = offsetPositionLocal(RS_START, { x: run.x + drift.x, y: run.y + drift.y })
+  const obs = (pos: LatLon, ut: number) => {
+    const gha = sunGHA(ut)
+    return { gha, declination: RS_DEC, observedAltitude: computeAltitudeAzimuth(pos, gha, RS_DEC).hc }
+  }
+  const r = sunRunSun(RS_START, obs(RS_START, t1), obs(truth2, t1 + gap), course, speed * gap)
+  const errFix = r.fix ? rhumbLine(r.fix, truth2).distance : null
+  const errDr = rhumbLine(r.dr, truth2).distance
+  const azChange = Math.abs(((r.second.zn - r.first.zn + 540) % 360) - 180)
+
+  // Skizze in lokalen NM um den DR zur zweiten Beobachtung
+  const W = 280
+  const H = 230
+  const L = (p: LatLon) => toLocalNm(r.dr, p)
+  const pts = [L(r.transferredFoot), L(r.dr), L(truth2), ...(r.fix ? [L(r.fix)] : [])]
+  const span = Math.max(4, ...pts.map((p) => Math.max(Math.abs(p.x), Math.abs(p.y)))) * 1.4
+  const s = Math.min(W, H) / 2 / span
+  const X = (x: number) => W / 2 + x * s
+  const Y = (y: number) => H / 2 - y * s
+  const lineThrough = (p: { x: number; y: number }, dir: number, color: string, dashed = false) => {
+    const d = fromPolar(span * 3, dir)
+    return <line x1={X(p.x - d.x)} y1={Y(p.y - d.y)} x2={X(p.x + d.x)} y2={Y(p.y + d.y)} stroke={color} strokeWidth={2} strokeDasharray={dashed ? '5 3' : undefined} />
+  }
+  const foot2 = L(offsetPositionLocal(r.dr, fromPolar(r.second.intercept, r.second.zn)))
+  const clockStr = (h: number) => `${String(Math.floor(h)).padStart(2, '0')}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`
+
+  return (
+    <div className="grid gap-4 md:grid-cols-[1fr_280px]">
+      <div className="space-y-4">
+        <p className="text-sm text-muted-foreground">
+          Mit nur einem Gestirn – der Sonne – gewinnt man einen Fix, indem man vormittags eine Standlinie misst, sie um den gesegelten Weg versetzt und sie mittags oder nachmittags mit einer zweiten Sonnenstandlinie schneidet. Die Sonne muss dazwischen genug im Azimut gewandert sein (mindestens etwa 30°). Ein unbekannter Strom geht – wie bei jedem Running Fix – in den Fix ein.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Slide label="1. Beobachtung (UT)" value={clockStr(t1)} min={7} max={11} step={0.25} v={t1} on={setT1} />
+          <Slide label="Zeit bis zur 2. Beobachtung" value={`${gap} h`} min={1} max={5} step={0.5} v={gap} on={setGap} />
+          <Slide label="Kurs über Grund (geschätzt)" value={formatBearing(course, 0)} min={0} max={355} step={5} v={course} on={setCourse} />
+          <Slide label="Fahrt (geschätzt)" value={`${speed} kn`} min={2} max={9} step={0.5} v={speed} on={setSpeed} />
+          <Slide label="Unbekannter Strom (Rate)" value={`${f1(current)} kn`} min={0} max={2} step={0.25} v={current} on={setCurrent} />
+          <Slide label="Unbekannter Strom (setzt nach)" value={formatBearing(set, 0)} min={0} max={355} step={5} v={set} on={setSet} />
+        </div>
+        <div className="max-w-md">
+          <Step label="Azimut 1. / 2. Beobachtung" value={`${formatBearing(r.first.zn, 0)} / ${formatBearing(r.second.zn, 0)} (Δ ${Math.round(azChange)}°)`} />
+          <Step label="Versegelung" value={`${formatBearing(course, 0)}, ${f1(speed * gap)} NM`} />
+          <Step label="Running Fix" value={r.fix ? formatLatLon(r.fix) : '—'} highlight />
+          <Step label="Abstand Fix → wahre Position" value={errFix === null ? '—' : `${formatNumber(errFix, 2)} NM`} />
+          <Step label="Abstand Koppelort → wahre Position" value={`${formatNumber(errDr, 2)} NM`} />
+        </div>
+        {azChange < 30 && <p className="text-sm text-amber-600 dark:text-amber-400">Die Sonne ist nur {Math.round(azChange)}° im Azimut gewandert – die Standlinien schneiden sich spitz, der Fix wird ungenau. Länger warten.</p>}
+      </div>
+      <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full rounded-lg border bg-[var(--chart-sea)]" role="img" aria-label="Skizze: versetzte erste Standlinie, zweite Standlinie, Koppelort, Running Fix und wahre Position">
+        <text x={W - 8} y={14} fontSize={9} textAnchor="end" fill="currentColor" fillOpacity={0.6}>N ↑ · ±{Math.round(span)} NM um den Koppelort</text>
+        {lineThrough(L(r.transferredFoot), r.first.lineDirection, '#2563eb', true)}
+        {lineThrough(foot2, r.second.lineDirection, '#16a34a')}
+        <circle cx={X(0)} cy={Y(0)} r={3.5} fill="currentColor" />
+        <text x={X(0) + 6} y={Y(0) + 12} fontSize={9} fill="currentColor">Koppelort</text>
+        {r.fix && (
+          <g>
+            <circle cx={X(L(r.fix).x)} cy={Y(L(r.fix).y)} r={5} fill="none" stroke="#e11d48" strokeWidth={1.5} />
+            <text x={X(L(r.fix).x) + 7} y={Y(L(r.fix).y) - 5} fontSize={9} fill="#e11d48">RF</text>
+          </g>
+        )}
+        <path d={`M ${X(L(truth2).x) - 4} ${Y(L(truth2).y) - 4} L ${X(L(truth2).x) + 4} ${Y(L(truth2).y) + 4} M ${X(L(truth2).x) - 4} ${Y(L(truth2).y) + 4} L ${X(L(truth2).x) + 4} ${Y(L(truth2).y) - 4}`} stroke="#64748b" strokeWidth={1.5} />
+        <text x={X(L(truth2).x) + 6} y={Y(L(truth2).y) + 12} fontSize={9} fill="#64748b">wahr</text>
+        <text x={8} y={H - 22} fontSize={9} fill="#2563eb">– – 1. Standlinie, versegelt</text>
+        <text x={8} y={H - 9} fontSize={9} fill="#16a34a">—— 2. Standlinie</text>
+      </svg>
     </div>
   )
 }

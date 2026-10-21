@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { computeAltitudeAzimuth, intercept, iteratedSightFix, localHourAngle, rhumbLine, sightFix, sunGHA } from '@/calculations'
+import { computeAltitudeAzimuth, fromPolar, intercept, iteratedSightFix, localHourAngle, rhumbLine, sightFix, sunGHA } from '@/calculations'
 
 describe('Berechnete Höhe und Azimut', () => {
   it('Gestirn im Zenit: Hc = 90°', () => {
@@ -67,5 +67,37 @@ describe('Intercept und Fix', () => {
   it('gleiches Azimut: kein Schnitt', () => {
     const a = intercept(ap, sun.gha, sun.dec, 30)
     expect(sightFix(ap, a, a)).toBeNull()
+  })
+})
+
+import { offsetPosition as offsetPos, sunRunSun } from '@/calculations'
+
+describe('Sonne – Versegelung – Sonne', () => {
+  const start = { lat: 48, lon: -20 }
+  const dec = 15
+  const sight = (pos: { lat: number; lon: number }, ut: number) => {
+    const gha = sunGHAForTest(ut)
+    return { gha, declination: dec, observedAltitude: computeAltitudeAzimuth(pos, gha, dec).hc }
+  }
+  // GHA wie sunGHA ohne Zeitgleichung
+  function sunGHAForTest(ut: number) {
+    return (((15 * (ut - 12)) % 360) + 360) % 360
+  }
+  it('exakt geschätzter Weg: Running Fix trifft die wahre Position', () => {
+    const run = fromPolar(18, 240) // 3 h mit 6 kn auf 240°
+    const p2 = offsetPos(start, run)
+    const r = sunRunSun(start, sight(start, 10.5), sight(p2, 13.5), 240, 18)
+    expect(rhumbLine(r.fix!, p2).distance).toBeLessThan(0.5)
+    expect(Math.abs(r.first.zn - r.second.zn)).toBeGreaterThan(30) // Sonne hat genug Azimut gewandert
+  })
+  it('unbekannter Strom verschiebt den Fix – der Fehler hängt vom Versatz ab', () => {
+    const run = fromPolar(18, 240)
+    const drift = fromPolar(3, 180) // 3 NM Strom nach Süd, nicht im geschätzten Weg enthalten
+    const p2 = offsetPos(start, { x: run.x + drift.x, y: run.y + drift.y })
+    const r = sunRunSun(start, sight(start, 10.5), sight(p2, 13.5), 240, 18)
+    const err = rhumbLine(r.fix!, p2).distance
+    expect(err).toBeGreaterThan(0.5)
+    expect(err).toBeLessThan(4)
+    expect(rhumbLine(r.dr, p2).distance).toBeCloseTo(3, 0)
   })
 })

@@ -77,3 +77,33 @@ export function iteratedSightFix(ap: LatLon, a: SightObservation, b: SightObserv
   }
   return pos
 }
+
+export interface RunningSightFix {
+  /** Fix zur Zeit der zweiten Beobachtung */
+  fix: LatLon | null
+  /** Koppelort (DR) zur Zeit der zweiten Beobachtung */
+  dr: LatLon
+  first: Intercept
+  second: Intercept
+  /** Fußpunkt der ersten Standlinie nach dem Versegeln */
+  transferredFoot: LatLon
+}
+
+/**
+ * Running Fix aus zwei Sonnenstandlinien („Sonne – Versegelung – Sonne"): Die erste Höhenstandlinie wird um den
+ * geschätzten Weg über Grund zwischen den Beobachtungen versetzt und mit der zweiten geschnitten.
+ * `ap1` ist der Koppelort zur ersten Beobachtung; der Koppelort zur zweiten ergibt sich aus Kurs und Distanz.
+ */
+export function sunRunSun(ap1: LatLon, first: SightObservation, second: SightObservation, runCourse: number, runDistance: number): RunningSightFix {
+  const run = fromPolar(runDistance, runCourse)
+  const dr = offsetPosition(ap1, run)
+  const i1 = intercept(ap1, first.gha, first.declination, first.observedAltitude)
+  const i2 = intercept(dr, second.gha, second.declination, second.observedAltitude)
+  // gemeinsamer lokaler Bezug: ap1
+  const foot1 = fromPolar(i1.intercept, i1.zn)
+  const moved = { x: foot1.x + run.x, y: foot1.y + run.y }
+  const foot2Local = fromPolar(i2.intercept, i2.zn)
+  const foot2 = { x: foot2Local.x + run.x, y: foot2Local.y + run.y }
+  const p = intersectLines({ origin: moved, direction: i1.lineDirection }, { origin: foot2, direction: i2.lineDirection })
+  return { fix: p ? offsetPosition(ap1, p) : null, dr, first: i1, second: i2, transferredFoot: offsetPosition(ap1, moved) }
+}
