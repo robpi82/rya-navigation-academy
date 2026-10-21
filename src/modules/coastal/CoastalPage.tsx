@@ -2,6 +2,7 @@ import { QUESTION_BANK } from '@/questions'
 import type { CoastalTopicId } from '@/types/learning'
 import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
+import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { ClearingBearingWidget, MultiHourWidget, PassagePlanningWidget, RunningFixWidget, SecondaryPortWidget, TwelfthsWidget } from './widgets'
 
 export type CoastalLesson = Lesson & { id: CoastalTopicId }
@@ -86,6 +87,32 @@ export const LESSONS: CoastalLesson[] = [
     mnemonic: 'Standardhafen ablesen – Zeit addieren – Faktor bilden – Höhenunterschied interpolieren – addieren.',
     widgets: [{ title: 'Sekundärhafen berechnen', description: 'Rechenweg Schritt für Schritt.', Comp: SecondaryPortWidget }],
     links: [{ label: 'Zwölftelregel (Coastal)', href: '#/coastal/tidal-height' }],
+  },
+  {
+    id: 'pilotage',
+    title: 'Pilotage und Ansteuerung',
+    english: 'Pilotage',
+    summary: 'In Sichtweite von Land navigieren: Pilotage-Plan, Leitlinien, Gefahrenpeilungen und Tiefenlinien statt Plotten.',
+    body: [
+      'Bei der Ansteuerung eines Hafens oder einer engen Durchfahrt ist keine Zeit, Positionen in die Karte zu plotten. Man navigiert nach Sicht: Tonnen, Landmarken, Deckpeilungen, Gefahrenpeilungen und das Echolot. Grundlage ist ein vorab geschriebener Pilotage-Plan mit Teilstücken (Kurs, Distanz, Zeit) und für jeden Wendepunkt einem eindeutigen Merkmal – etwa „Tonne an Backbord querab" oder „auf die Deckpeilung 000° gehen".',
+      'Eine Leitlinie aus zwei hintereinanderstehenden Zeichen (Richtfeuer oder Deckpeilung) zeigt sofort, ob man auf dem Kurs ist. Weicht man ab, wandert das vordere, nähere Zeichen zur Seite; man steuert ihm nach. Gefahrenpeilungen (NMT/NLT) und eine Tiefenlinie, die nicht unterschritten werden darf, begrenzen den sicheren Bereich seitlich.',
+      'Zum Plan gehören auch Strom und Gezeitenhöhe zur geplanten Uhrzeit, Ausweich- und Abbruchkriterien („wenn die Tonne nach 20 Minuten nicht in Sicht ist, umkehren") und die Aufgabenverteilung an Bord: Wer steuert, wer liest den Plan vor, wer achtet auf Verkehr. Bei Nacht ersetzen Feuerkennungen die Formen und Farben der Zeichen. Alle Daten der Übungen sind fiktiv.',
+    ],
+    keyPoints: [
+      'Pilotage-Plan: Teilstücke mit Kurs, Distanz, Zeit und je einem eindeutigen Wendemerkmal.',
+      'Leitlinie: Zeichen in Deckung = auf Kurs; dem vorderen Zeichen folgen.',
+      'Seitliche Grenzen: Gefahrenpeilungen und Tiefenlinien.',
+      'Abbruchkriterien und Rollen an Bord vorher festlegen.',
+    ],
+    mnemonic: 'Planen am Kartentisch, fahren nach Sicht – dem vorderen Zeichen nach.',
+    widgets: [
+      { title: 'Pilotage-Plan für die Ansteuerung', description: 'Teilstücke auf der Seekarte mit Uhrzeiten.', Comp: PilotagePlanWidget },
+      { title: 'Leitlinie: Zeichen in Deckung halten', Comp: LeadingLineWidget },
+    ],
+    links: [
+      { label: 'Gefahrenpeilung', href: '#/coastal/clearing-bearing' },
+      { label: 'Peilen (Day Skipper)', href: '#/themen/bearings' },
+    ],
   },
 ]
 

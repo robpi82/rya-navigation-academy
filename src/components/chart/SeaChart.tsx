@@ -74,9 +74,11 @@ export interface SeaChartProps {
   /** zusätzliche Elemente in der rechten oberen Ecke (HTML) */
   topRight?: ReactNode
   showDiamonds?: boolean
+  /** Anfangsausschnitt: Mittelpunkt und halbe Höhe des Ausschnitts in NM (sonst ganzes Revier) */
+  focus?: { center: LatLon; halfSpanNm: number }
 }
 
-export function SeaChart({ overlays = [], onMapClick, cursor, className, topRight, showDiamonds = true }: SeaChartProps) {
+export function SeaChart({ overlays = [], onMapClick, cursor, className, topRight, showDiamonds = true, focus }: SeaChartProps) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const [size, setSize] = useState({ w: 800, h: 560 })
@@ -101,7 +103,13 @@ export function SeaChart({ overlays = [], onMapClick, cursor, className, topRigh
       const w = Math.max(200, e.contentRect.width)
       const h = Math.max(200, e.contentRect.height)
       setSize({ w, h })
-      setVp((v) => v ?? fitViewport(w, h))
+      setVp((v) => {
+        if (v) return v
+        if (!focus) return fitViewport(w, h)
+        // 1 NM ≈ 1 Meridionalteil-Minute in der Höhe; Maßstab so, dass ±halfSpanNm in die kleinere Seite passt
+        const c = toMap(focus.center)
+        return { cx: c.x, cy: c.y, s: Math.min(w, h) / (2 * focus.halfSpanNm / Math.cos(degToRad(focus.center.lat))) }
+      })
     })
     ro.observe(el)
     return () => ro.disconnect()

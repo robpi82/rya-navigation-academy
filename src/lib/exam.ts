@@ -53,6 +53,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   'passage-planning': 'coastal',
   'multi-hour-tide': 'coastal',
   'secondary-ports': 'coastal',
+  pilotage: 'coastal',
   'great-circle': 'yacht',
   'night-navigation': 'yacht',
   'weather-routing': 'yacht',

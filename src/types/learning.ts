@@ -10,7 +10,7 @@ export type TermId =
   | 'ep'
 
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
-export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports'
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
 export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings'
@@ -243,6 +243,13 @@ export type QuestionVerify =
       eyeHeight?: number
       longitude?: number
       equationOfTime?: number
+    }
+  | {
+      kind: 'pilotage'
+      quantity: 'transitOffsetM'
+      observed: number
+      transitBearing: number
+      distanceToFront: number
     }
   | {
       kind: 'radar'

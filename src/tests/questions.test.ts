@@ -27,6 +27,7 @@ import {
   greatCircle,
   tackingDistance,
   plotTarget,
+  transitOffset,
   daylightDepartureWindow,
   watchLoad,
   watchSchedule,
@@ -162,6 +163,8 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'intercept') return (v.observedAltitude! - v.computedAltitude!) * 60
       if (v.quantity === 'sunGha') return sunGHA(v.ut!, v.equationOfTime ?? 0)
       return noonTimeUT(v.longitude!, v.equationOfTime ?? 0) * 60
+    case 'pilotage':
+      return Math.abs(transitOffset(v.observed, v.transitBearing, v.distanceToFront)) * 1852
     case 'radar': {
       const p = plotTarget(v.first, v.second, v.minutes, v.ownCourse, v.ownSpeed)
       if (v.quantity === 'targetSpeed') return p.targetSpeed

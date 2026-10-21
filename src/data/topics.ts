@@ -2,6 +2,7 @@ import type { CoastalTopicId, DayTopicId, TopicId, YachtTopicId } from '@/types/
 import { TERM_BY_ID } from './glossary'
 
 export const COASTAL_TOPICS: Record<CoastalTopicId, { abbr: string; english: string; german: string }> = {
+  pilotage: { abbr: 'PILOT', english: 'Pilotage', german: 'Pilotage und Ansteuerung' },
   'secondary-ports': { abbr: 'SEK', english: 'Secondary Ports', german: 'Sekundärhäfen' },
   'multi-hour-tide': { abbr: 'CTS+', english: 'Multi-hour Course to Steer', german: 'Kurs über mehrere Stromstunden' },
   'running-fix': { abbr: 'RF', english: 'Running Fix', german: 'Versegelungspeilung' },

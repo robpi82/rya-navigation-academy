@@ -278,10 +278,20 @@ const PHASES = [
       'Neue Berechnung sunRunSun in calculations/sight.ts, 3 Fragen, 1 Lernkarte, 2 neue Tests',
     ],
   },
+  {
+    phase: 27,
+    title: 'Coastal-Lektion Pilotage und Ansteuerung',
+    done: true,
+    items: [
+      'Siebte Coastal-Lektion: Pilotage-Plan auf der Seekarte (Kurs, Distanz, Zeit, Uhrzeit und Merkmal je Teilstück) und Leitlinien-Trainer („dem vorderen Zeichen folgen")',
+      'Seekarte kann mit einem Ausschnitt starten (focus); Test, dass der Plan nicht über Land führt',
+      'Neue Berechnungen in calculations/pilotage.ts, 8 Coastal-Fragen, 2 Lernkarten, 6 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Coastal-Stufe ausbauen (mehr Fragen und Lektionen, z. B. Pilotage und Ansteuerung)',
+  'Coastal-Stufe weiter ausbauen (z. B. Ankern und Festmachen bei Tide, Nebelnavigation)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

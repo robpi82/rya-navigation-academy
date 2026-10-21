@@ -339,6 +339,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Azimutänderung, Running Fix, Koppelort und der Abstand beider zur wahren Position.
 - 3 neue Yachtmaster-Fragen, 1 Lernkarte. Tests: 273.
 
+### Phase 27 – fertig ✅ (Pilotage und Ansteuerung)
+- Siebte Coastal-Lektion **Pilotage und Ansteuerung** (`#/coastal/pilotage`, `calculations/pilotage.ts`, `modules/coastal/pilotageWidgets.tsx`):
+  Pilotage-Plan mit Kursen, Distanzen, Zeiten und Merkmalen auf der Seekarte; Leitlinien-Trainer mit Blick voraus, Versatz und
+  Steuerempfehlung (`transitOffset`, `transitSeparation`).
+- `SeaChart` akzeptiert einen Anfangsausschnitt (`focus`). 8 neue Coastal-Fragen (insgesamt 52), 2 Lernkarten. Tests: 279.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
