@@ -22,9 +22,9 @@ export interface ChartSymbol {
 export const CHART_SYMBOLS: ChartSymbol[] = [
   // Tiefen & Höhen
   { id: 'sounding', abbr: '5₂', category: 'depth', english: 'Sounding', german: 'Lotung (Tiefe 5,2 m)', note: 'Meter und Dezimeter; Bezug: Kartennull. Zahl in tiefgestellter Ziffer = Dezimeter.' },
-  { id: 'drying', abbr: '1̲₂', category: 'depth', english: 'Drying height', german: 'Trockenfallende Höhe (1,2 m)', note: 'Unterstrichene Zahl: Fläche fällt bei Niedrigwasser trocken. Wassertiefe = Höhe der Gezeit − Trockenhöhe.' },
+  { id: 'drying', abbr: '1̲₂', category: 'depth', english: 'Drying height', german: 'Trockenfallende Höhe (1,2 m)', note: 'Unterstrichene Zahl: Höhe über dem Kartennull – die Fläche fällt bei niedrigem Wasserstand trocken. Wassertiefe = Höhe der Gezeit − Trockenhöhe.' },
   { id: 'chart-datum', abbr: 'CD', category: 'depth', english: 'Chart Datum', german: 'Kartennull', note: 'Bezugsfläche der Tiefen, meist niedrigster astronomischer Gezeitenstand (LAT).' },
-  { id: 'mhws', abbr: 'MHWS', category: 'depth', english: 'Mean High Water Springs', german: 'Mittleres Springhochwasser', note: 'Bezug der Höhen von Land-, Brücken- und Feuerhöhen.' },
+  { id: 'mhws', abbr: 'MHWS', category: 'depth', english: 'Mean High Water Springs', german: 'Mittleres Springhochwasser', note: 'Bezug der Höhen von Landmarken und Feuern; lichte Höhen von Brücken und Leitungen auf neueren britischen Karten über HAT – Kartentitel beachten.' },
   { id: 'contour', abbr: '5 m', category: 'depth', english: 'Depth contour', german: 'Tiefenlinie', note: 'Linie gleicher Tiefe; hilft, sich an der Küste zu orientieren.' },
   // Meeresboden
   { id: 'sand', abbr: 'S', category: 'seabed', english: 'Sand', german: 'Sand' },

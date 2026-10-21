@@ -177,6 +177,15 @@ const PHASES = [
       'Präzisiert: Nebelsignale mit Rule-Verweisen, Kälteschock bei Mann über Bord, Lichterfrage mit Kollisionskurs',
     ],
   },
+  {
+    phase: 17,
+    title: 'Inhaltsprüfung Kompass, Gezeiten, Karte, Peilen',
+    done: true,
+    items: [
+      'Fragen, Lektionstexte, Lernkarten, Glossar, Kartensymbole und Feuerkennungen zu Kompass, Gezeiten, Kartenkunde und Peilen gegengelesen',
+      'Korrigiert: Höhenbezug von Brücken (HAT statt MHWS auf neueren Karten), Trockenhöhe („kann trockenfallen"), Springtide mit ein bis zwei Tagen Verzögerung, Fix-Definition (eine Deckpeilung allein ist kein Fix), Handpeilkompass-Formulierung, Kartennull (LAT)',
+    ],
+  },
 ]
 
 const IDEAS = [

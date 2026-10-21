@@ -18,7 +18,7 @@ const CORE_LESSONS: DayLesson[] = [
     summary: 'Der Bordkompass zeigt nicht rechtweisend Nord: Missweisung der Erde (Variation) und Ablenkung durch das Schiff (Deviation) müssen angebracht werden.',
     body: [
       'Karten und Peilungen beziehen sich auf geografisch (rechtweisend) Nord. Der Kompass richtet sich aber nach dem Magnetfeld der Erde. Der Winkel zwischen rechtweisend und magnetisch Nord ist die Variation (Missweisung). Sie hängt vom Ort ab, ändert sich langsam im Laufe der Jahre und steht in der Kompassrose der Karte.',
-      'Zusätzlich lenken Eisenteile, Motor, Elektronik und Lautsprecher an Bord die Kompassnadel ab. Dieser Fehler heißt Deviation. Er hängt vom Kurs des Bootes ab und wird in einer Deviationstabelle festgehalten. Ein Handpeilkompass fern vom Boot hat in der Regel keine nennenswerte Deviation – hier genügt die Variation.',
+      'Zusätzlich lenken Eisenteile, Motor, Elektronik und Lautsprecher an Bord die Kompassnadel ab. Dieser Fehler heißt Deviation. Er hängt vom Kurs des Bootes ab und wird in einer Deviationstabelle festgehalten. Ein Handpeilkompass, den man fern von Eisenteilen, Motor und Elektronik benutzt, hat in der Regel keine nennenswerte Deviation – hier genügt die Variation.',
       'Die Umrechnung verläuft in der Kette Compass → Deviation → Magnetic → Variation → True. Ost wird dabei beim Weg „von C nach T" addiert, West subtrahiert; in der Gegenrichtung genau umgekehrt.',
     ],
     keyPoints: [
@@ -41,7 +41,7 @@ const CORE_LESSONS: DayLesson[] = [
     english: 'Tides & Heights of Tide',
     summary: 'Hoch- und Niedrigwasser, Spring- und Nipptide, Höhe der Gezeit und die Frage: Wie viel Wasser habe ich unter dem Kiel?',
     body: [
-      'Die Gezeiten entstehen vor allem durch die Anziehung von Mond und Sonne. Hochwasser (HW) und Niedrigwasser (NW) wechseln etwa alle sechs Stunden. Der Unterschied ist der Tidenhub. Bei Neu- und Vollmond summieren sich die Kräfte von Sonne und Mond: Springtide mit großem Tidenhub. Bei Halbmond wirken sie im rechten Winkel: Nipptide mit kleinem Tidenhub.',
+      'Die Gezeiten entstehen vor allem durch die Anziehung von Mond und Sonne. Hochwasser (HW) und Niedrigwasser (NW) wechseln etwa alle sechs Stunden. Der Unterschied ist der Tidenhub. Bei Neu- und Vollmond summieren sich die Kräfte von Sonne und Mond: Springtide mit großem Tidenhub, meist mit ein bis zwei Tagen Verzögerung. Bei Halbmond wirken sie im rechten Winkel: Nipptide mit kleinem Tidenhub.',
       'Alle Tiefen der Seekarte beziehen sich auf das Kartennull (Chart Datum, meist der niedrigste astronomische Gezeitenstand). Die Höhe der Gezeit sagt, wie viel Wasser zusätzlich darüber steht. Wassertiefe = Kartentiefe + Höhe der Gezeit; bei trockenfallenden Stellen (unterstrichene Zahl) gilt: Wassertiefe = Höhe der Gezeit − Trockenhöhe.',
       'Aus den Gezeitentafeln (Zeiten und Höhen von HW und NW des Standardhafens) berechnet man die Höhe zu jeder Uhrzeit mit der Gezeitenkurve. In dieser App dient ein Kosinusmodell als Näherung. Wichtig: Gezeitenstrom (horizontale Wasserbewegung) und Gezeitenhöhe (vertikaler Wasserstand) sind verschiedene Dinge und laufen zeitlich nicht gleich.',
     ],
@@ -69,7 +69,7 @@ const CORE_LESSONS: DayLesson[] = [
     summary: 'Kartennull, Lotungen, trockenfallende Höhen, Abkürzungen und die Kennung von Leuchtfeuern richtig lesen.',
     body: [
       'Die Seekarte ist das wichtigste Navigationsmittel. Tiefen sind in Metern und Dezimetern angegeben (eine kleine tiefgestellte Ziffer sind die Dezimeter). Unterstrichene Zahlen sind Trockenhöhen. Farben zeigen Wassertiefen an – flaches Wasser ist häufig blau getönt, trockenfallende Flächen sind grün oder grau.',
-      'Höhen von Landmarken, Brücken und Feuern beziehen sich auf das mittlere Springhochwasser (MHWS); Tiefen auf das Kartennull. Abstände misst man immer am seitlichen Breitenmaßstab: 1 Bogenminute Breite = 1 Seemeile. Der untere Längenmaßstab ist wegen der Mercatorprojektion nicht dafür geeignet.',
+      'Höhen von Landmarken und Feuern beziehen sich auf britischen Karten meist auf das mittlere Springhochwasser (MHWS), lichte Höhen von Brücken und Leitungen auf neueren Karten auf den höchsten astronomischen Gezeitenstand (HAT) – der Kartentitel nennt den Bezug. Tiefen beziehen sich auf das Kartennull. Abstände misst man immer am seitlichen Breitenmaßstab: 1 Bogenminute Breite = 1 Seemeile. Der untere Längenmaßstab ist wegen der Mercatorprojektion nicht dafür geeignet.',
       'Leuchtfeuer sind mit Kennung, Farbe, Periode, Höhe und Tragweite beschrieben, z. B. „Fl(2) WR 10s 24m 15M". Wie weit man ein Feuer tatsächlich sieht, hängt außerdem von der Augenhöhe und der Sicht ab. Karten müssen mit Berichtigungen (Nachrichten für Seefahrer) aktuell gehalten werden.',
     ],
     keyPoints: [

@@ -53,7 +53,7 @@ export const LESSONS: CoastalLesson[] = [
     english: 'Tidal Height & Rule of Twelfths',
     summary: 'Wassertiefe = Kartentiefe + Höhe der Gezeit. Die Zwölftelregel schätzt die Höhe zwischen NW und HW.',
     body: [
-      'Die Kartentiefe bezieht sich auf das Seekartennull (Chart Datum, meist ungefähr das niedrigste Niedrigwasser). Die tatsächliche Wassertiefe ist Kartentiefe plus aktuelle Höhe der Gezeit.',
+      'Die Kartentiefe bezieht sich auf das Seekartennull (Chart Datum, auf britischen Karten etwa der niedrigste astronomische Gezeitenstand, LAT). Die tatsächliche Wassertiefe ist Kartentiefe plus aktuelle Höhe der Gezeit.',
       'Die Zwölftelregel verteilt den Tidenhub auf sechs Stunden im Verhältnis 1-2-3-3-2-1. In der dritten und vierten Stunde steigt (oder fällt) das Wasser am schnellsten.',
       'Die Regel ist eine Näherung für gleichmäßige Gezeitenkurven. Für Häfen mit ungewöhnlichen Kurven verwendet man die Gezeitenkurve des Standardhafens aus dem Almanach.',
     ],

@@ -243,6 +243,23 @@ Gegengelesen wurden alle Fragen zu KVR und Sicherheit sowie `data/colregs.ts`, `
 Seezeichen (IALA A), Seefunk-Abläufe und Wetterbegriffe des Seewetterberichts waren stimmig und blieben unverändert. Tests: 208.
 Die Prüfung ersetzt keinen Abgleich mit den amtlichen Texten (COLREGs/KVR, Funkhandbuch, Seewetterdienst).
 
+### Phase 17 – fertig ✅ (Inhaltsprüfung Kompass, Gezeiten, Karte, Peilen)
+Gegengelesen wurden die 78 Fragen zu Kompass, Gezeiten, Kartenkunde und Peilen sowie die zugehörigen Lektionstexte, Lernkarten,
+das Glossar, `data/chartSymbols.ts` und die Feuerkennungen (`calculations/lights.ts`). Alle Rechenaufgaben waren bereits durch Tests
+abgesichert; korrigiert wurden Erklärtexte:
+
+| Stelle | Vorher | Jetzt |
+| --- | --- | --- |
+| Höhenbezug (Lektion Kartenkunde, Lernkarte und Symbol MHWS) | Landmarken, **Brücken** und Feuer auf MHWS | Landmarken und Feuer auf MHWS; lichte Höhen von Brücken/Leitungen auf neueren britischen Karten auf HAT – Kartentitel beachten |
+| Trockenhöhe (Frage, Symbol) | „fällt bei Niedrigwasser trocken" | liegt über dem Kartennull und kann bei niedrigem Wasserstand trockenfallen |
+| Springtide (Lektion, Frage, Lernkarte) | „bei Neu- und Vollmond" | meist ein bis zwei Tage danach |
+| Glossar „Fix" | Deckpeilung als Beispiel für einen Fix | eine einzelne Peilung oder Deckpeilung liefert nur eine Standlinie |
+| Lektion Kompass | „Handpeilkompass fern vom Boot" | fern von Eisenteilen, Motor und Elektronik benutzt |
+| Lektion Gezeitenhöhe (Coastal) | Kartennull „ungefähr niedrigstes Niedrigwasser" | etwa der niedrigste astronomische Gezeitenstand (LAT) |
+
+Unverändert und stimmig: Umrechnungskette C–D–M–V–T, Feuerkennungen (Q 50–79/min, VQ 80–159/min, LFl ≥ 2 s), Abkürzungen,
+Peilregeln (Schnittwinkel, Reihenfolge, Deckpeilung).
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

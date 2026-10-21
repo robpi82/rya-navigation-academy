@@ -240,7 +240,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     english: 'Position Fix',
     german: 'Standortbestimmung / beobachteter Ort',
     definition:
-      'Eine Position, die durch Beobachtung bekannter Referenzen ermittelt wurde – z. B. GPS, Kreuzpeilung, Deckpeilung oder Radar.',
+      'Eine Position, die durch Beobachtung bekannter Referenzen ermittelt wurde – z. B. GPS, Kreuzpeilung oder Radar. Eine einzelne Peilung oder Deckpeilung liefert nur eine Standlinie, noch keinen Fix.',
     details: [
       'Ein Fix beruht auf Messungen zu externen Bezugspunkten, nicht auf Annahmen über Fahrt und Strom. Er ist daher zuverlässiger als eine Estimated Position.',
       'Klassische Methode: Drei-Linien-Kreuzpeilung auf gut identifizierbare Objekte. Die drei Standlinien bilden selten einen Punkt, sondern ein kleines Fehlerdreieck („cocked hat"). Man nimmt den für die Gefahr ungünstigsten Punkt an.',

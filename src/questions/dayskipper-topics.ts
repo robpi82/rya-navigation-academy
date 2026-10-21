@@ -389,7 +389,7 @@ export const DAY_SKIPPER_TOPICS: Question[] = [
     options: ['Bei Halbmond', 'Bei Neu- und Vollmond', 'Nur im Frühling', 'Bei starkem Wind aus West'],
     correctIndex: 1,
     solution: 'Bei Neu- und Vollmond.',
-    steps: ['Sonne, Mond und Erde stehen in einer Linie – die Anziehungskräfte addieren sich.', 'Die Folge sind der größte Tidenhub und die stärksten Gezeitenströme.'],
+    steps: ['Sonne, Mond und Erde stehen in einer Linie – die Anziehungskräfte addieren sich.', 'Die Folge sind der größte Tidenhub und die stärksten Gezeitenströme – in der Praxis meist ein bis zwei Tage nach Neu- bzw. Vollmond.'],
   },
   {
     id: 'dt-022',
@@ -482,7 +482,7 @@ export const DAY_SKIPPER_TOPICS: Question[] = [
     level: 'day-skipper',
     category: 'concept',
     prompt: 'Was bedeutet in der Seekarte eine unterstrichene Zahl, z. B. 1,2 mit Unterstrich?',
-    options: ['Eine besonders tiefe Stelle', 'Eine Trockenhöhe: Die Stelle fällt bei Niedrigwasser trocken', 'Eine Gefahrenpeilung', 'Die Höhe eines Leuchtturms'],
+    options: ['Eine besonders tiefe Stelle', 'Eine Trockenhöhe: Die Stelle liegt über dem Kartennull und kann bei Niedrigwasser trockenfallen', 'Eine Gefahrenpeilung', 'Die Höhe eines Leuchtturms'],
     correctIndex: 1,
     solution: 'Trockenhöhe über Kartennull.',
     steps: ['Unterstrichene Zahlen geben an, wie weit die Stelle über das Kartennull ragt.', 'Wassertiefe = Höhe der Gezeit − Trockenhöhe.'],
