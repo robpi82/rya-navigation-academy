@@ -114,6 +114,32 @@
   color: var(--foreground);
 }
 
+/* OpenSeaMap-Karte: Originalfarben der Kartenanbieter, eigene Beschriftungen schlicht */
+.osm-chart .leaflet-container {
+  background: #aad3df;
+  font-family: var(--font-sans);
+}
+.osm-chart .leaflet-control-attribution a {
+  text-decoration: underline;
+}
+.osm-chart .osm-chart-symbol {
+  background: none;
+  border: none;
+}
+.osm-chart .osm-chart-label {
+  background: rgb(255 255 255 / 0.9);
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 1px 5px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.osm-chart .osm-chart-label::before {
+  display: none;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

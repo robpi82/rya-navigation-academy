@@ -545,6 +545,16 @@ const PHASES = [
       'Ebenen ein- und ausblendbar, Detailstufen je Zoom, Beschriftungen ohne Überlappung; Karte bleibt auch im dunklen Design hell. Alle 11 Aufgaben und ihre Objekte unverändert; 17 neue Tests (u. a. Tiefe entlang aller Kurslinien, Molen, IALA-Seiten)',
     ],
   },
+  {
+    phase: 54,
+    title: 'Echte Seekarte mit OpenSeaMap',
+    done: true,
+    items: [
+      'Neue Kartenansicht mit Leaflet: OpenStreetMap als Grundkarte, OpenSeaMap-Seezeichen transparent darüber, dauerhafte Quellenangabe und Hinweis „Nur für Ausbildungszwecke“',
+      'Fünf reale Übungsgebiete (Solent, Plymouth, Portsmouth Harbour, Baiona/Ría de Vigo, Kieler Förde); Messen in Grad/Dezimalminuten und Seemeilen, Loxodrome und Großkreis getrennt, Kurslinien, Start/Ziel, Peillinien, Positionskreuze, Rückgängig',
+      'Erste reale Aufgabe (Kurs und Distanz südlich der Isle of Wight); die 11 bisherigen Aufgaben im Modus „Übungsrevier (fiktiv)“ unverändert. Kartenanbieter zentral konfigurierbar; 12 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

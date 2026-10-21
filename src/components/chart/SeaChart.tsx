@@ -9,6 +9,7 @@ import { CHART_COLORS, FeatureGlyph, MarkGlyph } from './chartSymbols'
 import type { LatLon } from '@/types/navigation'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { formatLat, formatLon } from '@/lib/coords'
 
 /* ------------------------------------------------------------------ Koordinaten */
 
@@ -19,18 +20,7 @@ const toMap = (p: LatLon) => {
 }
 const fromMap = (x: number, y: number): LatLon => fromMercator({ x, y: -y })
 
-export function formatLat(lat: number, decimals = 1): string {
-  const a = Math.abs(lat)
-  const d = Math.floor(a)
-  const m = (a - d) * 60
-  return `${d}°${m.toFixed(decimals).replace('.', ',').padStart(decimals ? 3 + decimals : 2, '0')}′${lat >= 0 ? 'N' : 'S'}`
-}
-export function formatLon(lon: number, decimals = 1): string {
-  const a = Math.abs(lon)
-  const d = Math.floor(a)
-  const m = (a - d) * 60
-  return `${String(d).padStart(3, '0')}°${m.toFixed(decimals).replace('.', ',').padStart(decimals ? 3 + decimals : 2, '0')}′${lon >= 0 ? 'E' : 'W'}`
-}
+export { formatLat, formatLon }
 
 /* ------------------------------------------------------------------ Overlays */
 

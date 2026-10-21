@@ -51,7 +51,7 @@ src/
 ├── components/
 │   ├── ui/            shadcn/ui-Komponenten (Button, Card, Slider, Tabs, …)
 │   ├── layout/        AppShell, Sidebar, ThemeToggle
-│   ├── chart/         SeaChart: interaktive Seekarte (Zoom, Pan, Ebenen, Overlays) und Kartenzeichen
+│   ├── chart/         OpenSeaMapChart (reale Webkarte) und SeaChart (fiktives Übungsrevier)
 │   └── nautical/      SVG-Bausteine: Vektorpfeile (RYA-Pfeilkonvention), Boot, Nordpfeil, Winkelbogen
 ├── modules/           Fachmodule: dashboard, glossary, simulator, quiz, flashcards, calculators, chart, coastal,
 │                      daylessons (Themen), lessons (gemeinsames Lektionsgerüst)
@@ -499,6 +499,21 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Ebenen-Menü, Detailstufen je Zoom, kollisionsfreie Beschriftung; `.chart-paper` hält die Karte im Dark Mode hell.
 - Alle Karten- und Revierdaten sind selbst erstellt (keine IHO-, UKHO- oder OpenSeaMap-Daten) – damit gibt es keine Lizenzpflichten
   aus Kartendaten. Die 11 Aufgabenobjekte sind per Test eingefroren. Tests: 468.
+
+### Phase 54 – fertig ✅ (Echte Seekarte mit OpenSeaMap)
+- `/#/seekarte` startet mit der **realen Karte** (`components/chart/OpenSeaMapChart.tsx`, Leaflet 1.9, BSD-2-Clause):
+  OpenStreetMap-Kacheln als Grundkarte, OpenSeaMap-Seezeichen als transparente Ebene darüber, Quellenangabe und der Hinweis
+  „Nur für Ausbildungszwecke – nicht zur realen Navigation geeignet.“ dauerhaft sichtbar. `react-leaflet` wurde bewusst nicht
+  verwendet (Hippocratic License 2.1, keine OSI-Lizenz); Leaflet ist direkt eingebunden.
+- Fünf reale Übungsgebiete (`data/practiceAreas.ts`), Werkzeuge Messen, Kurslinie, Start/Ziel, Peillinie, Positionskreuz,
+  Rückgängig und Löschen; Positionsanzeige in Grad und Dezimalminuten, Maßstab in Seemeilen. Kurse werden als Loxodrome aus den
+  Koordinaten berechnet (`lib/measure.ts`), der Großkreis wird getrennt ausgewiesen – unabhängig vom Zoom.
+- Erste reale Aufgabe `rc-01` (`lib/realChartExercises.ts`); die 11 bisherigen Aufgaben im Modus „Übungsrevier (fiktiv)“.
+- **Kartenanbieter** stehen nur in `config/mapProviders.ts` und lassen sich beim Build ersetzen:
+  `VITE_BASEMAP_URL`, `VITE_BASEMAP_ATTRIBUTION`, `VITE_BASEMAP_MAX_ZOOM`, `VITE_SEAMARK_URL`, `VITE_SEAMARK_ATTRIBUTION`,
+  `VITE_BATHYMETRY_URL`, `VITE_BATHYMETRY_ATTRIBUTION`, `VITE_BATHYMETRY_WMS_LAYERS`. Ohne Tiefendatenquelle bleibt die
+  Tiefen-Ebene deaktiviert (OpenSeaMap enthält keine Tiefenlinien). Die öffentlichen OSM-/OpenSeaMap-Server sind nur für
+  Entwicklung und geringe Last gedacht – vor einer Veröffentlichung eigenen oder kommerziellen Kachelanbieter eintragen. Tests: 480.
 
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
