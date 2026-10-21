@@ -425,6 +425,16 @@ const PHASES = [
       'Dabei korrigiert: Nordtonne steht an der Nordseite der Gefahr (dt-053), Rule 30(e) für Ankerlicht unter 7 m, Kegel „wo am besten sichtbar“, überlappende Ablenker (Gale, LAT) ersetzt; 5 neue Tests',
     ],
   },
+  {
+    phase: 42,
+    title: 'Yachtmaster-Lektion Wetterkarten lesen',
+    done: true,
+    items: [
+      'Achte Yachtmaster-Lektion: Isobaren, Fronten, geostrophischer Wind aus Isobarenabstand und Breite, Bodenwind über See (¾, 15° zum Tief), Gradientwind um Tief und Hoch',
+      'Rechner Wind aus dem Isobarenabstand, Richtungsübung um Tief und Hoch (Nordhalbkugel), Tiefdurchzug als Reihenfolge',
+      'Neue Berechnungen in calculations/weatherCharts.ts, 10 Fragen, 2 Lernkarten, 1 Formel; Lektionstest prüft jetzt gegen die Themenliste; 9 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

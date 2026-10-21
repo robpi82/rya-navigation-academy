@@ -7,6 +7,7 @@ import { NoonLatitudeWidget, NoonTimeWidget, SextantWidget } from './astroWidget
 import { InterceptWidget, SightFixWidget, SunRunSunWidget } from './sightWidgets'
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 import { RadarPlotWidget } from './radarWidgets'
+import { DepressionOrderWidget, IsobarWindWidget, WindAroundSystemWidget } from './weatherChartWidgets'
 
 export const YACHT_LESSONS: Lesson[] = [
   {
@@ -51,6 +52,34 @@ export const YACHT_LESSONS: Lesson[] = [
     mnemonic: 'Der kleinere Wert gewinnt: Kimm oder Lichtstärke.',
     widgets: [{ title: 'Wann taucht das Feuer auf?', description: 'Feuer-, Augenhöhe und Nenntragweite verändern.', Comp: LightHorizonWidget }],
     links: [{ label: 'Feuerkennung entschlüsseln', href: '#/themen/chart-reading' }],
+  },
+  {
+    id: 'weather-charts',
+    title: 'Wetterkarten lesen',
+    english: 'Reading Weather Charts',
+    summary: 'Bodendruckkarten verstehen: Windstärke aus dem Isobarenabstand, Richtung um Tief und Hoch, Fronten und der Ablauf eines Tiefdurchzugs.',
+    body: [
+      'Eine Bodendruckkarte zeigt Linien gleichen Luftdrucks (Isobaren, meist alle 4 hPa), Hoch- und Tiefdruckgebiete und Fronten: Warmfronten mit Halbkreisen, Kaltfronten mit Dreiecken, Okklusionen mit beidem. Für den Segler ist die wichtigste Information der Wind. Je enger die Isobaren, desto stärker der Wind; bei gleichem Abstand weht es in niedrigen Breiten stärker als in hohen, weil die Coriolisbeschleunigung zum Äquator hin abnimmt. Der Wert, der sich aus Abstand und Breite ergibt, heißt geostrophischer Wind.',
+      'Auf der Nordhalbkugel weht der Wind gegen den Uhrzeigersinn um ein Tief und im Uhrzeigersinn um ein Hoch – mit dem Rücken zum Wind liegt das Tief links. Über See bremst die Reibung den Bodenwind auf etwa drei Viertel und dreht ihn um rund 15° zum Tief hin. Gekrümmte Isobaren verändern das Bild: Um ein Tief ist der Wind schwächer als nach dem Abstand zu erwarten, um ein Hoch etwas stärker. Böen und Schauerböen an Fronten liegen deutlich über diesen Mittelwerten.',
+      'Ein Tief kündigt sich mit hohen Federwolken und fallendem Druck an. Vor der Warmfront dreht der Wind links und frischt auf, an der Front regnet es anhaltend und der Wind dreht rechts. Im Warmsektor ist es diesig, an der Kaltfront folgen Schauerböen, ein kräftiger Rechtsdreher und steigender Druck. Vorhersagekarten für 24 bis 72 Stunden zeigen, wie sich das Muster verschiebt; Barometer und Himmel an Bord zeigen, ob die Vorhersage eintrifft. GRIB-Daten sind praktisch, glätten aber Fronten und Böen.',
+    ],
+    keyPoints: [
+      'Enge Isobaren = viel Wind; gleicher Abstand weiter südlich = mehr Wind.',
+      'Nordhalbkugel: um das Tief gegen den Uhrzeigersinn, Tief links mit dem Wind im Rücken.',
+      'Über See: Bodenwind ≈ ¾ des geostrophischen, ≈ 15° zum Tief hin; um ein Tief schwächer, um ein Hoch stärker.',
+      'Tiefdurchzug: Cirrus → Warmfront (Regen, Rechtsdreher) → Warmsektor → Kaltfront (Böen, Rechtsdreher, Druck steigt).',
+    ],
+    mnemonic: 'Rücken zum Wind, das Tief zur Linken – und je enger die Linien, desto mehr Wind.',
+    widgets: [
+      { title: 'Wind aus dem Isobarenabstand', Comp: IsobarWindWidget },
+      { title: 'Windrichtung um Tief und Hoch', Comp: WindAroundSystemWidget },
+      { title: 'Ein Tief zieht durch', Comp: DepressionOrderWidget },
+    ],
+    links: [
+      { label: 'Wetter (Day Skipper)', href: '#/themen/weather' },
+      { label: 'Wetterrouting', href: '#/yachtmaster/weather-routing' },
+      { label: 'Schwerwetter', href: '#/coastal/heavy-weather' },
+    ],
   },
   {
     id: 'weather-routing',

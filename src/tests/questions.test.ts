@@ -34,6 +34,11 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  geostrophicWind,
+  surfaceWindSpeed,
+  surfaceWindFrom,
+  gradientWind,
+  frontArrivalHours,
   distanceOffFromBowAngles,
   abeamDistance,
   epErrorRadius,
@@ -191,6 +196,14 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'wxchart': {
+      if (v.quantity === 'frontHours') return frontArrivalHours(v.distanceNm!, v.speedKn!)
+      if (v.quantity === 'surfaceDir') return surfaceWindFrom(v.bearingFromCentre!, v.system!)
+      const vg = geostrophicWind(v.intervalHpa!, v.spacingNm!, v.latDeg!)
+      if (v.quantity === 'geostrophic') return vg
+      if (v.quantity === 'gradient') return gradientWind(vg, v.radiusNm!, v.latDeg!, v.system!)
+      return surfaceWindSpeed(vg)
+    }
     case 'nogps':
       if (v.quantity === 'distanceOff') return distanceOffFromBowAngles(v.firstAngle!, v.secondAngle!, v.runNm!)
       if (v.quantity === 'abeam') return abeamDistance(v.firstAngle!, v.secondAngle!, v.runNm!)

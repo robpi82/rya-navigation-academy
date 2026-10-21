@@ -428,6 +428,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Fachlich korrigiert: Nordtonne steht nördlich der Gefahr (dt-053), Rule 30(e) vollständig, Kegelposition nach Regeltext,
   überlappende Ablenker ersetzt. Tests: 371.
 
+### Phase 42 – fertig ✅ (Yachtmaster-Lektion Wetterkarten lesen)
+- Neue Lektion **Wetterkarten lesen**: geostrophischer Wind aus Isobarenabstand und Breite, Bodenwind über See, Gradientwind um
+  Tief und Hoch, Windrichtung nach Buys Ballot, Fronten und Tiefdurchzug.
+- 10 neue Fragen (insgesamt 449), 2 Lernkarten, Formelsammlung 38 Formeln. Tests: 380.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

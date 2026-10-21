@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { QUESTION_BANK } from '@/questions'
-import { DAY_TOPIC_IDS, COASTAL_TOPIC_IDS } from '@/data/topics'
+import { DAY_TOPIC_IDS, COASTAL_TOPIC_IDS, YACHT_TOPIC_IDS } from '@/data/topics'
 import { DAY_LESSON_IDS } from '@/data/lessonIds'
 import { EXAM_GROUPS, EXAM_PRESETS, PASS_PERCENT, buildExam, gradeExam, groupOf, groupQuotas, normalizeAnswer, remainingSeconds, seededRandom } from '@/lib/exam'
 import { buildOrder } from '@/modules/exam/order'
@@ -188,7 +188,7 @@ import { YACHT_LESSONS } from '@/modules/yachtmaster/YachtmasterPage'
 
 describe('Yachtmaster-Lektionen', () => {
   it('jede Lektion hat Text, Merksatz, Widget und passende Fragen', () => {
-    expect(YACHT_LESSONS.map((l) => l.id).sort()).toEqual(['celestial', 'great-circle', 'night-navigation', 'night-passage', 'radar-plotting', 'sight-reduction', 'weather-routing'])
+    expect(YACHT_LESSONS.map((l) => l.id).sort()).toEqual([...YACHT_TOPIC_IDS].sort())
     for (const l of YACHT_LESSONS) {
       expect(l.body.length).toBeGreaterThanOrEqual(3)
       expect(l.mnemonic.length).toBeGreaterThan(10)

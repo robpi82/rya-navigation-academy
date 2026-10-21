@@ -11,6 +11,8 @@ import {
   epErrorRadius,
   reduceSounding,
   fuelNeeded,
+  geostrophicWind,
+  surfaceWindSpeed,
   thirdsRange,
   distanceFrom,
   driftToCoast,
@@ -123,6 +125,7 @@ export const FORMULA_GROUPS: FormulaGroup[] = [
     level: 'yachtmaster-offshore',
     items: [
       { id: 'gc', title: 'Großkreisdistanz', formula: 'cos d = sin φ1 sin φ2 + cos φ1 cos φ2 cos Δλ; 1′ Bogen = 1 NM', example: 'auf dem Äquator von 0° nach 60° E', compute: () => greatCircle({ lat: 0, lon: 0 }, { lat: 0, lon: 60 })!.distance, expected: 3600, digits: 0, unit: ' NM', href: '#/yachtmaster/great-circle' },
+      { id: 'geostrophic', title: 'Wind aus dem Isobarenabstand', formula: 'V = Δp / (ρ · f · Δn), f = 2 Ω sin φ; Bodenwind über See ≈ ¾ V', example: '4 hPa auf 100 NM, 50° N, Bodenwind', compute: () => surfaceWindSpeed(geostrophicWind(4, 100, 50)), expected: 23, digits: 0, unit: ' kn', href: '#/yachtmaster/weather-charts' },
       { id: 'tacking', title: 'Kreuzen gegen den Wind', formula: 'gesegelt = Distanz / cos(Winkel zum Wind)', example: '10 NM genau gegen den Wind, 45° am Wind', compute: () => tackingDistance(10, 45), expected: 14.14, digits: 1, unit: ' NM', href: '#/yachtmaster/weather-routing' },
       { id: 'vmg', title: 'VMG', formula: 'VMG = SOG × cos(Kurs zum Ziel − COG)', example: 'SOG 6 kn, 30° neben dem Kurs zum Ziel', compute: () => vmg(6, 30, 0), expected: 5.2, digits: 1, unit: ' kn', href: '#/themen/electronics' },
       { id: 'dip', title: 'Kimmtiefe', formula: 'Dip (′) = −1,76 × √Augeshöhe (m)', example: 'Augeshöhe 4 m', compute: () => dip(4), expected: -3.52, digits: 1, unit: '′', href: '#/yachtmaster/celestial' },
