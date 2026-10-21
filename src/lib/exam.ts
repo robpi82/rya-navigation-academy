@@ -22,7 +22,7 @@ export const EXAM_PRESETS: ExamPreset[] = [
   { id: 'standard', label: 'Standard', questions: 40, minutes: 60, description: 'Realistischer Umfang für eine Probeprüfung.' },
   { id: 'lang', label: 'Intensiv', questions: 60, minutes: 90, description: 'Breite Abdeckung aller Themen.' },
   { id: 'coastal', label: 'Coastal-Test', questions: 20, minutes: 40, description: 'Kurzer Check über die Coastal-Themen.', level: 'coastal-skipper' },
-  { id: 'coastal-full', label: 'Coastal-Probeprüfung', questions: 40, minutes: 75, description: 'Alle dreizehn Coastal-Themen gleichmäßig: Gezeiten, Peilungen, Pilotage, Strom an Kaps, Nebel, Schwerwetter, Festmachen, Ankern, Notfälle.', level: 'coastal-skipper' },
+  { id: 'coastal-full', label: 'Coastal-Probeprüfung', questions: 42, minutes: 80, description: 'Alle vierzehn Coastal-Themen gleichmäßig: Gezeiten, Peilungen, Pilotage, Navigation ohne GPS, Strom an Kaps, Nebel, Schwerwetter, Festmachen, Ankern, Notfälle.', level: 'coastal-skipper' },
   { id: 'yacht', label: 'Yachtmaster kurz', questions: 12, minutes: 25, description: 'Kurzer Check über die Yachtmaster-Themen.', level: 'yachtmaster-offshore' },
   { id: 'yacht-full', label: 'Yachtmaster-Probeprüfung', questions: 30, minutes: 60, description: 'Alle sieben Yachtmaster-Themen gleichmäßig: Großkreis, Nacht, Routing, Törnplanung, Radar, Astronavigation.', level: 'yachtmaster-offshore' },
 ]
@@ -61,6 +61,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   mooring: 'coastal',
   anchoring: 'coastal',
   'tidal-races': 'coastal',
+  'no-gps': 'coastal',
   emergencies: 'coastal',
   'great-circle': 'yacht',
   'night-navigation': 'yacht',

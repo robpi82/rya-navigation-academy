@@ -10,7 +10,7 @@ export type TermId =
   | 'ep'
 
 /** Coastal-Skipper-Themen, die über die neun Grundbegriffe hinausgehen */
-export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies' | 'anchoring' | 'tidal-races'
+export type CoastalTopicId = 'tidal-height' | 'running-fix' | 'clearing-bearing' | 'passage-planning' | 'multi-hour-tide' | 'secondary-ports' | 'pilotage' | 'fog' | 'heavy-weather' | 'mooring' | 'emergencies' | 'anchoring' | 'tidal-races' | 'no-gps'
 
 /** Day-Skipper-Themen (Lektionen über die neun Grundbegriffe hinaus) */
 export type DayTopicId = 'compass' | 'tides' | 'chart-reading' | 'buoyage' | 'colregs' | 'weather' | 'safety' | 'electronics' | 'bearings' | 'preparation'
@@ -258,6 +258,19 @@ export type QuestionVerify =
       volumeL?: number
       inflowLpm?: number
       pumpingLpm?: number
+    }
+  | {
+      kind: 'nogps'
+      quantity: 'distanceOff' | 'abeam' | 'epRadius' | 'reduced' | 'dipping'
+      firstAngle?: number
+      secondAngle?: number
+      runNm?: number
+      fraction?: number
+      displayedDepth?: number
+      transducerDepth?: number
+      heightOfTide?: number
+      lightHeight?: number
+      eyeHeight?: number
     }
   | {
       kind: 'prep'

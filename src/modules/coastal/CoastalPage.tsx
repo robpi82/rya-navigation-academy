@@ -5,6 +5,7 @@ import type { Lesson } from '@/modules/lessons/types'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
 import { MooringLinesWidget, MooringOrderWidget } from './mooringWidgets'
+import { BowAngleWidget, EpErrorWidget, SoundingWidget } from './noGpsWidgets'
 import { CapeRouteWidget, CapeTimingWidget, WindAgainstTideWidget } from './tidalRaceWidgets'
 import { AnchorageChoiceWidget, AnchoringOrderWidget, AnchorScopeWidget } from './anchoringWidgets'
 import { DismastingWidget, DriftWidget, LeakWidget } from './emergencyWidgets'
@@ -118,6 +119,34 @@ export const LESSONS: CoastalLesson[] = [
     links: [
       { label: 'Gefahrenpeilung', href: '#/coastal/clearing-bearing' },
       { label: 'Peilen (Day Skipper)', href: '#/themen/bearings' },
+    ],
+  },
+  {
+    id: 'no-gps',
+    title: 'Navigation ohne GPS',
+    english: 'Navigation without GPS',
+    summary: 'Wenn die Elektronik ausfällt: Koppeln mit Fehlerkreis, Abstand aus zwei Bugwinkeln, Feuer in der Kimm und Tiefenlinien als Standlinien.',
+    body: [
+      'GPS fällt selten aus – aber wenn, dann oft zusammen mit der Bordelektrik. Wer regelmäßig Ort, Kurs, Fahrt und Logstand ins Logbuch schreibt, kann vom letzten sicheren Ort aus weiterkoppeln. Ein Koppelort ist allerdings unsicher: Als Richtwert wächst der Fehlerkreis mit rund 10 % der seither gelaufenen Strecke. Gefahren in diesem Kreis sind nicht sicher frei – also Abstand halten und den Ort bei jeder Gelegenheit neu bestimmen.',
+      'Schon eine einzige Marke liefert einen Ort: Man peilt sie zweimal relativ zum Bug und misst die Zeit dazwischen. Verdoppelt sich der Bugwinkel, ist der Abstand bei der zweiten Peilung gleich der gelaufenen Strecke; bei 45° → 90° (Vierstrichpeilung) ist sie gleich dem Passierabstand querab. Voraussetzung: Kurs und Fahrt über Grund bleiben gleich. Nachts gibt ein Feuer, das gerade in der Kimm auftaucht oder verschwindet, mit seiner geografischen Sichtweite einen Abstandskreis – zusammen mit einer Peilung einen Ort.',
+      'Auch der Meeresboden hilft: Eine ausgeprägte Tiefenlinie ist eine Standlinie, wenn die Lotung auf Kartennull reduziert wird (Echolot plus Gebertiefe, minus Höhe der Gezeit). Eine einzelne Lotung ergibt keinen Ort; eine Lotreihe entlang des Kurses, mit Zeit und Strecke notiert, kann ihn eingrenzen. Leitlinien und Deckpeilungen aus der Lektion Pilotage funktionieren ganz ohne Elektronik.',
+    ],
+    keyPoints: [
+      'Logbuch regelmäßig führen – der letzte sichere Ort ist der Startpunkt fürs Koppeln.',
+      'Fehlerkreis ≈ 10 % der Strecke seit dem letzten Fix; Gefahren darin meiden.',
+      'Bugwinkel verdoppelt: Abstand = gelaufene Strecke; 45° → 90°: Passierabstand.',
+      'Feuer in der Kimm + Peilung = Ort; Tiefenlinie + reduzierte Lotung = Standlinie.',
+    ],
+    mnemonic: 'Doppelter Winkel, gleiche Strecke – und immer ins Logbuch schreiben.',
+    widgets: [
+      { title: 'Abstand aus zwei Bugwinkeln', Comp: BowAngleWidget },
+      { title: 'Fehlerkreis des Koppelorts', Comp: EpErrorWidget },
+      { title: 'Lotung und Tiefenlinie', Comp: SoundingWidget },
+    ],
+    links: [
+      { label: 'Peilen (Day Skipper)', href: '#/themen/bearings' },
+      { label: 'Pilotage', href: '#/coastal/pilotage' },
+      { label: 'Kartenkunde: Feuer und Sichtweite', href: '#/themen/chart-reading' },
     ],
   },
   {

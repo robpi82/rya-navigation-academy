@@ -416,6 +416,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Nach jeder Rechenaufgabe (auch im normalen Prüfungstrainer) Link zur passenden Formel und Lektion; die Formelsammlung springt
   per `#/formeln/<id>` zur Formel und hebt sie hervor. Auswertung nach Rechenart. Formelsammlung: 34 Formeln. Tests: 357.
 
+### Phase 40 – fertig ✅ (Inhaltsprüfung 36–39, Coastal-Lektion Navigation ohne GPS)
+- Maschinelle Prüfung aller Fragen (IDs, Optionen, Lösungen). Befund: Bei vielen MC-Fragen ist die richtige Antwort die längste
+  und damit erratbar – für alle Fragen ab Phase 35 behoben und per Test abgesichert; bei 163 von 226 älteren Fragen noch offen.
+- Vierzehnte Coastal-Lektion **Navigation ohne GPS**: Bugwinkel-Verdoppelung, Vierstrichpeilung, Fehlerkreis, Lotung auf Kartennull.
+  10 neue Fragen (insgesamt 439), 2 Lernkarten, Formelsammlung 37 Formeln, Coastal-Probeprüfung 42 Fragen / 80 min. Tests: 365.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

@@ -19,6 +19,7 @@ export const CALC_SKILLS: CalcSkill[] = [
   { id: 'compass', label: 'Kompass und Peilungen', match: ['compass', 'bearing'], formulaId: 'c-to-t', href: '#/themen/compass' },
   { id: 'tides', label: 'Gezeitenhöhe und Tiefe', match: ['tide', 'twelfths', 'secondary'], formulaId: 'twelfths', href: '#/themen/tides' },
   { id: 'anchoring', label: 'Ankern und Festmachen', match: ['anchoring', 'mooring', 'tide:chain'], formulaId: 'chain', href: '#/coastal/anchoring' },
+  { id: 'nogps', label: 'Navigation ohne GPS', match: ['nogps'], formulaId: 'bow-angle', href: '#/coastal/no-gps' },
   { id: 'chart', label: 'Seekarte und Sichtweite', match: ['chart'], formulaId: 'light', href: '#/themen/chart-reading' },
   { id: 'wind', label: 'Wind und Wetter', match: ['weather', 'wind', 'races:windOverWater'], formulaId: 'apparent', href: '#/themen/weather' },
   { id: 'streams', label: 'Strom an Kaps und Stromrate', match: ['races'], formulaId: 'rate', href: '#/coastal/tidal-races' },

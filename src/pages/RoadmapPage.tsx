@@ -405,6 +405,16 @@ const PHASES = [
       'Jede Rechenaufgabe verlinkt nach der Antwort auf die passende Formel (#/formeln/<id>, hervorgehoben) und Lektion; Auswertung nach Rechenart; neue Formel Stromdreieck; 9 neue Tests',
     ],
   },
+  {
+    phase: 40,
+    title: 'Inhaltsprüfung 36–39 und Coastal-Lektion Navigation ohne GPS',
+    done: true,
+    items: [
+      'Maschinelle Prüfung aller Fragen: IDs, Optionen und Lösungen stimmig. Befund: Bei vielen Multiple-Choice-Fragen ist die richtige Antwort die längste – für die Fragen ab Phase 35 behoben und per Test abgesichert, ältere Fragen folgen',
+      'Vierzehnte Coastal-Lektion: Verdoppelung des Bugwinkels und Vierstrichpeilung, Fehlerkreis des Koppelorts, Feuer in der Kimm, Lotung auf Kartennull und Tiefenlinien',
+      'Neue Berechnungen in calculations/noGps.ts, 10 Fragen, 2 Lernkarten, 3 Formeln, Rechenart „Navigation ohne GPS“; Coastal-Probeprüfung jetzt 42 Fragen in 80 Minuten; 8 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

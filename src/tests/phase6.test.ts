@@ -222,10 +222,10 @@ describe('Themenverteilung Coastal/Yachtmaster', () => {
 })
 
 describe('Coastal-Probeprüfung', () => {
-  it('40 Fragen, jedes Coastal-Thema mindestens dreimal', () => {
+  it('42 Fragen, jedes Coastal-Thema mindestens dreimal', () => {
     const p = EXAM_PRESETS.find((x) => x.id === 'coastal-full')!
     const exam = buildExam(p.questions, QUESTION_BANK, seededRandom(31), p.level)
-    expect(exam).toHaveLength(40)
+    expect(exam).toHaveLength(42)
     expect(exam.every((q) => q.level === 'coastal-skipper')).toBe(true)
     for (const t of COASTAL_TOPIC_IDS) expect(exam.filter((q) => q.topic === t).length, t).toBeGreaterThanOrEqual(3)
   })

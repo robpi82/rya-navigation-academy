@@ -34,6 +34,10 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  distanceOffFromBowAngles,
+  abeamDistance,
+  epErrorRadius,
+  reduceSounding,
   fuelNeeded,
   thirdsRange,
   waterNeeded,
@@ -187,6 +191,12 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'nogps':
+      if (v.quantity === 'distanceOff') return distanceOffFromBowAngles(v.firstAngle!, v.secondAngle!, v.runNm!)
+      if (v.quantity === 'abeam') return abeamDistance(v.firstAngle!, v.secondAngle!, v.runNm!)
+      if (v.quantity === 'epRadius') return epErrorRadius(v.runNm!, v.fraction)
+      if (v.quantity === 'reduced') return reduceSounding(v.displayedDepth!, v.transducerDepth!, v.heightOfTide!)
+      return geographicRange(v.lightHeight!, v.eyeHeight!)
     case 'prep':
       if (v.quantity === 'fuel') return fuelNeeded(v.distanceNm!, v.sogKn!, v.litresPerHour!, v.reserve)
       if (v.quantity === 'thirds') return thirdsRange(v.tankLitres!, v.litresPerHour!, v.sogKn!)

@@ -3,6 +3,7 @@ import { TERM_BY_ID } from './glossary'
 
 export const COASTAL_TOPICS: Record<CoastalTopicId, { abbr: string; english: string; german: string }> = {
   emergencies: { abbr: 'NOT', english: 'Emergencies under Way', german: 'Notfälle unter Segeln' },
+  'no-gps': { abbr: 'OHNE', english: 'Navigation without GPS', german: 'Navigation ohne GPS' },
   'tidal-races': { abbr: 'RACE', english: 'Tidal Races and Overfalls', german: 'Strom an Kaps und Engstellen' },
   anchoring: { abbr: 'ANK', english: 'Anchoring', german: 'Ankern' },
   mooring: { abbr: 'FEST', english: 'Mooring in Tidal Waters', german: 'Festmachen bei Gezeiten' },
