@@ -30,7 +30,7 @@ export type BuoyId =
   | 'new-danger'
 
 /** Yachtmaster-Offshore-Themen (Vorgriff) */
-export type YachtTopicId = 'great-circle' | 'night-navigation'
+export type YachtTopicId = 'great-circle' | 'night-navigation' | 'weather-routing'
 
 export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
@@ -229,6 +229,12 @@ export type QuestionVerify =
       quantity: 'distance' | 'initialBearing' | 'finalBearing' | 'saving'
       from: LatLonLike
       to: LatLonLike
+    }
+  | {
+      kind: 'routing'
+      quantity: 'tackDistance'
+      distance: number
+      angleOffWind: number
     }
   | {
       kind: 'dst'

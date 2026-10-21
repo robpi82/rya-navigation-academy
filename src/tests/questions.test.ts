@@ -25,6 +25,7 @@ import {
   rhumbLine,
   secondaryTide,
   greatCircle,
+  tackingDistance,
   compareRoutes,
   reciprocal,
   cutAngle,
@@ -143,6 +144,8 @@ function compute(v: QuestionVerify): number | null {
     }
     case 'chart':
       return v.quantity === 'geoRange' ? geographicRange(v.lightHeight!, v.eyeHeight!) : rhumbLine(v.from!, v.to!).distance
+    case 'routing':
+      return tackingDistance(v.distance, v.angleOffWind)
     case 'greatcircle': {
       const g = greatCircle(v.from, v.to)!
       if (v.quantity === 'saving') return compareRoutes(v.from, v.to)!.saving

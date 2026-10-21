@@ -205,10 +205,21 @@ const PHASES = [
       'Direkte Links zur passenden Lektion und zum gezielten Üben (#/quiz/thema/<Thema> wählt Stufe und Thema vor); Bestehensgrenze im Ergebnis-Diagramm',
     ],
   },
+  {
+    phase: 20,
+    title: 'Yachtmaster-Lektion Wetterrouting',
+    done: true,
+    items: [
+      'Polardiagramm einer fiktiven 10-m-Yacht mit No-go-Bereich und besten Am-Wind- und Vorwind-Winkeln (größte VMG)',
+      '„Kreuzen oder direkt?": Schlagplanung zu einem Ziel bei beliebigem Wind, mit Kursen, Strecken und Zeitbedarf',
+      'Abfahrtszeit nach stündlicher Windvorhersage: Fahrtdauer je Abfahrt, Empfehlung mit Sicherheitshinweisen',
+      'Neue Berechnungen in calculations/routing.ts, 6 Fragen, 2 Lernkarten, 13 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [
-  'Weitere Yachtmaster-Lektionen (Astronavigation, Wetterrouting, Törnplanung über Nacht)',
+  'Weitere Yachtmaster-Lektionen (Astronavigation, Törnplanung über Nacht)',
   'Sekundärhäfen und Gezeitenkurven aus dem Almanach',
   'Benutzerkonten und Synchronisation über eine Datenbank',
 ]

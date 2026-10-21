@@ -25,6 +25,7 @@ export const DAY_TOPICS: Record<DayTopicId, { abbr: string; english: string; ger
 export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string; german: string }> = {
   'great-circle': { abbr: 'GK', english: 'Great Circle Sailing', german: 'Großkreisnavigation' },
   'night-navigation': { abbr: 'NACHT', english: 'Night Navigation', german: 'Nachtnavigation' },
+  'weather-routing': { abbr: 'ROUTE', english: 'Weather Routing', german: 'Wetterrouting' },
 }
 
 export const YACHT_TOPIC_IDS = Object.keys(YACHT_TOPICS) as YachtTopicId[]

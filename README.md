@@ -289,6 +289,14 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Neue Route `#/quiz/thema/<Thema>`: Prüfungstrainer mit vorgewählter Stufe und vorgewähltem Thema.
 - Diagramm „Prüfungsergebnisse" zeigt die Bestehensgrenze. Tests: 216.
 
+### Phase 20 – fertig ✅ (Wetterrouting)
+- Dritte Yachtmaster-Lektion **Wetterrouting** (`#/yachtmaster/weather-routing`, `calculations/routing.ts`, `modules/yachtmaster/routingWidgets.tsx`):
+  - Polardiagramm einer fiktiven 10-m-Yacht (bilinear interpoliert), No-go-Bereich unter 40°, beste Winkel nach größter VMG.
+  - Schlagplanung: direkt, kreuzend oder halsend – mit Steuerkursen, Schlaglängen, gesegelter Strecke und Zeitbedarf.
+  - Abfahrtszeit nach einer stündlichen Windvorhersage (Winddreher durch ein Tief): Fahrtdauer je Abfahrtsstunde.
+- 6 neue Yachtmaster-Fragen (Kreuzstrecke nachgerechnet), 2 Lernkarten, Tests: 229.
+- Vereinfachungen: kein Strom, keine Abdrift, Wendezeiten vernachlässigt, Wind innerhalb einer Stunde konstant.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 
