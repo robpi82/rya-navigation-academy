@@ -345,6 +345,16 @@ const PHASES = [
       'Erledigt-Status automatisch aus Lektionen, Glossar und Probeprüfungen; Dashboard-Karte „Diese Woche im Lernplan“, 6 neue Tests',
     ],
   },
+  {
+    phase: 34,
+    title: 'Lernplan-Status und Neuverteilen',
+    done: true,
+    items: [
+      'Status gegenüber dem Plan: im Plan, vor dem Plan, Rückstand, alles erledigt oder Termin vorbei – mit Tagen bis zur Prüfung und nötigem Wochentempo',
+      'Liste „Nachholen“ mit offenen Punkten aus vergangenen Wochen, auch auf dem Dashboard',
+      'Diagramm geplant gegen erledigt je Woche; „Restplan ab heute neu verteilen“ – Erledigtes fällt heraus, der Prüfungstermin bleibt; 7 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

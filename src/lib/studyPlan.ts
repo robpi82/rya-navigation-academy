@@ -82,18 +82,19 @@ export interface StudyPlan {
 }
 
 /** Verteilt Lektionen gleichmäßig auf die Wochen; Wiederholung und Probeprüfungen kommen in die letzte Woche (bzw. die letzten zwei). */
-export function buildPlan(level: CourseLevel, start: Date, exam: Date, sessionsPerWeek: number): StudyPlan {
+export function buildPlan(level: CourseLevel, start: Date, exam: Date, sessionsPerWeek: number, exclude: string[] = []): StudyPlan {
   const weeksN = weeksBetween(start, exam)
-  const learn = curriculum(level)
+  const learn = curriculum(level).filter((i) => !exclude.includes(i.id))
   const fin = finale()
   const learnWeeks = weeksN >= 3 ? weeksN - 1 : weeksN
   const weeks: PlanWeek[] = Array.from({ length: weeksN }, (_, i) => ({ index: i, start: toIso(new Date(monday(start).getTime() + i * 7 * DAY_MS)), items: [] }))
   learn.forEach((item, i) => weeks[Math.min(learnWeeks - 1, Math.floor((i * learnWeeks) / learn.length))].items.push(item))
-  if (weeksN >= 3) weeks[weeksN - 2].items.push(fin[0])
-  else weeks[weeksN - 1].items.push(fin[0])
-  weeks[weeksN - 1].items.push(fin[1], fin[2])
+  const keep = (i: PlanItem) => !exclude.includes(i.id)
+  if (keep(fin[0])) weeks[weeksN >= 3 ? weeksN - 2 : weeksN - 1].items.push(fin[0])
+  weeks[weeksN - 1].items.push(...fin.slice(1).filter(keep))
   const maxPerWeek = Math.max(...weeks.map((w) => w.items.length))
-  return { weeks, itemsPerWeek: (learn.length + fin.length) / weeksN, tooDense: maxPerWeek > sessionsPerWeek }
+  const count = learn.length + fin.filter(keep).length
+  return { weeks, itemsPerWeek: count / weeksN, tooDense: maxPerWeek > sessionsPerWeek }
 }
 
 export interface ProgressSnapshot {
@@ -113,4 +114,60 @@ export function isDone(item: PlanItem, p: ProgressSnapshot): boolean {
   if (item.kind === 'review') return since.some((a) => !a.exam && a.mode === 'learn' && a.answers.length > 0)
   const exams = since.filter((a) => a.exam && presetLevel(a.exam.presetId) === p.level)
   return exams.length >= (item.id === 'exam-2' ? 2 : 1)
+}
+
+/** Index der aktuellen Woche (vor Beginn 0, nach dem Ende die letzte Woche). */
+export function currentWeekIndex(plan: StudyPlan, today: string): number {
+  let idx = 0
+  plan.weeks.forEach((w, i) => {
+    if (w.start <= today) idx = i
+  })
+  return idx
+}
+
+export type PlanPace = 'done' | 'ahead' | 'on-track' | 'behind' | 'over'
+
+export interface PlanStatus {
+  pace: PlanPace
+  /** offene Punkte aus vergangenen Wochen */
+  overdue: PlanItem[]
+  /** bereits erledigte Punkte aus kommenden Wochen */
+  aheadCount: number
+  /** Punkte, die bis Ende der aktuellen Woche fällig sind, und davon erledigt */
+  dueByNow: number
+  doneByNow: number
+  /** offene Punkte insgesamt */
+  open: number
+  /** Tage bis zur Prüfung (negativ = vorbei) */
+  daysLeft: number
+}
+
+/** Vergleicht den Plan mit dem Lernstand: Was ist überfällig, was schon vorgezogen? */
+export function planStatus(plan: StudyPlan, done: (i: PlanItem) => boolean, today: string, examDate: string): PlanStatus {
+  const current = today < plan.weeks[0].start ? -1 : currentWeekIndex(plan, today)
+  const past = plan.weeks.filter((w) => w.index < current).flatMap((w) => w.items)
+  const upToNow = plan.weeks.filter((w) => w.index <= current).flatMap((w) => w.items)
+  const future = plan.weeks.filter((w) => w.index > current).flatMap((w) => w.items)
+  const all = plan.weeks.flatMap((w) => w.items)
+  const overdue = past.filter((i) => !done(i))
+  const aheadCount = future.filter(done).length
+  const open = all.filter((i) => !done(i)).length
+  const daysLeft = Math.round((Date.parse(examDate) - Date.parse(today)) / DAY_MS)
+  let pace: PlanPace
+  if (open === 0) pace = 'done'
+  else if (daysLeft < 0) pace = 'over'
+  else if (overdue.length > 0) pace = 'behind'
+  else if (aheadCount > 0) pace = 'ahead'
+  else pace = 'on-track'
+  return { pace, overdue, aheadCount, dueByNow: upToNow.length, doneByNow: upToNow.filter(done).length, open, daysLeft }
+}
+
+/** Geplante und erledigte Punkte je Woche (für das Diagramm). */
+export function weeklyProgress(plan: StudyPlan, done: (i: PlanItem) => boolean): { week: string; planned: number; done: number }[] {
+  return plan.weeks.map((w) => ({ week: String(w.index + 1), planned: w.items.length, done: w.items.filter(done).length }))
+}
+
+/** IDs aller erledigten Punkte – sie fallen beim Neuverteilen des Restplans heraus. */
+export function doneIds(plan: StudyPlan, done: (i: PlanItem) => boolean): string[] {
+  return plan.weeks.flatMap((w) => w.items).filter(done).map((i) => i.id)
 }

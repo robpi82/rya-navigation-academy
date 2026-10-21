@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PlanItemRow } from './PlanItemRow'
 import { usePlanView } from './usePlan'
+import { PaceBadge, paceSentence } from './PlanStatusPanel'
 
 /** Dashboard-Karte: Punkte der aktuellen Lernplan-Woche oder Hinweis zum Anlegen. */
 export function PlanWeekCard() {
@@ -30,14 +31,29 @@ export function PlanWeekCard() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2">
-          <CalendarDays className="size-5 text-primary" /> Diese Woche im Lernplan
-        </CardTitle>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <CardTitle className="flex items-center gap-2">
+            <CalendarDays className="size-5 text-primary" /> Diese Woche im Lernplan
+          </CardTitle>
+          <PaceBadge pace={view.status.pace} overdue={view.status.overdue.length} />
+        </div>
         <CardDescription>
-          Woche {view.current + 1} von {view.plan.weeks.length} · insgesamt {view.doneCount}/{view.total} erledigt
+          Woche {view.current + 1} von {view.plan.weeks.length} · insgesamt {view.doneCount + (view.settings.exclude?.length ?? 0)}/{view.total + (view.settings.exclude?.length ?? 0)} erledigt
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
+        <p className="text-sm text-muted-foreground">{paceSentence(view)}</p>
+        {view.status.overdue.length > 0 && (
+          <div>
+            <p className="px-2 text-xs font-semibold tracking-wide text-destructive uppercase">Nachholen</p>
+            <ul className="space-y-0.5">
+              {view.status.overdue.slice(0, 3).map((i) => (
+                <PlanItemRow key={i.id} item={i} done={false} />
+              ))}
+            </ul>
+            {view.status.overdue.length > 3 && <p className="px-2 text-xs text-muted-foreground">… und {view.status.overdue.length - 3} weitere</p>}
+          </div>
+        )}
         {week.items.length ? (
           <ul className="space-y-0.5">
             {week.items.map((i) => (

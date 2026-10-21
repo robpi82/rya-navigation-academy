@@ -8,6 +8,10 @@ export interface PlanSettings {
   start: string
   exam: string
   sessionsPerWeek: number
+  /** beim Neuverteilen: schon erledigte Punkte, die nicht mehr eingeplant werden */
+  exclude?: string[]
+  /** ab wann Probeprüfungen und Wiederholungen zählen (Beginn des ersten Plans) */
+  countFrom?: string
 }
 
 interface PlanState {

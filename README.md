@@ -381,6 +381,12 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Erledigt-Status automatisch aus Lektionen, gelernten Begriffen und Probeprüfungen ab Planbeginn; Warnung bei zu dichtem Plan.
 - Dashboard-Karte „Diese Woche im Lernplan“. Tests: 311.
 
+### Phase 34 – fertig ✅ (Lernplan-Status)
+- Status gegenüber dem Plan (im Plan / voraus / Rückstand / erledigt / Termin vorbei), Tage bis zur Prüfung und nötiges Wochentempo.
+- „Nachholen“-Liste für offene Punkte vergangener Wochen (Seite und Dashboard), Diagramm geplant gegen erledigt je Woche.
+- „Restplan ab heute neu verteilen“: Erledigtes fällt heraus, Prüfungstermin bleibt, Probeprüfungen zählen weiter ab dem ersten Planbeginn.
+  Tests: 318.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

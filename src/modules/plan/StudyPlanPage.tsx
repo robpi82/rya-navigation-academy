@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import { usePlanStore } from '@/stores/planStore'
 import type { CourseLevel } from '@/types/learning'
 import { PlanItemRow } from './PlanItemRow'
+import { PlanStatusPanel } from './PlanStatusPanel'
 import { todayIso, usePlanView } from './usePlan'
 
 export const LEVEL_NAME: Record<CourseLevel, string> = {
@@ -98,6 +99,7 @@ export function StudyPlanPage() {
     )
 
   const { settings, plan, done, current, doneCount, total } = view
+  const before = settings.exclude?.length ?? 0
   return (
     <div className="space-y-6">
       <PageHeader
@@ -110,14 +112,17 @@ export function StudyPlanPage() {
         }
       />
       <Card>
-        <CardContent className="space-y-2 pt-5">
-          <div className="flex justify-between text-sm">
-            <span>Gesamtfortschritt</span>
-            <span className="font-mono tabular-nums">
-              {doneCount}/{total}
-            </span>
+        <CardContent className="space-y-5 pt-5">
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Gesamtfortschritt{before > 0 && <span className="text-muted-foreground"> (davon {before} vor dem Neuverteilen)</span>}</span>
+              <span className="font-mono tabular-nums">
+                {doneCount + before}/{total + before}
+              </span>
+            </div>
+            <Progress value={((doneCount + before) / Math.max(1, total + before)) * 100} />
           </div>
-          <Progress value={(doneCount / total) * 100} />
+          <PlanStatusPanel view={view} />
         </CardContent>
       </Card>
       {plan.tooDense && (
