@@ -34,6 +34,8 @@ import {
   driftToCoast,
   anchorRode,
   windOverWater,
+  vhfRange,
+  stormCentreBearing,
   legMinutes,
   minDistanceForDischarge,
   holdingTankDays,
@@ -217,6 +219,9 @@ function compute(v: QuestionVerify): number | null {
       if (v.quantity === 'leakLpm') return leakRate(v.diameterCm!, v.depthM!)
       if (v.quantity === 'minutesUntil') return minutesUntil(v.volumeL!, v.inflowLpm!, v.pumpingLpm!)
       return driftToCoast(v.windFrom!, v.windKn!, v.currentSet ?? 0, v.currentKn ?? 0, v.coastBearing!, v.distanceNm!).hours
+    case 'oceanwx':
+      if (v.quantity === 'vhfRange') return vhfRange(v.antennaA!, v.antennaB!)
+      return v.quantity === 'centreNear' ? stormCentreBearing(v.windFrom!, v.hemisphere!).near : stormCentreBearing(v.windFrom!, v.hemisphere!).far
     case 'inshore':
       return legMinutes(v.distanceNm, v.speedKn)
     case 'env':

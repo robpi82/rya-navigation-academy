@@ -8,6 +8,7 @@ import { InterceptWidget, SightFixWidget, SunRunSunWidget } from './sightWidgets
 import { DaylightArrivalWidget, RouteLightsWidget, WatchPlanWidget } from './nightWidgets'
 import { RadarPlotWidget } from './radarWidgets'
 import { AbandonShipOrderWidget, MobDriftWidget, RescueTimeWidget, SearchPatternWidget } from './sarWidgets'
+import { GlobalWindsWidget, OffshoreCommsWidget, TropicalStormWidget } from './oceanWeatherWidgets'
 import { EtmalProvisionWidget, SeasonRouteWidget, TimeZoneWidget } from './oceanWidgets'
 import { AtlasBrowserWidget, AtlasPageQuizWidget, AtlasPassageWidget } from './atlasWidgets'
 import { DepressionOrderWidget, IsobarWindWidget, WindAroundSystemWidget } from './weatherChartWidgets'
@@ -162,6 +163,34 @@ export const YACHT_LESSONS: Lesson[] = [
       { label: 'Wetterrouting', href: '#/yachtmaster/weather-routing' },
       { label: 'Großkreisnavigation', href: '#/yachtmaster/great-circle' },
       { label: 'Törnvorbereitung (Day Skipper)', href: '#/themen/preparation' },
+    ],
+  },
+  {
+    id: 'ocean-weather',
+    title: 'Ozeanwetter und Kommunikation',
+    english: 'Ocean Weather & Communications',
+    summary: 'Die großen Windgürtel, tropische Wirbelstürme und wie man ihnen ausweicht – und wie man weit draußen Wetterdaten bekommt und Hilfe ruft.',
+    body: [
+      'Über den Ozeanen ordnen sich die Winde in Gürteln: Beiderseits des Äquators wehen die Passate – auf der Nordhalbkugel aus Nordost, auf der Südhalbkugel aus Südost. Dazwischen liegen die Mallungen (ITCZ) mit Flauten, Gewittern und Böen. Um 30° Breite folgen die windarmen subtropischen Hochs wie das Azorenhoch, weiter polwärts die Westwindzonen mit wandernden Tiefs. Im Sommer der jeweiligen Halbkugel verschiebt sich das ganze System polwärts. Daraus ergeben sich die klassischen Ozeanrouten.',
+      'Tropische Wirbelstürme entstehen über warmem Wasser; ab 34 kn mittlerem Wind spricht man von einem tropischen Sturm, ab 64 kn von einem Hurrikan (Taifun, Zyklon). Auf der Nordhalbkugel drehen sie gegen den Uhrzeigersinn, und der rechte Halbkreis – in Zugrichtung gesehen – ist der gefährliche: Dort addieren sich Wind und Zuggeschwindigkeit, und der Wind treibt ein Schiff vor den Sturm. Dreht der Wind bei fallendem Druck rechts, liegt man im gefährlichen Halbkreis; dreht er links, im fahrbaren; bleibt er gleich und nimmt zu, liegt man auf der Zugbahn. Mit dem Gesicht zum Wind liegt das Zentrum auf der Nordhalbkugel 90° bis 135° rechts. Auf der Südhalbkugel ist alles spiegelverkehrt. Die beste Taktik bleibt, Saison und Warnungen zu beachten und gar nicht erst in die Nähe zu kommen.',
+      'UKW reicht nur bis zum Funkhorizont, rund 2,2 × (√H + √h) Seemeilen – das Seegebiet A1 des Weltweiten Seenot- und Sicherheitsfunksystems (GMDSS). Weiter draußen helfen Grenzwelle (A2), Satellit (A3) und Kurzwelle. NAVTEX sendet Wetter- und Warnmeldungen als Text auf 518 kHz bis etwa 200–400 NM vor die Küste, auf Hochsee kommen sie per Satellit. GRIB-Dateien per Satellit oder Kurzwelle liefern Windvorhersagen, glätten aber Böen und Gewitter. Alle Werte hier sind vereinfacht.',
+    ],
+    keyPoints: [
+      'Nordostpassat – Mallungen – Südostpassat; um 30° Hochdruck, dann Westwinde; im Sommer polwärts verschoben.',
+      'Hurrikan ab 64 kn; Nordhalbkugel: rechter Halbkreis gefährlich, Wind dreht dort rechts.',
+      'Gesicht zum Wind: Zentrum 90°–135° rechts (Nordhalbkugel).',
+      'UKW ≈ 2,2 × (√H + √h) NM; weiter draußen Grenzwelle, Kurzwelle, Satellit; NAVTEX für Küstennähe.',
+    ],
+    mnemonic: 'Rechts dreht er, rechts ist Gefahr – auf der Nordhalbkugel.',
+    widgets: [
+      { title: 'Die Windgürtel der Ozeane', Comp: GlobalWindsWidget },
+      { title: 'Tropischer Wirbelsturm: Wo bin ich?', Comp: TropicalStormWidget },
+      { title: 'Funk und Wetterdaten auf Hochsee', Comp: OffshoreCommsWidget },
+    ],
+    links: [
+      { label: 'Ozeanpassage', href: '#/yachtmaster/ocean-passage' },
+      { label: 'Wetterkarten lesen', href: '#/yachtmaster/weather-charts' },
+      { label: 'Notfälle auf Hochsee', href: '#/yachtmaster/offshore-emergency' },
     ],
   },
   {

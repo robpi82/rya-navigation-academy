@@ -78,7 +78,7 @@ export function NumberField({ label, hint, unit, field, className }: { label: st
 
 export function Toggle<T extends string>({ value, options, onChange, label }: { value: T; options: { value: T; label: string }[]; onChange: (v: T) => void; label: string }) {
   return (
-    <div className="inline-flex rounded-lg bg-muted p-1" role="group" aria-label={label}>
+    <div className="inline-flex max-w-full flex-wrap rounded-lg bg-muted p-1" role="group" aria-label={label}>
       {options.map((o) => (
         <button
           key={o.value}

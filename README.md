@@ -480,6 +480,11 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
 - Neue Lektion **Pilotage und Nebel (küstennah)**: Pilotageplan, Deckpeilung, Sektorenfeuer, Hafensignale, erste Maßnahmen bei Nebel.
 - 12 neue Fragen (insgesamt 516), 2 Lernkarten. Syllabus jetzt 33 abgedeckt, 2 teilweise (Ozeanwetter, Kommunikation auf Hochsee). Tests: 440.
 
+### Phase 52 – fertig ✅ (Yachtmaster-Lektion Ozeanwetter und Kommunikation)
+- Neue Lektion **Ozeanwetter und Kommunikation**: Windgürtel, tropische Wirbelstürme und gefährlicher Halbkreis, UKW-Reichweite,
+  NAVTEX, GMDSS-Seegebiete, Satellit und Kurzwelle.
+- 12 neue Fragen (insgesamt 528), 2 Lernkarten; Yachtmaster-Probeprüfung 36 Fragen / 75 min. **Syllabus: alle 35 Bereiche abgedeckt.** Tests: 448.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

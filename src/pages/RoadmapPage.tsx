@@ -525,6 +525,16 @@ const PHASES = [
       'Neue Berechnungen in calculations/inshore.ts, 12 Fragen, 2 Lernkarten; Syllabus-Bereiche Pilotage und verminderte Sicht für Day Skipper jetzt abgedeckt; 7 neue Tests',
     ],
   },
+  {
+    phase: 52,
+    title: 'Yachtmaster-Lektion Ozeanwetter und Kommunikation',
+    done: true,
+    items: [
+      'Zwölfte Yachtmaster-Lektion: globale Windgürtel (Passate, Mallungen, subtropische Hochs, Westwinde), tropische Wirbelstürme (64 kn, gefährlicher Halbkreis, Lage aus der Winddrehung), Funk und Wetterdaten auf Hochsee (UKW-Reichweite, NAVTEX, GMDSS A1–A4)',
+      'Windgürtel-Modell nach Breite und Jahreszeit, Wirbelsturm-Übung für Nord- und Südhalbkugel, Reichweiten-Übersicht der Funksysteme',
+      '12 Fragen, 2 Lernkarten; Yachtmaster-Probeprüfung 36 Fragen; Syllabus vollständig abgedeckt; gemeinsamer Umschalter bricht auf schmalen Bildschirmen um (alle 56 Seiten ohne seitliches Scrollen); 8 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

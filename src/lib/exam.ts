@@ -24,7 +24,7 @@ export const EXAM_PRESETS: ExamPreset[] = [
   { id: 'coastal', label: 'Coastal-Test', questions: 20, minutes: 40, description: 'Kurzer Check über die Coastal-Themen.', level: 'coastal-skipper' },
   { id: 'coastal-full', label: 'Coastal-Probeprüfung', questions: 42, minutes: 80, description: 'Alle vierzehn Coastal-Themen gleichmäßig: Gezeiten, Peilungen, Pilotage, Navigation ohne GPS, Strom an Kaps, Nebel, Schwerwetter, Festmachen, Ankern, Notfälle.', level: 'coastal-skipper' },
   { id: 'yacht', label: 'Yachtmaster kurz', questions: 12, minutes: 25, description: 'Kurzer Check über die Yachtmaster-Themen.', level: 'yachtmaster-offshore' },
-  { id: 'yacht-full', label: 'Yachtmaster-Probeprüfung', questions: 33, minutes: 70, description: 'Alle elf Yachtmaster-Themen gleichmäßig: Großkreis, Stromatlas, Wetterkarten, Routing, Ozeanpassage, Nacht, Radar, Notfälle, Astronavigation.', level: 'yachtmaster-offshore' },
+  { id: 'yacht-full', label: 'Yachtmaster-Probeprüfung', questions: 36, minutes: 75, description: 'Alle zwölf Yachtmaster-Themen gleichmäßig: Großkreis, Stromatlas, Wetterkarten, Routing, Ozeanpassage und -wetter, Nacht, Radar, Notfälle, Astronavigation.', level: 'yachtmaster-offshore' },
 ]
 
 export type ExamGroupId = 'basics' | 'compass' | 'tides' | 'rules' | 'coastal' | 'yacht'
@@ -73,6 +73,7 @@ const GROUP_BY_TOPIC: Record<string, ExamGroupId> = {
   'tidal-atlas': 'yacht',
   'ocean-passage': 'yacht',
   'offshore-emergency': 'yacht',
+  'ocean-weather': 'yacht',
   celestial: 'yacht',
   'sight-reduction': 'yacht',
   'night-passage': 'yacht',

@@ -41,6 +41,7 @@ export const YACHT_TOPICS: Record<YachtTopicId, { abbr: string; english: string;
   'weather-charts': { abbr: 'KARTE', english: 'Reading Weather Charts', german: 'Wetterkarten lesen' },
   'weather-routing': { abbr: 'ROUTE', english: 'Weather Routing', german: 'Wetterrouting' },
   'ocean-passage': { abbr: 'OZEAN', english: 'Ocean Passage Planning', german: 'Ozeanpassage' },
+  'ocean-weather': { abbr: 'OZWX', english: 'Ocean Weather & Communications', german: 'Ozeanwetter und Kommunikation' },
   'radar-plotting': { abbr: 'RADAR', english: 'Radar Plotting', german: 'Radarplotting' },
   'offshore-emergency': { abbr: 'SAR', english: 'Offshore Emergencies', german: 'Notfälle auf Hochsee' },
   'night-passage': { abbr: 'TÖRN', english: 'Night Passage Planning', german: 'Törnplanung über Nacht' },

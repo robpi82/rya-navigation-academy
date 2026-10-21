@@ -79,9 +79,9 @@ export const SYLLABUS: SyllabusLevel[] = [
     areas: [
       { id: 'o-gc', title: 'Großkreis und Kartenprojektionen', status: 'covered', links: [yacht('great-circle', 'Großkreisnavigation')], topics: ['great-circle'], ocean: true },
       { id: 'o-astro', title: 'Astronavigation: Sextant, Mittagsbreite, Höhenstandlinie', status: 'covered', links: [yacht('celestial', 'Astronavigation'), yacht('sight-reduction', 'Höhenstandlinie')], topics: ['celestial', 'sight-reduction'], ocean: true, note: 'Ohne Gestirne außer der Sonne und ohne Nautisches Jahrbuch im Original.' },
-      { id: 'o-weather', title: 'Ozeanwetter: globale Windsysteme, tropische Wirbelstürme', status: 'partial', links: [yacht('ocean-passage', 'Ozeanpassage'), yacht('weather-routing', 'Wetterrouting')], topics: ['ocean-passage', 'weather-routing'], ocean: true, note: 'Passat und Hurrikansaison sind enthalten, die globale Zirkulation nur am Rand.' },
+      { id: 'o-weather', title: 'Ozeanwetter: globale Windsysteme, tropische Wirbelstürme', status: 'covered', links: [yacht('ocean-weather', 'Ozeanwetter und Kommunikation'), yacht('ocean-passage', 'Ozeanpassage'), yacht('weather-routing', 'Wetterrouting')], topics: ['ocean-weather', 'ocean-passage', 'weather-routing'], ocean: true },
       { id: 'o-passage', title: 'Planung von Ozeanpassagen', status: 'covered', links: [yacht('ocean-passage', 'Ozeanpassage')], topics: ['ocean-passage'], ocean: true },
-      { id: 'o-comms', title: 'Kommunikation auf Hochsee (Satellit, Kurzwelle)', status: 'partial', links: [yacht('offshore-emergency', 'Notfälle auf Hochsee')], topics: ['offshore-emergency'], ocean: true, note: 'Nur EPIRB und SART, keine Satellitentelefonie oder Kurzwelle.' },
+      { id: 'o-comms', title: 'Kommunikation auf Hochsee (Satellit, Kurzwelle)', status: 'covered', links: [yacht('ocean-weather', 'Ozeanwetter und Kommunikation'), yacht('offshore-emergency', 'Notfälle auf Hochsee')], topics: ['ocean-weather', 'offshore-emergency'], ocean: true, note: 'Überblick über Systeme und Reichweiten, keine Gerätebedienung.' },
     ],
   },
 ]

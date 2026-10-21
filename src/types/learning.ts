@@ -30,7 +30,7 @@ export type BuoyId =
   | 'new-danger'
 
 /** Yachtmaster-Offshore-Themen (Vorgriff) */
-export type YachtTopicId = 'offshore-emergency' | 'ocean-passage' | 'tidal-atlas' | 'weather-charts' | 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction' | 'night-passage' | 'radar-plotting'
+export type YachtTopicId = 'ocean-weather' | 'offshore-emergency' | 'ocean-passage' | 'tidal-atlas' | 'weather-charts' | 'great-circle' | 'night-navigation' | 'weather-routing' | 'celestial' | 'sight-reduction' | 'night-passage' | 'radar-plotting'
 
 export type TopicId = TermId | CoastalTopicId | DayTopicId | YachtTopicId
 
@@ -258,6 +258,14 @@ export type QuestionVerify =
       volumeL?: number
       inflowLpm?: number
       pumpingLpm?: number
+    }
+  | {
+      kind: 'oceanwx'
+      quantity: 'vhfRange' | 'centreNear' | 'centreFar'
+      antennaA?: number
+      antennaB?: number
+      windFrom?: number
+      hemisphere?: 'N' | 'S'
     }
   | {
       kind: 'inshore'
