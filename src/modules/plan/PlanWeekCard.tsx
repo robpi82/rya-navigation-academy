@@ -11,7 +11,7 @@ export function PlanWeekCard({ className }: { className?: string }) {
   if (!view)
     return (
       <Card className={className}>
-        <CardContent className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <CardContent className="flex flex-col items-start gap-3 pt-5">
           <div className="flex items-start gap-3">
             <CalendarDays className="mt-0.5 size-5 shrink-0 text-primary" />
             <div>
