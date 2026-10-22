@@ -2,7 +2,8 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
 import type { Route } from '@/hooks/useHashRoute'
 import { Button } from '@/components/ui/button'
-import { Logo } from './Logo'
+import { cn } from '@/lib/utils'
+import { CompassRose } from './Logo'
 import { Sidebar } from './Sidebar'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -17,7 +18,8 @@ export function AppShell({ route, children }: { route: Route; children: ReactNod
   }, [open])
 
   return (
-    <div className="min-h-dvh lg:pl-64 print:pl-0">
+    // Dashboard immer im dunklen Marine-Look, übrige Seiten folgen dem gewählten Theme
+    <div className={cn('min-h-dvh lg:pl-64 print:pl-0', route.name === 'dashboard' && 'dark marine text-foreground')}>
       <a
         href="#inhalt"
         onClick={(e) => {
@@ -40,7 +42,7 @@ export function AppShell({ route, children }: { route: Route; children: ReactNod
           <Menu />
         </Button>
         <a href="#/" className="flex items-center gap-2 font-semibold">
-          <Logo className="size-7" /> RYA Navigation Academy
+          <CompassRose className="size-8" /> RYA Navigation Academy
         </a>
         <ThemeToggle className="ml-auto" />
       </header>
