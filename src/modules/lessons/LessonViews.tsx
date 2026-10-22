@@ -15,7 +15,7 @@ interface CatalogProps {
   quizLabel: string
   /** Optionale Bildkarten je Lektions-ID; die Bilder enthalten Nummer, Titel und Pfeil bereits selbst. */
   cardImages?: Partial<Record<string, string>>
-  /** Seitenverhältnis der Bildkarten (Standard: Day-Skipper-Format 363 × 257). */
+  /** Pixelmaß der Bildkarten; bestimmt das einheitliche Seitenverhältnis. */
   cardImageSize?: { width: number; height: number }
 }
 
