@@ -45,7 +45,7 @@ function SectionProgress({ done, total, className }: { done: number; total: numb
     <div className={cn('space-y-1.5', className)}>
       <div className="flex items-baseline justify-between gap-3 text-sm">
         <span className="text-muted-foreground">Lernabschnitte verstanden</span>
-        <span className="font-mono font-semibold text-primary">
+        <span className="font-mono font-semibold whitespace-nowrap text-primary">
           {done} / {total}
         </span>
       </div>
@@ -229,7 +229,11 @@ function SectionCard({ section, index, total, lesson, understood, onToggle, next
 
 /** Lektion 1 „Kompass, Variation und Deviation“ im Lernabschnitts-Layout (Design-Prototyp, nur für diese Lektion). */
 export function CompassLesson({ lesson, lessons, basePath, backLabel }: { lesson: Lesson; lessons: Lesson[]; basePath: string; backLabel: string }) {
-  const { completedLessons, toggleLesson } = useProgressStore()
+  const { completedLessons, toggleLesson, openLesson } = useProgressStore()
+  // wie LessonDetail: zuletzt geöffnete Lektion für „Weiterlernen“ im Dashboard merken
+  useEffect(() => {
+    openLesson({ id: lesson.id, title: lesson.title, href: `${basePath}/${lesson.id}` })
+  }, [lesson.id, lesson.title, basePath, openLesson])
   const understood = useLessonSections(lesson.id)
   const toggleSection = useLessonSectionStore((s) => s.toggleSection)
   const sections = useMemo(() => compassSections(lesson), [lesson])
