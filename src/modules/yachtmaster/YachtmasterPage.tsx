@@ -12,6 +12,7 @@ import { GlobalWindsWidget, OffshoreCommsWidget, TropicalStormWidget } from './o
 import { EtmalProvisionWidget, SeasonRouteWidget, TimeZoneWidget } from './oceanWidgets'
 import { AtlasBrowserWidget, AtlasPageQuizWidget, AtlasPassageWidget } from './atlasWidgets'
 import { DepressionOrderWidget, IsobarWindWidget, WindAroundSystemWidget } from './weatherChartWidgets'
+import { YACHT_LESSON_CARD_IMAGES, YACHT_LESSON_CARD_SIZE } from './cardImages'
 
 export const YACHT_LESSONS: Lesson[] = [
   {
@@ -333,6 +334,8 @@ export function YachtmasterPage({ lessonId }: { lessonId?: string }) {
       subtitle="Themen über den Coastal-Stoff hinaus: Wetterkarten, Stromatlas, Wetterrouting, Nachtfahrt, Radarplotting und Notfälle auf Hochsee. Großkreis, Astronavigation und Ozeanpassage gehören beim RYA zum eigenen Kurs Yachtmaster Ocean – siehe Syllabus-Abdeckung."
       lessons={YACHT_LESSONS}
       basePath="#/yachtmaster"
+      cardImages={YACHT_LESSON_CARD_IMAGES}
+      cardImageSize={YACHT_LESSON_CARD_SIZE}
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'yachtmaster-offshore').length} Yachtmaster-Fragen üben`}
     />
   )

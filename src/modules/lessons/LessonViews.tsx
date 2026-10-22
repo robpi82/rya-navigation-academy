@@ -15,9 +15,11 @@ interface CatalogProps {
   quizLabel: string
   /** Optionale Bildkarten je Lektions-ID; die Bilder enthalten Nummer, Titel und Pfeil bereits selbst. */
   cardImages?: Partial<Record<string, string>>
+  /** Seitenverhältnis der Bildkarten (Standard: Day-Skipper-Format 363 × 257). */
+  cardImageSize?: { width: number; height: number }
 }
 
-export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel, cardImages }: CatalogProps) {
+export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel, cardImages, cardImageSize = { width: 363, height: 257 } }: CatalogProps) {
   const completed = useProgressStore((s) => s.completedLessons)
   const done = lessons.filter((l) => completed.includes(l.id)).length
   const next = lessons.find((l) => !completed.includes(l.id)) ?? lessons[0]
@@ -59,11 +61,12 @@ export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel, c
               <img
                 src={image}
                 alt={`Lektion ${i + 1}: ${l.title} (${l.english}) – Lektion öffnen`}
-                width={363}
-                height={257}
+                width={cardImageSize.width}
+                height={cardImageSize.height}
+                style={{ aspectRatio: `${cardImageSize.width} / ${cardImageSize.height}` }}
                 loading={i < 6 ? 'eager' : 'lazy'}
                 decoding="async"
-                className="aspect-[363/257] w-full object-contain transition-[filter] group-hover:brightness-110"
+                className="w-full object-contain transition-[filter] group-hover:brightness-110"
               />
               {completed.includes(l.id) && (
                 <Badge variant="success" className="absolute top-2.5 right-2.5 shadow-md">
