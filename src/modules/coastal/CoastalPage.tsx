@@ -2,6 +2,7 @@ import { QUESTION_BANK } from '@/questions'
 import type { CoastalTopicId } from '@/types/learning'
 import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import type { Lesson } from '@/modules/lessons/types'
+import { COASTAL_LESSON_CARD_IMAGES, COASTAL_LESSON_CARD_SIZE } from './cardImages'
 import { LeadingLineWidget, PilotagePlanWidget } from './pilotageWidgets'
 import { FogActionsWidget, FogEncounterWidget } from './fogWidgets'
 import { MooringLinesWidget, MooringOrderWidget } from './mooringWidgets'
@@ -323,6 +324,8 @@ export function CoastalPage({ lessonId }: { lessonId?: string }) {
       subtitle="Aufbauende Lerninhalte zur Küstennavigation – jede Lektion mit interaktiver Übung. Ergänzend: Coastal-Aufgaben im Prüfungstrainer und in der Seekarte."
       lessons={LESSONS}
       basePath="#/coastal"
+      cardImages={COASTAL_LESSON_CARD_IMAGES}
+      cardImageSize={COASTAL_LESSON_CARD_SIZE}
       quizLabel={`${QUESTION_BANK.filter((q) => q.level === 'coastal-skipper').length} Coastal-Fragen üben`}
     />
   )
