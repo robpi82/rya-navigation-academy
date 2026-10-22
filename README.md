@@ -515,6 +515,13 @@ Sekundärhäfen, Großkreis und Sichtweite von Feuern. Tests: 208.
   Tiefen-Ebene deaktiviert (OpenSeaMap enthält keine Tiefenlinien). Die öffentlichen OSM-/OpenSeaMap-Server sind nur für
   Entwicklung und geringe Last gedacht – vor einer Veröffentlichung eigenen oder kommerziellen Kachelanbieter eintragen. Tests: 480.
 
+### Phase 55 – fertig ✅ (Reale Kartenaufgaben in allen fünf Gebieten)
+- 10 Aufgaben auf der realen Karte (`lib/realChartExercises.ts`), je zwei pro Übungsgebiet, drei Typen: Kurs und Distanz messen,
+  Koppelort plotten (Kurs/Distanz vom Wegpunkt), Position nach Koordinaten eintragen. Lösungen werden aus den Koordinaten berechnet.
+- Wegpunkte liegen in offenem Wasser mit Abstand zur Küste und wurden gegen die gemeinfreien Natural-Earth-Küstenlinien geprüft
+  (grob, ca. ± 0,5 sm). Lagehinweise („rund 4 sm südlich von Rame Head“) sind nur Orientierung. Portsmouth-Gebiet reicht jetzt bis Spithead.
+  Tests: 485.
+
 ### Mögliche Erweiterungen
 Weitere Yachtmaster-Offshore-Inhalte (Astronavigation, Nachtfahrt), Gezeitenkurven aus dem Almanach, Benutzerkonten mit Datenbank-Synchronisation.
 

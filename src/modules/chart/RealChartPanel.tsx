@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { CheckCircle2, Circle, Crosshair, Eye, Flag, Hand, MapPin, Navigation, RotateCcw, Ruler, Trash2, Undo2, XCircle } from 'lucide-react'
+import { CheckCircle2, Circle, Crosshair, Eye, Flag, Hand, MapPin, MousePointerClick, Navigation, RotateCcw, Ruler, Trash2, Undo2, XCircle } from 'lucide-react'
 import { formatBearing, formatNumber, rhumbDestination } from '@/calculations'
 import { OpenSeaMapChart, type MapOverlay } from '@/components/chart/OpenSeaMapChart'
 import { Badge } from '@/components/ui/badge'
@@ -7,10 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MAP_PROVIDERS } from '@/config/mapProviders'
 import { AREA_BY_ID, PRACTICE_AREAS } from '@/data/practiceAreas'
-import { checkField } from '@/lib/chartExercises'
+import { checkField, checkPlot } from '@/lib/chartExercises'
 import { measure, routeLegs } from '@/lib/measure'
 import { parseNumberInput } from '@/lib/quiz'
-import { formatPos, REAL_CHART_EXERCISES, solveRealExercise, type RealCourseExercise } from '@/lib/realChartExercises'
+import { formatPos, REAL_CHART_EXERCISES, REAL_TYPE_LABEL, solveRealExercise, type RealExercise } from '@/lib/realChartExercises'
 import { cn } from '@/lib/utils'
 import { useProgressStore } from '@/stores/progressStore'
 import type { LatLon } from '@/types/navigation'
@@ -59,6 +59,7 @@ export function RealExercisesPanel({ onShowFictional }: { onShowFictional: () =>
   const results = useProgressStore((s) => s.chartResults)
   const [activeId, setActiveId] = useState(REAL_CHART_EXERCISES[0].id)
   const exercise = REAL_CHART_EXERCISES.find((e) => e.id === activeId)!
+  let n = 0
   return (
     <div className="grid gap-4 xl:grid-cols-[230px_minmax(0,1fr)_320px]">
       <Card className="h-fit">
@@ -69,27 +70,39 @@ export function RealExercisesPanel({ onShowFictional }: { onShowFictional: () =>
           </p>
         </CardHeader>
         <CardContent className="space-y-3 px-2">
-          <ul className="space-y-0.5">
-            {REAL_CHART_EXERCISES.map((e, i) => {
-              const r = results[e.id]
-              return (
-                <li key={e.id}>
-                  <button
-                    type="button"
-                    onClick={() => setActiveId(e.id)}
-                    aria-current={e.id === activeId}
-                    className={cn('flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-left text-sm', e.id === activeId ? 'bg-accent font-medium' : 'hover:bg-muted')}
-                  >
-                    {r?.solved ? <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-success" /> : r ? <XCircle className="mt-0.5 size-4 shrink-0 text-destructive" /> : <Circle className="mt-0.5 size-4 shrink-0 text-muted-foreground" />}
-                    <span>
-                      {i + 1}. {e.title}
-                      <span className="block text-[11px] text-muted-foreground">{AREA_BY_ID[e.areaId].name}</span>
-                    </span>
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
+          {PRACTICE_AREAS.map((area) => {
+            const list = REAL_CHART_EXERCISES.filter((e) => e.areaId === area.id)
+            if (list.length === 0) return null
+            return (
+              <section key={area.id} aria-labelledby={`area-${area.id}`}>
+                <h3 id={`area-${area.id}`} className="px-2 pb-0.5 text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
+                  {area.name}
+                </h3>
+                <ul className="space-y-0.5">
+                  {list.map((e) => {
+                    const r = results[e.id]
+                    n += 1
+                    return (
+                      <li key={e.id}>
+                        <button
+                          type="button"
+                          onClick={() => setActiveId(e.id)}
+                          aria-current={e.id === activeId}
+                          className={cn('flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-left text-sm', e.id === activeId ? 'bg-accent font-medium' : 'hover:bg-muted')}
+                        >
+                          {r?.solved ? <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-success" /> : r ? <XCircle className="mt-0.5 size-4 shrink-0 text-destructive" /> : <Circle className="mt-0.5 size-4 shrink-0 text-muted-foreground" />}
+                          <span>
+                            {n}. {e.title}
+                            <span className="block text-[11px] text-muted-foreground">{REAL_TYPE_LABEL[e.type]}</span>
+                          </span>
+                        </button>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </section>
+            )
+          })}
           <div className="rounded-lg border border-dashed p-2.5 text-xs leading-relaxed text-muted-foreground">
             Die 11 bisherigen Aufgaben (Strom, Kreuzpeilung, EP, Course to Steer) laufen weiter im fiktiven Übungsrevier.
             <Button size="sm" variant="outline" className="mt-2 w-full" onClick={onShowFictional}>
@@ -103,21 +116,29 @@ export function RealExercisesPanel({ onShowFictional }: { onShowFictional: () =>
   )
 }
 
-function RealExerciseView({ exercise }: { exercise: RealCourseExercise }) {
+function RealExerciseView({ exercise }: { exercise: RealExercise }) {
   const solution = useMemo(() => solveRealExercise(exercise), [exercise])
   const record = useProgressStore((s) => s.recordChartResult)
-  const [tool, setTool] = useState<'pan' | 'measure'>('pan')
+  const [tool, setTool] = useState<'pan' | 'measure' | 'answer'>('pan')
   const [points, setPoints] = useState<LatLon[]>([])
+  const [answerPos, setAnswerPos] = useState<LatLon | null>(null)
   const [texts, setTexts] = useState<Record<string, string>>({})
-  const [checked, setChecked] = useState<null | { ok: boolean; fieldOk: Record<string, boolean> }>(null)
+  const [checked, setChecked] = useState<null | { ok: boolean; fieldOk: Record<string, boolean>; plotError?: number }>(null)
   const [showSolution, setShowSolution] = useState(false)
-  const ready = solution.fields.every((f) => parseNumberInput(texts[f.key] ?? '') !== null)
+  const ready = solution.fields.every((f) => parseNumberInput(texts[f.key] ?? '') !== null) && (!solution.plot || answerPos !== null)
+  const start = solution.markers.find((m) => m.symbol === 'start')
 
   const check = () => {
     const fieldOk: Record<string, boolean> = {}
     for (const f of solution.fields) fieldOk[f.key] = checkField(f, parseNumberInput(texts[f.key] ?? '')!)
-    const ok = Object.values(fieldOk).every(Boolean)
-    setChecked({ ok, fieldOk })
+    let ok = Object.values(fieldOk).every(Boolean)
+    let plotError: number | undefined
+    if (solution.plot && answerPos) {
+      const r = checkPlot(solution.plot.pos, answerPos, solution.plot.toleranceNm)
+      plotError = r.errorNm
+      ok = ok && r.ok
+    }
+    setChecked({ ok, fieldOk, plotError })
     record(exercise.id, ok)
   }
   const reset = () => {
@@ -125,14 +146,36 @@ function RealExerciseView({ exercise }: { exercise: RealCourseExercise }) {
     setShowSolution(false)
     setTexts({})
     setPoints([])
+    setAnswerPos(null)
+  }
+
+  const onMapClick = (p: LatLon) => {
+    if (tool === 'answer') {
+      if (!checked) setAnswerPos(p)
+      return
+    }
+    setPoints((m) => (m.length >= 2 ? [p] : [...m, p]))
   }
 
   const overlays: MapOverlay[] = [
-    { kind: 'point', id: 'from', layer: 'tasks', pos: exercise.from.pos, symbol: 'start', label: exercise.from.name, color: COLOR.task },
-    { kind: 'point', id: 'to', layer: 'tasks', pos: exercise.to.pos, symbol: 'target', label: exercise.to.name, color: COLOR.task },
+    ...solution.markers.map((m, i): MapOverlay => ({ kind: 'point', id: `wp${i}`, layer: 'tasks', pos: m.pos, symbol: m.symbol, label: m.name, color: COLOR.task })),
     ...measureOverlays(points),
   ]
-  if (showSolution) overlays.push({ kind: 'line', id: 'sol', layer: 'tasks', points: [exercise.from.pos, exercise.to.pos], color: COLOR.solution, arrow: true, width: 2.5, label: `Lösung ${formatBearing(solution.rhumb.bearing, 0)} · ${f2(solution.rhumb.distance)} sm` })
+  if (answerPos) overlays.push({ kind: 'point', id: 'ans', layer: 'bearings', pos: answerPos, symbol: exercise.type === 'dr-plot' ? 'cross' : 'fix', label: 'Deine Position', color: '#b91c1c' })
+  if (showSolution) {
+    if (solution.solutionLine) overlays.push({ kind: 'line', id: 'sol', layer: 'tasks', points: solution.solutionLine.points, color: COLOR.solution, arrow: true, width: 2.5, label: solution.solutionLine.label })
+    if (solution.plot) {
+      overlays.push({ kind: 'circle', id: 'tol', layer: 'tasks', center: solution.plot.pos, radiusNm: solution.plot.toleranceNm, color: COLOR.solution })
+      overlays.push({ kind: 'point', id: 'solpt', layer: 'tasks', pos: solution.plot.pos, symbol: 'fix', label: 'Lösung', color: COLOR.solution, labelLeft: true })
+    }
+  }
+
+  const hint =
+    tool === 'answer'
+      ? 'Klick in die Karte setzt deine Position (erneuter Klick verschiebt sie).'
+      : tool === 'measure'
+        ? 'Zwei Klicks: Start, dann Ziel (rastet an den Aufgabenmarkern ein).'
+        : 'Karte ziehen und zoomen; zum Messen „Messen“ wählen.'
 
   return (
     <>
@@ -144,22 +187,36 @@ function RealExerciseView({ exercise }: { exercise: RealCourseExercise }) {
           <Button size="sm" variant={tool === 'measure' ? 'default' : 'outline'} onClick={() => setTool('measure')} aria-pressed={tool === 'measure'}>
             <Ruler /> Messen
           </Button>
+          {solution.plot && (
+            <Button size="sm" variant={tool === 'answer' ? 'default' : 'outline'} onClick={() => setTool('answer')} aria-pressed={tool === 'answer'}>
+              <MousePointerClick /> Position setzen
+            </Button>
+          )}
           <Button size="sm" variant="ghost" onClick={() => setPoints([])} disabled={points.length === 0}>
             <Trash2 /> Messung löschen
           </Button>
-          <span className="text-xs text-muted-foreground">{tool === 'measure' ? 'Zwei Klicks: Start, dann Ziel (rastet an WP-Markern ein).' : 'Karte ziehen und zoomen; zum Messen „Messen“ wählen.'}</span>
+          <span className="text-xs text-muted-foreground">{hint}</span>
         </div>
         <OpenSeaMapChart
           area={AREA_BY_ID[exercise.areaId]}
           overlays={overlays}
-          snapTargets={[exercise.from.pos, exercise.to.pos]}
-          fitTo={[exercise.from.pos, exercise.to.pos]}
-          onMapClick={tool === 'measure' ? (p) => setPoints((m) => (m.length >= 2 ? [p] : [...m, p])) : undefined}
+          snapTargets={tool === 'measure' ? solution.markers.map((m) => m.pos) : []}
+          fitTo={solution.fitTo}
+          onMapClick={tool === 'pan' ? undefined : onMapClick}
           className="h-[58vh] xl:h-[calc(100vh-240px)]"
         />
         <Card>
-          <CardContent className="pt-4">
+          <CardContent className="space-y-2 pt-4">
             <MeasureReadout points={points} />
+            {answerPos && (
+              <p className="font-mono text-sm">
+                Deine Position: {formatPos(answerPos)}
+                {exercise.type === 'dr-plot' && start && (() => {
+                  const m = measure(start.pos, answerPos)
+                  return ` · von ${start.name}: ${formatBearing(m.rhumb.bearing, 1)}, ${f2(m.rhumb.distance)} sm`
+                })()}
+              </p>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -170,20 +227,22 @@ function RealExerciseView({ exercise }: { exercise: RealCourseExercise }) {
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline">{LEVEL_LABEL[exercise.level]}</Badge>
               <Badge variant="secondary">{['', 'leicht', 'mittel', 'schwer'][exercise.difficulty]}</Badge>
-              <Badge variant="secondary">{AREA_BY_ID[exercise.areaId].name}</Badge>
+              <Badge variant="secondary">{REAL_TYPE_LABEL[exercise.type]}</Badge>
             </div>
             <CardTitle className="pt-1 text-lg">{exercise.title}</CardTitle>
+            <p className="text-xs text-muted-foreground">{AREA_BY_ID[exercise.areaId].name}</p>
             <p className="text-sm leading-relaxed">{solution.prompt}</p>
           </CardHeader>
           <CardContent className="space-y-3">
-            <ul className="space-y-1 rounded-lg bg-muted p-2.5 font-mono text-xs">
-              <li>
-                {exercise.from.name}: {formatPos(exercise.from.pos)}
-              </li>
-              <li>
-                {exercise.to.name}: {formatPos(exercise.to.pos)}
-              </li>
-            </ul>
+            {solution.markers.length > 0 && (
+              <ul className="space-y-1 rounded-lg bg-muted p-2.5 font-mono text-xs">
+                {solution.markers.map((m) => (
+                  <li key={m.name}>
+                    {m.name}: {formatPos(m.pos)}
+                  </li>
+                ))}
+              </ul>
+            )}
             {solution.fields.map((f) => (
               <div key={f.key} className="space-y-1">
                 <label htmlFor={`${exercise.id}-${f.key}`} className="text-sm font-medium">
@@ -207,10 +266,16 @@ function RealExerciseView({ exercise }: { exercise: RealCourseExercise }) {
                 )}
               </div>
             ))}
-            <p className="text-xs text-muted-foreground">Toleranz: Kurs ± 2°, Distanz ± 0,2 sm (wie im Übungsrevier).</p>
+            {solution.plot && (
+              <p className="text-sm">
+                {answerPos ? 'Position gesetzt.' : 'Noch keine Position gesetzt – Werkzeug „Position setzen“ wählen.'} Toleranz: ± {formatNumber(solution.plot.toleranceNm, 2)} sm
+              </p>
+            )}
+            {solution.fields.length > 0 && <p className="text-xs text-muted-foreground">Toleranz: Kurs ± 2°, Distanz ± 0,2 sm (wie im Übungsrevier).</p>}
             {checked && (
               <div className={cn('rounded-lg p-3 text-sm', checked.ok ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive')} role="status">
                 <b>{checked.ok ? 'Richtig gelöst!' : 'Noch nicht richtig.'}</b>
+                {checked.plotError !== undefined && ` Abweichung deiner Position: ${f2(checked.plotError)} sm.`}
               </div>
             )}
             <div className="flex flex-wrap gap-2">

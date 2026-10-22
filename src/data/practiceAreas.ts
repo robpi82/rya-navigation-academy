@@ -38,10 +38,10 @@ export const PRACTICE_AREAS: PracticeArea[] = [
     id: 'portsmouth',
     name: 'Portsmouth Harbour',
     country: 'England',
-    center: { lat: 50.81, lon: -1.11 },
+    center: { lat: 50.79, lon: -1.11 },
     zoom: 13,
-    bounds: { south: 50.76, west: -1.17, north: 50.85, east: -1.05 },
-    description: 'Enge Hafeneinfahrt mit Fähr- und Marineverkehr, Small Boat Channel.',
+    bounds: { south: 50.72, west: -1.18, north: 50.85, east: -1.04 },
+    description: 'Enge Hafeneinfahrt mit Fähr- und Marineverkehr, Small Boat Channel, Ansteuerung über Spithead.',
   },
   {
     id: 'vigo',

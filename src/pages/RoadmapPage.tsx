@@ -555,6 +555,16 @@ const PHASES = [
       'Erste reale Aufgabe (Kurs und Distanz südlich der Isle of Wight); die 11 bisherigen Aufgaben im Modus „Übungsrevier (fiktiv)“ unverändert. Kartenanbieter zentral konfigurierbar; 12 neue Tests',
     ],
   },
+  {
+    phase: 55,
+    title: 'Reale Kartenaufgaben in allen fünf Gebieten',
+    done: true,
+    items: [
+      '10 Aufgaben auf der echten Karte, je zwei in Solent, Plymouth, Portsmouth Harbour, Baiona/Ría de Vigo und Kieler Förde, nach Gebieten gruppiert',
+      'Drei Aufgabentypen: Kurs und Distanz messen, Koppelort nach Kurs und Distanz plotten, Position nach Koordinaten eintragen; Musterlösungen aus den Koordinaten berechnet, Toleranzen ± 2° / ± 0,2 sm bzw. ± 0,15 sm',
+      'Wegpunkte in offenem Wasser, mit Abstand zur Küste gewählt und gegen gemeinfreie Küstenlinien (Natural Earth) geprüft; Plot-Aufgaben verraten die Lösung nicht über Marker oder Kartenausschnitt; 5 neue Tests',
+    ],
+  },
 ]
 
 const IDEAS = [

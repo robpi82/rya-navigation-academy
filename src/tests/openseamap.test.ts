@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { DEFAULT_PROVIDERS, NAV_DISCLAIMER, resolveMapProviders } from '@/config/mapProviders'
-import { PRACTICE_AREAS } from '@/data/practiceAreas'
-import { CHART_EXERCISES, checkField } from '@/lib/chartExercises'
+import { AREA_BY_ID, PRACTICE_AREAS } from '@/data/practiceAreas'
+import { rhumbDestination, rhumbLine } from '@/calculations'
+import { CHART_EXERCISES, checkField, checkPlot } from '@/lib/chartExercises'
 import { formatLat, formatLon } from '@/lib/coords'
 import { measure, nauticalScale, nmPerPixel, routeLegs } from '@/lib/measure'
-import { REAL_CHART_EXERCISES, solveRealExercise } from '@/lib/realChartExercises'
+import { DR_TOLERANCE, formatPos, POSITION_TOLERANCE, REAL_CHART_EXERCISES, solveRealExercise, type RealExercise } from '@/lib/realChartExercises'
 
 describe('Kartenanbieter (zentrale Konfiguration)', () => {
   it('Standard: OpenStreetMap-Grundkarte und OpenSeaMap-Seezeichen mit Quellenangabe', () => {
@@ -67,14 +68,15 @@ describe('Reale Übungsgebiete', () => {
 describe('Messen: Loxodrome und Großkreis', () => {
   it('Loxodrome stimmt mit dem Mittelbreitenverfahren überein (Aufgabe rc-01)', () => {
     const e = REAL_CHART_EXERCISES[0]
+    if (e.type !== 'course-distance') throw new Error('rc-01 ist eine Kurs-/Distanzaufgabe')
     const s = solveRealExercise(e)
     const dLat = (e.to.pos.lat - e.from.pos.lat) * 60
     const dep = (e.to.pos.lon - e.from.pos.lon) * 60 * Math.cos((((e.from.pos.lat + e.to.pos.lat) / 2) * Math.PI) / 180)
     const course = ((Math.atan2(dep, dLat) * 180) / Math.PI + 360) % 360
-    expect(s.rhumb.bearing).toBeCloseTo(course, 1)
-    expect(s.rhumb.distance).toBeCloseTo(Math.hypot(dLat, dep), 1)
-    expect(s.rhumb.bearing).toBeCloseTo(288.9, 1)
-    expect(s.rhumb.distance).toBeCloseTo(15.44, 2)
+    expect(s.rhumb!.bearing).toBeCloseTo(course, 1)
+    expect(s.rhumb!.distance).toBeCloseTo(Math.hypot(dLat, dep), 1)
+    expect(s.rhumb!.bearing).toBeCloseTo(288.9, 1)
+    expect(s.rhumb!.distance).toBeCloseTo(15.44, 2)
   })
   it('Großkreis und Loxodrome werden getrennt ausgewiesen; auf langen Strecken ist der Großkreis kürzer', () => {
     const short = measure({ lat: 50.5333, lon: -1.2833 }, { lat: 50.6167, lon: -1.6667 })
@@ -115,17 +117,69 @@ describe('Reale Kartenaufgabe', () => {
     expect(checkField(distance, 15.6)).toBe(true)
     expect(checkField(distance, 15.7)).toBe(false)
   })
-  it('Wegpunkte liegen im Übungsgebiet; die 11 fiktiven Aufgaben bleiben erhalten', () => {
-    const solent = PRACTICE_AREAS[0].bounds
-    for (const e of REAL_CHART_EXERCISES)
-      for (const p of [e.from.pos, e.to.pos]) {
-        expect(p.lat).toBeGreaterThan(solent.south)
-        expect(p.lat).toBeLessThan(solent.north)
-        expect(p.lon).toBeGreaterThan(solent.west)
-        expect(p.lon).toBeLessThan(solent.east)
-      }
+  it('die 11 fiktiven Aufgaben bleiben erhalten, IDs eindeutig', () => {
     expect(CHART_EXERCISES).toHaveLength(11)
+    const ids = REAL_CHART_EXERCISES.map((e) => e.id)
+    expect(new Set(ids).size).toBe(ids.length)
     expect(REAL_CHART_EXERCISES.every((e) => !CHART_EXERCISES.some((c) => c.id === e.id))).toBe(true)
+  })
+})
+
+describe('Reale Aufgaben in allen fünf Gebieten', () => {
+  const pointsOf = (e: RealExercise) => {
+    const s = solveRealExercise(e)
+    return [...s.markers.map((m) => m.pos), ...(s.plot ? [s.plot.pos] : []), ...(s.solutionLine?.points ?? [])]
+  }
+  it('jedes Gebiet hat mindestens zwei Aufgaben, alle drei Aufgabentypen kommen vor', () => {
+    for (const a of PRACTICE_AREAS) expect(REAL_CHART_EXERCISES.filter((e) => e.areaId === a.id).length, a.id).toBeGreaterThanOrEqual(2)
+    expect(new Set(REAL_CHART_EXERCISES.map((e) => e.type))).toEqual(new Set(['course-distance', 'dr-plot', 'plot-position']))
+  })
+  it('alle Wegpunkte, Lösungen und Linien liegen im Kartenausschnitt ihres Gebiets', () => {
+    for (const e of REAL_CHART_EXERCISES) {
+      const b = AREA_BY_ID[e.areaId].bounds
+      for (const p of pointsOf(e)) {
+        expect(p.lat, e.id).toBeGreaterThan(b.south)
+        expect(p.lat, e.id).toBeLessThan(b.north)
+        expect(p.lon, e.id).toBeGreaterThan(b.west)
+        expect(p.lon, e.id).toBeLessThan(b.east)
+      }
+    }
+  })
+  it('Kurs-/Distanzaufgaben: Musterlösung = Loxodrome zwischen den Wegpunkten', () => {
+    for (const e of REAL_CHART_EXERCISES) {
+      if (e.type !== 'course-distance') continue
+      const s = solveRealExercise(e)
+      const r = rhumbLine(e.from.pos, e.to.pos)
+      expect(s.fields.map((f) => f.key), e.id).toEqual(['course', 'distance'])
+      expect(s.fields[0].value, e.id).toBeCloseTo(r.bearing!, 9)
+      expect(s.fields[1].value, e.id).toBeCloseTo(r.distance, 9)
+      expect(s.fields[1].value, e.id).toBeGreaterThan(1)
+    }
+  })
+  it('Koppelort: Endpunkt liegt genau auf Kurs und Distanz vom Start, Kartenausschnitt verrät die Richtung nicht', () => {
+    for (const e of REAL_CHART_EXERCISES) {
+      if (e.type !== 'dr-plot') continue
+      const s = solveRealExercise(e)
+      const back = rhumbLine(e.from.pos, s.plot!.pos)
+      expect(back.bearing!, e.id).toBeCloseTo(e.course, 6)
+      expect(back.distance, e.id).toBeCloseTo(e.distance, 6)
+      // Ausschnitt symmetrisch um den Start
+      const lats = s.fitTo.map((p) => p.lat)
+      expect((Math.max(...lats) + Math.min(...lats)) / 2, e.id).toBeCloseTo(e.from.pos.lat, 3)
+      expect(s.plot!.toleranceNm).toBe(DR_TOLERANCE)
+      expect(checkPlot(s.plot!.pos, rhumbDestination(s.plot!.pos, 90, 0.15), s.plot!.toleranceNm).ok).toBe(true)
+      expect(checkPlot(s.plot!.pos, rhumbDestination(s.plot!.pos, 90, 0.3), s.plot!.toleranceNm).ok).toBe(false)
+    }
+  })
+  it('Position eintragen: keine Marker (Lösung bleibt verborgen), Koordinaten stehen in der Aufgabe', () => {
+    for (const e of REAL_CHART_EXERCISES) {
+      if (e.type !== 'plot-position') continue
+      const s = solveRealExercise(e)
+      expect(s.markers, e.id).toHaveLength(0)
+      expect(s.plot!.pos, e.id).toEqual(e.target.pos)
+      expect(s.prompt, e.id).toContain(formatPos(e.target.pos))
+      expect(s.plot!.toleranceNm).toBe(POSITION_TOLERANCE)
+    }
   })
 })
 

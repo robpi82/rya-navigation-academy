@@ -20,7 +20,7 @@ export type OverlayLayer = 'tasks' | 'measure' | 'bearings'
 export type MapPointSymbol = 'start' | 'target' | 'cross' | 'fix' | 'wp' | 'object'
 
 export type MapOverlay =
-  | { kind: 'point'; id: string; layer: OverlayLayer; pos: LatLon; symbol: MapPointSymbol; label?: string; color?: string }
+  | { kind: 'point'; id: string; layer: OverlayLayer; pos: LatLon; symbol: MapPointSymbol; label?: string; color?: string; labelLeft?: boolean }
   | { kind: 'line'; id: string; layer: OverlayLayer; points: LatLon[]; color: string; dashed?: boolean; label?: string; arrow?: boolean; width?: number }
   | { kind: 'circle'; id: string; layer: OverlayLayer; center: LatLon; radiusNm: number; color: string }
 
@@ -268,8 +268,8 @@ const SYMBOL_SVG: Record<MapPointSymbol, (c: string) => string> = {
 
 const escapeHtml = (s: string) => s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!)
 
-function label(group: L.LayerGroup, at: L.LatLngExpression, text: string, color: string, offset: [number, number] = [10, -10]) {
-  L.tooltip({ permanent: true, direction: 'right', offset, className: 'osm-chart-label', interactive: false })
+function label(group: L.LayerGroup, at: L.LatLngExpression, text: string, color: string, offset: [number, number] = [10, -10], direction: 'right' | 'left' = 'right') {
+  L.tooltip({ permanent: true, direction, offset, className: 'osm-chart-label', interactive: false })
     .setLatLng(at)
     .setContent(`<span style="color:${color}">${escapeHtml(text)}</span>`)
     .addTo(group)
@@ -283,7 +283,7 @@ function drawOverlay(group: L.LayerGroup, o: MapOverlay) {
       keyboard: false,
       icon: L.divIcon({ className: 'osm-chart-symbol', html: `<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">${SYMBOL_SVG[o.symbol](c)}</svg>`, iconSize: [24, 24], iconAnchor: [12, 12] }),
     }).addTo(group)
-    if (o.label) label(group, [o.pos.lat, o.pos.lon], o.label, c)
+    if (o.label) label(group, [o.pos.lat, o.pos.lon], o.label, c, o.labelLeft ? [-10, -10] : [10, -10], o.labelLeft ? 'left' : 'right')
     return
   }
   if (o.kind === 'circle') {
