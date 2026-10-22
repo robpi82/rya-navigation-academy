@@ -11,6 +11,7 @@ import { ENVIRONMENT_LESSON } from './environmentLesson'
 import { INSHORE_LESSON } from './inshoreLesson'
 import { SAFETY_LESSONS } from './safetyLessons'
 import type { DayLesson } from './types'
+import { DAY_LESSON_CARD_IMAGES } from './cardImages'
 import { AnchorTideWidget, SpringNeapWidget, TideHeightWidget } from './tideWidgets'
 
 
@@ -129,6 +130,7 @@ export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
       subtitle="Die Grundlagen für Tagestörns in bekannten Gewässern: Kompass, Gezeiten, Karte und Betonnung, Kollisionsverhütung, Wetter, Sicherheit, Seemannschaft, Umwelt und Pilotage – jede Lektion mit interaktiven Übungen. Dazu die neun Grundbegriffe im Glossar."
       lessons={DAY_LESSONS}
       basePath="#/themen"
+      cardImages={DAY_LESSON_CARD_IMAGES}
       quizLabel={`${QUESTION_BANK.filter((q) => DAY_TOPIC_IDS.includes(q.topic as never)).length} Fragen zu diesen Themen`}
     />
   )
