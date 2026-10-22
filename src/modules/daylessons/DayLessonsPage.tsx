@@ -4,6 +4,7 @@ import { LessonCatalog, LessonDetail } from '@/modules/lessons/LessonViews'
 import { BuoyGalleryWidget, BuoyTrainerWidget, LateralDirectionWidget } from './buoyWidgets'
 import { LightDecoderWidget, LightRangeWidget, SoundingsWidget, SymbolBrowserWidget } from './chartWidgets'
 import { CompassConverterWidget, DeviationTableWidget, VariationYearWidget } from './compassWidgets'
+import { CompassLesson } from './compass/CompassLesson'
 import { BEARING_LESSON } from './bearingLesson'
 import { PREPARATION_LESSON } from './preparationLesson'
 import { SEAMANSHIP_LESSON } from './seamanshipLesson'
@@ -122,6 +123,8 @@ export const DAY_LESSONS: DayLesson[] = [...CORE_LESSONS, ...SAFETY_LESSONS, BEA
 
 export function DayLessonsPage({ lessonId }: { lessonId?: string }) {
   const lesson = DAY_LESSONS.find((l) => l.id === lessonId)
+  // Lektion 1 ist der Design-Prototyp mit Lernabschnitten; alle anderen Lektionen nutzen weiterhin LessonDetail
+  if (lesson?.id === 'compass') return <CompassLesson lesson={lesson} lessons={DAY_LESSONS} basePath="#/themen" backLabel="Alle Themen" />
   return lesson ? (
     <LessonDetail lesson={lesson} lessons={DAY_LESSONS} basePath="#/themen" backLabel="Alle Themen" />
   ) : (
