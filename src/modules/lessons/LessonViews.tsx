@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { ArrowLeft, ArrowRight, CheckCircle2, Circle, GraduationCap, Lightbulb } from 'lucide-react'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Badge } from '@/components/ui/badge'
@@ -101,7 +102,10 @@ export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel, c
 }
 
 export function LessonDetail({ lesson, lessons, basePath, backLabel }: { lesson: Lesson; lessons: Lesson[]; basePath: string; backLabel: string }) {
-  const { completedLessons, toggleLesson } = useProgressStore()
+  const { completedLessons, toggleLesson, openLesson } = useProgressStore()
+  useEffect(() => {
+    openLesson({ id: lesson.id, title: lesson.title, href: `${basePath}/${lesson.id}` })
+  }, [lesson.id, lesson.title, basePath, openLesson])
   const idx = lessons.indexOf(lesson)
   const next = lessons[(idx + 1) % lessons.length]
   const done = completedLessons.includes(lesson.id)

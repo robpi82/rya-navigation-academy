@@ -3,6 +3,12 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 import type { QuestionStat, QuizAttempt, TermId } from '@/types/learning'
 import { dayKey } from '@/lib/stats'
 
+export interface LastLesson {
+  id: string
+  title: string
+  href: string
+}
+
 interface ProgressState {
   viewedTerms: TermId[]
   learnedTerms: TermId[]
@@ -17,9 +23,12 @@ interface ProgressState {
   chartResults: Record<string, { solved: boolean; attempts: number; last: string }>
   /** abgeschlossene Coastal-Skipper-Lektionen */
   completedLessons: string[]
+  /** zuletzt geöffnete Lektion (für „Weiterlernen“ im Dashboard) */
+  lastLesson: LastLesson | null
 
   recordChartResult: (id: string, correct: boolean) => void
   toggleLesson: (id: string) => void
+  openLesson: (lesson: LastLesson) => void
   markViewed: (id: TermId) => void
   toggleLearned: (id: TermId) => void
   recordTermCheck: (id: TermId, correct: boolean) => void
@@ -39,6 +48,7 @@ const initial = {
   activeDays: [] as string[],
   chartResults: {} as Record<string, { solved: boolean; attempts: number; last: string }>,
   completedLessons: [] as string[],
+  lastLesson: null as LastLesson | null,
 }
 
 const withActiveDay = (days: string[]): string[] => {
@@ -103,6 +113,7 @@ export const useProgressStore = create<ProgressState>()(
           completedLessons: s.completedLessons.includes(id) ? s.completedLessons.filter((x) => x !== id) : [...s.completedLessons, id],
           activeDays: withActiveDay(s.activeDays),
         })),
+      openLesson: (lesson) => set((s) => (s.lastLesson?.href === lesson.href && s.lastLesson.title === lesson.title ? s : { lastLesson: lesson })),
       markActive: () => set((s) => ({ activeDays: withActiveDay(s.activeDays) })),
       reset: () => set({ ...initial }),
     }),
@@ -112,8 +123,9 @@ export const useProgressStore = create<ProgressState>()(
       // v1 → v2: neue Felder für Phase 3, bestehende Daten bleiben erhalten
       migrate: (state) => ({ chartResults: {}, completedLessons: [], ...(state as object) }) as unknown as ProgressState,
       storage: createJSONStorage(() => localStorage),
-      partialize: ({ viewedTerms, learnedTerms, termChecks, attempts, questionStats, studySeconds, activeDays, chartResults, completedLessons }) => ({
+      partialize: ({ viewedTerms, learnedTerms, termChecks, attempts, questionStats, studySeconds, activeDays, chartResults, completedLessons, lastLesson }) => ({
         chartResults,
+        lastLesson,
         completedLessons,
         viewedTerms,
         learnedTerms,

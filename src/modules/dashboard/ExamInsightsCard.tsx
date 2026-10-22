@@ -19,7 +19,7 @@ const STATUS: Record<Readiness, { label: string; variant: 'secondary' | 'destruc
   ready: { label: 'Prüfungsreif', variant: 'success' },
 }
 
-const germanName = (t: TopicId): string => {
+export const germanName = (t: TopicId): string => {
   if (t in DAY_TOPICS) return DAY_TOPICS[t as keyof typeof DAY_TOPICS].german
   if (t in COASTAL_TOPICS) return COASTAL_TOPICS[t as keyof typeof COASTAL_TOPICS].german
   if (t in YACHT_TOPICS) return YACHT_TOPICS[t as keyof typeof YACHT_TOPICS].german
