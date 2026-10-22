@@ -13,9 +13,11 @@ interface CatalogProps {
   lessons: Lesson[]
   basePath: string
   quizLabel: string
+  /** Optionale Bildkarten je Lektions-ID; die Bilder enthalten Nummer, Titel und Pfeil bereits selbst. */
+  cardImages?: Partial<Record<string, string>>
 }
 
-export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel }: CatalogProps) {
+export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel, cardImages }: CatalogProps) {
   const completed = useProgressStore((s) => s.completedLessons)
   const done = lessons.filter((l) => completed.includes(l.id)).length
   const next = lessons.find((l) => !completed.includes(l.id)) ?? lessons[0]
@@ -46,26 +48,50 @@ export function LessonCatalog({ title, subtitle, lessons, basePath, quizLabel }:
         </CardContent>
       </Card>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {lessons.map((l, i) => (
-          <a key={l.id} href={`${basePath}/${l.id}`} className="group rounded-xl border bg-card p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none">
-            <div className="flex items-start justify-between gap-2">
-              <span className="text-xs text-muted-foreground">Lektion {i + 1}</span>
-              {completed.includes(l.id) ? (
-                <Badge variant="success">
+        {lessons.map((l, i) => {
+          const image = cardImages?.[l.id]
+          return image ? (
+            <a
+              key={l.id}
+              href={`${basePath}/${l.id}`}
+              className="group relative block overflow-hidden rounded-xl border bg-[#05121e] shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:ring-[3px] focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
+            >
+              <img
+                src={image}
+                alt={`Lektion ${i + 1}: ${l.title} (${l.english}) – Lektion öffnen`}
+                width={363}
+                height={257}
+                loading={i < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+                className="aspect-[363/257] w-full object-contain transition-[filter] group-hover:brightness-110"
+              />
+              {completed.includes(l.id) && (
+                <Badge variant="success" className="absolute top-2.5 right-2.5 shadow-md">
                   <CheckCircle2 /> erledigt
                 </Badge>
-              ) : (
-                <Badge variant="outline">offen</Badge>
               )}
-            </div>
-            <div className="mt-2 font-semibold">{l.title}</div>
-            <div className="text-sm text-muted-foreground">{l.english}</div>
-            <p className="mt-3 text-sm">{l.summary}</p>
-            <div className="mt-3 flex items-center gap-1 text-sm font-medium text-primary">
-              Lektion öffnen <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </div>
-          </a>
-        ))}
+            </a>
+          ) : (
+            <a key={l.id} href={`${basePath}/${l.id}`} className="group rounded-xl border bg-card p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none">
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-xs text-muted-foreground">Lektion {i + 1}</span>
+                {completed.includes(l.id) ? (
+                  <Badge variant="success">
+                    <CheckCircle2 /> erledigt
+                  </Badge>
+                ) : (
+                  <Badge variant="outline">offen</Badge>
+                )}
+              </div>
+              <div className="mt-2 font-semibold">{l.title}</div>
+              <div className="text-sm text-muted-foreground">{l.english}</div>
+              <p className="mt-3 text-sm">{l.summary}</p>
+              <div className="mt-3 flex items-center gap-1 text-sm font-medium text-primary">
+                Lektion öffnen <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </div>
+            </a>
+          )
+        })}
       </div>
     </div>
   )
