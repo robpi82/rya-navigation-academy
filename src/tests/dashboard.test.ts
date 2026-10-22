@@ -31,3 +31,13 @@ describe('Dashboard: Weiterlernen', () => {
     expect(parseHash('#/yachtmaster').name).toBe('yachtmaster')
   })
 })
+
+describe('Dashboard: Bilder', () => {
+  it('jede Bilddatei liegt in public/images/dashboard', async () => {
+    const { existsSync } = await import('node:fs')
+    const { DASHBOARD_IMAGE_FILES } = await import('@/modules/dashboard/images')
+    const files = Object.values(DASHBOARD_IMAGE_FILES)
+    expect(files).toHaveLength(11)
+    for (const f of files) expect(existsSync(`public/images/dashboard/${f}`), f).toBe(true)
+  })
+})

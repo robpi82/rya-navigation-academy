@@ -141,9 +141,9 @@ export function DashboardPage() {
         <PhotoBackdrop
           src={IMG.hero}
           fallback="bg-[radial-gradient(ellipse_45%_60%_at_72%_58%,oklch(0.82_0.15_70/0.85),oklch(0.62_0.17_40/0.45)_45%,transparent_75%),linear-gradient(180deg,oklch(0.26_0.06_270)_0%,oklch(0.42_0.11_35)_52%,oklch(0.3_0.07_245)_58%,oklch(0.17_0.04_255)_100%)]"
-          className="-z-10 group-hover:scale-100"
+          className="-z-10 object-[68%_center] group-hover:scale-100"
         />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-[oklch(0.15_0.035_255/0.92)] via-[oklch(0.15_0.035_255/0.55)] to-transparent" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-[oklch(0.15_0.035_255/0.92)] via-[oklch(0.15_0.035_255/0.78)] to-[oklch(0.15_0.035_255/0.45)] md:via-[oklch(0.15_0.035_255/0.55)] md:to-transparent" />
         <div className="flex flex-col gap-6 px-6 py-8 sm:px-10 sm:py-12 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-xl">
             <p className="text-xs font-medium tracking-[0.3em] text-white/80 uppercase">RYA Navigation Academy</p>
@@ -167,7 +167,7 @@ export function DashboardPage() {
       </section>
 
       {/* Kurse */}
-      <section aria-label="Kurse" className="grid gap-4 md:grid-cols-3">
+      <section aria-label="Kurse" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:[&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
         <CourseCard
           title="Day Skipper"
           subtitle="Grundlagen der Navigation"
@@ -303,10 +303,15 @@ export function DashboardPage() {
 
       {/* Wochenplan, Wiederholung, Motivation */}
       <section aria-label="Lernplan und Wiederholung" className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-        <PlanWeekCard className="h-full shadow-lg shadow-black/20 backdrop-blur-sm" />
+        <div className="relative isolate overflow-hidden rounded-xl shadow-lg shadow-black/20">
+          {IMG.plan && <PhotoBackdrop src={IMG.plan} fallback="" className="-z-10 object-[center_70%] group-hover:scale-100" />}
+          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[oklch(0.16_0.035_255/0.7)] via-[oklch(0.16_0.035_255/0.88)] to-[oklch(0.16_0.035_255/0.96)]" />
+          <PlanWeekCard className="h-full bg-transparent" />
+        </div>
 
         <Panel className="flex flex-col p-5">
-          {IMG.review && <PhotoBackdrop src={IMG.review} fallback="" className="opacity-25" />}
+          {IMG.review && <PhotoBackdrop src={IMG.review} fallback="" className="object-[70%_center]" />}
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[oklch(0.16_0.035_255/0.97)] via-[oklch(0.16_0.035_255/0.88)] to-[oklch(0.16_0.035_255/0.45)]" />
           <div className="relative flex flex-1 flex-col gap-3">
             <PanelTitle icon={RotateCcw}>Empfohlene Wiederholung</PanelTitle>
             <p className="text-xs text-muted-foreground">
@@ -350,10 +355,11 @@ export function DashboardPage() {
         <Panel className="group flex min-h-64 flex-col p-5 lg:col-span-2 xl:col-span-1">
           <PhotoBackdrop
             src={IMG.motivation}
+            className="object-[75%_center]"
             fallback="bg-[radial-gradient(ellipse_at_80%_30%,oklch(0.75_0.14_65/0.55),transparent_55%),linear-gradient(180deg,oklch(0.28_0.06_260),oklch(0.2_0.045_255))]"
           />
           <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[oklch(0.15_0.035_255/0.85)] to-transparent" />
-          <CompassRose className="pointer-events-none absolute -right-10 -bottom-10 size-48 opacity-15" />
+          {!IMG.motivation && <CompassRose className="pointer-events-none absolute -right-10 -bottom-10 size-48 opacity-15" />}
           <div className="relative flex flex-1 flex-col">
             <PanelTitle icon={Star}>Motivation</PanelTitle>
             <blockquote className="mt-auto pt-8 font-display text-2xl leading-snug text-white italic">
