@@ -6,11 +6,11 @@ import { usePlanView } from './usePlan'
 import { PaceBadge, paceSentence } from './PlanStatusPanel'
 
 /** Dashboard-Karte: Punkte der aktuellen Lernplan-Woche oder Hinweis zum Anlegen. */
-export function PlanWeekCard() {
+export function PlanWeekCard({ className }: { className?: string }) {
   const view = usePlanView()
   if (!view)
     return (
-      <Card>
+      <Card className={className}>
         <CardContent className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
             <CalendarDays className="mt-0.5 size-5 shrink-0 text-primary" />
@@ -29,11 +29,11 @@ export function PlanWeekCard() {
     )
   const week = view.plan.weeks[view.current]
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader className="pb-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <CardTitle className="flex items-center gap-2">
-            <CalendarDays className="size-5 text-primary" /> Diese Woche im Lernplan
+            <CalendarDays className="size-5 text-primary" /> Dein Wochenlernplan
           </CardTitle>
           <PaceBadge pace={view.status.pace} overdue={view.status.overdue.length} />
         </div>

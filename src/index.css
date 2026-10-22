@@ -42,6 +42,8 @@
   --chart-coast: oklch(0.45 0.05 70);
   --chart-gridline: oklch(0.55 0.05 240 / 0.35);
   --chart-diamond: oklch(0.5 0.22 340);
+  --gold: oklch(0.8 0.13 78);
+  --gold-foreground: oklch(0.2 0.04 255);
 }
 
 .dark {
@@ -81,6 +83,23 @@
   --chart-coast: oklch(0.7 0.06 85);
   --chart-gridline: oklch(0.75 0.04 240 / 0.25);
   --chart-diamond: oklch(0.72 0.18 340);
+}
+
+/* Dashboard im Marine-Look: immer dunkel (wie die Seekarte immer hell ist), Karten halbtransparent auf Nachtblau */
+.marine {
+  --background: oklch(0.165 0.035 255);
+  --card: oklch(0.21 0.042 252 / 0.78);
+  --popover: oklch(0.22 0.045 252);
+  --muted: oklch(0.27 0.045 252 / 0.8);
+  --border: oklch(0.38 0.05 245 / 0.55);
+  --primary: oklch(0.76 0.13 225);
+  --gold: oklch(0.83 0.13 80);
+  --gold-foreground: oklch(0.2 0.045 255);
+  --chart-grid: oklch(0.34 0.04 250 / 0.7);
+  background:
+    radial-gradient(60rem 40rem at 85% -10%, oklch(0.3 0.06 245 / 0.55), transparent 70%),
+    radial-gradient(50rem 40rem at 0% 100%, oklch(0.24 0.05 240 / 0.6), transparent 70%),
+    var(--background);
 }
 
 /* Seekarte als Papierkarte: auch im Dark Mode hell, damit Farben und Kartenzeichen eindeutig bleiben */
@@ -168,11 +187,14 @@
   --color-vec-tide: var(--vec-tide);
   --color-vec-ground: var(--vec-ground);
   --color-vec-leeway: var(--vec-leeway);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
