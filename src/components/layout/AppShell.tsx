@@ -18,8 +18,8 @@ export function AppShell({ route, children }: { route: Route; children: ReactNod
   }, [open])
 
   return (
-    // Dashboard immer im dunklen Marine-Look, übrige Seiten folgen dem gewählten Theme
-    <div className={cn('min-h-dvh lg:pl-64 print:pl-0', route.name === 'dashboard' && 'dark marine text-foreground')}>
+    // Dashboard und Rechentraining immer im dunklen Marine-Look, übrige Seiten folgen dem gewählten Theme
+    <div className={cn('min-h-dvh lg:pl-64 print:pl-0', (route.name === 'dashboard' || route.name === 'calc') && 'dark marine text-foreground')}>
       <a
         href="#inhalt"
         onClick={(e) => {
