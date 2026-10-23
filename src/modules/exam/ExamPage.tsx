@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AlertTriangle, ArrowLeft, ArrowRight, CheckCircle2, Flag, GraduationCap, RotateCcw, Timer, Trophy, XCircle } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, ArrowRight, CheckCircle2, EyeOff, Flag, GraduationCap, Layers, ListChecks, Play, RotateCcw, Timer, Trophy, XCircle } from 'lucide-react'
+import { CompassRose } from '@/components/layout/Logo'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { QUESTION_BANK, QUESTION_BY_ID } from '@/questions'
 import { topicInfo } from '@/data/topics'
@@ -17,6 +18,8 @@ import { BuoyIcon } from '@/components/nautical/BuoyIcon'
 import { BUOY_BY_ID } from '@/data/buoyage'
 import { QuestionDiagram } from '@/modules/quiz/QuestionDiagram'
 import { Solution } from '@/modules/quiz/QuizPage'
+import { CroppedPhoto } from '@/modules/quiz/CroppedPhoto'
+import { examImage } from './examImages'
 import { QuestionInput } from './QuestionInput'
 
 const DIFFICULTY_LABEL = { 1: 'leicht', 2: 'mittel', 3: 'schwer' } as const
@@ -29,6 +32,57 @@ export function ExamPage() {
 }
 
 /* ------------------------------------------------------------------ Start */
+
+const LEVEL_NAME = { 'day-skipper': 'Day Skipper', 'coastal-skipper': 'Coastal Skipper', 'yachtmaster-offshore': 'Yachtmaster Offshore' } as const
+
+const FALLBACK = 'bg-[radial-gradient(120%_140%_at_85%_0%,oklch(0.32_0.06_240)_0%,oklch(0.2_0.045_252)_45%,oklch(0.14_0.03_258)_100%)]'
+
+/** Prüfungskarte im Marine-Look: Foto oben, darunter Name, Beschreibung, Umfang und Startbutton */
+function ExamCard({ preset: p, wide, onStart }: { preset: ExamPreset; wide: boolean; onStart: () => void }) {
+  return (
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[oklch(0.17_0.036_254)] shadow-xl shadow-black/40 transition duration-300 hover:-translate-y-0.5 hover:border-gold/35 hover:shadow-2xl">
+      <div className={cn('relative shrink-0 overflow-hidden', wide ? 'h-40 sm:h-48' : 'h-40')}>
+        <CroppedPhoto image={examImage(p.id)} fallback={FALLBACK} className="transition-transform duration-700 group-hover:scale-[1.04]" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-[oklch(0.17_0.036_254/0.05)] via-[oklch(0.17_0.036_254/0.25)] to-[oklch(0.17_0.036_254)]" />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+        <span className="absolute top-3 left-3 rounded-full border border-gold/35 bg-black/45 px-2.5 py-1 text-[11px] font-semibold tracking-[0.14em] text-gold uppercase backdrop-blur-sm">
+          {LEVEL_NAME[p.level ?? 'day-skipper']}
+        </span>
+      </div>
+      <div className={cn('relative -mt-6 flex flex-1 flex-col gap-4 px-5 pb-5', wide && 'md:flex-row md:items-end md:justify-between md:gap-8')}>
+        <div className="space-y-1.5">
+          <h2 className="flex items-center gap-2 font-display text-2xl leading-tight font-semibold text-white">
+            <GraduationCap className="size-5 shrink-0 text-gold" aria-hidden /> {p.label}
+          </h2>
+          <p className={cn('text-sm leading-relaxed text-white/70', wide && 'max-w-3xl')}>{p.description}</p>
+        </div>
+        <div className={cn('mt-auto space-y-4', wide && 'md:mt-0 md:w-96 md:shrink-0')}>
+          <dl className="grid grid-cols-2 gap-2 border-t border-white/10 pt-3 text-sm">
+            <div>
+              <dt className="flex items-center gap-1.5 text-xs text-white/55">
+                <ListChecks className="size-3.5 text-gold/80" aria-hidden /> Fragen
+              </dt>
+              <dd className="font-mono text-lg font-semibold text-white tabular-nums">{p.questions}</dd>
+            </div>
+            <div>
+              <dt className="flex items-center gap-1.5 text-xs text-white/55">
+                <Timer className="size-3.5 text-gold/80" aria-hidden /> Zeit
+              </dt>
+              <dd className="font-mono text-lg font-semibold text-white tabular-nums">{p.minutes} min</dd>
+            </div>
+          </dl>
+          <button
+            type="button"
+            onClick={onStart}
+            className="flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-teal-200/25 bg-gradient-to-b from-[oklch(0.68_0.09_192)] to-[oklch(0.58_0.085_196)] px-4 text-sm font-semibold text-[oklch(0.16_0.035_255)] shadow-lg shadow-teal-950/40 transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300"
+          >
+            <Play className="size-4 fill-current" aria-hidden /> {p.label} starten
+          </button>
+        </div>
+      </div>
+    </article>
+  )
+}
 
 function ExamSetup() {
   const start = useExamStore((s) => s.start)
@@ -46,34 +100,41 @@ function ExamSetup() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Probeprüfung" subtitle={`Wie in einer echten Prüfung: feste Fragenzahl, feste Zeit, keine Rückmeldung bis zur Abgabe. Bestanden ab ${PASS_PERCENT} %. Fragenpool: ${dayCount} Day-Skipper-, ${coastalCount} Coastal- und ${yachtCount} Yachtmaster-Fragen.`} />
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {EXAM_PRESETS.map((p) => (
-          <Card key={p.id}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <GraduationCap className="size-5 text-primary" /> {p.label}
-              </CardTitle>
-              <CardDescription>{p.description}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <dl className="grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <dt className="text-xs text-muted-foreground">Fragen</dt>
-                  <dd className="font-mono text-lg font-semibold">{p.questions}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-muted-foreground">Zeit</dt>
-                  <dd className="font-mono text-lg font-semibold">{p.minutes} min</dd>
-                </div>
-              </dl>
-              <Button className="w-full" onClick={() => begin(p)}>
-                {p.label} starten
-              </Button>
-            </CardContent>
-          </Card>
+      {/* Kopfbereich */}
+      <section className="relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40">
+        <div aria-hidden className={cn('absolute inset-0', FALLBACK)} />
+        <CompassRose className="pointer-events-none absolute -top-20 -right-12 size-80 opacity-[0.07]" />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+        <div className="relative space-y-4 p-5 sm:p-8">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold tracking-[0.22em] text-gold uppercase">Prüfungsmodus · Day Skipper bis Yachtmaster</p>
+            <h1 className="font-display text-4xl leading-none font-semibold text-white sm:text-5xl">Probeprüfung</h1>
+            <p className="max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
+              Trainiere unter realistischen Prüfungsbedingungen – mit Zeitlimit, festen Fragen und Auswertung nach der Abgabe.
+            </p>
+          </div>
+          <ul className="flex flex-wrap gap-2 text-xs text-white/80 sm:text-sm">
+            <li className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-black/30 px-3 py-1.5 backdrop-blur-sm">
+              <Trophy className="size-4 text-gold" aria-hidden /> Bestanden ab {PASS_PERCENT} %
+            </li>
+            <li className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-3 py-1.5 backdrop-blur-sm">
+              <Layers className="size-4 text-gold" aria-hidden /> Fragenpool: {dayCount} Day-Skipper-, {coastalCount} Coastal- und {yachtCount} Yachtmaster-Fragen
+            </li>
+            <li className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-3 py-1.5 backdrop-blur-sm">
+              <EyeOff className="size-4 text-gold" aria-hidden /> Keine Rückmeldung bis zur Abgabe
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {EXAM_PRESETS.map((p, k) => (
+          // die siebte Karte (Yachtmaster-Probeprüfung) steht allein in ihrer Reihe und wird breit dargestellt
+          <li key={p.id} className={cn(k === EXAM_PRESETS.length - 1 && 'md:col-span-2 xl:col-span-3')}>
+            <ExamCard preset={p} wide={k === EXAM_PRESETS.length - 1} onStart={() => begin(p)} />
+          </li>
         ))}
-      </div>
+      </ul>
       <Card>
         <CardHeader>
           <CardTitle className="text-base">So läuft die Prüfung</CardTitle>
