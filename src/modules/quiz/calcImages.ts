@@ -78,8 +78,9 @@ export const CALC_IMAGES: Record<CourseLevel, CourseImages> = {
   'yachtmaster-offshore': {
     folder: 'yachtmaster',
     // Ein eigenes Hero-Motiv gibt es nicht (mehr); die Nachtfahrt unter Sternen passt als Offshore-Motiv.
-    // Für die Seitenleiste liegt kein Motiv im Ordner, dort bleibt sie ohne Bild.
     hero: { file: '09-grosskreis-routing-nachtfahrt.png' },
+    // Hochformat: Ausschnitt mit Segelboot im Sonnenuntergang
+    sidebar: { file: '11-sidebar-motiv.png', crop: { x: 0, y: 0.12, w: 1, h: 0.5 } },
     // textfreie Fotos: füllen die ganze Karte
     skills: {
       vectors: { file: '01-stromdreieck-kurs-gegen-strom.png' },
