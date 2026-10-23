@@ -1,6 +1,9 @@
 import type { Route } from '@/hooks/useHashRoute'
 import { INFO_ITEM, MENU_GROUPS, ROADMAP_ITEM, SYLLABUS_ITEM, type MenuItem } from '@/navigation/menu'
 import { cn } from '@/lib/utils'
+import { sidebarImage } from '@/modules/quiz/calcImages'
+import { CroppedPhoto } from '@/modules/quiz/CroppedPhoto'
+import { useCalcTrainingStore } from '@/stores/calcTrainingStore'
 import { CompassRose } from './Logo'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -56,6 +59,7 @@ export function Sidebar({ route, onNavigate }: { route: Route; onNavigate?: () =
           <NavLink item={INFO_ITEM} active={route.name === 'about'} onNavigate={onNavigate} />
         </div>
       </nav>
+      {route.name === 'calc' && <CalcSidebarMotif />}
       <div className="relative flex items-center justify-between gap-2 border-t border-white/10 px-4 py-3">
         <p className="text-[11px] leading-snug text-sidebar-foreground/55">
           Unabhängiges Lernprojekt –<br />
@@ -63,6 +67,19 @@ export function Sidebar({ route, onNavigate }: { route: Route; onNavigate?: () =
         </p>
         <ThemeToggle className="text-sidebar-foreground hover:bg-white/10 hover:text-white" />
       </div>
+    </div>
+  )
+}
+
+/** Kursmotiv des Rechentrainings unten in der Seitenleiste; eigener Platz unter der Navigation, bei wenig Höhe ausgeblendet. */
+function CalcSidebarMotif() {
+  const level = useCalcTrainingStore((s) => s.level)
+  const image = sidebarImage(level)
+  if (!image) return null
+  return (
+    <div aria-hidden className="relative mx-3 mt-3 mb-3 h-32 shrink-0 overflow-hidden rounded-xl border border-white/10 shadow-lg shadow-black/40 [@media(max-height:760px)]:hidden">
+      <CroppedPhoto key={level} image={image} fallback="" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.15_0.035_255/0.7)] via-transparent to-[oklch(0.15_0.035_255/0.35)]" />
     </div>
   )
 }
