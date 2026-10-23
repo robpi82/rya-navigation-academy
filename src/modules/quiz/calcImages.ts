@@ -77,12 +77,22 @@ export const CALC_IMAGES: Record<CourseLevel, CourseImages> = {
   },
   'yachtmaster-offshore': {
     folder: 'yachtmaster',
-    // eingebrannt: Titel links, Fortschrittsbalken und Zitat unten – nur rechts oben sauber
-    hero: { file: '09-hero-yachtmaster.png', crop: { x: 0.53, y: 0.01, w: 0.46, h: 0.56 } },
-    sidebar: { file: '10-sidebar-motiv.png', crop: { x: 0, y: 0.12, w: 1, h: 0.5 } },
-    // Die Yachtmaster-Kartenbilder (01–08) tragen Titel und Badge ganz oben und haben keinen sauberen
-    // Fotobereich; ohne textfreie Fassung bleiben die Karten beim Farbverlauf.
-    skills: {},
+    // Ein eigenes Hero-Motiv gibt es nicht (mehr); die Nachtfahrt unter Sternen passt als Offshore-Motiv.
+    // Für die Seitenleiste liegt kein Motiv im Ordner, dort bleibt sie ohne Bild.
+    hero: { file: '09-grosskreis-routing-nachtfahrt.png' },
+    // textfreie Fotos: füllen die ganze Karte
+    skills: {
+      vectors: { file: '01-stromdreieck-kurs-gegen-strom.png' },
+      dst: { file: '02-weg-zeit-fahrt.png' },
+      chart: { file: '03-seekarte-sichtweite.png' },
+      wind: { file: '04-wind-wetter.png' },
+      streams: { file: '05-strom-kaps-stromrate.png' },
+      collision: { file: '06-begegnung-cpa-nebel.png' },
+      enav: { file: '07-vmg-echolot-leitlinien.png' },
+      safety: { file: '08-vorbereitung-notfaelle.png' },
+      offshore: { file: '09-grosskreis-routing-nachtfahrt.png' },
+      astro: { file: '10-astronavigation.png' },
+    },
   },
 }
 

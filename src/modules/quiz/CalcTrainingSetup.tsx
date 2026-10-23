@@ -264,7 +264,7 @@ function SkillCard({ stat: s, practiced, image, on, onToggle }: { stat: SkillSta
       <div aria-hidden className="absolute inset-0 bg-[oklch(0.17_0.036_254)]" />
       <div aria-hidden className={cn('absolute inset-x-0 top-0', band ? 'h-16' : 'bottom-0')}>
         <CroppedPhoto image={image} fallback={FALLBACK} className="transition-transform duration-500 group-hover:scale-[1.03]" />
-        <div className={cn('absolute inset-0', band ? 'bg-gradient-to-b from-transparent via-[oklch(0.17_0.036_254/0.35)] to-[oklch(0.17_0.036_254)]' : 'bg-gradient-to-r from-[oklch(0.15_0.035_255/0.95)] via-[oklch(0.15_0.035_255/0.75)] to-[oklch(0.15_0.035_255/0.35)]')} />
+        <div className={cn('absolute inset-0', band ? 'bg-gradient-to-b from-transparent via-[oklch(0.17_0.036_254/0.35)] to-[oklch(0.17_0.036_254)]' : 'bg-[linear-gradient(to_right,oklch(0.15_0.035_255/0.95),oklch(0.15_0.035_255/0.8)_55%,oklch(0.15_0.035_255/0.6)),linear-gradient(to_top,oklch(0.15_0.035_255/0.85),transparent_70%)]')} />
       </div>
       {on && (
         <span className="absolute top-2.5 right-2.5 flex size-6 items-center justify-center rounded-full bg-teal-300 text-[oklch(0.2_0.04_255)] shadow" aria-hidden>
@@ -286,7 +286,7 @@ function SkillCard({ stat: s, practiced, image, on, onToggle }: { stat: SkillSta
             <span
               className={cn(
                 'shrink-0 rounded-full border px-2 py-0.5 text-xs font-medium tabular-nums',
-                pct === null ? 'border-white/15 bg-white/5 text-white/75' : good ? 'border-teal-300/30 bg-teal-300/10 text-teal-200' : 'border-amber-300/30 bg-amber-300/10 text-amber-200',
+                pct === null ? 'border-white/15 bg-black/40 text-white/80 backdrop-blur-sm' : good ? 'border-teal-300/30 bg-teal-300/10 text-teal-200' : 'border-amber-300/30 bg-amber-300/10 text-amber-200',
               )}
             >
               {pct === null ? 'neu' : `${pct} %`}
